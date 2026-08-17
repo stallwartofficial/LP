@@ -1,22 +1,25 @@
 import type { Metadata } from "next";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { Story } from "@/components/Story";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "Why Stallwart built Extrovert AI — the origin behind the full AI-powered CRM on autopilot.",
+    "Why Stallwart exists: follow-through is an engineering problem, not a discipline problem. The conviction behind every system we build.",
+  alternates: { canonical: "/story" },
 };
 
 export default function StoryPage() {
   return (
-    <>
-      <Navbar />
-      <main className="pt-8">
-        <Story />
-      </main>
-      <Footer />
-    </>
+    <div>
+      <JsonLd
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Our Story", path: "/story" },
+        ])}
+      />
+      <Story />
+    </div>
   );
 }

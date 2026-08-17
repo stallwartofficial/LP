@@ -1,57 +1,106 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { testimonials, logoMarks } from "@/data/testimonials";
+import { getOffering } from "@/data/offerings";
 
+// MARKETER'S PASS.
+//
+// Two changes over the previous version. First, the logo bar no longer sits
+// centred above the testimonials competing with them for the same attention.
+// It is now a quiet top rail, right aligned, framed as a sector statement
+// rather than a headline, so it supports the section instead of leading it.
+// Second, testimonials are real cards: a pulled highlight does the scanning
+// work, the quote carries the detail, and an attribution row grounds it.
+//
+// NOTE ON THE LOGO STRIP: the "trusted by" framing above placeholder marks was
+// raised as a deceptive advertising risk (constraint #7) and the owner decided
+// to keep the strip pre-launch. Kept, with the heading softened to a sector
+// statement. Swap `logoMarks` in data/testimonials.ts for real names when they
+// exist.
 export function SocialProof() {
-  const marqueeMarks = [...logoMarks, ...logoMarks]; // duplicate for seamless loop
+  const marqueeMarks = [...logoMarks, ...logoMarks]; // doubled for a seamless loop
 
   return (
-    <section className="border-y border-[var(--accent)]/10 bg-[var(--surface)] py-20">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <p className="text-center text-xs uppercase tracking-widest text-[var(--fg)]/50">
-          Trusted by sales teams building for scale
-        </p>
+    <section
+      aria-labelledby="social-proof-heading"
+      className="section-y rule-t px-[var(--space-gutter)]"
+    >
+      <div className="mx-auto max-w-6xl">
+        {/* ---- Top rail: sector bar, right aligned, deliberately quiet ---- */}
+        <div className="marquee-host flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="eyebrow shrink-0">Built for teams at scale</p>
 
-        {/* Infinite scrolling logo strip */}
-        <div
-          className="mt-8 flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
-          aria-hidden="true"
-        >
-          <div className="flex shrink-0 animate-marquee items-center gap-16 pr-16">
-            {marqueeMarks.map((mark, i) => (
-              <span
-                key={`${mark}-${i}`}
-                className="whitespace-nowrap font-display text-lg tracking-widest text-[var(--fg)]/35"
-              >
-                {mark}
-              </span>
-            ))}
+          <div className="flex min-w-0 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] sm:max-w-[62%]">
+            <div
+              className="animate-marquee flex shrink-0 items-center gap-10 pr-10"
+              aria-hidden="true"
+            >
+              {marqueeMarks.map((mark, i) => (
+                <span
+                  key={`${mark}-${i}`}
+                  className="font-display whitespace-nowrap text-sm tracking-[0.2em] text-[var(--fg)]/28"
+                >
+                  {mark}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <motion.figure
+        {/* ---- The section proper ---- */}
+        <div className="mt-14 max-w-2xl">
+          <h2
+            id="social-proof-heading"
+            className="font-display text-display-sm font-light"
+          >
+            What changes when the system carries it.
+          </h2>
+          <p className="mt-4 text-[var(--fg)]/70">
+            Illustrative accounts by role and sector. We publish named customer
+            quotes when we have them and not before.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {testimonials.map((t) => (
+            <figure
               key={t.role}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-2xl border border-[var(--accent)]/15 bg-[var(--bg)] p-6"
+              className="card-lift scroll-rise flex flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 sm:p-7"
             >
-              <blockquote className="text-[var(--fg)]/85">
-                &ldquo;{t.quote}&rdquo;
+              <span
+                aria-hidden="true"
+                className="font-display text-2xl leading-none text-[var(--accent)]/45"
+              >
+                &ldquo;
+              </span>
+
+              <p className="font-display mt-3 text-[length:var(--text-step-2)] font-normal leading-snug">
+                {t.highlight}
+              </p>
+
+              <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-[var(--fg)]/70">
+                {t.quote}
               </blockquote>
-              <figcaption className="mt-4 text-sm text-[var(--fg)]/60">
-                <span className="font-medium text-[var(--fg)]/80">{t.role}</span>
-                {" · "}
-                {t.industry}
-                <span className="ml-2 text-xs italic text-[var(--fg)]/40">
-                  (example outcome)
+
+              <figcaption className="rule-t mt-6 flex items-center gap-3 pt-5">
+                <span
+                  aria-hidden="true"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[11px] font-medium tracking-wider text-[var(--accent-text)]"
+                >
+                  {t.initials}
+                </span>
+                <span className="min-w-0 text-sm">
+                  <span className="block font-medium text-[var(--fg)]/85">
+                    {t.role}
+                  </span>
+                  <span className="block text-xs text-[var(--fg)]/65">
+                    {t.industry} · {getOffering(t.offering)?.name ?? t.offering}
+                  </span>
                 </span>
               </figcaption>
-            </motion.figure>
+
+              <p className="mt-3 text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/60">
+                Illustrative example
+              </p>
+            </figure>
           ))}
         </div>
       </div>

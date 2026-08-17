@@ -1,53 +1,88 @@
-# Stallwart — Extrovert AI Landing Page
+# Stallwart, Landing Page
 
-Production-grade marketing site for Stallwart / Extrovert AI. Next.js 14 (App
-Router) + TypeScript + Tailwind + Framer Motion, deployed on Vercel.
+Marketing site for Stallwart. This README documents the stack only.
 
-## Local setup
+## Stack
+
+| Layer | Choice | Version |
+| --- | --- | --- |
+| Framework | Next.js, App Router, Turbopack | 16.3.1 |
+| Runtime | React | 19.2.8 |
+| Language | TypeScript, strict | 5.x |
+| Styling | Tailwind CSS, CSS first config via `@theme` | 4.x |
+| Animation | Framer Motion, plus native CSS scroll driven animation | 13.x |
+| Fonts | `next/font/google`, self hosted at build time | Fraunces (variable), Inter |
+| Hosting target | Vercel | n/a |
+
+## Requirements
+
+- Node.js 20 or newer
+- npm 10 or newer
+
+## Commands
 
 ```bash
-npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build check
+npm install      # install dependencies
+npm run dev      # dev server, http://localhost:3000
+npm run build    # production build
+npm start        # serve the production build
+npm run lint     # eslint
 ```
 
-## Where to edit content
+## Project layout
 
-- `data/site.ts` — company name, tagline, contact info, CTA copy
-- `data/offerings.ts` — the 4 product capability cards
-- `data/testimonials.ts` — testimonials (illustrative/role-based, see note
-  below) and logo marquee marks
-- `data/caseStudies.ts` — case study index; full narrative content lives in
-  `app/case-studies/[slug]/page.tsx` (marked with `TODO` where real content
-  should replace placeholder copy)
-- `app/layout.tsx` — global metadata, JSON-LD structured data
-- `public/llms.txt` — AI answer engine (AEO) fact sheet, keep in sync with
-  `data/site.ts`
+```
+app/          routes (App Router), route level metadata, API handlers
+  api/        server route handlers
+  offer/      portfolio index and [slug] offering pages
+  blog/       insights index and [slug] posts (case studies live here)
+components/   presentational components, server by default
+data/         all site content as typed modules, the single source of truth
+lib/          seo builders, og image renderer, theme hook
+public/       static assets, llms.txt
+```
 
-## Known TODOs before real launch
+## Architecture notes
 
-1. **Fonts**: `next/font/google` (Fraunces + Inter) couldn't resolve in this
-   sandboxed build environment — currently falls back to system fonts. Swap
-   back per the comment in `app/layout.tsx` once building outside this
-   sandbox (Vercel/local dev will resolve them normally).
-2. **Contact info**: `data/site.ts` has placeholder email/phone/address —
-   replace with real values.
-3. **Testimonials & logos**: currently illustrative/role-based by deliberate
-   decision (pre-launch product — avoids deceptive-advertising risk from
-   fabricated named-company quotes). Swap in real customer testimonials and
-   logos in `data/testimonials.ts` once available.
-4. **Case study body content**: structure and schema markup are in place;
-   the actual challenge/solution/outcome narratives need real content per
-   industry.
-5. **Demo request handler**: `app/api/demo-request/route.ts` currently
-   validates and accepts submissions but doesn't send anywhere — wire to a
-   real CRM/email webhook.
-6. **OG image**: `public/images/og-cover.png` referenced in metadata but not
-   yet created — add a 1200×630 social share image.
-7. **Blog**: route (`/blog`) is linked in nav but not yet scaffolded — same
-   MDX pattern as case studies, build when ready.
+**Server components by default.** Only components that need browser APIs are
+marked `"use client"`: the navbar, theme toggle, mindmap, contact form, and the
+motion wrappers in `components/Reveal.tsx`. Page copy stays server rendered so
+it is in the initial HTML.
 
-## Architecture
+**Content lives in `data/`.** Copy, offerings, posts, testimonials, and FAQs are
+typed modules, never hardcoded in components. Adding an offering to
+`data/offerings.ts` propagates to the portfolio page, its detail route, the
+sitemap, the footer, the contact form, and JSON-LD automatically.
 
-See `BUILD_PLAN.md` for the full living build plan (screens, data model,
-architecture decisions log, SEO/AEO strategy).
+**Styling is token driven.** `app/globals.css` defines a fluid type scale via
+`clamp()`, a light and dark palette, and shared easing. Components consume CSS
+variables rather than literal colours, so both themes stay in sync. Text colours
+use AA contrast safe tokens (`--accent-text`, `--branch-*-text`); the brighter
+counterparts are for fills and borders only.
+
+**Animation is CSS first.** Scroll reveals use native `animation-timeline: view()`
+with no JavaScript, degrading to visible content where unsupported. Framer
+Motion handles only mount transitions. Everything is disabled under
+`prefers-reduced-motion`.
+
+**SEO and AEO.** Structured data is centralised in `lib/seo.ts` and derived from
+`data/`, so schema cannot drift from rendered copy. Every route sets a canonical
+URL and has exactly one `h1`. OG images are generated at build time by
+`next/og`. `public/llms.txt` is the AI answer engine fact sheet.
+
+## Environment
+
+Copy `.env.example` to `.env.local`:
+
+```
+DEMO_WEBHOOK_URL=    # server side only, destination for contact form submissions
+```
+
+Server side only, never prefix with `NEXT_PUBLIC_`. If unset, submissions are
+accepted by the UI, delivered nowhere, and a warning is logged server side.
+
+## Conventions
+
+- No em dashes in any user facing copy, including page titles.
+- Both themes must be verified for any visual change.
+- WCAG AA contrast is enforced; text tokens are measured, not eyeballed.

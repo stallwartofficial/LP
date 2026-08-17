@@ -1,22 +1,34 @@
 import type { Metadata } from "next";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { Offerings } from "@/components/Offerings";
+import { Engagement } from "@/components/TrustLayer";
+import { Faq } from "@/components/Faq";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema, offeringListSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "What We Offer",
   description:
-    "Extrovert AI runs the full lead lifecycle on autopilot: capture, scoring, follow-up, and re-engagement.",
+    "Stallwart's portfolio, Extrovert AI, AI Editing, and the AI Compliance Office. Systems engineered to take work off a team permanently.",
+  alternates: { canonical: "/offer" },
 };
 
+// The portfolio overview. Offering-specific depth (features, integrations,
+// product FAQs) lives at /offer/[slug], not here.
 export default function OfferPage() {
   return (
-    <>
-      <Navbar />
-      <main className="pt-8">
-        <Offerings />
-      </main>
-      <Footer />
-    </>
+    <div>
+      <JsonLd
+        schema={[
+          offeringListSchema(),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "What We Offer", path: "/offer" },
+          ]),
+        ]}
+      />
+      <Offerings />
+      <Engagement />
+      <Faq heading="How we work" />
+    </div>
   );
 }

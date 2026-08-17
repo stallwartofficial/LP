@@ -1,0 +1,131 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { blogPosts, caseStudyPosts, articlePosts } from "@/data/blog";
+import { getOffering } from "@/data/offerings";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema, blogListSchema } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Insights and Case Studies",
+  description:
+    "Case studies and writing from Stallwart on operations, AI systems, and the work that quietly falls through. Written for operators who want the mechanism.",
+  alternates: { canonical: "/blog" },
+};
+
+// One content surface. Case studies and articles live together here; the
+// standalone /case-studies route redirects in (see next.config.ts), which
+// concentrates ranking signal on one namespace instead of splitting it.
+export default function BlogIndexPage() {
+  return (
+    <>
+      <JsonLd
+        schema={[
+          blogListSchema(),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Insights", path: "/blog" },
+          ]),
+        ]}
+      />
+
+      <header className="px-[var(--space-gutter)] pb-4 pt-36 lg:pt-44">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex items-center gap-3">
+            <span aria-hidden="true" className="h-px w-10 bg-[var(--accent)]" />
+            <p className="eyebrow">Insights</p>
+          </div>
+
+          <h1 className="font-display mt-6 max-w-3xl text-display-lg font-light">
+            Case studies and notes from{" "}
+            <span className="text-gold-sheen italic">the messy middle.</span>
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
+            How work actually breaks inside a business, and what it takes to
+            build something that holds. Written for operators who want the
+            mechanism, not the vocabulary.
+          </p>
+
+          <dl className="mt-9 flex flex-wrap gap-x-8 gap-y-2 text-sm">
+            <div className="flex items-baseline gap-2">
+              <dt className="text-[var(--fg)]/65">Case studies</dt>
+              <dd className="font-medium">{caseStudyPosts.length}</dd>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <dt className="text-[var(--fg)]/65">Articles</dt>
+              <dd className="font-medium">{articlePosts.length}</dd>
+            </div>
+          </dl>
+        </div>
+      </header>
+
+      <section
+        aria-label="All posts"
+        className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-10"
+      >
+        <div className="mx-auto max-w-6xl">
+          {blogPosts.length === 0 ? (
+            <p className="text-[var(--fg)]/60">First posts are on the way.</p>
+          ) : (
+            <ol>
+              {blogPosts.map((post, i) => (
+                <li key={post.slug} className="scroll-fade rule-t last:rule-b">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="row-nudge group grid gap-4 py-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-baseline lg:gap-10 lg:py-10"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="font-display text-[length:var(--text-step-2)] font-light leading-none text-[var(--accent)]/35 transition-colors group-hover:text-[var(--accent)]"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+
+                    <div>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <span
+                          className={`rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] ${
+                            post.kind === "case-study"
+                              ? "border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[var(--accent-text)]"
+                              : "border border-[var(--hairline-strong)] text-[var(--fg)]/60"
+                          }`}
+                        >
+                          {post.kind === "case-study" ? "Case study" : "Article"}
+                        </span>
+                        {post.industry && (
+                          <span className="text-xs text-[var(--fg)]/65">
+                            {post.industry}
+                          </span>
+                        )}
+                        <span className="text-xs text-[var(--fg)]/65">
+                          {getOffering(post.offering)?.name ?? post.offering}
+                        </span>
+                      </div>
+
+                      <h2 className="font-display mt-3 text-[length:var(--text-step-3)] font-normal leading-tight">
+                        {post.title}
+                      </h2>
+                      <p className="mt-3 max-w-2xl text-sm text-[var(--fg)]/70">
+                        {post.excerpt}
+                      </p>
+                    </div>
+
+                    <span className="flex shrink-0 items-center gap-4 text-xs text-[var(--fg)]/65">
+                      {post.readingMinutes} min
+                      <span
+                        aria-hidden="true"
+                        className="arrow-shift text-[var(--accent-text)]"
+                      >
+                        →
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}

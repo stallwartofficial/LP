@@ -1,58 +1,128 @@
-"use client";
+import { site } from "@/data/site";
+import { offerings } from "@/data/offerings";
 
-import { motion } from "framer-motion";
-
+// The company's story, told through the founder's conviction.
+//
+// PUBLICIST NOTE: attributed to Nuras by name and role. No words are quoted, so
+// nothing is put in a real person's mouth. If a signed pull quote is wanted,
+// see the TODO on site.founder in data/site.ts.
+//
+// Set as long form editorial: a drop cap, a pulled thesis, and the three
+// principles named as the through line to every offering.
 export function Story() {
   return (
-    <section id="story" className="mx-auto max-w-3xl px-6 py-24 lg:px-8">
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="font-display text-sm italic tracking-widest text-[var(--accent)]"
-      >
-        the origin
-      </motion.p>
+    <>
+      <header className="px-[var(--space-gutter)] pb-4 pt-36 lg:pt-44">
+        <div className="mx-auto max-w-3xl">
+          <div className="flex items-center gap-3">
+            <span aria-hidden="true" className="h-px w-10 bg-[var(--accent)]" />
+            <p className="eyebrow">Our story</p>
+          </div>
 
-      <motion.h2
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-        className="mt-3 font-display text-3xl sm:text-4xl"
-      >
-        Our Story
-      </motion.h2>
+          <h1 className="font-display mt-6 text-display-lg font-light">
+            Reliable, honest, scalable.
+            <br />
+            <span className="text-gold-sheen italic">In that order.</span>
+          </h1>
 
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2 }}
-        className="mt-8 space-y-5 text-lg leading-relaxed text-[var(--fg)]/85"
+          <p className="mt-6 text-[length:var(--text-step-1)] text-[var(--fg)]/70">
+            {site.positioning}
+          </p>
+        </div>
+      </header>
+
+      <section
+        id="story"
+        className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-10"
       >
-        <p>
-          Every sales team we ever watched had the same quiet tragedy: the
-          right lead came in at the wrong moment — after hours, mid-meeting,
-          buried under twelve other things — and by the time anyone got back
-          to it, the moment was gone. Not from a lack of care. From a lack of
-          hands.
-        </p>
-        <p>
-          Stallwart started with a founder who believed that was solvable —
-          not by asking people to work harder, but by building something that
-          never stops working at all. Something that notices the lead the
-          second it arrives, understands who's worth calling first, and
-          follows up before the window closes, every single time.
-        </p>
-        <p>
-          That belief became Extrovert AI. Not a tool you have to remember to
-          use — a system that remembers for you. We named the company
-          Stallwart because that's the standard we hold ourselves to: built
-          to last, built to show up, built beyond what a CRM was supposed to
-          be.
-        </p>
-      </motion.div>
-    </section>
+        <div className="mx-auto max-w-3xl">
+          <div className="space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
+            <p className="[&::first-letter]:font-display [&::first-letter]:mr-2 [&::first-letter]:float-left [&::first-letter]:text-[3.75rem] [&::first-letter]:font-light [&::first-letter]:leading-[0.82] [&::first-letter]:text-[var(--accent-text)]">
+              Businesses rarely fail at strategy. They fail at follow through.
+              The work that has to happen every day, by someone, on time, and
+              that nobody has ever found interesting. The enquiry that came in
+              at seven in the evening. The draft that sat in review for nine
+              days. The compliance question everyone quietly hoped belonged to
+              somebody else.
+            </p>
+
+            <p>
+              {site.founder.name} founded {site.company} on the observation that
+              this is the same failure everywhere, and that it is almost never a
+              failure of care. Nobody in those buildings needed a lecture about
+              rigour. There were simply more things to hold than there were
+              hands to hold them, and the things that got dropped were always
+              the ones that mattered later rather than now.
+            </p>
+
+            <p>
+              The obvious answer in 2026 is to point AI at the problem. That is
+              where most of it goes wrong. A model that is confident and
+              unaccountable does not remove the work, it moves the work to
+              whoever now has to check it. The organisation ends up with a new
+              category of risk and the same backlog.
+            </p>
+          </div>
+
+          {/* The thesis, given air. */}
+          <blockquote className="my-14 border-l-2 border-[var(--accent)] pl-7">
+            <p className="font-display text-[length:var(--text-step-3)] font-light leading-tight">
+              Building systems with AI that are built beyond the demo. Reliable
+              enough to leave alone, honest enough to trust, and scalable enough
+              to still be right at ten times the volume.
+            </p>
+            <footer className="mt-5 text-sm text-[var(--fg)]/60">
+              {site.founder.name}, {site.founder.role}
+            </footer>
+          </blockquote>
+
+          {/* The three principles, as the spine of the company. */}
+          <ol className="my-14 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
+            {site.pillars.map((pillar) => (
+              <li key={pillar.key} className="bg-[var(--bg)] p-6">
+                <span className="eyebrow">{pillar.number}</span>
+                <h2 className="font-display mt-2 text-[length:var(--text-step-2)]">
+                  {pillar.title}
+                </h2>
+                <p className="mt-2 text-sm text-[var(--fg)]/70">
+                  {pillar.claim}
+                </p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
+            <p>
+              So that became the specification rather than the marketing.
+              Reliable, because a system that needs remembering has not removed
+              any work. Honest, because a system that hides its own uncertainty
+              is a liability wearing the costume of an asset. Scalable, because
+              anything that only works at demo volume was a prototype, whatever
+              the invoice said.
+            </p>
+
+            <p>
+              The first system built to that standard was{" "}
+              <strong className="font-medium text-[var(--fg)]">
+                {offerings[0].name}
+              </strong>
+              , because revenue pipelines were where the cost showed most
+              plainly. A buyer arrives at the wrong hour and goes quietly cold.
+              It will not be the last. The same failure lives in AI governance,
+              where nobody can account for how a decision was reached, and in
+              video production, where output is capped by the hours available to
+              edit it.
+            </p>
+
+            <p>
+              The name is the standard. {site.tagline.replace(".", "")} means
+              the system holds past the point where a demo ends: at real volume,
+              on the exceptions nobody scoped, on the day the person who
+              understood it is somewhere else.
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
