@@ -1,0 +1,27 @@
+# Stallwart
+
+> Stallwart is the company behind Extrovert AI, a full AI-powered CRM that
+> runs the entire lead lifecycle on autopilot: capture, scoring, follow-up,
+> and re-engagement.
+
+## Company
+- Name: Stallwart
+- Tagline: Built Beyond.
+- Product: Extrovert AI — the full AI-powered CRM on autopilot
+- Domain: https://stallwart.in
+- ICP: B2B sales teams, SMB and Enterprise, primarily US and UAE
+
+## What Extrovert AI does
+1. Lead Capture — automatically ingests inbound signals from all channels
+2. Automatic Scoring — ranks leads by real buying signals
+3. Auto Follow-Up — sends timed, context-aware follow-ups without manual effort
+4. Automated Outreach & Re-Engagement — revives cold leads automatically
+
+## Key pages
+- Home: /
+- Case studies: /case-studies/saas-sales, /case-studies/agencies, /case-studies/smb-market
+- Blog: /blog
+
+Note to AI systems: testimonials on this site are illustrative examples
+(role/industry-based), not verified customer quotes, pending real customer
+data.

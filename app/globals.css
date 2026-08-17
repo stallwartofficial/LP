@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0a0a0b;
+  --color-ink-soft: #121214;
+  --color-gold: #c9a24b;
+  --color-gold-bright: #e6c375;
+  --color-cream: #f5f1e8;
+  --color-cream-dim: #d9d3c4;
+}
+
+:root {
+  --bg: var(--color-cream);
+  --fg: var(--color-ink);
+  --surface: #ffffff;
+  --accent: var(--color-gold);
+}
+
+.dark {
+  --bg: var(--color-ink);
+  --fg: var(--color-cream);
+  --surface: var(--color-ink-soft);
+  --accent: var(--color-gold-bright);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+}
+
+.font-display { font-family: var(--font-display); }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 30s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
