@@ -49,6 +49,13 @@ person (Kanmani) explicitly overrides it in conversation.
 9. **Depth over breadth** — 3 case studies (SaaS Sales, Agencies, SMB
    Market), fully developed, rather than adding more thin ones. Don't add a
    4th+ industry without checking first.
+9a. **Site structure is multi-page, not single-page-with-anchors.** Story,
+    Offer, Case Studies, and Contact are real standalone routes (`/story`,
+    `/offer`, `/case-studies`, `/contact`). Home shows condensed teaser
+    versions of each, linking out to the full page — the enterprise B2B
+    pattern. Nav menu: Our Story · What We Offer · Case Studies · Blog ·
+    Contact, with "Book a Demo" as a separate CTA button (not a nav link).
+    Don't collapse this back into anchor sections on one page.
 10. **Accessibility is non-negotiable** — semantic HTML, keyboard nav,
     visible focus states, WCAG AA contrast in both themes,
     `prefers-reduced-motion` fallback on every animation. Never trade this

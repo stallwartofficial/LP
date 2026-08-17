@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { caseStudies } from "@/data/caseStudies";
 
-export function CaseStudies() {
+type Props = { showViewAll?: boolean };
+
+export function CaseStudies({ showViewAll = false }: Props) {
   return (
-    <section id="case-studies" className="mx-auto max-w-6xl px-6 py-24 lg:px-8">
+    <section className="mx-auto max-w-6xl px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
         <p className="font-display text-sm italic tracking-widest text-[var(--accent)]">
           proof in practice
@@ -41,6 +43,17 @@ export function CaseStudies() {
           </motion.div>
         ))}
       </div>
+
+      {showViewAll && (
+        <div className="mt-10 text-center">
+          <Link
+            href="/case-studies"
+            className="text-sm font-medium text-[var(--accent)] hover:underline"
+          >
+            View all case studies →
+          </Link>
+        </div>
+      )}
     </section>
   );
 }

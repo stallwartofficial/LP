@@ -19,24 +19,43 @@
 
 No dead ends; CTA repeats after hero, after offer section, and in footer.
 
-## 2. Screens / Component Inventory
+## 2. Site Structure — Standalone Pages (Enterprise Pattern)
+
+This is a multi-page landing site, not a single-page-with-anchors site.
+Home carries **condensed teasers** of Story/Offer/Case Studies, each linking
+out to its own full page — the standard enterprise B2B pattern.
+
+**Nav menu:** Our Story · What We Offer · Case Studies · Blog · Contact
+**CTA button (not a nav link):** Book a Demo → `/contact`
+
+| Route | Purpose | Status |
+|---|---|---|
+| `/` | Hero (wow-moment pipeline visual) + condensed Story/Offer teasers + Social Proof + Case Studies preview + Contact banner | done |
+| `/story` | Full "Our Story" page | done |
+| `/offer` | Full "What We Offer" page (4 capability cards) | done |
+| `/case-studies` | Case studies index (3 cards) | done |
+| `/case-studies/[slug]` | Individual case study (SaaS Sales, Agencies, SMB Market) | done (structure; body content pending) |
+| `/blog` | Blog index | not started |
+| `/blog/[slug]` | Blog post template (MDX) | not started |
+| `/contact` | Full contact page with Book-a-Demo form | done |
+| 404 | Custom not-found page | not started |
+
+## 3. Component Inventory
 
 | Component | Status |
 |---|---|
-| Navbar (sticky, blur-on-scroll, logo + anchor links + CTA button) | not started |
-| Hero (headline, subhead, CTA, animated pipeline SVG/Framer visual) | not started |
-| Story section (heart+techy narrative, scroll-reveal) | not started |
-| Offer/Features grid (4 capability cards: Capture, Score, Follow-Up, Outreach) | not started |
-| Social proof: testimonial cards (role-based, illustrative tag) | not started |
-| Logo infinite-scroll strip (CSS marquee, placeholder marks) | not started |
-| Case studies preview (3 cards → SaaS Sales / Agencies / SMB) | not started |
-| Individual case study pages (MDX, 3 total) | not started |
-| Blog index + blog post template (MDX) | not started |
-| Contact/Book-a-Demo section (form + placeholder info) | not started |
-| Footer (nav, legal, social) | not started |
+| Navbar (sticky, blur-on-scroll, real page links + CTA button) | done |
+| Hero (headline, subhead, CTA, animated pipeline Framer visual) | done |
+| Story (full) / StoryTeaser (condensed, home) | done |
+| Offerings (full) / OfferingsTeaser (condensed, home) | done |
+| Social proof: testimonial cards (role-based, illustrative tag) | done |
+| Logo infinite-scroll strip (CSS marquee, placeholder marks) | done |
+| CaseStudies (shared component, `showViewAll` prop toggles "view all" link) | done |
+| ContactBanner (condensed, home) / Contact (full form, `/contact`) | done |
+| Footer (nav, legal, social) | done |
+| Loading/error/success states — contact form | done |
 | 404 page | not started |
-| Loading/skeleton states for all async sections | not started |
-| Logo asset integration (provided phoenix mark, optimized SVG/WebP) | not started |
+| Logo asset integration (provided phoenix mark) | done |
 
 ## 3. Design Direction
 

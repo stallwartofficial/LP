@@ -49,13 +49,13 @@ export function Hero() {
         className="mt-9 flex justify-center gap-4"
       >
         <Link
-          href="#contact"
+          href="/contact"
           className="rounded-full bg-[var(--accent)] px-7 py-3 text-sm font-medium text-[var(--color-ink)] transition-transform hover:scale-105"
         >
           {site.cta.primary}
         </Link>
         <Link
-          href="#offer"
+          href="/offer"
           className="rounded-full border border-[var(--accent)]/40 px-7 py-3 text-sm font-medium text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
         >
           See how it works

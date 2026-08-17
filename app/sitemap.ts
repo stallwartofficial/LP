@@ -3,7 +3,14 @@ import { caseStudies } from "@/data/caseStudies";
 import { site } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/blog"].map((route) => ({
+  const staticRoutes = [
+    "",
+    "/story",
+    "/offer",
+    "/case-studies",
+    "/blog",
+    "/contact",
+  ].map((route) => ({
     url: `${site.domain}${route}`,
     lastModified: new Date(),
   }));
