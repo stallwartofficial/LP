@@ -9,7 +9,7 @@ import { getOffering } from "@/data/offerings";
 // Also an internal linking surface. Fresh, crawlable links from the highest
 // authority page to the content built to rank.
 export function InsightsTeaser() {
-  const featured = blogPosts.slice(0, 3);
+  const featured = blogPosts.slice(0, 4);
 
   return (
     <section
@@ -40,7 +40,7 @@ export function InsightsTeaser() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((post) => (
             <Link
               key={post.slug}

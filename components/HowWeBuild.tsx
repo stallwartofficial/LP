@@ -34,7 +34,7 @@ export function HowWeBuild() {
             <p className="eyebrow">The standard</p>
             <h2
               id="how-we-build-heading"
-              className="font-display weight-in mt-3 text-display-sm font-light"
+              className="font-display mt-3 text-display-sm font-light"
             >
               <span className="text-gold-sheen italic">Built Beyond</span> is a
               specification, not a slogan.

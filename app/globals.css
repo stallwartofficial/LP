@@ -545,23 +545,12 @@ p {
   }
 }
 
-/* Variable-font weight on display type as it arrives. Fraunces is already
-   loaded variable, so this costs nothing extra. */
-@supports (font-variation-settings: normal) {
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      @keyframes weight-in {
-        from { font-variation-settings: "wght" 300; letter-spacing: -0.005em; }
-        to { font-variation-settings: "wght" 460; letter-spacing: -0.018em; }
-      }
-      .weight-in {
-        animation: weight-in linear both;
-        animation-timeline: view();
-        animation-range: entry 10% cover 30%;
-      }
-    }
-  }
-}
+/* NOTE: a `weight-in` animation used to live here, transitioning
+   font-variation-settings and letter-spacing as headings scrolled in. Removed:
+   animating either property forces a full text relayout on every frame, which
+   showed up in Lighthouse as forced reflow and main-thread work. The effect was
+   almost invisible; the cost was measurable. Headings keep their static weight.
+*/
 
 /* Progressive blur at a section seam. Cheap, GPU-composited, decorative only. */
 .seam-blur {

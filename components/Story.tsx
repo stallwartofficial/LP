@@ -13,22 +13,75 @@ import { offerings } from "@/data/offerings";
 export function Story() {
   return (
     <>
-      <header className="px-[var(--space-gutter)] pb-4 pt-36 lg:pt-44">
-        <div className="mx-auto max-w-3xl">
-          <div className="flex items-center gap-3">
-            <span aria-hidden="true" className="h-px w-10 bg-[var(--accent)]" />
-            <p className="eyebrow">Our story</p>
+      <header className="px-[var(--space-gutter)] pb-4 pt-32 lg:pt-40">
+        <div className="mx-auto grid max-w-6xl items-end gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:gap-16">
+          <div>
+            <div className="flex items-center gap-3">
+              <span aria-hidden="true" className="h-px w-10 bg-[var(--accent)]" />
+              <p className="eyebrow">Our story</p>
+            </div>
+
+            <h1 className="font-display mt-5 text-display-lg font-light">
+              Reliable, honest, scalable.
+              <br />
+              <span className="text-gold-sheen italic">In that order.</span>
+            </h1>
+
+            <p className="mt-5 max-w-xl text-[length:var(--text-step-1)] text-[var(--fg)]/75">
+              {site.positioning}
+            </p>
+
+            <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-3">
+              <div>
+                <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
+                  Founder
+                </dt>
+                <dd className="font-display mt-1 text-[length:var(--text-step-1)]">
+                  {site.founder.name}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
+                  Regions
+                </dt>
+                <dd className="mt-1 text-sm text-[var(--fg)]/85">
+                  {site.areaServed.join(" · ")}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
+                  Systems
+                </dt>
+                <dd className="mt-1 text-sm text-[var(--fg)]/85">
+                  {offerings.length} in the portfolio
+                </dd>
+              </div>
+            </dl>
           </div>
 
-          <h1 className="font-display mt-6 text-display-lg font-light">
-            Reliable, honest, scalable.
-            <br />
-            <span className="text-gold-sheen italic">In that order.</span>
-          </h1>
-
-          <p className="mt-6 text-[length:var(--text-step-1)] text-[var(--fg)]/70">
-            {site.positioning}
-          </p>
+          {/* Portrait pinned at the top of the page, so the story opens with a
+              person rather than with a wall of prose. */}
+          <div className="pinboard rounded-2xl border border-[var(--hairline)] p-7 sm:p-8">
+            <figure className="photo-taped bg-[var(--bg-raised)] p-2.5">
+              <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
+                <Image
+                  src="/images/founder.jpg"
+                  alt={`${site.founder.name}, ${site.founder.role} of ${site.company}`}
+                  fill
+                  sizes="(min-width: 1024px) 17rem, 70vw"
+                  className="object-cover object-top"
+                />
+              </div>
+              <figcaption className="mt-3 px-1 pb-1">
+                <span className="font-display block text-[length:var(--text-step-1)] italic">
+                  {site.founder.name}
+                </span>
+                <span className="font-mono mt-0.5 block text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
+                  {site.founder.role}
+                </span>
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </header>
 
@@ -65,48 +118,48 @@ export function Story() {
             </p>
           </div>
 
-          {/* The thesis, attributed, with the portrait beside it. Same taped
-              material as the home page and the testimonials, so every human
-              moment on the site shares one treatment. */}
-          <blockquote className="my-14 grid items-center gap-8 sm:grid-cols-[minmax(0,9rem)_minmax(0,1fr)] sm:gap-10">
-            <figure className="photo-taped bg-[var(--bg-raised)] p-2.5">
-              <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
-                <Image
-                  src="/images/founder.jpg"
-                  alt={`${site.founder.name}, ${site.founder.role} of ${site.company}`}
-                  fill
-                  sizes="(min-width: 640px) 9rem, 70vw"
-                  className="object-cover object-top"
-                />
-              </div>
-            </figure>
-
-            <div className="border-l-2 border-[var(--accent)] pl-6">
+          {/* The thesis on paper, so the one quoted moment reads as a
+              document rather than as more body copy. */}
+          <blockquote className="my-14">
+            <div className="note-pin mx-auto max-w-xl rounded-sm bg-[var(--bg-raised)] p-7 sm:p-9">
               <p className="font-display text-[length:var(--text-step-3)] font-light leading-tight">
                 Building systems with AI that are built beyond the demo. Reliable
                 enough to leave alone, honest enough to trust, and scalable
                 enough to still be right at ten times the volume.
               </p>
-              <footer className="mt-5 text-sm text-[var(--fg)]/70">
+              <footer className="rule-t mt-6 pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
                 {site.founder.name}, {site.founder.role}
               </footer>
             </div>
           </blockquote>
 
           {/* The three principles, as the spine of the company. */}
-          <ol className="my-14 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
-            {site.pillars.map((pillar) => (
-              <li key={pillar.key} className="bg-[var(--bg)] p-6">
-                <span className="eyebrow">{pillar.number}</span>
-                <h2 className="font-display mt-2 text-[length:var(--text-step-2)]">
-                  {pillar.title}
-                </h2>
-                <p className="mt-2 text-sm text-[var(--fg)]/70">
-                  {pillar.claim}
-                </p>
-              </li>
-            ))}
-          </ol>
+          <div className="pinboard my-14 rounded-2xl border border-[var(--hairline)] px-5 pb-8 pt-12 sm:px-7">
+            <ol className="grid gap-8 sm:grid-cols-3 sm:gap-6">
+              {site.pillars.map((pillar, i) => (
+                <li
+                  key={pillar.key}
+                  className="note-pin rounded-sm bg-[var(--bg-raised)] p-5"
+                  style={
+                    {
+                      "--note-rot": i === 1 ? "0.8deg" : i === 0 ? "-1.1deg" : "-0.5deg",
+                      "--tape-rot": i === 1 ? "-1.6deg" : "1.4deg",
+                    } as React.CSSProperties
+                  }
+                >
+                  <span className="font-mono text-[10px] tracking-[0.18em] text-[var(--accent-text)]">
+                    {pillar.number}
+                  </span>
+                  <h2 className="font-display mt-2 text-[length:var(--text-step-2)] leading-tight">
+                    {pillar.title}
+                  </h2>
+                  <p className="mt-2 text-sm leading-snug text-[var(--fg)]/75">
+                    {pillar.claim}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
 
           <div className="space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
             <p>

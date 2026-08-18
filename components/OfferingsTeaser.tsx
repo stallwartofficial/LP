@@ -25,7 +25,7 @@ export function OfferingsTeaser() {
             <p className="eyebrow">The portfolio</p>
             <h2
               id="offerings-teaser-heading"
-              className="font-display weight-in mt-3 text-display-sm font-light"
+              className="font-display mt-3 text-display-sm font-light"
             >
               {offerings.length} systems. One engine.
             </h2>

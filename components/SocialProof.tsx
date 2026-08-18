@@ -36,7 +36,7 @@ export function SocialProof() {
           <p className="eyebrow">In their words</p>
           <h2
             id="social-proof-heading"
-            className="font-display weight-in mt-3 text-display-sm font-light"
+            className="font-display mt-3 text-display-sm font-light"
           >
             What changes when the system carries it.
           </h2>

@@ -13,6 +13,13 @@ import { commitments, engagementTerms } from "@/data/trust";
 // a server component with no JavaScript and the whole text is in the initial
 // HTML. Reads as a document rather than as marketing, which is the right
 // register for terms.
+const NOTE_STYLES = [
+  { "--note-rot": "-1.1deg", "--tape-rot": "2deg" },
+  { "--note-rot": "0.8deg", "--tape-rot": "-1.6deg" },
+  { "--note-rot": "-0.6deg", "--tape-rot": "1.3deg" },
+  { "--note-rot": "1deg", "--tape-rot": "-1.1deg" },
+] as const;
+
 export function Commitments() {
   return (
     <section
@@ -24,7 +31,7 @@ export function Commitments() {
           <p className="eyebrow">How we operate</p>
           <h2
             id="operate-heading"
-            className="font-display weight-in mt-3 text-display-sm font-light"
+            className="font-display mt-3 text-display-sm font-light"
           >
             The terms, before you ask for them.
           </h2>
@@ -34,28 +41,33 @@ export function Commitments() {
           </p>
         </div>
 
-        {/* ---- The four terms. The answers buyers block on. ---- */}
-        <dl className="mt-10 grid gap-px bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
-          {engagementTerms.map((term, i) => (
-            <div
-              key={term.question}
-              className="enter-rise bg-[var(--bg)] p-5 transition-colors hover:bg-[var(--surface)] sm:p-6"
-              style={{ transitionDelay: `${i * 60}ms` }}
-            >
-              <dt>
-                <span className="font-mono text-[10px] tracking-[0.18em] text-[var(--accent-text)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="font-display mt-3 block text-[length:var(--text-step-1)]">
-                  {term.question}
-                </span>
-              </dt>
-              <dd className="mt-3 text-sm leading-relaxed text-[var(--fg)]/75">
-                {term.answer}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        {/* ---- The four terms, as pinned notes ----
+            Terms are the human half of this section, so they take the paper and
+            tape material the testimonials established rather than another
+            hairline grid. Extra top padding leaves room for the tape. */}
+        <div className="pinboard mt-10 rounded-2xl border border-[var(--hairline)] px-5 pb-8 pt-12 sm:px-8">
+          <dl className="grid gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+            {engagementTerms.map((term, i) => (
+              <div
+                key={term.question}
+                className="note-pin flex flex-col rounded-sm bg-[var(--bg-raised)] p-5"
+                style={NOTE_STYLES[i % NOTE_STYLES.length] as React.CSSProperties}
+              >
+                <dt>
+                  <span className="font-mono text-[10px] tracking-[0.18em] text-[var(--accent-text)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-display mt-3 block text-[length:var(--text-step-1)] leading-tight">
+                    {term.question}
+                  </span>
+                </dt>
+                <dd className="mt-3 text-xs leading-relaxed text-[var(--fg)]/75">
+                  {term.answer}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
 
         {/* ---- Commitments, as expandable ledger rows ---- */}
         <div className="mt-14">
@@ -63,33 +75,24 @@ export function Commitments() {
             Standing commitments
           </p>
 
-          <div className="mt-4">
+          {/* Four across, stated outright. Disclosure rows hid short text
+              behind a click and added a scroll for no reason. */}
+          <ul className="mt-4 grid gap-px bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
             {commitments.map((commitment) => (
-              <details
-                key={commitment.title}
-                className="group rule-t last:rule-b"
-              >
-                <summary className="flex cursor-pointer list-none items-baseline gap-4 py-5">
-                  <span
-                    aria-hidden="true"
-                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)] transition-transform duration-500 group-open:scale-150"
-                  />
-                  <span className="font-display flex-1 text-[length:var(--text-step-1)]">
-                    {commitment.title}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="shrink-0 text-[var(--accent-text)] transition-transform duration-500 group-open:rotate-45"
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="max-w-2xl pb-6 pl-[1.375rem] text-[var(--fg)]/75">
+              <li key={commitment.title} className="bg-[var(--bg)] p-5">
+                <span
+                  aria-hidden="true"
+                  className="mb-3 block h-1 w-5 bg-[var(--accent)]"
+                />
+                <h3 className="font-display text-[length:var(--text-step-1)] leading-tight">
+                  {commitment.title}
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-[var(--fg)]/75">
                   {commitment.description}
                 </p>
-              </details>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>

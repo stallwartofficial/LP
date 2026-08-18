@@ -1,81 +1,72 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
-// The ONLY client component needed for scroll animation.
+// Scroll and mount reveals, in CSS.
 //
-// Previously each animated section was itself "use client", which pulled all of
-// its copy out of the server render, worse for Core Web Vitals and for
-// crawlers that don't execute JS. Wrapping just the motion boundary keeps the
-// text server-rendered while the animation stays client-side.
+// WHY THIS WAS REWRITTEN. These two components were the last consumers of
+// framer-motion on the site, which meant the entire animation library shipped to
+// every page in order to fade a few elements in. Lighthouse put total blocking
+// time at 530ms and LCP render delay near 4s on throttled mobile, and this was
+// the largest avoidable share of it.
 //
-// `useReducedMotion` is checked explicitly rather than relying on the global
-// CSS override, because Framer Motion drives transforms in JS where the
-// stylesheet's `transition-duration` reset cannot reach them.
+// The replacements are server components with no JavaScript at all:
+//   Reveal        uses the scroll-driven `scroll-rise` class, which runs on the
+//                 compositor via animation-timeline: view().
+//   RevealOnLoad  uses `enter-rise`, a @starting-style transition that plays once
+//                 on first paint.
+//
+// Both degrade to visible content where unsupported, and both are cancelled
+// under prefers-reduced-motion (see globals.css), so nothing can be left stuck
+// at opacity 0.
+//
+// The `index` prop keeps its meaning as a stagger position, applied as a
+// transition and animation delay rather than through a JS timeline.
 
 type RevealProps = {
   children: ReactNode;
-  /** Stagger index, multiplied into the transition delay. */
+  /** Stagger position. Multiplied into the delay. */
   index?: number;
-  /** Distance in px to rise from. */
-  y?: number;
   className?: string;
-  as?: "div" | "li" | "figure" | "article";
+  as?: "div" | "li" | "figure" | "article" | "section";
+  /**
+   * Retained for source compatibility with the previous framer-motion API.
+   * Distance is now set in CSS, so this is intentionally ignored.
+   */
+  y?: number;
 };
 
+const delayFor = (index: number) =>
+  ({ animationDelay: `${index * 70}ms`, transitionDelay: `${index * 70}ms` }) as React.CSSProperties;
+
+/** Reveals as it scrolls into view. */
 export function Reveal({
   children,
   index = 0,
-  y = 16,
   className,
-  as = "div",
+  as: Tag = "div",
 }: RevealProps) {
-  const reduce = useReducedMotion();
-  const MotionTag = motion[as];
-
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
-
   return (
-    <MotionTag
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
+    <Tag
+      className={["scroll-rise", className].filter(Boolean).join(" ")}
+      style={delayFor(index)}
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }
 
-/** Same contract as Reveal, but animates immediately on mount (above the fold). */
+/** Reveals once on first paint, for content above the fold. */
 export function RevealOnLoad({
   children,
   index = 0,
-  y = 16,
   className,
-  as = "div",
+  as: Tag = "div",
 }: RevealProps) {
-  const reduce = useReducedMotion();
-  const MotionTag = motion[as];
-
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
-
   return (
-    <MotionTag
-      className={className}
-      initial={{ opacity: 0, y }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1 + index * 0.1, duration: 0.7, ease: "easeOut" }}
+    <Tag
+      className={["enter-rise", className].filter(Boolean).join(" ")}
+      style={delayFor(index)}
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }

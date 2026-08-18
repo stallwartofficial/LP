@@ -65,64 +65,58 @@ export default function BlogIndexPage() {
       >
         <div className="mx-auto max-w-6xl">
           {blogPosts.length === 0 ? (
-            <p className="text-[var(--fg)]/60">First posts are on the way.</p>
+            <p className="text-[var(--fg)]/70">First posts are on the way.</p>
           ) : (
-            <ol>
+            /* Cards, not stacked rows. Four full-width rows made a short index
+               feel like a long scroll. */
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {blogPosts.map((post, i) => (
-                <li key={post.slug} className="scroll-fade rule-t last:rule-b">
+                <li key={post.slug}>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="row-nudge group grid gap-4 py-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-baseline lg:gap-10 lg:py-10"
+                    className="card-lift enter-rise group flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5"
+                    style={{ transitionDelay: `${i * 70}ms` }}
                   >
-                    <span
-                      aria-hidden="true"
-                      className="font-display text-[length:var(--text-step-2)] font-light leading-none text-[var(--accent)]/35 transition-colors group-hover:text-[var(--accent)]"
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-
-                    <div>
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                        <span
-                          className={`rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] ${
-                            post.kind === "case-study"
-                              ? "border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[var(--accent-text)]"
-                              : "border border-[var(--hairline-strong)] text-[var(--fg)]/60"
-                          }`}
-                        >
-                          {post.kind === "case-study" ? "Case study" : "Article"}
-                        </span>
-                        {post.industry && (
-                          <span className="text-xs text-[var(--fg)]/65">
-                            {post.industry}
-                          </span>
-                        )}
-                        <span className="text-xs text-[var(--fg)]/65">
-                          {getOffering(post.offering)?.name ?? post.offering}
-                        </span>
-                      </div>
-
-                      <h2 className="font-display mt-3 text-[length:var(--text-step-3)] font-normal leading-tight">
-                        {post.title}
-                      </h2>
-                      <p className="mt-3 max-w-2xl text-sm text-[var(--fg)]/70">
-                        {post.excerpt}
-                      </p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span
+                        className={`rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] ${
+                          post.kind === "case-study"
+                            ? "border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[var(--accent-text)]"
+                            : "border border-[var(--hairline-strong)] text-[var(--fg)]/70"
+                        }`}
+                      >
+                        {post.kind === "case-study" ? "Case study" : "Article"}
+                      </span>
                     </div>
 
-                    <span className="flex shrink-0 items-center gap-4 text-xs text-[var(--fg)]/65">
-                      {post.readingMinutes} min
-                      <span
-                        aria-hidden="true"
-                        className="arrow-shift text-[var(--accent-text)]"
-                      >
-                        →
+                    <h2 className="font-display mt-4 text-[length:var(--text-step-2)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
+                      {post.title}
+                    </h2>
+
+                    <p className="mt-3 flex-1 text-xs leading-relaxed text-[var(--fg)]/70">
+                      {post.excerpt}
+                    </p>
+
+                    <span className="rule-t mt-5 flex items-center justify-between pt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/70">
+                      <span>
+                        {post.industry ??
+                          getOffering(post.offering)?.name ??
+                          post.offering}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        {post.readingMinutes}m
+                        <span
+                          aria-hidden="true"
+                          className="arrow-shift text-[var(--accent-text)]"
+                        >
+                          →
+                        </span>
                       </span>
                     </span>
                   </Link>
                 </li>
               ))}
-            </ol>
+            </ul>
           )}
         </div>
       </section>

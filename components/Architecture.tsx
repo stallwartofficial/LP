@@ -25,7 +25,7 @@ export function Architecture() {
           <p className="eyebrow">Architecture</p>
           <h2
             id="architecture-heading"
-            className="font-display weight-in mt-3 text-display-sm font-light"
+            className="font-display mt-3 text-display-sm font-light"
           >
             Inside{" "}
             <span className="text-gold-sheen italic">the engine.</span>

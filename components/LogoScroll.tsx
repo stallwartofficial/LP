@@ -38,7 +38,7 @@ export function LogoScroll({ inHero = false }: { inHero?: boolean } = {}) {
             {marks.map((mark, i) => (
               <span
                 key={`${mark}-${i}`}
-                className="font-display whitespace-nowrap text-sm tracking-[0.2em] text-[var(--fg)]/30"
+                className="font-display whitespace-nowrap text-sm tracking-[0.2em] text-[var(--fg)]/55"
               >
                 {mark}
               </span>

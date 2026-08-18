@@ -62,7 +62,7 @@ export function StoryTeaser() {
 
             <blockquote
               id="story-teaser-heading"
-              className="font-display weight-in mt-4 text-display-sm font-light"
+              className="font-display mt-4 text-display-sm font-light"
             >
               <span aria-hidden="true" className="mr-1 text-[var(--accent)]/50">
                 &ldquo;
