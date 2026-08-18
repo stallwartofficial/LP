@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { site } from "@/data/site";
 import { offerings } from "@/data/offerings";
 
@@ -64,16 +65,32 @@ export function Story() {
             </p>
           </div>
 
-          {/* The thesis, given air. */}
-          <blockquote className="my-14 border-l-2 border-[var(--accent)] pl-7">
-            <p className="font-display text-[length:var(--text-step-3)] font-light leading-tight">
-              Building systems with AI that are built beyond the demo. Reliable
-              enough to leave alone, honest enough to trust, and scalable enough
-              to still be right at ten times the volume.
-            </p>
-            <footer className="mt-5 text-sm text-[var(--fg)]/60">
-              {site.founder.name}, {site.founder.role}
-            </footer>
+          {/* The thesis, attributed, with the portrait beside it. Same taped
+              material as the home page and the testimonials, so every human
+              moment on the site shares one treatment. */}
+          <blockquote className="my-14 grid items-center gap-8 sm:grid-cols-[minmax(0,9rem)_minmax(0,1fr)] sm:gap-10">
+            <figure className="photo-taped bg-[var(--bg-raised)] p-2.5">
+              <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
+                <Image
+                  src="/images/founder.jpg"
+                  alt={`${site.founder.name}, ${site.founder.role} of ${site.company}`}
+                  fill
+                  sizes="(min-width: 640px) 9rem, 70vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </figure>
+
+            <div className="border-l-2 border-[var(--accent)] pl-6">
+              <p className="font-display text-[length:var(--text-step-3)] font-light leading-tight">
+                Building systems with AI that are built beyond the demo. Reliable
+                enough to leave alone, honest enough to trust, and scalable
+                enough to still be right at ten times the volume.
+              </p>
+              <footer className="mt-5 text-sm text-[var(--fg)]/70">
+                {site.founder.name}, {site.founder.role}
+              </footer>
+            </div>
           </blockquote>
 
           {/* The three principles, as the spine of the company. */}

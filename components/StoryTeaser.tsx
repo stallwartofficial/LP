@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/data/site";
 
@@ -12,12 +13,13 @@ import { site } from "@/data/site";
 // paper and tape; engineering sections share hairlines and mono. That split is a
 // system rather than decoration.
 //
-// The photo is a marked placeholder. It renders as a deliberate empty frame with
-// a caption rather than a stock portrait, because a stock face on a founder story
-// is worse than an honest gap.
+// The portrait loads from /images/founder.jpg. Referenced by path rather than
+// static import on purpose: a missing file then degrades to a broken image at
+// runtime instead of failing the build, which keeps the site deployable while the
+// asset is being swapped.
 //
-// TODO(owner): drop a real portrait at public/images/founder.jpg and swap the
-// placeholder block for next/image.
+// `sizes` is set so a phone never downloads the desktop-width file. The frame is
+// 4:5 with object-cover, so the source aspect ratio does not have to match.
 export function StoryTeaser() {
   return (
     <section
@@ -29,13 +31,14 @@ export function StoryTeaser() {
           {/* ---------------- The taped photograph ---------------- */}
           <div className="pinboard rounded-2xl border border-[var(--hairline)] p-8 sm:p-10">
             <figure className="photo-taped bg-[var(--bg-raised)] p-3">
-              {/* Placeholder frame. Deliberately empty, not a stock portrait. */}
-              <div className="flex aspect-[4/5] items-center justify-center border border-dashed border-[var(--hairline-strong)] bg-[var(--surface)]">
-                <span className="font-mono px-4 text-center text-[9px] uppercase leading-relaxed tracking-[0.16em] text-[var(--fg)]/60">
-                  Portrait
-                  <br />
-                  to come
-                </span>
+              <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
+                <Image
+                  src="/images/founder.jpg"
+                  alt={`${site.founder.name}, ${site.founder.role} of ${site.company}`}
+                  fill
+                  sizes="(min-width: 1024px) 18rem, (min-width: 640px) 60vw, 90vw"
+                  className="object-cover object-top"
+                />
               </div>
 
               <figcaption className="mt-3 px-1 pb-1">
