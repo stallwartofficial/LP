@@ -3,6 +3,10 @@
 // Extrovert AI is ONE offering here, not the subject of the site. Each entry
 // gets its own detail page at /offer/[slug] where its capabilities live.
 //
+// Order is deliberate: Custom AI Engineering leads because it is available
+// today and is what the hero's positioning claims. The two in-development
+// services follow the shipped product rather than heading the list.
+//
 // Adding an offering is a single entry: the portfolio page, detail route,
 // sitemap, footer, contact form, and schema all derive from this array.
 //
@@ -64,6 +68,102 @@ export type Offering = {
 };
 
 export const offerings: Offering[] = [
+  {
+    slug: "custom-ai-engineering",
+    name: "Custom AI Engineering",
+    category: "Engagement · Build",
+    status: "available",
+    tagline: "Your system, engineered from first principles",
+    summary:
+      "For problems no product solves. We design and build the system, run it to production, and hand over code you own outright with the documentation to keep it.",
+    description:
+      "Most AI work fails at the same point: a promising prototype meets real data, real volume, and real edge cases, and nobody scoped the last 80 percent. We take the problem from first principles instead. That means understanding the workflow before proposing architecture, building against your actual exceptions rather than a clean sample, and treating observability and rollback as part of the build rather than a later phase. You own the code, the infrastructure definitions, and the documentation. No lock in, because a system you cannot maintain without us is not a system we would ship.",
+    problem:
+      "The prototype worked. Then it met production, and the team discovered that the interesting 20 percent was demonstrated and the load bearing 80 percent was never built.",
+    capabilities: [
+      {
+        eyebrow: "01 Scope",
+        title: "Problem framing before architecture",
+        description:
+          "We map how the work actually happens, where it stalls, and what a failure costs. Systems fail from being pointed at the wrong problem far more often than from bad engineering.",
+      },
+      {
+        eyebrow: "02 Design",
+        title: "Architecture you can interrogate",
+        description:
+          "A written technical design covering data flow, model boundaries, failure modes, escalation paths, and the decisions the system is explicitly not permitted to make. Reviewed with your engineers before a line is written.",
+      },
+      {
+        eyebrow: "03 Build",
+        title: "Built against your real exceptions",
+        description:
+          "Calibrated on your data, including the malformed records and the requests that fit no category. Tested on the failure modes rather than the happy path.",
+      },
+      {
+        eyebrow: "04 Handover",
+        title: "Code you own, documented to maintain",
+        description:
+          "Source, infrastructure as code, runbooks, and observability. Your team can operate and extend it without us. Optional support after that is a choice, not a dependency.",
+      },
+    ],
+    builtFor: [
+      "CTOs and heads of engineering with a build decision",
+      "Teams whose prototype stalled before production",
+      "Organisations that need to own the system outright",
+    ],
+    faqs: [
+      {
+        question: "What does a custom engineering engagement cost?",
+        answer:
+          "Engagements are scoped and fixed price per phase rather than billed hourly, so you approve a number before work starts. Scope drives the figure, so the first conversation is about the problem rather than a rate card. We will tell you early if the work does not justify the spend.",
+      },
+      {
+        question: "How long does it take?",
+        answer:
+          "A scoping and technical design phase typically runs in weeks, not months, and produces a written architecture you can take elsewhere if you choose. Build duration depends on scope, and we commit to a date at the end of design rather than guessing before it.",
+      },
+      {
+        question: "Who owns the code and the IP?",
+        answer:
+          "You do, outright. Source, infrastructure definitions, and documentation are yours. We do not retain licences to work you paid for and we do not build in dependencies on us.",
+      },
+      {
+        question: "What technologies do you build on?",
+        answer:
+          "Chosen per problem rather than per preference. In practice: Python and TypeScript, managed model APIs alongside self hosted open weight models where data residency requires it, Postgres and vector stores, containerised deployment on your cloud of choice. We will justify every choice in the design document.",
+      },
+      {
+        question: "Will you work alongside our existing engineering team?",
+        answer:
+          "Yes, and it is usually the better outcome. Your engineers know the domain, we know how these systems fail in production. Handover is materially easier when your team was in the design reviews.",
+      },
+      {
+        question: "What if we already have a prototype?",
+        answer:
+          "Bring it. A working prototype is useful evidence about the problem even when little of the code survives. We will tell you honestly which parts are a foundation and which are a detour.",
+      },
+    ],
+    integrations: [
+      "Your existing cloud account",
+      "Your data warehouse",
+      "Internal APIs and services",
+      "Identity and access management",
+      "Existing CI and observability",
+      "On premise and residency constrained",
+    ],
+    flow: {
+      label: "Engagement path",
+      stages: [
+        { name: "Scope", kind: "input" },
+        { name: "Technical design", kind: "model" },
+        { name: "Build", kind: "action" },
+        { name: "Production", kind: "action" },
+        { name: "You own it", kind: "output" },
+      ],
+      branch: { fromIndex: 1, name: "Walk away with the design" },
+    },
+    layers: ["Intelligence", "Orchestration", "Governance", "Production"],
+  },
   {
     slug: "extrovert-ai",
     name: "Extrovert AI",

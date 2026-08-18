@@ -410,3 +410,265 @@ p {
   }
   .card-lift:hover { transform: none; }
 }
+
+/* ==========================================================================
+   BLUEPRINT SET PIECE
+   --------------------------------------------------------------------------
+   The hero's one orchestrated moment: a technical drawing that constructs
+   itself on load. Strokes draw, nodes latch, annotations settle.
+
+   Chosen over the obvious alternatives on purpose. A particle field, a glowing
+   network, or a rotating sphere would all have been faster to build and would
+   have put us back in the generic AI aesthetic. A drawing that assembles is
+   on-brand for a company whose whole claim is engineering discipline, and it
+   reads as competence rather than atmosphere.
+
+   Runs once, not on a loop: an infinite animation in a hero is decoration,
+   a single construction is an event. All CSS, no JavaScript.
+   ========================================================================== */
+
+@keyframes bp-draw {
+  from { stroke-dashoffset: var(--bp-len, 1000); }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes bp-pop {
+  0% { opacity: 0; transform: scale(0.2); }
+  70% { transform: scale(1.25); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes bp-settle {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bp-line {
+  stroke-dasharray: var(--bp-len, 1000);
+  stroke-dashoffset: var(--bp-len, 1000);
+  animation: bp-draw 1.1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation-delay: var(--bp-delay, 0s);
+}
+.bp-node {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bp-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--bp-delay, 0s);
+}
+.bp-label {
+  opacity: 0;
+  animation: bp-settle 0.6s ease-out forwards;
+  animation-delay: var(--bp-delay, 0s);
+}
+
+/* Reduced motion gets the finished drawing, immediately and completely. */
+@media (prefers-reduced-motion: reduce) {
+  .bp-line,
+  .bp-node,
+  .bp-label {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---- Type range. Three weights and a flat scale read as timid, not calm. --- */
+.text-hero {
+  font-size: clamp(2.6rem, 1.5rem + 4.6vw, 5.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+/* Outline weight for a counter-line: presence without another colour.
+   The stroke is deliberately NOT --hairline-strong (fg at 22%). At headline
+   size that measured about 1.2:1 against the ground, which is unreadable for
+   real copy rather than decoration. At 62% of the foreground with a 2px stroke
+   it clears the 3:1 large-text floor while still reading as an outline.
+
+   The solid `color` fallback matters: where -webkit-text-stroke is unsupported
+   the text must not render transparent, so the fill is only cleared inside the
+   @supports block. */
+.text-outline {
+  color: color-mix(in oklab, var(--fg) 62%, transparent);
+}
+@supports (-webkit-text-stroke: 2px black) {
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px color-mix(in oklab, var(--fg) 62%, transparent);
+  }
+}
+
+/* ==========================================================================
+   MODERN PLATFORM LAYER
+   All of the below is progressive enhancement: every feature is either behind
+   @supports or degrades to the current behaviour. Nothing here adds a byte of
+   JavaScript, and none of it changes layout on unsupported browsers.
+   ========================================================================== */
+
+/* Cross-document view transitions. Chromium morphs between routes; every other
+   browser navigates exactly as before. ~0 cost, largest perceived-quality gain
+   available to a multi-page site. */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+/* Native animated disclosure. Replaces the JS state that used to drive the
+   How-we-build panels, so that component is now a server component. */
+:root { interpolate-size: allow-keywords; }
+
+@supports selector(::details-content) {
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size 0.42s var(--ease-out-expo), content-visibility 0.42s;
+    transition-behavior: allow-discrete;
+  }
+  details[open]::details-content { block-size: auto; }
+}
+
+/* Entry animation with no JS and no scroll observer. */
+@supports at-rule(@starting-style) {
+  .enter-rise {
+    transition: opacity 0.5s var(--ease-out-expo),
+      translate 0.5s var(--ease-out-expo);
+    opacity: 1;
+    translate: 0 0;
+  }
+  @starting-style {
+    .enter-rise { opacity: 0; translate: 0 1rem; }
+  }
+}
+
+/* Variable-font weight on display type as it arrives. Fraunces is already
+   loaded variable, so this costs nothing extra. */
+@supports (font-variation-settings: normal) {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      @keyframes weight-in {
+        from { font-variation-settings: "wght" 300; letter-spacing: -0.005em; }
+        to { font-variation-settings: "wght" 460; letter-spacing: -0.018em; }
+      }
+      .weight-in {
+        animation: weight-in linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 30%;
+      }
+    }
+  }
+}
+
+/* Progressive blur at a section seam. Cheap, GPU-composited, decorative only. */
+.seam-blur {
+  position: absolute;
+  inset-inline: 0;
+  height: 4rem;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  mask-image: linear-gradient(to bottom, transparent, black 70%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 70%);
+}
+
+/* CAD crosshair. Driven by two custom properties the hero sets directly on the
+   element, so pointer movement never triggers a React render. */
+.cad-field { position: relative; }
+.cad-cross {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.cad-field:hover .cad-cross { opacity: 1; }
+.cad-cross::before,
+.cad-cross::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+  opacity: 0.35;
+}
+.cad-cross::before {
+  inset-block: 0;
+  inline-size: 1px;
+  left: var(--cad-x, 50%);
+}
+.cad-cross::after {
+  inset-inline: 0;
+  block-size: 1px;
+  top: var(--cad-y, 50%);
+}
+.cad-readout {
+  position: absolute;
+  left: var(--cad-x, 50%);
+  top: var(--cad-y, 50%);
+  translate: 0.5rem 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--accent-text);
+  white-space: nowrap;
+}
+/* Touch devices have no hover, so the crosshair never shows and costs nothing. */
+@media (hover: none) {
+  .cad-cross, .cad-readout { display: none; }
+}
+
+/* Container queries: the signal path adapts to ITS OWN width, which is what
+   lets one markup tree serve every layout instead of shipping two. */
+.cq { container-type: inline-size; }
+
+/* Tactile revival: sticky notes for the one human section on the site. */
+.note-pin {
+  position: relative;
+  rotate: var(--note-rot, -0.8deg);
+  transition: rotate 0.45s var(--ease-out-expo), translate 0.45s var(--ease-out-expo);
+  box-shadow: 0 10px 22px -14px rgb(0 0 0 / 0.45);
+}
+.note-pin:hover { rotate: 0deg; translate: 0 -3px; }
+/* Tape across the top edge. */
+.note-pin::before {
+  content: "";
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  translate: -50% 0;
+  width: 3.5rem;
+  height: 1rem;
+  background: color-mix(in oklab, var(--accent) 26%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 34%, transparent);
+  rotate: var(--tape-rot, 1.5deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .note-pin { rotate: 0deg !important; }
+  .note-pin:hover { translate: none; }
+}
+
+/* Faint pinboard grid behind the notes. */
+.pinboard {
+  background-image:
+    linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+}
+
+/* Small craft: hanging punctuation on pull quotes, gold scrollbar. */
+blockquote { hanging-punctuation: first; }
+
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--accent) 55%, transparent);
+    border-radius: 999px;
+    border: 2px solid var(--surface);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+}
+html { scrollbar-color: color-mix(in oklab, var(--accent) 55%, transparent) var(--surface); }
+
+/* Form craft: auto-growing textarea, and validation that waits until the user
+   has actually finished rather than shouting on first keystroke. */
+textarea { field-sizing: content; }
+.field:user-invalid {
+  border-color: color-mix(in oklab, #c2410c 60%, transparent);
+}

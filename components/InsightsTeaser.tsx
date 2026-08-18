@@ -24,7 +24,7 @@ export function InsightsTeaser() {
               id="insights-teaser-heading"
               className="font-display mt-4 text-display-sm font-light"
             >
-              Where the work was breaking.
+              Where the work breaks.
             </h2>
             <p className="mt-4 text-[var(--fg)]/70">
               Case studies and writing on how operations actually fail, and what

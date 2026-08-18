@@ -1,124 +1,152 @@
 import Link from "next/link";
 import { site } from "@/data/site";
 import { offerings } from "@/data/offerings";
+import { Blueprint } from "./Blueprint";
+import { CadField } from "./CadField";
 import { RevealOnLoad } from "./Reveal";
 
-// Company hero. Stallwart is the only subject.
+// The company hero.
 //
-// The previous version carried a "Systems running" instrument panel, which read
-// as a fake dashboard. Removed. Presence now comes from restrained display
-// type, the tagline given its own weight, and a live portfolio strip that
-// states what the company actually is: three systems, one standard.
+// WHAT CHANGED. The spec rail across the top ("Stallwart / AI and software
+// engineering / 4 systems / US and UAE") is gone: it repeated the wordmark, the
+// descriptor, and the footer, and it pushed the headline below the fold. Top
+// padding is reduced so the tagline, headline, subhead, CTAs, and the portfolio
+// strip all land in one view.
 //
-// Server component: headline, subhead, and CTAs are in the initial HTML, so the
+// The blueprint sits inside a CadField, so a pointer over the drawing gets a
+// crosshair and a live coordinate readout: the instrument a drawing is actually
+// read with, rather than a cursor-following glow.
+//
+// Server component. Headline, subhead, and CTAs are in the initial HTML, so the
 // h1 is crawlable with no JavaScript.
 export function Hero() {
-  // Split the headline around the emphasised word so the gold accent tracks the
-  // copy rather than being hardcoded into the markup. If the word is not found,
-  // the headline renders whole and unemphasised, which is a safe fallback.
   const { headline, headlineEmphasis } = site.hero;
   const at = headline.indexOf(headlineEmphasis);
   const before = at === -1 ? headline : headline.slice(0, at);
   const after = at === -1 ? "" : headline.slice(at + headlineEmphasis.length);
 
   return (
-    <section className="relative isolate overflow-hidden px-[var(--space-gutter)] pt-32 pb-[var(--space-section)] lg:pt-40">
-      {/* Ambient field: one drifting gold wash and a hairline grid for depth. */}
+    <section className="relative isolate overflow-hidden px-[var(--space-gutter)] pb-[var(--space-section)] pt-24 lg:pt-28">
+      {/* One faint drifting wash. The blueprint is the focal point, so the
+          background must not compete with it. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="animate-aurora absolute -top-[40%] left-1/2 h-[70vh] w-[120vw] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,var(--glow)_0%,transparent_62%)] blur-3xl" />
-        <div
-          className="absolute inset-x-0 top-0 h-full opacity-40"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, var(--hairline) 1px, transparent 1px)",
-            backgroundSize: "clamp(4rem, 8vw, 8rem) 100%",
-            maskImage: "linear-gradient(to bottom, black 0%, transparent 70%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 0%, transparent 70%)",
-          }}
-        />
+        <div className="animate-aurora absolute -top-[45%] left-1/2 h-[60vh] w-[110vw] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,var(--glow)_0%,transparent_60%)] blur-3xl" />
       </div>
 
       <div className="mx-auto max-w-6xl">
-        {/* The tagline, given real presence as the brand line it is. */}
-        <RevealOnLoad index={0} y={8}>
-          <div className="flex items-center gap-3">
-            <span
-              aria-hidden="true"
-              className="h-px w-10 bg-[var(--accent)] sm:w-16"
-            />
-            <p className="font-display text-[length:var(--text-step-1)] italic tracking-wide text-[var(--accent-text)]">
-              {site.tagline}
-            </p>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
+          {/* ------------------------- The claim ------------------------- */}
+          <div>
+            <RevealOnLoad index={0} y={8}>
+              <div className="flex items-center gap-3">
+                <span
+                  aria-hidden="true"
+                  className="h-px w-10 bg-[var(--accent)] sm:w-14"
+                />
+                <p className="font-display text-[length:var(--text-step-1)] italic tracking-wide text-[var(--accent-text)]">
+                  {site.tagline}
+                </p>
+              </div>
+            </RevealOnLoad>
+
+            {/* Range inside one headline: the emphasised word solid gold, the
+                trailing clause outlined. Presence from contrast, not size. */}
+            <RevealOnLoad index={1} y={16}>
+              <h1 className="font-display text-hero mt-5 font-normal">
+                {before}
+                <span className="text-gold-sheen italic">
+                  {headlineEmphasis}
+                </span>
+                <span className="text-outline">{after}</span>
+              </h1>
+            </RevealOnLoad>
+
+            <RevealOnLoad index={2}>
+              <div className="mt-7 max-w-xl space-y-4 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
+                {site.hero.subhead.map((para) => (
+                  <p key={para}>{para}</p>
+                ))}
+              </div>
+            </RevealOnLoad>
+
+            <RevealOnLoad
+              index={3}
+              className="mt-8 flex flex-wrap items-center gap-3"
+            >
+              <Link
+                href={site.hero.primaryCta.href}
+                className="btn-wipe rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)]"
+              >
+                {site.hero.primaryCta.label}
+              </Link>
+
+              <Link
+                href={site.hero.secondaryCta.href}
+                className="group inline-flex items-center gap-2 rounded-full border border-[var(--hairline-strong)] px-7 py-3.5 text-sm font-medium transition-colors hover:border-[var(--accent)]"
+              >
+                {site.hero.secondaryCta.label}
+                <span aria-hidden="true" className="arrow-shift">
+                  →
+                </span>
+              </Link>
+            </RevealOnLoad>
           </div>
-        </RevealOnLoad>
 
-        <RevealOnLoad index={1} y={20}>
-          <h1 className="font-display mt-7 max-w-4xl text-display-xl font-light">
-            {before}
-            <span className="text-gold-sheen italic">{headlineEmphasis}</span>
-            {after}
-          </h1>
-        </RevealOnLoad>
+          {/* ----------------------- The set piece ----------------------- */}
+          <RevealOnLoad index={2} y={0}>
+            <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/60 p-4 backdrop-blur-sm sm:p-6">
+              <div className="mb-3 flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--fg)]/70">
+                <span>System schematic</span>
+                <span className="text-[var(--accent-text)]">
+                  {site.company} core
+                </span>
+              </div>
+              <CadField>
+                <Blueprint />
+              </CadField>
+            </div>
+          </RevealOnLoad>
+        </div>
 
-        <RevealOnLoad index={2}>
-          <div className="mt-8 max-w-2xl space-y-4 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
-            {site.hero.subhead.map((para) => (
-              <p key={para}>{para}</p>
-            ))}
+        {/* ---- Portfolio strip: what we build, status made explicit ---- */}
+        <RevealOnLoad index={4} className="rule-t mt-12 pt-7">
+          <div className="flex items-baseline justify-between gap-4">
+            <p className="eyebrow">What we build</p>
+            <Link
+              href="/offer"
+              className="link-draw font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]"
+            >
+              All {offerings.length} →
+            </Link>
           </div>
-        </RevealOnLoad>
 
-        <RevealOnLoad
-          index={3}
-          className="mt-10 flex flex-wrap items-center gap-3"
-        >
-          <Link
-            href={site.hero.primaryCta.href}
-            className="btn-wipe rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)]"
-          >
-            {site.hero.primaryCta.label}
-          </Link>
-
-          <Link
-            href={site.hero.secondaryCta.href}
-            className="group inline-flex items-center gap-2 rounded-full border border-[var(--hairline-strong)] px-7 py-3.5 text-sm font-medium transition-colors hover:border-[var(--accent)]"
-          >
-            {site.hero.secondaryCta.label}
-            <span aria-hidden="true" className="arrow-shift">
-              →
-            </span>
-          </Link>
-        </RevealOnLoad>
-
-        {/* Portfolio strip. States what the company is, and doubles as an
-            internal link surface on the highest authority page. */}
-        <RevealOnLoad index={4} className="rule-t mt-16 pt-8">
-          <p className="eyebrow">Three systems, one standard</p>
-          <ul className="mt-5 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
+          <ul className="mt-4 grid gap-px bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
             {offerings.map((offering) => (
               <li key={offering.slug} className="bg-[var(--bg)]">
                 <Link
                   href={`/offer/${offering.slug}`}
-                  className="group flex h-full flex-col gap-1.5 py-4 pr-4 transition-colors hover:bg-[var(--surface)] sm:px-5"
+                  className="group flex h-full flex-col gap-1.5 p-4 transition-colors hover:bg-[var(--surface)]"
                 >
                   <span className="flex items-center gap-2">
                     <span
                       aria-hidden="true"
-                      className={`h-1.5 w-1.5 rounded-full ${
+                      className={`h-1.5 w-1.5 shrink-0 rounded-full ${
                         offering.status === "available"
                           ? "bg-[var(--accent)]"
-                          : "border border-[var(--fg)]/35"
+                          : "border border-[var(--fg)]/40"
                       }`}
                     />
-                    <span className="font-display text-[length:var(--text-step-1)] transition-colors group-hover:text-[var(--accent-text)]">
-                      {offering.name}
+                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--fg)]/70">
+                      {offering.status === "available" ? "Available" : "Soon"}
                     </span>
                   </span>
-                  <span className="text-xs leading-snug text-[var(--fg)]/60">
+                  <span className="font-display text-[length:var(--text-step-1)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
+                    {offering.name}
+                  </span>
+                  <span className="text-xs leading-snug text-[var(--fg)]/70">
                     {offering.tagline}
                   </span>
                 </Link>

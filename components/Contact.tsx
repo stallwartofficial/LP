@@ -160,7 +160,7 @@ export function Contact() {
                     required
                     autoComplete="name"
                     placeholder="Jordan Mehta"
-                    className={fieldClass}
+                    className={`field ${fieldClass}`}
                   />
                 </div>
 
@@ -175,7 +175,7 @@ export function Contact() {
                     required
                     autoComplete="email"
                     placeholder="jordan@company.com"
-                    className={fieldClass}
+                    className={`field ${fieldClass}`}
                   />
                 </div>
 
@@ -190,7 +190,7 @@ export function Contact() {
                     required
                     autoComplete="organization"
                     placeholder="Company name"
-                    className={fieldClass}
+                    className={`field ${fieldClass}`}
                   />
                 </div>
 
@@ -204,7 +204,7 @@ export function Contact() {
                     id="teamSize"
                     name="teamSize"
                     defaultValue=""
-                    className={fieldClass}
+                    className={`field ${fieldClass}`}
                   >
                     <option value="">Select…</option>
                     <option value="1-10">1-10</option>
@@ -222,7 +222,7 @@ export function Contact() {
                     id="interest"
                     name="interest"
                     defaultValue=""
-                    className={fieldClass}
+                    className={`field ${fieldClass}`}
                   >
                     <option value="">Select…</option>
                     {offerings.map((o) => (
@@ -247,7 +247,7 @@ export function Contact() {
                     name="message"
                     rows={4}
                     placeholder="The process that only works because someone remembers it…"
-                    className={fieldClass}
+                    className={`field ${fieldClass}`}
                   />
                 </div>
               </div>

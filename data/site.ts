@@ -123,13 +123,13 @@ export const site = {
 
   /**
    * The shared engineering core every offering is built on. This is what makes
-   * "three systems, one standard" a structural claim rather than a heading:
+   * "one standard" a structural claim rather than a heading:
    * each offering declares which of these layers it leans on (see `layers` in
    * data/offerings.ts) and the architecture diagram draws the connection.
    */
   architecture: {
     heading: "One engineering standard",
-    lead: "Three systems, one core. Every Stallwart build moves through the same four layers, which is why a governance guarantee in one product is a governance guarantee in all of them.",
+    lead: "Every Stallwart build, product or engagement, moves through the same four layers. That is why a governance guarantee in one system is a governance guarantee in all of them.",
     layers: [
       {
         name: "Intelligence",
@@ -158,22 +158,6 @@ export const site = {
     ],
   },
 
-  /**
-   * ARCHITECTURAL PROPERTIES, not performance metrics.
-   *
-   * Every line here is true by construction and checkable by reading the
-   * system, rather than a measured outcome we cannot verify pre-launch
-   * (constraint 7). The section heading says "built for production" and the
-   * footnote states plainly that these are design commitments, because
-   * presenting them as results would invite exactly the credibility question
-   * they are meant to answer.
-   */
-  productionProperties: [
-    { value: "24/7", label: "Autonomous operation" },
-    { value: "100%", label: "Actions logged" },
-    { value: "0", label: "Untracked automation steps" },
-    { value: "3", label: "Systems currently in portfolio" },
-  ],
 
   areaServed: ["United States", "United Arab Emirates"],
 

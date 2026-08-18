@@ -38,36 +38,36 @@ export const commitments: Commitment[] = [
   },
 ];
 
-export type EngagementStep = {
-  step: string;
-  title: string;
-  description: string;
-};
 
-// How any Stallwart engagement runs, regardless of which offering it involves.
-export const engagementSteps: EngagementStep[] = [
+/**
+ * THE QUESTIONS EVERY BUYER ASKS AND THE SITE PREVIOUSLY DID NOT ANSWER.
+ *
+ * Cost, duration, and ownership were absent everywhere, so no visitor could
+ * self qualify and the only path forward was to book a call and hope.
+ *
+ * These state a POSTURE rather than a number. A posture is honest pre-launch and
+ * still lets a buyer decide whether to start a conversation; a fabricated price
+ * would be neither.
+ */
+export const engagementTerms = [
   {
-    step: "01",
-    title: "Understand the work",
-    description:
-      "We map how the work actually happens inside your business today, where it stalls, who it waits on, and what it costs when it slips.",
+    question: "What it costs",
+    answer:
+      "Fixed price per phase, approved before work starts. Not billed hourly, so the estimate is our risk rather than yours. Scope sets the figure, which is why the first conversation is about the problem instead of a rate card.",
   },
   {
-    step: "02",
-    title: "Scope the system",
-    description:
-      "We identify which part a system can take over outright, and which part should stay with your team. We won't automate something that shouldn't be.",
+    question: "How long it takes",
+    answer:
+      "Scoping and technical design run in weeks, not months, and produce a written architecture you can take elsewhere. We commit to a build date at the end of design rather than guessing before it.",
   },
   {
-    step: "03",
-    title: "Build against reality",
-    description:
-      "The system is built and calibrated on your actual data and edge cases, not a clean sample, so it holds when it meets the real thing.",
+    question: "What you own",
+    answer:
+      "Everything. Source, infrastructure as code, runbooks, documentation. We do not retain licences to work you paid for, and we do not build in dependencies on us.",
   },
   {
-    step: "04",
-    title: "Hand over the running",
-    description:
-      "It goes live doing the work unattended. Your team reviews outcomes instead of performing the process.",
+    question: "When we say no",
+    answer:
+      "When off the shelf software already solves it, when the data to make it work does not exist yet, or when the spend cannot be justified. We would rather lose the engagement than ship something you regret.",
   },
-];
+] as const;

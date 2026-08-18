@@ -1,239 +1,132 @@
-"use client";
-
-import { useState } from "react";
 import { site } from "@/data/site";
 
-// "How we build" as an interactive mindmap.
+// The standard, as a specification sheet.
 //
-// Three branches radiate from a Stallwart core. Selecting a branch promotes it:
-// its own accent takes over, its sub branches draw in, and the detail panel
-// swaps. Hover previews, click commits, arrow keys move. It is a real tablist,
-// so the interaction is not mouse only.
+// WHAT CHANGED, TWICE OVER. This was a two column mindmap with tab state, which
+// competed with the architecture diagram directly below it and required a client
+// component to work. It is now three disclosure rows built on native
+// details/summary, which means:
 //
-// COLOUR: every branch has two tokens (see globals.css). `-fill` is decorative
-// and may be the bright brand gold; `-text` is measured AA safe against the
-// current theme's background. Type only ever uses `-text`.
+//   - No JavaScript. It is a server component, so the whole argument is in the
+//     initial HTML and crawlable without hydration.
+//     Registers as a specification a buyer reads, not a toy they operate.
+//   - The open and close animation is native CSS (::details-content plus
+//     interpolate-size, see globals.css), so it is smooth where supported and
+//     instant where not. Nothing breaks either way.
+//   - Keyboard and screen reader support come from the platform rather than
+//     from hand rolled roving tabindex.
 //
-// SEO: all three panels are rendered in the DOM and only visually collapsed, so
-// a crawler reads the whole argument without running the interaction.
+// Each row carries its own gold weight so the three read as distinct claims.
+// Type only ever uses a --branch-*-text token, which is AA measured; the -fill
+// counterparts are for rules and markers.
 
-const branches = [
+const TONES = [
   { fill: "var(--branch-reliable-fill)", text: "var(--branch-reliable-text)" },
   { fill: "var(--branch-honest-fill)", text: "var(--branch-honest-text)" },
   { fill: "var(--branch-scalable-fill)", text: "var(--branch-scalable-text)" },
-];
+] as const;
 
 export function HowWeBuild() {
-  const [active, setActive] = useState(0);
-  const pillars = site.pillars;
-  const tone = branches[active] ?? branches[0];
-
   return (
     <section
       aria-labelledby="how-we-build-heading"
       className="section-y rule-t px-[var(--space-gutter)]"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="max-w-2xl">
-          <p className="eyebrow">How we build</p>
-          <h2
-            id="how-we-build-heading"
-            className="font-display mt-4 text-display-sm font-light"
-          >
-            <span className="text-gold-sheen italic">Built Beyond</span> is a
-            specification, not a slogan.
-          </h2>
-          <p className="mt-4 text-[var(--fg)]/70">
-            {site.positioning} Three things have to be true before a system
-            ships with our name on it.
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="eyebrow">The standard</p>
+            <h2
+              id="how-we-build-heading"
+              className="font-display weight-in mt-3 text-display-sm font-light"
+            >
+              <span className="text-gold-sheen italic">Built Beyond</span> is a
+              specification, not a slogan.
+            </h2>
+            <p className="mt-4 text-[var(--fg)]/75">
+              Three conditions have to hold before a system ships with our name
+              on it. Each one is testable.
+            </p>
+          </div>
+
+          <p className="shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
+            {site.pillars.length} conditions
           </p>
         </div>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16">
-          {/* --------------------------- The map --------------------------- */}
-          <div
-            role="tablist"
-            aria-label="How Stallwart builds"
-            aria-orientation="vertical"
-          >
-            {/* Core node */}
-            <div
-              className="relative z-10 mb-1 inline-flex items-center gap-3 rounded-full border bg-[var(--bg)] px-4 py-2 transition-colors duration-500"
-              style={{ borderColor: tone.fill }}
-            >
-              <span
-                aria-hidden="true"
-                className="animate-soft-pulse h-2 w-2 rounded-full"
-                style={{ background: tone.fill }}
-              />
-              <span className="font-display text-[length:var(--text-step-1)]">
-                {site.company}
-              </span>
-            </div>
+        <div className="mt-10">
+          {site.pillars.map((pillar, i) => {
+            const tone = TONES[i] ?? TONES[0];
 
-            <ul>
-              {pillars.map((pillar, i) => {
-                const selected = i === active;
-                const t = branches[i] ?? branches[0];
-                const isLast = i === pillars.length - 1;
+            return (
+              <details
+                key={pillar.key}
+                open={i === 0}
+                className="group rule-t last:rule-b"
+              >
+                <summary className="flex cursor-pointer list-none items-baseline gap-4 py-6 sm:gap-6">
+                  <span
+                    aria-hidden="true"
+                    className="font-mono text-[11px] tracking-[0.2em]"
+                    style={{ color: tone.text }}
+                  >
+                    {pillar.number}
+                  </span>
 
-                return (
-                  <li key={pillar.key} className="relative pl-8">
-                    {/* Spine plus an elbow into the node. */}
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-2 top-0 w-px bg-[var(--hairline-strong)]"
-                      style={{ height: isLast ? "2.4rem" : "100%" }}
-                    />
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-2 top-[2.4rem] h-px w-5 transition-colors duration-500"
-                      style={{
-                        background: selected ? t.fill : "var(--hairline-strong)",
-                      }}
-                    />
+                  <span className="min-w-0 flex-1">
+                    <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                      <span
+                        className="font-display text-[length:var(--text-step-3)] leading-tight"
+                        style={{ color: tone.text }}
+                      >
+                        {pillar.title}
+                      </span>
+                      <span className="text-[var(--fg)]/75">{pillar.claim}</span>
+                    </span>
+                  </span>
 
-                    <button
-                      type="button"
-                      role="tab"
-                      id={`branch-tab-${pillar.key}`}
-                      aria-selected={selected}
-                      aria-controls={`branch-panel-${pillar.key}`}
-                      tabIndex={selected ? 0 : -1}
-                      onClick={() => setActive(i)}
-                      onMouseEnter={() => setActive(i)}
-                      onFocus={() => setActive(i)}
-                      onKeyDown={(e) => {
-                        if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-                          e.preventDefault();
-                          setActive((i + 1) % pillars.length);
-                        }
-                        if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-                          e.preventDefault();
-                          setActive((i - 1 + pillars.length) % pillars.length);
-                        }
-                      }}
-                      className="group w-full py-4 text-left"
-                    >
-                      <span className="flex items-baseline gap-3">
+                  {/* Rotates to a minus when the row is open. */}
+                  <span
+                    aria-hidden="true"
+                    className="mt-1 shrink-0 text-lg leading-none transition-transform duration-500 group-open:rotate-45"
+                    style={{ color: tone.text }}
+                  >
+                    +
+                  </span>
+                </summary>
+
+                <div className="pb-8 sm:pl-12">
+                  <p className="max-w-2xl text-[var(--fg)]/75">
+                    {pillar.description}
+                  </p>
+
+                  <ul className="mt-6 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
+                    {pillar.branches.map((branch) => (
+                      <li
+                        key={branch}
+                        className="bg-[var(--bg)] p-4 text-sm text-[var(--fg)]/80"
+                      >
                         <span
                           aria-hidden="true"
-                          className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full border transition-all duration-500"
-                          style={{
-                            borderColor: selected
-                              ? t.fill
-                              : "var(--hairline-strong)",
-                            background: selected ? t.fill : "transparent",
-                            transform: selected ? "scale(1.35)" : "scale(1)",
-                          }}
+                          className="mb-3 block h-1 w-5"
+                          style={{ background: tone.fill }}
                         />
-                        <span className="min-w-0">
-                          <span className="flex items-baseline gap-2.5">
-                            <span
-                              className="font-display text-[length:var(--text-step-2)] transition-colors duration-500"
-                              style={{ color: selected ? t.text : undefined }}
-                            >
-                              {pillar.title}
-                            </span>
-                            <span
-                              aria-hidden="true"
-                              className="text-[10px] tracking-[0.18em] text-[var(--fg)]/65"
-                            >
-                              {pillar.number}
-                            </span>
-                          </span>
-                          <span className="mt-1 block text-sm text-[var(--fg)]/70">
-                            {pillar.claim}
-                          </span>
-                        </span>
-                      </span>
+                        {branch}
+                      </li>
+                    ))}
+                  </ul>
 
-                      {/* Sub branches draw in when selected. */}
-                      <span
-                        className="grid transition-all duration-500 ease-[var(--ease-out-expo)]"
-                        style={{
-                          gridTemplateRows: selected ? "1fr" : "0fr",
-                          opacity: selected ? 1 : 0,
-                        }}
-                      >
-                        <span className="overflow-hidden">
-                          <span className="mt-3 block space-y-2 pl-[1.4rem] pt-1">
-                            {pillar.branches.map((b) => (
-                              <span
-                                key={b}
-                                className="flex items-center gap-2.5 text-xs text-[var(--fg)]/70"
-                              >
-                                <span
-                                  aria-hidden="true"
-                                  className="h-px w-3 shrink-0"
-                                  style={{ background: t.fill }}
-                                />
-                                {b}
-                              </span>
-                            ))}
-                          </span>
-                        </span>
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* ------------------------ Detail panels ------------------------ */}
-          <div className="relative lg:sticky lg:top-32 lg:self-start">
-            {pillars.map((pillar, i) => {
-              const selected = i === active;
-              const t = branches[i] ?? branches[0];
-
-              return (
-                <div
-                  key={pillar.key}
-                  role="tabpanel"
-                  id={`branch-panel-${pillar.key}`}
-                  aria-labelledby={`branch-tab-${pillar.key}`}
-                  // Not `hidden`: kept in the DOM and visually collapsed so the
-                  // full argument stays crawlable and quotable.
-                  className={
-                    selected
-                      ? "relative opacity-100 transition-opacity duration-500"
-                      : "pointer-events-none absolute inset-0 h-0 overflow-hidden opacity-0"
-                  }
-                >
-                  <div
-                    className="rounded-2xl border bg-[var(--surface)] p-7 transition-colors duration-500 sm:p-9"
-                    style={{
-                      borderColor: `color-mix(in oklab, ${t.fill} 45%, transparent)`,
-                    }}
+                  <p
+                    className="mt-6 flex items-start gap-2.5 text-sm font-medium"
+                    style={{ color: tone.text }}
                   >
-                    <span
-                      className="text-[10px] font-medium uppercase tracking-[0.2em]"
-                      style={{ color: t.text }}
-                    >
-                      {pillar.number} · {pillar.title}
-                    </span>
-
-                    <p className="font-display mt-4 text-[length:var(--text-step-3)] font-light leading-tight">
-                      {pillar.claim}
-                    </p>
-
-                    <p className="mt-5 text-[var(--fg)]/75">
-                      {pillar.description}
-                    </p>
-
-                    <p
-                      className="rule-t mt-7 flex items-start gap-2.5 pt-5 text-sm font-medium"
-                      style={{ color: t.text }}
-                    >
-                      <span aria-hidden="true">✓</span>
-                      {pillar.proof}
-                    </p>
-                  </div>
+                    <span aria-hidden="true">✓</span>
+                    {pillar.proof}
+                  </p>
                 </div>
-              );
-            })}
-          </div>
+              </details>
+            );
+          })}
         </div>
       </div>
     </section>

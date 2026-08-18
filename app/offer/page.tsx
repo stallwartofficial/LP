@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Offerings } from "@/components/Offerings";
-import { Engagement } from "@/components/TrustLayer";
+import { Commitments } from "@/components/TrustLayer";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, offeringListSchema } from "@/lib/seo";
@@ -8,7 +8,7 @@ import { breadcrumbSchema, offeringListSchema } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "What We Offer",
   description:
-    "Stallwart's portfolio, Extrovert AI, AI Editing, and the AI Compliance Office. Systems engineered to take work off a team permanently.",
+    "Stallwart builds custom AI engineering engagements, Extrovert AI, AI Compliance and Governance, and AI Video Creation. Four systems on one engineering standard.",
   alternates: { canonical: "/offer" },
 };
 
@@ -27,7 +27,7 @@ export default function OfferPage() {
         ]}
       />
       <Offerings />
-      <Engagement />
+      <Commitments />
       <Faq heading="How we work" />
     </div>
   );
