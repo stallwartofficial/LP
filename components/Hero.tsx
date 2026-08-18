@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { site } from "@/data/site";
-import { offerings } from "@/data/offerings";
 import { Blueprint } from "./Blueprint";
 import { LogoScroll } from "./LogoScroll";
 import { CadField } from "./CadField";
@@ -125,49 +124,6 @@ export function Hero() {
           <LogoScroll inHero />
         </RevealOnLoad>
 
-        {/* ---- Portfolio strip: what we build, status made explicit ---- */}
-        <RevealOnLoad index={5} className="mt-5">
-          <div className="flex items-baseline justify-between gap-4">
-            <p className="eyebrow">What we build</p>
-            <Link
-              href="/offer"
-              className="link-draw font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]"
-            >
-              All {offerings.length} →
-            </Link>
-          </div>
-
-          <ul className="mt-3 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
-            {offerings.map((offering) => (
-              <li key={offering.slug} className="bg-[var(--bg)]">
-                <Link
-                  href={`/offer/${offering.slug}`}
-                  className="group flex h-full flex-col gap-1 p-3 transition-colors hover:bg-[var(--surface)]"
-                >
-                  <span className="flex items-center gap-2">
-                    <span
-                      aria-hidden="true"
-                      className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                        offering.status === "available"
-                          ? "bg-[var(--accent)]"
-                          : "border border-[var(--fg)]/40"
-                      }`}
-                    />
-                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--fg)]/70">
-                      {offering.status === "available" ? "Available" : "In development"}
-                    </span>
-                  </span>
-                  <span className="font-display text-[length:var(--text-step-1)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
-                    {offering.name}
-                  </span>
-                  <span className="text-xs leading-snug text-[var(--fg)]/70">
-                    {offering.tagline}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </RevealOnLoad>
       </div>
     </section>
   );

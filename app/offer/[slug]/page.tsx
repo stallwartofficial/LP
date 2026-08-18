@@ -108,29 +108,25 @@ export default async function OfferingPage({ params }: Props) {
         </div>
       </header>
 
-      {/* ---- Built for ---- */}
+      {/* ---- Built for: an editorial line, not a checklist of tiles ---- */}
       <section
         aria-labelledby="built-for"
         className="section-y px-[var(--space-gutter)]"
       >
         <div className="mx-auto max-w-3xl">
           <p className="eyebrow">Built for</p>
-          <h2
-            id="built-for"
-            className="font-display mt-3 text-display-sm font-light"
+          <ul
+            aria-labelledby="built-for"
+            className="mt-5 divide-y divide-[var(--hairline)] border-y border-[var(--hairline)]"
           >
-            Who this is for
-          </h2>
-          <ul className="mt-8 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
-            {offering.builtFor.map((who) => (
+            {offering.builtFor.map((who, i) => (
               <li
                 key={who}
-                className="scroll-fade bg-[var(--bg)] p-5 text-sm text-[var(--fg)]/80"
+                className="flex items-baseline gap-4 py-4 text-[length:var(--text-step-1)] text-[var(--fg)]/85"
               >
-                <span
-                  aria-hidden="true"
-                  className="mb-3 block h-1 w-6 bg-[var(--accent)]"
-                />
+                <span className="font-mono text-[10px] tracking-[0.2em] text-[var(--accent-text)]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 {who}
               </li>
             ))}

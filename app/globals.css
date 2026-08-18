@@ -187,6 +187,8 @@ p {
 }
 @supports (-webkit-background-clip: text) {
   .text-gold-sheen {
+    display: inline-block;
+    padding-right: 0.08em;
     background: linear-gradient(
       100deg,
       var(--accent-text) 0%,
@@ -260,13 +262,29 @@ p {
 
 /* Row that indents slightly when hovered, for editorial list links. */
 .row-nudge {
-  transition: padding-left 0.5s var(--ease-out-expo),
-    background-color 0.4s ease;
+  position: relative;
+  transition: padding-left 0.45s var(--ease-out-expo),
+    background-color 0.35s ease;
+}
+/* A left accent bar wipes in, so the hover reads even where a faint tint would
+   be invisible on the light ground. */
+.row-nudge::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s var(--ease-out-expo);
 }
 .row-nudge:hover {
-  padding-left: 0.75rem;
-  background-color: color-mix(in oklab, var(--accent) 5%, transparent);
+  padding-left: 1rem;
+  background-color: color-mix(in oklab, var(--accent) 9%, transparent);
 }
+.row-nudge:hover::before { transform: scaleY(1); }
 
 /* Card that lifts a hair on hover. Transform only, so it never reflows. */
 .card-lift {
@@ -275,7 +293,10 @@ p {
 }
 .card-lift:hover {
   transform: translateY(-3px);
-  border-color: color-mix(in oklab, var(--accent) 50%, transparent);
+  border-color: color-mix(in oklab, var(--accent) 55%, transparent);
+  /* A soft shadow so the lift is legible on a flat light card, not only in
+     dark where the border already reads. */
+  box-shadow: 0 14px 30px -18px color-mix(in oklab, var(--fg) 45%, transparent);
 }
 
 /* ===================  SCROLL DRIVEN ANIMATION (no JS)  =================== */
@@ -410,7 +431,7 @@ p {
   .animate-soft-pulse {
     animation: none !important;
   }
-  .card-lift:hover { transform: none; }
+  .card-lift:hover { transform: none; box-shadow: none; }
 }
 
 /* ==========================================================================
@@ -483,7 +504,7 @@ p {
      instead of wrapping mid-clause. Each clause is its own block in the markup;
      balance keeps the break clean at every width. */
   font-size: clamp(2.1rem, 1.5rem + 2.4vw, 3.25rem);
-  line-height: 1.0;
+  line-height: 1.08;
   letter-spacing: -0.028em;
   text-wrap: balance;
 }

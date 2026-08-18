@@ -31,6 +31,14 @@ export function Story() {
               {site.positioning}
             </p>
 
+            <blockquote className="mt-8 max-w-xl border-l-2 border-[var(--accent)] pl-5 font-display text-[length:var(--text-step-2)] font-light italic leading-snug text-[var(--fg)]/85">
+              &ldquo;Building systems with AI that are built beyond the demo:
+              reliable enough to leave alone, honest enough to trust, and
+              scalable enough to still be right at ten times the volume.&rdquo;
+              <footer className="mt-4 font-sans not-italic font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
+                {site.founder.name}, {site.founder.role}
+              </footer>
+            </blockquote>
           </div>
 
           {/* Portrait pinned at the top of the page, so the story opens with a
@@ -58,12 +66,6 @@ export function Story() {
                 </span>
               </figcaption>
             </figure>
-
-            <blockquote className="mt-5 border-t border-[var(--hairline)] pt-5 font-display text-[length:var(--text-step-1)] font-light italic leading-snug text-[var(--fg)]/85">
-              Building systems with AI that are built beyond the demo:
-              reliable enough to leave alone, honest enough to trust, and
-              scalable enough to still be right at ten times the volume.
-            </blockquote>
           </div>
         </div>
       </header>
