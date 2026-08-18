@@ -35,7 +35,8 @@ export const site = {
     "Stallwart is an AI and software engineering company building production grade AI systems, intelligent automation, and custom software products for complex problems that demand more than off the shelf solutions. Engineered for reliability, security, and scale.",
 
   hero: {
-    headline: "Engineering the impossible into production.",
+    /** Split on the pipe: one line per clause. */
+    headline: "Engineering the impossible|into production.",
     /**
      * The one word set in gold. The headline is split around it, so changing
      * either string keeps the emphasis in the right place. Must appear in
@@ -49,8 +50,7 @@ export const site = {
      * punctuation rule above.
      */
     subhead: [
-      "Stallwart is an AI and software engineering company that builds production grade AI systems, intelligent automation, and custom software products for complex problems that demand more than off the shelf solutions.",
-      "We take ambitious ideas from first principles to production, engineering technology for reliability, security, scalability, and continuous evolution, built for the real world and not just the demo.",
+      "We build production grade AI systems, intelligent automation, and custom software for problems no product solves. Taken from first principles to production, engineered for reliability, security, and scale.",
     ],
     primaryCta: { label: "Book a Call", href: "/contact" },
     secondaryCta: { label: "See What We Build", href: "/offer" },

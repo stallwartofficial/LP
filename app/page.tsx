@@ -1,5 +1,4 @@
 import { Hero } from "@/components/Hero";
-import { LogoScroll } from "@/components/LogoScroll";
 import { OfferingsTeaser } from "@/components/OfferingsTeaser";
 import { StoryTeaser } from "@/components/StoryTeaser";
 import { HowWeBuild } from "@/components/HowWeBuild";
@@ -36,7 +35,6 @@ export default function Home() {
     <>
       <JsonLd schema={[webSiteSchema(), offeringListSchema()]} />
       <Hero />
-      <LogoScroll />
       <OfferingsTeaser />
       <StoryTeaser />
       <HowWeBuild />

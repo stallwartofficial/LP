@@ -21,6 +21,8 @@
   /* --font-*-loaded is injected by next/font in app/layout.tsx. */
   --font-display: var(--font-display-loaded), ui-serif, Georgia, serif;
   --font-sans: var(--font-sans-loaded), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-loaded), ui-monospace, SFMono-Regular, Menlo,
+    monospace;
 
   --color-ink: #0a0a0b;
   --color-ink-soft: #121214;
@@ -473,10 +475,13 @@ p {
 }
 
 /* ---- Type range. Three weights and a flat scale read as timid, not calm. --- */
+/* Two lines at the previous 5.5rem ceiling consumed 174px of a 768px viewport
+   on their own, which pushed the trust bar and portfolio strip below the fold.
+   3.9rem keeps real presence and buys back roughly 46px across the pair. */
 .text-hero {
-  font-size: clamp(2.6rem, 1.5rem + 4.6vw, 5.5rem);
-  line-height: 0.94;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.4rem, 1.6rem + 3.2vw, 3.9rem);
+  line-height: 0.98;
+  letter-spacing: -0.028em;
 }
 /* Outline weight for a counter-line: presence without another colour.
    The stroke is deliberately NOT --hairline-strong (fg at 22%). At headline
@@ -671,4 +676,84 @@ html { scrollbar-color: color-mix(in oklab, var(--accent) 55%, transparent) var(
 textarea { field-sizing: content; }
 .field:user-invalid {
   border-color: color-mix(in oklab, #c2410c 60%, transparent);
+}
+
+/* ==========================================================================
+   STEPPED SIGNAL
+   --------------------------------------------------------------------------
+   The travelling dot now DWELLS at each node instead of sliding continuously.
+   A dot that slides reads as decoration; a dot that stops at Scope, then
+   Technical design, then You own it reads as a process with stages, which is
+   the actual point of the diagram.
+
+   Three plateaus, roughly 20% of the cycle each, with short travel between.
+   ========================================================================== */
+
+@keyframes trace-step {
+  0%    { left: 0%;   opacity: 0; }
+  4%    { left: 0%;   opacity: 1; }
+  26%   { left: 0%;   opacity: 1; }   /* dwell, stage 1 */
+  40%   { left: 50%;  opacity: 1; }
+  62%   { left: 50%;  opacity: 1; }   /* dwell, stage 2 */
+  76%   { left: 100%; opacity: 1; }
+  94%   { left: 100%; opacity: 1; }   /* dwell, stage 3 */
+  100%  { left: 100%; opacity: 0; }
+}
+
+.trace-step {
+  animation: trace-step var(--trace-duration, 5.4s) cubic-bezier(0.6, 0, 0.4, 1)
+    infinite;
+  animation-delay: var(--trace-delay, 0s);
+}
+
+/* Each node brightens during its own dwell window, so arrival is visible. */
+@keyframes node-arrive {
+  0%, 100% { border-color: var(--hairline-strong); transform: scale(1); }
+  50% { border-color: var(--accent); transform: scale(1.3); }
+}
+.node-arrive-1,
+.node-arrive-2,
+.node-arrive-3 {
+  animation: node-arrive var(--trace-duration, 5.4s) ease-in-out infinite;
+}
+/* Offsets line up with the plateaus above. */
+.node-arrive-1 { animation-delay: calc(var(--trace-delay, 0s) - 0.72 * var(--trace-duration, 5.4s)); }
+.node-arrive-2 { animation-delay: calc(var(--trace-delay, 0s) - 0.36 * var(--trace-duration, 5.4s)); }
+.node-arrive-3 { animation-delay: var(--trace-delay, 0s); }
+
+@media (prefers-reduced-motion: reduce) {
+  .trace-step { animation: none !important; left: 100%; opacity: 1; }
+  .node-arrive-1, .node-arrive-2, .node-arrive-3 { animation: none !important; }
+}
+
+/* ==========================================================================
+   TAPED PHOTOGRAPH
+   Extends the sticky-note material to the founder placeholder, so every human
+   section of the site shares one material and every engineering section shares
+   another. That is a system rather than a one-off.
+   ========================================================================== */
+
+.photo-taped {
+  position: relative;
+  rotate: -1.4deg;
+  transition: rotate 0.5s var(--ease-out-expo), translate 0.5s var(--ease-out-expo);
+  box-shadow: 0 14px 30px -18px rgb(0 0 0 / 0.5);
+}
+.photo-taped:hover { rotate: 0deg; translate: 0 -3px; }
+/* Two tape strips, opposite corners. */
+.photo-taped::before,
+.photo-taped::after {
+  content: "";
+  position: absolute;
+  width: 4.5rem;
+  height: 1.15rem;
+  background: color-mix(in oklab, var(--accent) 24%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 32%, transparent);
+}
+.photo-taped::before { top: -0.55rem; left: -1rem; rotate: -32deg; }
+.photo-taped::after { bottom: -0.55rem; right: -1rem; rotate: -32deg; }
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-taped { rotate: 0deg !important; }
+  .photo-taped:hover { translate: none; }
 }

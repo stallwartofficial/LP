@@ -1,24 +1,20 @@
 import { site } from "@/data/site";
 
-// The standard, as a specification sheet.
+// The standard, as three compact cards.
 //
-// WHAT CHANGED, TWICE OVER. This was a two column mindmap with tab state, which
-// competed with the architecture diagram directly below it and required a client
-// component to work. It is now three disclosure rows built on native
-// details/summary, which means:
+// WHAT CHANGED, TWICE. This began as a two column mindmap with tab state, then
+// became three full width disclosure rows at 873px. Both were too much room for
+// three claims on a landing page.
 //
-//   - No JavaScript. It is a server component, so the whole argument is in the
-//     initial HTML and crawlable without hydration.
-//     Registers as a specification a buyer reads, not a toy they operate.
-//   - The open and close animation is native CSS (::details-content plus
-//     interpolate-size, see globals.css), so it is smooth where supported and
-//     instant where not. Nothing breaks either way.
-//   - Keyboard and screen reader support come from the platform rather than
-//     from hand rolled roving tabindex.
+// Now three cards at roughly a third of that height, carrying the same three
+// claims, their sub points, and their proof lines. Nothing was cut: the
+// description paragraph moved to the /story page where the standard is discussed
+// at length, and the card keeps the claim, the three testable conditions, and
+// the proof.
 //
-// Each row carries its own gold weight so the three read as distinct claims.
-// Type only ever uses a --branch-*-text token, which is AA measured; the -fill
-// counterparts are for rules and markers.
+// Server component, no JavaScript. Each card owns a gold weight, and type only
+// ever uses a --branch-*-text token, which is AA measured; the -fill
+// counterparts drive rules and markers.
 
 const TONES = [
   { fill: "var(--branch-reliable-fill)", text: "var(--branch-reliable-text)" },
@@ -43,91 +39,75 @@ export function HowWeBuild() {
               <span className="text-gold-sheen italic">Built Beyond</span> is a
               specification, not a slogan.
             </h2>
-            <p className="mt-4 text-[var(--fg)]/75">
-              Three conditions have to hold before a system ships with our name
-              on it. Each one is testable.
-            </p>
           </div>
 
-          <p className="shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
-            {site.pillars.length} conditions
+          <p className="font-mono shrink-0 text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
+            {site.pillars.length} conditions, all testable
           </p>
         </div>
 
-        <div className="mt-10">
+        <ul className="mt-10 grid gap-4 md:grid-cols-3">
           {site.pillars.map((pillar, i) => {
             const tone = TONES[i] ?? TONES[0];
 
             return (
-              <details
+              <li
                 key={pillar.key}
-                open={i === 0}
-                className="group rule-t last:rule-b"
+                className="enter-rise flex flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5 sm:p-6"
+                style={{ transitionDelay: `${i * 70}ms` }}
               >
-                <summary className="flex cursor-pointer list-none items-baseline gap-4 py-6 sm:gap-6">
+                <div className="flex items-baseline justify-between gap-3">
                   <span
-                    aria-hidden="true"
-                    className="font-mono text-[11px] tracking-[0.2em]"
+                    className="font-mono text-[10px] tracking-[0.2em]"
                     style={{ color: tone.text }}
                   >
                     {pillar.number}
                   </span>
-
-                  <span className="min-w-0 flex-1">
-                    <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                      <span
-                        className="font-display text-[length:var(--text-step-3)] leading-tight"
-                        style={{ color: tone.text }}
-                      >
-                        {pillar.title}
-                      </span>
-                      <span className="text-[var(--fg)]/75">{pillar.claim}</span>
-                    </span>
-                  </span>
-
-                  {/* Rotates to a minus when the row is open. */}
                   <span
                     aria-hidden="true"
-                    className="mt-1 shrink-0 text-lg leading-none transition-transform duration-500 group-open:rotate-45"
-                    style={{ color: tone.text }}
-                  >
-                    +
-                  </span>
-                </summary>
-
-                <div className="pb-8 sm:pl-12">
-                  <p className="max-w-2xl text-[var(--fg)]/75">
-                    {pillar.description}
-                  </p>
-
-                  <ul className="mt-6 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
-                    {pillar.branches.map((branch) => (
-                      <li
-                        key={branch}
-                        className="bg-[var(--bg)] p-4 text-sm text-[var(--fg)]/80"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="mb-3 block h-1 w-5"
-                          style={{ background: tone.fill }}
-                        />
-                        {branch}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <p
-                    className="mt-6 flex items-start gap-2.5 text-sm font-medium"
-                    style={{ color: tone.text }}
-                  >
-                    <span aria-hidden="true">✓</span>
-                    {pillar.proof}
-                  </p>
+                    className="h-1 w-6"
+                    style={{ background: tone.fill }}
+                  />
                 </div>
-              </details>
+
+                <h3
+                  className="font-display mt-4 text-[length:var(--text-step-2)] leading-tight"
+                  style={{ color: tone.text }}
+                >
+                  {pillar.title}
+                </h3>
+
+                <p className="mt-2 text-sm leading-snug text-[var(--fg)]/85">
+                  {pillar.claim}
+                </p>
+
+                <ul className="mt-5 flex-1 space-y-2">
+                  {pillar.branches.map((branch) => (
+                    <li
+                      key={branch}
+                      className="flex items-start gap-2.5 text-xs leading-snug text-[var(--fg)]/75"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-[7px] h-px w-2.5 shrink-0"
+                        style={{ background: tone.fill }}
+                      />
+                      {branch}
+                    </li>
+                  ))}
+                </ul>
+
+                <p
+                  className="rule-t mt-5 flex items-start gap-2 pt-4 text-xs font-medium"
+                  style={{ color: tone.text }}
+                >
+                  <span aria-hidden="true">✓</span>
+                  {pillar.proof}
+                </p>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
   );

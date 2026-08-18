@@ -9,15 +9,25 @@ import { logoMarks } from "@/data/testimonials";
 //
 // NOTE: these are placeholder marks. The framing is a sector statement rather
 // than "trusted by", pending real customer names (constraint 7).
-export function LogoScroll() {
+export function LogoScroll({ inHero = false }: { inHero?: boolean } = {}) {
   const marks = [...logoMarks, ...logoMarks];
 
   return (
     <section
       aria-label="Sectors we build for"
-      className="rule-t rule-b marquee-host overflow-hidden bg-[var(--surface)] py-6"
+      className={
+        inHero
+          ? "marquee-host rule-t rule-b overflow-hidden py-3"
+          : "rule-t rule-b marquee-host overflow-hidden bg-[var(--surface)] py-6"
+      }
     >
-      <div className="mx-auto flex max-w-6xl items-center gap-8 px-[var(--space-gutter)]">
+      <div
+        className={
+          inHero
+            ? "flex items-center gap-8"
+            : "mx-auto flex max-w-6xl items-center gap-8 px-[var(--space-gutter)]"
+        }
+      >
         <p className="eyebrow shrink-0">Built for teams at scale</p>
 
         <div className="flex min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { offerings } from "@/data/offerings";
 import { Blueprint } from "./Blueprint";
+import { LogoScroll } from "./LogoScroll";
 import { CadField } from "./CadField";
 import { RevealOnLoad } from "./Reveal";
 
@@ -20,13 +21,16 @@ import { RevealOnLoad } from "./Reveal";
 // Server component. Headline, subhead, and CTAs are in the initial HTML, so the
 // h1 is crawlable with no JavaScript.
 export function Hero() {
+  // Two lines, split on the pipe. Line one carries the gold emphasis word, line
+  // two is outlined, so the pair reads as claim then consequence.
   const { headline, headlineEmphasis } = site.hero;
-  const at = headline.indexOf(headlineEmphasis);
-  const before = at === -1 ? headline : headline.slice(0, at);
-  const after = at === -1 ? "" : headline.slice(at + headlineEmphasis.length);
+  const [lineOne = "", lineTwo = ""] = headline.split("|");
+  const at = lineOne.indexOf(headlineEmphasis);
+  const before = at === -1 ? lineOne : lineOne.slice(0, at);
+  const after = at === -1 ? "" : lineOne.slice(at + headlineEmphasis.length);
 
   return (
-    <section className="relative isolate overflow-hidden px-[var(--space-gutter)] pb-[var(--space-section)] pt-24 lg:pt-28">
+    <section className="relative isolate overflow-hidden px-[var(--space-gutter)] pb-12 pt-16 lg:pb-14 lg:pt-20">
       {/* One faint drifting wash. The blueprint is the focal point, so the
           background must not compete with it. */}
       <div
@@ -37,7 +41,7 @@ export function Hero() {
       </div>
 
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-12">
           {/* ------------------------- The claim ------------------------- */}
           <div>
             <RevealOnLoad index={0} y={8}>
@@ -55,17 +59,20 @@ export function Hero() {
             {/* Range inside one headline: the emphasised word solid gold, the
                 trailing clause outlined. Presence from contrast, not size. */}
             <RevealOnLoad index={1} y={16}>
-              <h1 className="font-display text-hero mt-5 font-normal">
-                {before}
-                <span className="text-gold-sheen italic">
-                  {headlineEmphasis}
+              <h1 className="font-display text-hero mt-4 font-normal">
+                <span className="block">
+                  {before}
+                  <span className="text-gold-sheen italic">
+                    {headlineEmphasis}
+                  </span>
+                  {after}
                 </span>
-                <span className="text-outline">{after}</span>
+                <span className="text-outline block">{lineTwo}</span>
               </h1>
             </RevealOnLoad>
 
             <RevealOnLoad index={2}>
-              <div className="mt-7 max-w-xl space-y-4 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
+              <div className="mt-5 max-w-xl space-y-4 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
                 {site.hero.subhead.map((para) => (
                   <p key={para}>{para}</p>
                 ))}
@@ -74,7 +81,7 @@ export function Hero() {
 
             <RevealOnLoad
               index={3}
-              className="mt-8 flex flex-wrap items-center gap-3"
+              className="mt-6 flex flex-wrap items-center gap-3"
             >
               <Link
                 href={site.hero.primaryCta.href}
@@ -97,7 +104,7 @@ export function Hero() {
 
           {/* ----------------------- The set piece ----------------------- */}
           <RevealOnLoad index={2} y={0}>
-            <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/60 p-4 backdrop-blur-sm sm:p-6">
+            <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/60 p-4 backdrop-blur-sm sm:p-5">
               <div className="mb-3 flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--fg)]/70">
                 <span>System schematic</span>
                 <span className="text-[var(--accent-text)]">
@@ -111,8 +118,15 @@ export function Hero() {
           </RevealOnLoad>
         </div>
 
+        {/* Trust bar above the portfolio strip, both inside the hero, so
+            opening the page shows the CTA, the sectors, and what we build
+            without a scroll. */}
+        <RevealOnLoad index={4} className="mt-6">
+          <LogoScroll inHero />
+        </RevealOnLoad>
+
         {/* ---- Portfolio strip: what we build, status made explicit ---- */}
-        <RevealOnLoad index={4} className="rule-t mt-12 pt-7">
+        <RevealOnLoad index={5} className="mt-5">
           <div className="flex items-baseline justify-between gap-4">
             <p className="eyebrow">What we build</p>
             <Link
@@ -123,12 +137,12 @@ export function Hero() {
             </Link>
           </div>
 
-          <ul className="mt-4 grid gap-px bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-3 grid gap-px bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
             {offerings.map((offering) => (
               <li key={offering.slug} className="bg-[var(--bg)]">
                 <Link
                   href={`/offer/${offering.slug}`}
-                  className="group flex h-full flex-col gap-1.5 p-4 transition-colors hover:bg-[var(--surface)]"
+                  className="group flex h-full flex-col gap-1 p-3 transition-colors hover:bg-[var(--surface)]"
                 >
                   <span className="flex items-center gap-2">
                     <span

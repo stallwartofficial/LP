@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { Navbar } from "@/components/Navbar";
@@ -19,9 +19,24 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-const inter = Inter({
+// IBM Plex Sans replaces Inter for body copy. Inter is the safe default every
+// generated site reaches for, and it has no point of view. Plex was designed as
+// an engineering company's voice, so it carries character while staying sober,
+// and it pairs properly against a high-contrast serif.
+const plexSans = IBM_Plex_Sans({
   variable: "--font-sans-loaded",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+// Plex Mono for every micro-label and data readout. Sharing a family with the
+// body face makes the schematic annotations and the prose visibly related,
+// which the generic system-mono stack could never do.
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-mono-loaded",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -56,7 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`h-full antialiased ${fraunces.variable} ${inter.variable}`}
+      className={`h-full antialiased ${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}
       // Tells Next the smooth scrolling in globals.css is intentional, so it
       // suppresses it during route transitions instead of warning about it.
       data-scroll-behavior="smooth"
