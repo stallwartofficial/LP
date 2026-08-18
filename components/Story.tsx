@@ -14,9 +14,12 @@ export function Story() {
       id="story"
       className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-32 lg:pt-40"
     >
-      <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
-        {/* ------------------- LEFT: the article ------------------- */}
-        <div>
+      {/* Three blocks that stack heading -> portrait -> prose on mobile. On
+          desktop the heading and prose share the left column while the portrait
+          holds a sticky right column spanning both rows. */}
+      <div className="mx-auto grid max-w-6xl items-start gap-x-16 gap-y-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)]">
+        {/* --- Heading: first on mobile, top-left on desktop. --- */}
+        <div className="order-1 lg:col-start-1 lg:row-start-1">
           <div className="flex items-center gap-3">
             <span aria-hidden="true" className="h-px w-10 bg-[var(--accent)]" />
             <p className="eyebrow">Our story</p>
@@ -31,8 +34,10 @@ export function Story() {
           <p className="mt-5 text-[length:var(--text-step-1)] text-[var(--fg)]/75">
             {site.positioning}
           </p>
+        </div>
 
-          <div className="mt-10 space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
+        {/* --- Prose: last on mobile, bottom-left on desktop. --- */}
+        <div className="order-3 space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85 lg:col-start-1 lg:row-start-2">
             <p className="[&::first-letter]:font-display [&::first-letter]:mr-2 [&::first-letter]:float-left [&::first-letter]:text-[3.75rem] [&::first-letter]:font-light [&::first-letter]:leading-[0.82] [&::first-letter]:text-[var(--accent-text)]">
               Businesses rarely fail at strategy. They fail at follow through.
               The work that has to happen every day, by someone, on time, and
@@ -86,10 +91,9 @@ export function Story() {
               understood it is somewhere else.
             </p>
           </div>
-        </div>
 
-        {/* ------------- RIGHT: portrait, then the quote below it ------------- */}
-        <div className="lg:sticky lg:top-32">
+        {/* --- Portrait: second on mobile, sticky right column on desktop. --- */}
+        <div className="order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-start lg:sticky lg:top-32">
           <div className="pinboard rounded-2xl border border-[var(--hairline)] p-7 sm:p-8">
             <figure className="photo-taped bg-[var(--bg-raised)] p-2.5">
               <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">

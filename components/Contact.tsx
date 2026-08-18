@@ -11,8 +11,10 @@ const fieldClass =
   "mt-2 w-full rounded-xl border border-[var(--hairline-strong)] bg-transparent px-4 py-3 outline-none transition-colors placeholder:text-[var(--fg)]/35 focus:border-[var(--accent)]";
 const labelClass = "block text-sm font-medium text-[var(--fg)]/85";
 
-// Two-column contact page: the argument on the left, the form on the right.
-// A form alone gives a reader no reason to fill it in.
+// Contact page. On desktop it is two columns: the argument on the left (a form
+// alone gives a reader no reason to fill it in), the form on the right. On
+// mobile the form comes first so the primary action is immediate, with the
+// argument and a direct-contact line beneath it.
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -51,25 +53,13 @@ export function Contact() {
       aria-labelledby="contact-heading"
       className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-36 lg:pt-44"
     >
-      <div className="mx-auto mb-10 max-w-6xl border-y border-[var(--hairline)] py-5 lg:hidden">
-        <p className="eyebrow">Direct</p>
-        <ul className="mt-3 space-y-1.5 text-sm">
-          <li>
-            <a
-              href={`mailto:${site.contact.email}`}
-              className="link-draw text-[var(--fg)]/85"
-            >
-              {site.contact.email}
-            </a>
-          </li>
-          <li className="text-[var(--fg)]/70">{site.contact.phone}</li>
-          <li className="text-[var(--fg)]/70">{site.areaServed.join(" · ")}</li>
-        </ul>
-      </div>
-
-      <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-20">
-        {/* ---- The argument ---- */}
-        <div>
+      {/* Heading -> form -> detail on mobile, so the title frames the page, the
+          form is the immediate action, and the supporting detail follows. On
+          desktop the heading and detail share the left column while the form
+          holds a sticky right column spanning both rows. */}
+      <div className="mx-auto grid max-w-6xl items-start gap-x-20 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]">
+        {/* ---- Heading: first on mobile, top-left on desktop. ---- */}
+        <div className="order-1 lg:col-start-1 lg:row-start-1">
           <div className="flex items-center gap-3">
             <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)]" />
             <p className="eyebrow">Get in touch</p>
@@ -89,8 +79,11 @@ export function Contact() {
             We&apos;ll show you which part a system can take over, and say so
             plainly if the answer is none of it.
           </p>
+        </div>
 
-          <dl className="mt-12 grid gap-px bg-[var(--hairline)] sm:grid-cols-2">
+        {/* ---- Detail: below the form on mobile, bottom-left on desktop. ---- */}
+        <div className="order-3 lg:col-start-1 lg:row-start-2">
+          <dl className="grid gap-px bg-[var(--hairline)] sm:grid-cols-2">
             <div className="bg-[var(--bg)] py-5 pr-5">
               <dt className="eyebrow">What happens next</dt>
               <dd className="mt-2 text-sm text-[var(--fg)]/70">
@@ -122,8 +115,8 @@ export function Contact() {
           </div>
         </div>
 
-        {/* ---- The form ---- */}
-        <div className="lg:sticky lg:top-32 lg:self-start">
+        {/* ---- The form: second on mobile, sticky right column on desktop. ---- */}
+        <div className="order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-32 lg:self-start">
           {status === "success" ? (
             <div
               role="status"
@@ -294,6 +287,23 @@ export function Contact() {
               </p>
             </form>
           )}
+        </div>
+
+        {/* Direct-contact line, mobile only. The desktop layout carries its
+            own copy of this inside the argument column. */}
+        <div className="order-4 border-t border-[var(--hairline)] pt-6 lg:hidden">
+          <p className="eyebrow">Direct</p>
+          <ul className="mt-3 space-y-1.5 text-sm">
+            <li>
+              <a
+                href={`mailto:${site.contact.email}`}
+                className="link-draw text-[var(--fg)]/85"
+              >
+                {site.contact.email}
+              </a>
+            </li>
+            <li className="text-[var(--fg)]/70">{site.contact.phone}</li>
+          </ul>
         </div>
       </div>
     </section>
