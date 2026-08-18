@@ -1,20 +1,16 @@
 import { site } from "@/data/site";
 
-// The standard, as three compact cards.
+// The standard, as an editorial spec, not cards.
 //
-// WHAT CHANGED, TWICE. This began as a two column mindmap with tab state, then
-// became three full width disclosure rows at 873px. Both were too much room for
-// three claims on a landing page.
+// WHAT CHANGED, THREE TIMES NOW. Mindmap with tab state, then full-width
+// disclosure rows, then three bordered cards. All read either as a toy or as a
+// SaaS tile grid. This is the compact, de-carded version: three columns divided
+// by hairline rules, no borders, no rounded boxes, so it reads as one
+// specification rather than three products. Shorter than the card version, which
+// keeps the page from scrolling.
 //
-// Now three cards at roughly a third of that height, carrying the same three
-// claims, their sub points, and their proof lines. Nothing was cut: the
-// description paragraph moved to the /story page where the standard is discussed
-// at length, and the card keeps the claim, the three testable conditions, and
-// the proof.
-//
-// Server component, no JavaScript. Each card owns a gold weight, and type only
-// ever uses a --branch-*-text token, which is AA measured; the -fill
-// counterparts drive rules and markers.
+// Server component, no JavaScript. Type only ever uses a --branch-*-text token,
+// which is AA measured; -fill drives the small rule markers.
 
 const TONES = [
   { fill: "var(--branch-reliable-fill)", text: "var(--branch-reliable-text)" },
@@ -46,68 +42,45 @@ export function HowWeBuild() {
           </p>
         </div>
 
-        <ul className="mt-10 grid gap-4 md:grid-cols-3">
+        {/* Ruled columns. A single top rule spans the row; each column carries a
+            left rule from the second onward, so the three read as one table. */}
+        <div className="mt-10 grid border-t border-[var(--hairline)] md:grid-cols-3">
           {site.pillars.map((pillar, i) => {
             const tone = TONES[i] ?? TONES[0];
-
             return (
-              <li
+              <div
                 key={pillar.key}
-                className="enter-rise flex flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5 sm:p-6"
-                style={{ transitionDelay: `${i * 70}ms` }}
+                className="border-b border-[var(--hairline)] py-6 md:border-b-0 md:py-8 md:pr-8 md:[&:not(:first-child)]:border-l md:[&:not(:first-child)]:border-[var(--hairline)] md:[&:not(:first-child)]:pl-8"
               >
-                <div className="flex items-baseline justify-between gap-3">
+                <div className="flex items-baseline gap-3">
                   <span
                     className="font-mono text-[10px] tracking-[0.2em]"
                     style={{ color: tone.text }}
                   >
                     {pillar.number}
                   </span>
-                  <span
-                    aria-hidden="true"
-                    className="h-1 w-6"
-                    style={{ background: tone.fill }}
-                  />
+                  <h3
+                    className="font-display text-[length:var(--text-step-2)] leading-tight"
+                    style={{ color: tone.text }}
+                  >
+                    {pillar.title}
+                  </h3>
                 </div>
 
-                <h3
-                  className="font-display mt-4 text-[length:var(--text-step-2)] leading-tight"
-                  style={{ color: tone.text }}
-                >
-                  {pillar.title}
-                </h3>
-
-                <p className="mt-2 text-sm leading-snug text-[var(--fg)]/85">
+                <p className="mt-3 text-sm leading-snug text-[var(--fg)]/85">
                   {pillar.claim}
                 </p>
 
-                <ul className="mt-5 flex-1 space-y-2">
-                  {pillar.branches.map((branch) => (
-                    <li
-                      key={branch}
-                      className="flex items-start gap-2.5 text-xs leading-snug text-[var(--fg)]/75"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="mt-[7px] h-px w-2.5 shrink-0"
-                        style={{ background: tone.fill }}
-                      />
-                      {branch}
-                    </li>
-                  ))}
-                </ul>
-
-                <p
-                  className="rule-t mt-5 flex items-start gap-2 pt-4 text-xs font-medium"
-                  style={{ color: tone.text }}
-                >
-                  <span aria-hidden="true">✓</span>
+                <p className="mt-4 flex items-start gap-2 text-xs text-[var(--fg)]/70">
+                  <span aria-hidden="true" style={{ color: tone.text }}>
+                    ✓
+                  </span>
                   {pillar.proof}
                 </p>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
       </div>
     </section>
   );

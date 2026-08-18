@@ -130,6 +130,9 @@ export function Story() {
               <footer className="rule-t mt-6 pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
                 {site.founder.name}, {site.founder.role}
               </footer>
+              <p className="mt-4 text-sm text-[var(--fg)]/70">
+                {site.founder.credential}
+              </p>
             </div>
           </blockquote>
 

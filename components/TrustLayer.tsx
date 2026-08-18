@@ -45,8 +45,8 @@ export function Commitments() {
             Terms are the human half of this section, so they take the paper and
             tape material the testimonials established rather than another
             hairline grid. Extra top padding leaves room for the tape. */}
-        <div className="pinboard mt-10 rounded-2xl border border-[var(--hairline)] px-5 pb-8 pt-12 sm:px-8">
-          <dl className="grid gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+        <div className="pinboard mt-8 rounded-2xl border border-[var(--hairline)] px-5 pb-6 pt-10 sm:px-7">
+          <dl className="grid gap-7 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {engagementTerms.map((term, i) => (
               <div
                 key={term.question}
@@ -69,30 +69,39 @@ export function Commitments() {
           </dl>
         </div>
 
-        {/* ---- Commitments, as expandable ledger rows ---- */}
-        <div className="mt-14">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--fg)]/70">
-            Standing commitments
-          </p>
+        {/* ---- Standing commitments, as an editorial spec sheet ----
+            No cards. Each commitment is a ruled row, label left and the specific
+            claim right, so it reads like a data-processing summary a security
+            reviewer can act on rather than four marketing tiles. */}
+        <div className="mt-12">
+          <div className="flex items-baseline justify-between gap-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--fg)]/70">
+              Standing commitments
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/60">
+              Full detail on request
+            </p>
+          </div>
 
-          {/* Four across, stated outright. Disclosure rows hid short text
-              behind a click and added a scroll for no reason. */}
-          <ul className="mt-4 grid gap-px bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="mt-5 border-t border-[var(--hairline)]">
             {commitments.map((commitment) => (
-              <li key={commitment.title} className="bg-[var(--bg)] p-5">
-                <span
-                  aria-hidden="true"
-                  className="mb-3 block h-1 w-5 bg-[var(--accent)]"
-                />
-                <h3 className="font-display text-[length:var(--text-step-1)] leading-tight">
+              <div
+                key={commitment.title}
+                className="grid gap-1 border-b border-[var(--hairline)] py-4 sm:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] sm:gap-8"
+              >
+                <dt className="flex items-baseline gap-3 font-display text-[length:var(--text-step-1)] leading-tight">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-1 w-4 shrink-0 bg-[var(--accent)]"
+                  />
                   {commitment.title}
-                </h3>
-                <p className="mt-2 text-xs leading-relaxed text-[var(--fg)]/75">
+                </dt>
+                <dd className="text-sm leading-relaxed text-[var(--fg)]/75 sm:pt-0.5">
                   {commitment.description}
-                </p>
-              </li>
+                </dd>
+              </div>
             ))}
-          </ul>
+          </dl>
         </div>
       </div>
     </section>

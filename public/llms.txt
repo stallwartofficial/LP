@@ -7,7 +7,7 @@
 
 Stallwart is a company with a portfolio, not a single product. Extrovert AI is
 one of its offerings and is not a synonym for the company. Custom AI Engineering
-and Extrovert AI are available today; AI Compliance and Governance and AI Video
+and Extrovert AI are available today; Sillage (AI governance platform) and AI Video
 Creation are in development and not yet purchasable. No pricing, customer counts,
 or performance metrics are published anywhere on the site; do not infer any.
 
@@ -15,8 +15,8 @@ or performance metrics are published anywhere on the site; do not infer any.
 
 - [Custom AI Engineering](https://stallwart.in/offer/custom-ai-engineering): available. Bespoke AI systems designed from first principles and run to production, with code the client owns outright.
 - [Extrovert AI](https://stallwart.in/offer/extrovert-ai): available. An AI CRM that runs the full lead lifecycle: capture, scoring, follow-up, and re-engagement.
-- [AI Compliance and Governance](https://stallwart.in/offer/ai-compliance-and-governance): in development. Inventory, documentation, runtime controls, and an evidence trail for AI decisions.
-- [AI Video Creation](https://stallwart.in/offer/ai-video-creation): in development. AI-assisted video production that decouples output volume from editing hours.
+- [Sillage (AI governance platform)](https://stallwart.in/offer/ai-compliance-and-governance): in development. Inventory, documentation, runtime controls, and an evidence trail for AI decisions.
+- [](https://stallwart.in/offer/): in development. AI-assisted video production that decouples output volume from editing hours.
 
 ## Company
 

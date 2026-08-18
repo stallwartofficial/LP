@@ -86,6 +86,10 @@ export function StoryTeaser() {
               and scalable enough to still be right at ten times the volume.
             </p>
 
+            <p className="mt-4 max-w-xl text-sm text-[var(--fg)]/60">
+              {site.founder.credential}
+            </p>
+
             <Link
               href="/story"
               className="link-draw mt-7 inline-block text-sm font-medium text-[var(--accent-text)]"

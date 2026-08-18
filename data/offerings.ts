@@ -256,15 +256,15 @@ export const offerings: Offering[] = [
     layers: ["Intelligence", "Orchestration", "Production"],
   },
   {
-    slug: "ai-compliance-and-governance",
-    name: "AI Compliance and Governance",
-    category: "Service · Assurance",
+    slug: "sillage",
+    name: "Sillage",
+    category: "Platform · Governance",
     status: "in-development",
-    tagline: "Deploy AI you can defend in a room full of auditors",
+    tagline: "The AI governance platform for teams who will be audited",
     summary:
       "A governance function for organisations putting AI into real decisions. Inventory what is running, document how it decides, and hold evidence ready before anyone asks for it.",
     description:
-      "Most organisations adopted AI faster than they built the ability to account for it. Models are in production that nobody has inventoried, making decisions nobody has documented, on data nobody has mapped. This service will stand up that missing layer: a register of every AI system in use, a written account of how each one decides, controls on the decisions they are permitted to make, and an evidence trail assembled continuously rather than the week before a review.",
+      "Sillage is the governance layer most organisations skipped: models reached production faster than the ability to account for them. It stands up a live register of every AI system in use, a written basis for how each one decides, runtime controls on the decisions they may make, and a continuously assembled evidence trail. It is built to map cleanly onto the frameworks an audit will invoke, including SOC 2 and ISO/IEC 42001, so readiness is a standing state rather than a scramble.",
     problem:
       "The exposure is not that AI makes mistakes. It is that when a regulator, customer, or board member asks how a decision was reached, nobody can answer, and the absence of an answer is the finding.",
     capabilities: [
@@ -295,19 +295,19 @@ export const offerings: Offering[] = [
     ],
     builtFor: [
       "Regulated industries deploying AI in decisions",
-      "Teams facing EU AI Act or sector obligations",
+      "Teams facing SOC 2, ISO 42001, or the EU AI Act",
       "Boards asking how AI decisions are governed",
     ],
     faqs: [
       {
         question: "Is this a certification?",
         answer:
-          "No. Stallwart does not issue certifications and does not claim any. This service builds the inventory, documentation, controls, and evidence trail that a certification, audit, or regulatory review will ask you to produce.",
+          "No. Stallwart does not issue certifications and does not claim to hold any. Sillage produces the inventory, documentation, controls, and evidence trail that a SOC 2 or ISO/IEC 42001 audit, or an EU AI Act review, will ask you to produce.",
       },
       {
-        question: "When will AI Compliance and Governance be available?",
+        question: "When will Sillage be available?",
         answer:
-          "It is in development and not yet available for purchase. Scope is being finalised. If AI governance is live on your risk register, book a call and we will tell you honestly where it stands.",
+          "Sillage is in development and not yet available for purchase. If AI governance is live on your risk register, book a call and we will tell you honestly where it stands.",
       },
       {
         question: "Do you replace our legal or risk team?",
@@ -328,80 +328,6 @@ export const offerings: Offering[] = [
       branch: { fromIndex: 2, name: "Rollback" },
     },
     layers: ["Governance", "Orchestration"],
-  },
-  {
-    slug: "ai-video-creation",
-    name: "AI Video Creation",
-    category: "Service · Production",
-    status: "in-development",
-    tagline: "Video production at the volume your channels actually need",
-    summary:
-      "A production service for teams whose video demand outgrew their editing capacity. Consistent output, on brand, without a linear relationship between videos shipped and hours spent.",
-    description:
-      "Video is now the format every channel prefers and the one every team is short of. The constraint is rarely ideas. It is that each finished asset costs the same editing hours as the last, so output is capped by headcount. This service will change that arithmetic: an AI assisted production pipeline that turns source material into finished, on brand, platform ready video, with a human holding editorial judgement rather than dragging clips on a timeline.",
-    problem:
-      "Every channel rewards more video, and every additional video costs the same as the one before it. Output stays flat while demand compounds.",
-    capabilities: [
-      {
-        eyebrow: "Assemble",
-        title: "Source material to first cut",
-        description:
-          "Long form recordings, calls, and raw footage become structured first cuts automatically, so editorial time is spent on judgement instead of on assembly.",
-      },
-      {
-        eyebrow: "Adapt",
-        title: "One asset, every aspect ratio",
-        description:
-          "Each piece is reframed, captioned, and paced for the platform it is going to, rather than one master file posted everywhere and performing nowhere.",
-      },
-      {
-        eyebrow: "Hold the line",
-        title: "Brand consistency at volume",
-        description:
-          "Typography, colour, pacing, and lower thirds stay identical across every asset, because consistency is what separates a channel from a pile of uploads.",
-      },
-      {
-        eyebrow: "Review",
-        title: "A human before anything ships",
-        description:
-          "Nothing publishes unreviewed. The pipeline removes the labour, not the editorial judgement, which is the part worth paying a person for.",
-      },
-    ],
-    builtFor: [
-      "Marketing teams with a weekly content commitment",
-      "Founders publishing consistently on social",
-      "Agencies delivering video across many clients",
-    ],
-    faqs: [
-      {
-        question: "When will AI Video Creation be available?",
-        answer:
-          "It is in development and not yet available for purchase. Scope is being finalised. If video output is a current bottleneck, book a call and we will tell you where the service stands.",
-      },
-      {
-        question: "Is the output fully automated?",
-        answer:
-          "No, deliberately. The pipeline removes the assembly labour, and a person holds editorial judgement and signs off before anything publishes. Fully unattended publishing is how brands ship work they regret.",
-      },
-      {
-        question: "Will it match our existing brand?",
-        answer:
-          "That is the point of the service. Typography, colour, pacing, and templates are configured to your brand once, then applied identically across every asset.",
-      },
-    ],
-    integrations: [],
-    flow: {
-      label: "Production path",
-      stages: [
-        { name: "Source input", kind: "input" },
-        { name: "Assemble cut", kind: "model" },
-        { name: "Format variants", kind: "action" },
-        { name: "Channel ready", kind: "action" },
-        { name: "Published", kind: "output" },
-      ],
-      branch: { fromIndex: 3, name: "Human review" },
-    },
-    layers: ["Intelligence", "Production"],
   },
 ];
 

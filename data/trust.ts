@@ -19,22 +19,22 @@ export const commitments: Commitment[] = [
   {
     title: "Your data stays yours",
     description:
-      "We do not sell, share, or train public models on your data. What you bring into a Stallwart system belongs to you and leaves with you.",
+      "We do not sell or share your data, and we do not train shared or public models on it. What you bring into a Stallwart system stays yours and leaves with you.",
   },
   {
     title: "Encrypted in transit and at rest",
     description:
-      "All traffic runs over TLS, and stored records are encrypted at rest. Credentials and API keys are held server-side only.",
+      "TLS 1.2 or higher in transit, AES-256 at rest. Credentials and keys are held server side only and are never shipped to the browser.",
   },
   {
     title: "Human override, always",
     description:
-      "Automation is reviewable and reversible. Every automated action is logged, and anything running can be paused or overridden by your team.",
+      "Every automated action is logged and reversible. Any running system can be paused or overridden by your team, and the audit trail exports on request.",
   },
   {
     title: "Regional data handling",
     description:
-      "Built for organisations operating across the US and UAE, with data residency and handling requirements accounted for from the start.",
+      "Data resident in the region you choose across our US and UAE operations. A current sub-processor list is available on request.",
   },
 ];
 

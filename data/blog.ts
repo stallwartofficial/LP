@@ -50,6 +50,112 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "why-ai-pilots-dont-reach-production",
+    kind: "article",
+    title: "Why AI pilots do not reach production",
+    excerpt:
+      "Most enterprise AI never ships. The reason is rarely the model. It is the 80 percent of the system the pilot was allowed to skip.",
+    topic:
+      "enterprise AI in production, AI pilot to production, why AI projects fail, production AI engineering",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-02-18",
+    readingMinutes: 6,
+    sections: [
+      {
+        heading: "The pilot proves the wrong thing",
+        paragraphs: [
+          "A pilot is built to answer one question: can the model do the interesting part at all. It almost always can. So the pilot succeeds, the demo lands, and everyone concludes the hard part is done. It is not. The hard part was never the interesting 20 percent. It is the load-bearing 80 percent the pilot was allowed to ignore: malformed inputs, partial failures, retries, permissions, audit, rollback, and the request that fits no category.",
+          "That gap is why the industry's own numbers are so bleak. A large majority of enterprise AI initiatives never reach durable production, and the failures cluster after the pilot, not during it. The model was fine. The system around it was never built.",
+        ],
+      },
+      {
+        heading: "Production is a different discipline",
+        paragraphs: [
+          "A demo runs once, on chosen input, with a human watching. Production runs continuously, on adversarial input, with nobody watching. Those are not two points on one scale. They are different engineering problems, and the second one is what you are actually buying.",
+          "The move that changes outcomes is unglamorous: treat observability, evaluation, and rollback as part of the build, not a later phase. A system you cannot watch is a system you cannot trust, and a system you cannot roll back is one you cannot deploy twice.",
+        ],
+      },
+      {
+        heading: "What to require before you scale a pilot",
+        paragraphs: [
+          "Ask three questions of any pilot before you fund its path to production. What does it do when the input is wrong. Who is paged when it fails, and what can they do. How do you turn it off without turning off everything around it. If a pilot cannot answer those, it has not been de-risked; it has only been demonstrated.",
+          "This is why Stallwart scopes from first principles rather than from the prototype. The prototype is useful evidence about the problem. It is almost never the foundation of the system that survives contact with production.",
+        ],
+      },
+    ],
+    qa: [
+      {
+        question: "Why do most enterprise AI projects fail to reach production?",
+        answer:
+          "Because the pilot proves the model can do the interesting part, which was never the risk. The failure lives in the surrounding system: input validation, retries, permissions, observability, audit, and rollback. That 80 percent is skipped in a pilot and is exactly what production requires.",
+      },
+      {
+        question:
+          "What is the difference between an AI demo and an AI system in production?",
+        answer:
+          "A demo runs once on chosen input with a person watching. Production runs continuously on unpredictable input with nobody watching. They are different engineering problems, and observability, evaluation, and rollback are what separate them.",
+      },
+      {
+        question: "How do you de-risk an AI pilot before scaling it?",
+        answer:
+          "Require it to answer three questions: what it does when input is wrong, who is paged on failure and what they can do, and how it can be turned off in isolation. A pilot that cannot answer these has been demonstrated, not de-risked.",
+      },
+    ],
+  },
+  {
+    slug: "ai-governance-before-the-audit",
+    kind: "article",
+    title: "AI governance before the audit, not after",
+    excerpt:
+      "Most teams assemble AI governance the week a regulator, customer, or board asks. By then the finding is already written. The absence of an answer is the finding.",
+    topic:
+      "AI governance, AI compliance, EU AI Act, ISO 42001, SOC 2, AI audit readiness, AI risk management",
+    offering: "sillage",
+    publishedAt: "2026-02-25",
+    readingMinutes: 6,
+    sections: [
+      {
+        heading: "The exposure is not that AI makes mistakes",
+        paragraphs: [
+          "Every model makes mistakes; that is priced in. The exposure that ends careers is different: when a regulator, an enterprise customer, or a board member asks how a specific decision was reached, nobody can answer. The absence of an answer is the finding. It does not matter that the decision was probably fine. Governance is being able to account for it, on demand, in writing.",
+          "Frameworks are converging on exactly this. SOC 2 asks which controls you operate and whether they held. ISO/IEC 42001 asks for a managed AI management system, not a good intention. The EU AI Act asks for documentation, risk classification, human oversight, and logging for higher-risk uses. All three reward the same thing: an evidence trail that already exists.",
+        ],
+      },
+      {
+        heading: "Governance assembled after the fact is theatre",
+        paragraphs: [
+          "The common pattern is a scramble. The week before a review, a team reconstructs what its AI systems do from memory, screenshots, and hope. What they produce is a snapshot, not a control. It describes what the system was that week, not what it does, and an auditor who has seen it before knows the difference.",
+          "The alternative is to make the record a byproduct of running the system rather than a project. An inventory that updates as systems ship. A written basis for each decision, kept current. Runtime controls that actually intervene, so policy is enforced rather than filed. Logs and approvals assembled continuously, so an audit is a query against evidence that already exists.",
+        ],
+      },
+      {
+        heading: "What a governable AI system looks like",
+        paragraphs: [
+          "It knows what is running: a live register of every model in use, the data each touches, and the decisions each influences. It can explain itself: a plain-language account of how each system decides and what it is not permitted to decide. It escalates: the decisions it should never make alone route to a human by design, not by luck. And it is reversible: every automated action is logged and can be rolled back.",
+          "This is the layer Sillage is being built to stand up, and it is the same governance layer every Stallwart system ships with. Governance you can produce on the day you are asked is the only kind that counts.",
+        ],
+      },
+    ],
+    qa: [
+      {
+        question: "When should a company set up AI governance?",
+        answer:
+          "Before it is asked, not after. Governance assembled the week of a review is a snapshot, not a control, and an experienced auditor can tell the difference. The evidence trail has to be a byproduct of running the system, so it already exists when a regulator, customer, or board asks.",
+      },
+      {
+        question:
+          "What do SOC 2, ISO 42001, and the EU AI Act have in common for AI?",
+        answer:
+          "They reward the same thing: an evidence trail that already exists. SOC 2 asks which controls you operate and whether they held, ISO/IEC 42001 asks for a managed AI management system, and the EU AI Act asks for documentation, risk classification, human oversight, and logging for higher-risk uses.",
+      },
+      {
+        question: "What makes an AI system governable?",
+        answer:
+          "Four properties: a live inventory of what is running, a written basis for how each system decides, escalation of decisions it should not make alone, and reversibility so every automated action is logged and can be rolled back.",
+      },
+    ],
+  },
+  {
     slug: "speed-to-lead-is-the-whole-funnel",
     kind: "article",
     title: "Speed to lead is not a metric. It is the whole funnel.",

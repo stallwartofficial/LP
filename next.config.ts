@@ -7,6 +7,16 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      {
+        source: "/offer/ai-compliance-and-governance",
+        destination: "/offer/sillage",
+        permanent: true,
+      },
+      {
+        source: "/offer/ai-video-creation",
+        destination: "/offer",
+        permanent: true,
+      },
       // Case studies were consolidated into /blog so one namespace carries the
       // ranking signal. Permanent redirects preserve any existing inbound
       // links and pass authority to the new location.

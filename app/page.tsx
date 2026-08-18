@@ -36,12 +36,12 @@ export default function Home() {
       <JsonLd schema={[webSiteSchema(), offeringListSchema()]} />
       <Hero />
       <OfferingsTeaser />
-      <StoryTeaser />
       <HowWeBuild />
       <Architecture />
-      <InsightsTeaser />
-      <SocialProof />
       <Commitments />
+      <InsightsTeaser />
+      <StoryTeaser />
+      <SocialProof />
       <ContactBanner />
     </>
   );

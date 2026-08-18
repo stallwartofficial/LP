@@ -8,7 +8,7 @@ import { breadcrumbSchema, offeringListSchema } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "What We Offer",
   description:
-    "Stallwart builds custom AI engineering engagements, Extrovert AI, AI Compliance and Governance, and AI Video Creation. Four systems on one engineering standard.",
+    "Stallwart is a custom AI engineering firm. Three offerings on one engineering standard: bespoke builds, Extrovert AI, and Sillage for AI governance.",
   alternates: { canonical: "/offer" },
 };
 

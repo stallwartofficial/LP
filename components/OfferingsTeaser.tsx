@@ -27,7 +27,7 @@ export function OfferingsTeaser() {
               id="offerings-teaser-heading"
               className="font-display mt-3 text-display-sm font-light"
             >
-              {offerings.length} systems. One engine.
+              {offerings.length} offerings. One engine.
             </h2>
           </div>
 

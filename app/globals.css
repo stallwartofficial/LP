@@ -69,8 +69,8 @@
 
   --hairline: color-mix(in oklab, var(--fg) 12%, transparent);
   --hairline-strong: color-mix(in oklab, var(--fg) 22%, transparent);
-  --glow: color-mix(in oklab, var(--accent) 20%, transparent);
-  --grain-opacity: 0.03;
+  --glow: color-mix(in oklab, var(--accent) 10%, transparent);
+  --grain-opacity: 0.018;
 
   /* Mindmap branch identities. Two tokens per branch on purpose:
      -fill is decorative (dots, rules, borders) and may be the bright brand
@@ -102,8 +102,8 @@
 
   --hairline: color-mix(in oklab, var(--fg) 14%, transparent);
   --hairline-strong: color-mix(in oklab, var(--fg) 26%, transparent);
-  --glow: color-mix(in oklab, var(--accent) 26%, transparent);
-  --grain-opacity: 0.05;
+  --glow: color-mix(in oklab, var(--accent) 14%, transparent);
+  --grain-opacity: 0.03;
 
   /* On ink the bright variants already clear AA comfortably, so fill and text
      can share a value. Measured on ink: 11.71, 12.10, 9.16. */

@@ -44,7 +44,7 @@ export function Offerings() {
           </div>
 
           <h1 className="font-display mt-6 max-w-3xl text-display-lg font-light">
-            Four systems.
+            {offerings.length} offerings.
             <br />
             <span className="text-gold-sheen italic">One standard.</span>
           </h1>

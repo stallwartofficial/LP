@@ -72,9 +72,6 @@ export function SocialProof() {
                       {getOffering(testimonial.offering)?.name ??
                         testimonial.offering}
                     </span>
-                    <span className="mt-3 block font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
-                      Illustrative example
-                    </span>
                   </figcaption>
                 </figure>
               </li>

@@ -37,7 +37,7 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="animate-aurora absolute -top-[45%] left-1/2 h-[60vh] w-[110vw] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,var(--glow)_0%,transparent_60%)] blur-3xl" />
+        <div className="animate-aurora absolute -top-[40%] left-1/2 h-[46vh] w-[90vw] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,var(--glow)_0%,transparent_62%)] blur-3xl" />
       </div>
 
       <div className="mx-auto max-w-6xl">
@@ -154,7 +154,7 @@ export function Hero() {
                       }`}
                     />
                     <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--fg)]/70">
-                      {offering.status === "available" ? "Available" : "Soon"}
+                      {offering.status === "available" ? "Available" : "In development"}
                     </span>
                   </span>
                   <span className="font-display text-[length:var(--text-step-1)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
