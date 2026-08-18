@@ -32,7 +32,7 @@ export const site = {
    * contradicts the h1 splits the ranking signal for the same query.
    */
   description:
-    "Stallwart is an AI and software engineering company building production grade AI systems, intelligent automation, and custom software products for complex problems that demand more than off the shelf solutions. Engineered for reliability, security, and scale.",
+    "Stallwart engineers the impossible into production: AI systems, automation, and custom software built for reliability, security, and scale.",
 
   hero: {
     /** Split on the pipe: one line per clause. */
@@ -50,7 +50,7 @@ export const site = {
      * punctuation rule above.
      */
     subhead: [
-      "We build production grade AI systems, intelligent automation, and custom software for problems no product solves. Taken from first principles to production, engineered for reliability, security, and scale.",
+      "We engineer the impossible into production. Production grade AI systems, intelligent automation, and custom software for problems no product solves, taken from first principles to production and built for reliability, security, and scale.",
     ],
     primaryCta: { label: "Book a Call", href: "/contact" },
     secondaryCta: { label: "See What We Build", href: "/offer" },
