@@ -14,7 +14,7 @@ export function Story() {
   return (
     <>
       <header className="px-[var(--space-gutter)] pb-4 pt-32 lg:pt-40">
-        <div className="mx-auto grid max-w-6xl items-end gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
+        <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
           <div>
             <div className="flex items-center gap-3">
               <span aria-hidden="true" className="h-px w-10 bg-[var(--accent)]" />
@@ -58,6 +58,12 @@ export function Story() {
                 </span>
               </figcaption>
             </figure>
+
+            <blockquote className="mt-5 border-t border-[var(--hairline)] pt-5 font-display text-[length:var(--text-step-1)] font-light italic leading-snug text-[var(--fg)]/85">
+              Building systems with AI that are built beyond the demo:
+              reliable enough to leave alone, honest enough to trust, and
+              scalable enough to still be right at ten times the volume.
+            </blockquote>
           </div>
         </div>
       </header>
@@ -95,51 +101,7 @@ export function Story() {
             </p>
           </div>
 
-          {/* The thesis on paper, so the one quoted moment reads as a
-              document rather than as more body copy. */}
-          <blockquote className="my-14">
-            <div className="note-pin mx-auto max-w-xl rounded-sm bg-[var(--bg-raised)] p-7 sm:p-9">
-              <p className="font-display text-[length:var(--text-step-3)] font-light leading-tight">
-                Building systems with AI that are built beyond the demo. Reliable
-                enough to leave alone, honest enough to trust, and scalable
-                enough to still be right at ten times the volume.
-              </p>
-              <footer className="rule-t mt-6 pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
-                {site.founder.name}, {site.founder.role}
-              </footer>
-              <p className="mt-4 text-sm text-[var(--fg)]/70">
-                {site.founder.credential}
-              </p>
-            </div>
-          </blockquote>
 
-          {/* The three principles, as the spine of the company. */}
-          <div className="pinboard my-14 rounded-2xl border border-[var(--hairline)] px-5 pb-8 pt-12 sm:px-7">
-            <ol className="grid gap-8 sm:grid-cols-3 sm:gap-6">
-              {site.pillars.map((pillar, i) => (
-                <li
-                  key={pillar.key}
-                  className="note-pin rounded-sm bg-[var(--bg-raised)] p-5"
-                  style={
-                    {
-                      "--note-rot": i === 1 ? "0.8deg" : i === 0 ? "-1.1deg" : "-0.5deg",
-                      "--tape-rot": i === 1 ? "-1.6deg" : "1.4deg",
-                    } as React.CSSProperties
-                  }
-                >
-                  <span className="font-mono text-[10px] tracking-[0.18em] text-[var(--accent-text)]">
-                    {pillar.number}
-                  </span>
-                  <h2 className="font-display mt-2 text-[length:var(--text-step-2)] leading-tight">
-                    {pillar.title}
-                  </h2>
-                  <p className="mt-2 text-sm leading-snug text-[var(--fg)]/75">
-                    {pillar.claim}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
 
           <div className="space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
             <p>

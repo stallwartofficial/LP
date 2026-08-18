@@ -87,7 +87,7 @@ export function Commitments() {
             {commitments.map((commitment) => (
               <div
                 key={commitment.title}
-                className="grid gap-1 border-b border-[var(--hairline)] py-4 sm:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] sm:gap-8"
+                className="row-nudge grid gap-1 border-b border-[var(--hairline)] py-4 sm:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] sm:gap-8"
               >
                 <dt className="flex items-baseline gap-3 font-display text-[length:var(--text-step-1)] leading-tight">
                   <span

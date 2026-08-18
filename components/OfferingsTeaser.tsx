@@ -16,8 +16,8 @@ import { MiniPath } from "@/components/MiniPath";
 export function OfferingsTeaser() {
   return (
     <section
-      aria-labelledby="offerings-teaser-heading"
-      className="section-y rule-t px-[var(--space-gutter)]"
+      aria-label="What we build, in detail"
+      className="rule-t px-[var(--space-gutter)] pb-[var(--space-section)] pt-10"
     >
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
