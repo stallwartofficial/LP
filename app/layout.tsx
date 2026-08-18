@@ -57,6 +57,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`h-full antialiased ${fraunces.variable} ${inter.variable}`}
+      // Tells Next the smooth scrolling in globals.css is intentional, so it
+      // suppresses it during route transitions instead of warning about it.
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <head>
@@ -69,7 +72,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--fg)]">
+      {/* suppressHydrationWarning on <body>: browser extensions (Grammarly,
+          password managers, translators) inject attributes such as
+          data-gr-ext-installed into <body> before React hydrates, which
+          otherwise reports a mismatch we neither caused nor can fix. This
+          suppresses the warning for this element's own attributes only,
+          one level deep; children are still fully checked. <html> carries it
+          for the same reason plus the theme class set by the script above. */}
+      <body
+        className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--fg)]"
+        suppressHydrationWarning
+      >
         {/* Nav and footer live here, not per-page: a new route cannot ship
             without them, and there is one import instead of sixteen. */}
         <a
