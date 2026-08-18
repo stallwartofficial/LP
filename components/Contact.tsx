@@ -51,6 +51,22 @@ export function Contact() {
       aria-labelledby="contact-heading"
       className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-36 lg:pt-44"
     >
+      <div className="mx-auto mb-10 max-w-6xl border-y border-[var(--hairline)] py-5 lg:hidden">
+        <p className="eyebrow">Direct</p>
+        <ul className="mt-3 space-y-1.5 text-sm">
+          <li>
+            <a
+              href={`mailto:${site.contact.email}`}
+              className="link-draw text-[var(--fg)]/85"
+            >
+              {site.contact.email}
+            </a>
+          </li>
+          <li className="text-[var(--fg)]/70">{site.contact.phone}</li>
+          <li className="text-[var(--fg)]/70">{site.areaServed.join(" · ")}</li>
+        </ul>
+      </div>
+
       <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-20">
         {/* ---- The argument ---- */}
         <div>
@@ -90,7 +106,7 @@ export function Contact() {
             </div>
           </dl>
 
-          <div className="rule-t mt-10 pt-8">
+          <div className="rule-t mt-10 hidden pt-8 lg:block">
             <p className="eyebrow">Direct</p>
             <ul className="mt-4 space-y-2 text-sm">
               <li>

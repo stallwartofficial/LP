@@ -79,6 +79,13 @@ export default async function OfferingPage({ params }: Props) {
             {offering.tagline}
           </p>
 
+          <p className="mt-6 inline-flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-[var(--hairline)] pt-5 text-sm text-[var(--fg)]/80">
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
+              Pricing
+            </span>
+            {offering.pricing}
+          </p>
+
           {/* The problem, stated before the pitch. */}
           <p className="mt-9 border-l-2 border-[var(--accent)] pl-5 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
             {offering.problem}
@@ -146,25 +153,24 @@ export default async function OfferingPage({ params }: Props) {
               {inDevelopment ? "What it will do" : "How it works"}
             </h2>
 
-            <ol className="mt-10">
+            <ol className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2">
               {offering.capabilities.map((c, i) => (
-                <li
-                  key={c.title}
-                  className="scroll-rise rule-t last:rule-b grid gap-3 py-7 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-8"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="font-display text-[length:var(--text-step-2)] font-light leading-none text-[var(--accent)]/45"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
+                <li key={c.title} className="scroll-rise">
+                  <div className="flex items-baseline gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-[11px] tracking-[0.2em] text-[var(--accent)]/60"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                     <span className="eyebrow">{c.eyebrow}</span>
-                    <h3 className="font-display mt-2 text-[length:var(--text-step-2)]">
-                      {c.title}
-                    </h3>
-                    <p className="mt-3 text-[var(--fg)]/75">{c.description}</p>
                   </div>
+                  <h3 className="font-display mt-2 text-[length:var(--text-step-1)]">
+                    {c.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--fg)]/75">
+                    {c.description}
+                  </p>
                 </li>
               ))}
             </ol>

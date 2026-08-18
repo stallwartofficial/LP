@@ -14,7 +14,7 @@ export function Story() {
   return (
     <>
       <header className="px-[var(--space-gutter)] pb-4 pt-32 lg:pt-40">
-        <div className="mx-auto grid max-w-6xl items-end gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:gap-16">
+        <div className="mx-auto grid max-w-6xl items-end gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
           <div>
             <div className="flex items-center gap-3">
               <span aria-hidden="true" className="h-px w-10 bg-[var(--accent)]" />
@@ -31,32 +31,6 @@ export function Story() {
               {site.positioning}
             </p>
 
-            <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-3">
-              <div>
-                <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
-                  Founder
-                </dt>
-                <dd className="font-display mt-1 text-[length:var(--text-step-1)]">
-                  {site.founder.name}
-                </dd>
-              </div>
-              <div>
-                <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
-                  Regions
-                </dt>
-                <dd className="mt-1 text-sm text-[var(--fg)]/85">
-                  {site.areaServed.join(" · ")}
-                </dd>
-              </div>
-              <div>
-                <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
-                  Systems
-                </dt>
-                <dd className="mt-1 text-sm text-[var(--fg)]/85">
-                  {offerings.length} in the portfolio
-                </dd>
-              </div>
-            </dl>
           </div>
 
           {/* Portrait pinned at the top of the page, so the story opens with a
@@ -68,7 +42,7 @@ export function Story() {
                   src="/images/founder.jpg"
                   alt={`${site.founder.name}, ${site.founder.role} of ${site.company}`}
                   fill
-                  sizes="(min-width: 1024px) 17rem, 70vw"
+                  sizes="(min-width: 1024px) 24rem, 80vw"
                   className="object-cover object-top"
                 />
               </div>
@@ -78,6 +52,9 @@ export function Story() {
                 </span>
                 <span className="font-mono mt-0.5 block text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
                   {site.founder.role}
+                </span>
+                <span className="mt-2 block text-xs leading-snug text-[var(--fg)]/70">
+                  {site.founder.credential}
                 </span>
               </figcaption>
             </figure>

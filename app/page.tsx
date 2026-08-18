@@ -1,7 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { OfferingsTeaser } from "@/components/OfferingsTeaser";
 import { StoryTeaser } from "@/components/StoryTeaser";
-import { HowWeBuild } from "@/components/HowWeBuild";
 import { Architecture } from "@/components/Architecture";
 import { InsightsTeaser } from "@/components/InsightsTeaser";
 import { SocialProof } from "@/components/SocialProof";
@@ -18,7 +17,6 @@ import { offeringListSchema, webSiteSchema } from "@/lib/seo";
 //   2  LogoScroll      the trust bar, where a trust bar belongs
 //   3  OfferingsTeaser what can I buy, four compact cards
 //   4  StoryTeaser     why you exist, once they know what you sell
-//   5  HowWeBuild      the standard, as a specification
 //   6  Architecture    the one engine underneath all four systems
 //   7  InsightsTeaser  proof
 //   8  SocialProof     accounts by role and sector
@@ -36,7 +34,6 @@ export default function Home() {
       <JsonLd schema={[webSiteSchema(), offeringListSchema()]} />
       <Hero />
       <OfferingsTeaser />
-      <HowWeBuild />
       <Architecture />
       <Commitments />
       <InsightsTeaser />

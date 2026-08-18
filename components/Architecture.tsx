@@ -39,7 +39,7 @@ export function Architecture() {
             Systems
           </p>
 
-          <ul className="mt-4 grid gap-px bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-4 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
             {offerings.map((offering) => (
               <li key={offering.slug} className="bg-[var(--surface)] p-4">
                 <span className="flex items-center gap-2">

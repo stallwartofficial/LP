@@ -161,7 +161,7 @@ export function Blueprint() {
           letterSpacing="1.4"
           fontFamily={MONO}
         >
-          4 LAYERS
+          4-LAYER ENGINE
         </text>
       </g>
 

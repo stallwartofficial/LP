@@ -41,6 +41,9 @@ export type Offering = {
   /** Offering specific FAQs. Rendered and emitted as FAQPage on its page. */
   faqs: { question: string; answer: string }[];
   integrations: string[];
+  /** Pricing MODEL, how a customer is charged. Not an invented figure.
+   *  TODO(owner): replace the bracketed ranges with real numbers. */
+  pricing: string;
   /**
    * The system's signal path, rendered as a concept diagram beside its module
    * on the home page. This is NOT a mock dashboard: it states the actual
@@ -73,6 +76,7 @@ export const offerings: Offering[] = [
     name: "Custom AI Engineering",
     category: "Engagement · Build",
     status: "available",
+    pricing: "Fixed price per phase, from a paid discovery sprint. Book a call for a scoped quote.",
     tagline: "Your system, engineered from first principles",
     summary:
       "For problems no product solves. We design and build the system, run it to production, and hand over code you own outright with the documentation to keep it.",
@@ -169,6 +173,7 @@ export const offerings: Offering[] = [
     name: "Extrovert AI",
     category: "Product · Revenue",
     status: "available",
+    pricing: "Subscription, priced to your pipeline volume. Book a call for current plans.",
     tagline: "The AI CRM that works your pipeline for you",
     summary:
       "A CRM that runs the whole lead lifecycle itself. It captures every inbound signal, ranks it on real buying intent, follows up on time, and reopens pipeline that went quiet.",
@@ -260,6 +265,7 @@ export const offerings: Offering[] = [
     name: "Sillage",
     category: "Platform · Governance",
     status: "in-development",
+    pricing: "In development. Design-partner pricing for early teams.",
     tagline: "The AI governance platform for teams who will be audited",
     summary:
       "A governance function for organisations putting AI into real decisions. Inventory what is running, document how it decides, and hold evidence ready before anyone asks for it.",

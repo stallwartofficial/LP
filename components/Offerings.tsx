@@ -64,7 +64,7 @@ export function Offerings() {
         {/* Cards, not rows. Four full-width editorial rows meant four screens of
             scrolling for four items; the grid puts the whole portfolio in one
             view while keeping the mechanism visible via MiniPath. */}
-        <ul className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-3">
           {offerings.map((offering, i) => (
             <li key={offering.slug}>
               <Link
@@ -99,7 +99,14 @@ export function Offerings() {
 
                 <MiniPath offering={offering} />
 
-                <span className="rule-t mt-5 flex items-center justify-between pt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/70">
+                <p className="rule-t mt-5 pt-4 text-xs text-[var(--fg)]/70">
+                  <span className="font-mono uppercase tracking-[0.14em] text-[var(--accent-text)]">
+                    Pricing
+                  </span>
+                  <span className="mt-1 block leading-snug">{offering.pricing}</span>
+                </p>
+
+                <span className="mt-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/70">
                   {offering.category}
                   <span
                     aria-hidden="true"

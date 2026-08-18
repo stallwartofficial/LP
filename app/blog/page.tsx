@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts, caseStudyPosts, articlePosts } from "@/data/blog";
-import { getOffering } from "@/data/offerings";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, blogListSchema } from "@/lib/seo";
 
@@ -67,56 +66,47 @@ export default function BlogIndexPage() {
           {blogPosts.length === 0 ? (
             <p className="text-[var(--fg)]/70">First posts are on the way.</p>
           ) : (
-            /* Cards, not stacked rows. Four full-width rows made a short index
-               feel like a long scroll. */
-            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {blogPosts.map((post, i) => (
-                <li key={post.slug}>
+            /* One post per full-width row. A ruled editorial list reads more
+               senior than a card grid and fits more in less height. */
+            <ol className="border-t border-[var(--hairline)]">
+              {blogPosts.map((post) => (
+                <li key={post.slug} className="border-b border-[var(--hairline)]">
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="card-lift enter-rise group flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5"
-                    style={{ transitionDelay: `${i * 70}ms` }}
+                    className="row-nudge group grid items-baseline gap-2 py-5 sm:grid-cols-[7rem_minmax(0,1fr)_auto] sm:gap-6"
                   >
-                    <div className="flex flex-wrap items-center gap-2">
+                    <span
+                      className={`font-mono text-[10px] uppercase tracking-[0.14em] ${
+                        post.kind === "case-study"
+                          ? "text-[var(--accent-text)]"
+                          : "text-[var(--fg)]/60"
+                      }`}
+                    >
+                      {post.kind === "case-study" ? "Case study" : "Article"}
+                    </span>
+
+                    <span className="min-w-0">
+                      <span className="font-display block text-[length:var(--text-step-2)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
+                        {post.title}
+                      </span>
+                      <span className="mt-1 block truncate text-sm text-[var(--fg)]/70">
+                        {post.excerpt}
+                      </span>
+                    </span>
+
+                    <span className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/60">
+                      {post.readingMinutes}m
                       <span
-                        className={`rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] ${
-                          post.kind === "case-study"
-                            ? "border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[var(--accent-text)]"
-                            : "border border-[var(--hairline-strong)] text-[var(--fg)]/70"
-                        }`}
+                        aria-hidden="true"
+                        className="arrow-shift text-[var(--accent-text)]"
                       >
-                        {post.kind === "case-study" ? "Case study" : "Article"}
-                      </span>
-                    </div>
-
-                    <h2 className="font-display mt-4 text-[length:var(--text-step-2)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
-                      {post.title}
-                    </h2>
-
-                    <p className="mt-3 flex-1 text-xs leading-relaxed text-[var(--fg)]/70">
-                      {post.excerpt}
-                    </p>
-
-                    <span className="rule-t mt-5 flex items-center justify-between pt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/70">
-                      <span>
-                        {post.industry ??
-                          getOffering(post.offering)?.name ??
-                          post.offering}
-                      </span>
-                      <span className="flex items-center gap-2">
-                        {post.readingMinutes}m
-                        <span
-                          aria-hidden="true"
-                          className="arrow-shift text-[var(--accent-text)]"
-                        >
-                          →
-                        </span>
+                        →
                       </span>
                     </span>
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ol>
           )}
         </div>
       </section>

@@ -137,7 +137,7 @@ export function Hero() {
             </Link>
           </div>
 
-          <ul className="mt-3 grid gap-px bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-3 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
             {offerings.map((offering) => (
               <li key={offering.slug} className="bg-[var(--bg)]">
                 <Link
