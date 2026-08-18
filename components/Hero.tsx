@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { Blueprint } from "./Blueprint";
 import { LogoScroll } from "./LogoScroll";
+import { offerings } from "@/data/offerings";
 import { CadField } from "./CadField";
 import { RevealOnLoad } from "./Reveal";
 
@@ -122,6 +123,38 @@ export function Hero() {
             without a scroll. */}
         <RevealOnLoad index={4} className="mt-6">
           <LogoScroll inHero />
+        </RevealOnLoad>
+
+        {/* Offering names on the landing view. No status here; the portfolio
+            section below carries status, pricing, and the signal paths. */}
+        <RevealOnLoad index={5} className="rule-t mt-5 pt-4">
+          <div className="flex items-baseline justify-between gap-4">
+            <p className="eyebrow">What we build</p>
+            <Link
+              href="/offer"
+              className="link-draw font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]"
+            >
+              All {offerings.length} &rarr;
+            </Link>
+          </div>
+          <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-3">
+            {offerings.map((offering) => (
+              <li key={offering.slug}>
+                <Link
+                  href={`/offer/${offering.slug}`}
+                  className="group flex items-baseline gap-2"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]"
+                  />
+                  <span className="font-display text-[length:var(--text-step-1)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
+                    {offering.name}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </RevealOnLoad>
 
       </div>
