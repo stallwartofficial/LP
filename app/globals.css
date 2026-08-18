@@ -333,6 +333,51 @@ p {
 }
 .animate-soft-pulse { animation: soft-pulse 2.6s ease-in-out infinite; }
 
+/* ---------------  SYSTEM DIAGRAMS (engineering texture)  ----------------- */
+/* A signal tracing a connector. Deliberately a single travelling dot on a
+   hairline: an engineering trace readout, not a particle field. */
+@keyframes trace-x {
+  0% { left: 0; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes trace-y {
+  0% { top: 0; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.trace-x {
+  animation: trace-x var(--trace-duration, 3.2s) linear infinite;
+  animation-delay: var(--trace-delay, 0s);
+}
+.trace-y {
+  animation: trace-y var(--trace-duration, 3.2s) linear infinite;
+  animation-delay: var(--trace-delay, 0s);
+}
+
+/* Node ring that brightens as the signal arrives. */
+@keyframes node-latch {
+  0%, 100% { border-color: var(--hairline-strong); }
+  50% { border-color: var(--accent); }
+}
+.node-latch {
+  animation: node-latch var(--trace-duration, 3.2s) ease-in-out infinite;
+  animation-delay: var(--trace-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trace-x,
+  .trace-y,
+  .node-latch {
+    animation: none !important;
+  }
+  /* A static trace still needs to be visible, or the diagram loses its path. */
+  .trace-x { left: 50%; opacity: 1; }
+  .trace-y { top: 50%; opacity: 1; }
+}
+
 /* ===========================  A11Y  ====================================== */
 
 :focus-visible {

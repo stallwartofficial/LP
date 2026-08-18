@@ -37,6 +37,30 @@ export type Offering = {
   /** Offering specific FAQs. Rendered and emitted as FAQPage on its page. */
   faqs: { question: string; answer: string }[];
   integrations: string[];
+  /**
+   * The system's signal path, rendered as a concept diagram beside its module
+   * on the home page. This is NOT a mock dashboard: it states the actual
+   * mechanism, stage by stage, which is the thing a technical buyer wants to
+   * see and the thing a chart of invented numbers cannot convey.
+   *
+   * `kind` drives the node treatment:
+   *   input   entry point, hairline only
+   *   model   where a judgement is made, gold ring
+   *   action  something happens in the world, gold ring
+   *   output  terminal state, filled
+   * `branch` is the escape hatch off a given stage: every honest system has
+   * one, and showing it is a credibility signal rather than a caveat.
+   */
+  flow: {
+    label: string;
+    stages: {
+      name: string;
+      kind: "input" | "model" | "action" | "output";
+    }[];
+    branch: { fromIndex: number; name: string };
+  };
+  /** Which layers of the shared engineering core this system leans on. */
+  layers: string[];
 };
 
 export const offerings: Offering[] = [
@@ -118,6 +142,18 @@ export const offerings: Offering[] = [
       "Chat and inbound messaging",
       "Webhooks and custom APIs",
     ],
+    flow: {
+      label: "Lead path",
+      stages: [
+        { name: "Lead in", kind: "input" },
+        { name: "Qualify", kind: "model" },
+        { name: "Follow up", kind: "action" },
+        { name: "Pipeline moves", kind: "action" },
+        { name: "Booked", kind: "output" },
+      ],
+      branch: { fromIndex: 1, name: "Human escalation" },
+    },
+    layers: ["Intelligence", "Orchestration", "Production"],
   },
   {
     slug: "ai-compliance-and-governance",
@@ -180,6 +216,18 @@ export const offerings: Offering[] = [
       },
     ],
     integrations: [],
+    flow: {
+      label: "Decision path",
+      stages: [
+        { name: "AI decision", kind: "input" },
+        { name: "Policy check", kind: "model" },
+        { name: "Approval gate", kind: "action" },
+        { name: "Audit trail", kind: "action" },
+        { name: "Evidence held", kind: "output" },
+      ],
+      branch: { fromIndex: 2, name: "Rollback" },
+    },
+    layers: ["Governance", "Orchestration"],
   },
   {
     slug: "ai-video-creation",
@@ -242,6 +290,18 @@ export const offerings: Offering[] = [
       },
     ],
     integrations: [],
+    flow: {
+      label: "Production path",
+      stages: [
+        { name: "Source input", kind: "input" },
+        { name: "Assemble cut", kind: "model" },
+        { name: "Format variants", kind: "action" },
+        { name: "Channel ready", kind: "action" },
+        { name: "Published", kind: "output" },
+      ],
+      branch: { fromIndex: 3, name: "Human review" },
+    },
+    layers: ["Intelligence", "Production"],
   },
 ];
 

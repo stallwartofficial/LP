@@ -122,14 +122,57 @@ export const site = {
   ],
 
   /**
-   * Structural facts only. Deliberately NOT performance metrics or customer
-   * counts, which are unverifiable pre-launch (constraint 7).
+   * The shared engineering core every offering is built on. This is what makes
+   * "three systems, one standard" a structural claim rather than a heading:
+   * each offering declares which of these layers it leans on (see `layers` in
+   * data/offerings.ts) and the architecture diagram draws the connection.
    */
-  facts: [
-    { value: "3", label: "systems in the portfolio" },
-    { value: "24/7", label: "how long they run unattended" },
-    { value: "0", label: "steps needing a human reminder" },
-    { value: "100%", label: "actions logged and reversible" },
+  architecture: {
+    heading: "One engineering standard",
+    lead: "Three systems, one core. Every Stallwart build moves through the same four layers, which is why a governance guarantee in one product is a governance guarantee in all of them.",
+    layers: [
+      {
+        name: "Intelligence",
+        role: "Where a judgement is made",
+        detail:
+          "Models are selected and constrained for the decision at hand, and calibrated to report their own uncertainty rather than assert through it.",
+      },
+      {
+        name: "Orchestration",
+        role: "Where work is routed",
+        detail:
+          "State, retries, and sequencing. The layer that makes a system run unattended instead of needing a person to advance it.",
+      },
+      {
+        name: "Governance",
+        role: "Where limits are enforced",
+        detail:
+          "Policy expressed as runtime controls, not documentation. Approval gates, escalation paths, and an audit trail written as work happens.",
+      },
+      {
+        name: "Production",
+        role: "Where it meets reality",
+        detail:
+          "Observability, rollback, and load behaviour. The difference between a system that demonstrated well and a system that is still correct on a Tuesday.",
+      },
+    ],
+  },
+
+  /**
+   * ARCHITECTURAL PROPERTIES, not performance metrics.
+   *
+   * Every line here is true by construction and checkable by reading the
+   * system, rather than a measured outcome we cannot verify pre-launch
+   * (constraint 7). The section heading says "built for production" and the
+   * footnote states plainly that these are design commitments, because
+   * presenting them as results would invite exactly the credibility question
+   * they are meant to answer.
+   */
+  productionProperties: [
+    { value: "24/7", label: "Autonomous operation" },
+    { value: "100%", label: "Actions logged" },
+    { value: "0", label: "Untracked automation steps" },
+    { value: "3", label: "Systems currently in portfolio" },
   ],
 
   areaServed: ["United States", "United Arab Emirates"],
