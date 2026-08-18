@@ -188,7 +188,11 @@ p {
 @supports (-webkit-background-clip: text) {
   .text-gold-sheen {
     display: inline-block;
+    /* Room so italic descenders (y, g) and the last swash are not clipped by
+       the background-clip:text box, which is only as tall as line-height. */
     padding-right: 0.08em;
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
     background: linear-gradient(
       100deg,
       var(--accent-text) 0%,

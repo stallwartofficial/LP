@@ -29,7 +29,7 @@ export function Hero() {
   const after = at === -1 ? "" : lineOne.slice(at + headlineEmphasis.length);
 
   return (
-    <section className="relative isolate overflow-hidden px-[var(--space-gutter)] pb-12 pt-16 lg:pb-14 lg:pt-20">
+    <section className="relative isolate overflow-hidden px-[var(--space-gutter)] pb-4 pt-16 lg:pb-6 lg:pt-20">
       {/* One faint drifting wash. The blueprint is the focal point, so the
           background must not compete with it. */}
       <div
@@ -120,7 +120,7 @@ export function Hero() {
         {/* Trust bar above the portfolio strip, both inside the hero, so
             opening the page shows the CTA, the sectors, and what we build
             without a scroll. */}
-        <RevealOnLoad index={4} className="mt-6">
+        <RevealOnLoad index={4} className="mt-5">
           <LogoScroll inHero />
         </RevealOnLoad>
 

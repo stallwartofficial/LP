@@ -17,7 +17,7 @@ export function OfferingsTeaser() {
   return (
     <section
       aria-labelledby="offerings-teaser-heading"
-      className="section-y rule-t px-[var(--space-gutter)]"
+      className="rule-t px-[var(--space-gutter)] pt-8 pb-[var(--space-section)]"
     >
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
@@ -39,7 +39,7 @@ export function OfferingsTeaser() {
           </Link>
         </div>
 
-        <ul className="mt-10 grid gap-4 sm:grid-cols-3">
+        <ul className="mt-6 grid gap-4 sm:grid-cols-3">
           {offerings.map((offering, i) => (
             <li key={offering.slug}>
               <Link
