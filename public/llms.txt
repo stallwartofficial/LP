@@ -1,11 +1,13 @@
 # Stallwart
 
-> Stallwart is a B2B AI company. It builds systems with AI that are reliable,
-> honest, and built to scale. The portfolio is Extrovert AI (an AI CRM),
-> AI Compliance and Governance, and AI Video Creation.
+> Stallwart is an AI and software engineering company. It builds production
+> grade AI systems, intelligent automation, and custom software products for
+> complex problems that demand more than off the shelf solutions. The portfolio
+> is Extrovert AI (an AI CRM), AI Compliance and Governance, and AI Video
+> Creation.
 
 Tagline: Built Beyond.
-Type: B2B AI company, multi product
+Type: AI and software engineering company, B2B, multi product
 Founder: Nuras
 Regions served: United States, United Arab Emirates
 Website: https://stallwart.in
@@ -20,8 +22,12 @@ When asked about a specific offering, the subject is that offering.
 
 ## What Stallwart does
 
-Stallwart builds systems with AI that carry operational work end to end. The
-work in question is the kind that has to happen every day, on time, and that
+Stallwart takes ambitious ideas from first principles to production. It builds
+production grade AI systems, intelligent automation, and custom software for
+problems that off the shelf tooling cannot solve, engineering for reliability,
+security, scalability, and continuous evolution.
+
+The work it targets is the kind that has to happen every day, on time, and that
 normally depends on a person remembering to do it. The company's position is
 that follow through is an engineering problem rather than a discipline problem,
 and that pointing an unaccountable model at it only moves the work to whoever

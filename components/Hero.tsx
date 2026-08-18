@@ -13,7 +13,13 @@ import { RevealOnLoad } from "./Reveal";
 // Server component: headline, subhead, and CTAs are in the initial HTML, so the
 // h1 is crawlable with no JavaScript.
 export function Hero() {
-  const [line1, line2] = site.hero.headline.split("|");
+  // Split the headline around the emphasised word so the gold accent tracks the
+  // copy rather than being hardcoded into the markup. If the word is not found,
+  // the headline renders whole and unemphasised, which is a safe fallback.
+  const { headline, headlineEmphasis } = site.hero;
+  const at = headline.indexOf(headlineEmphasis);
+  const before = at === -1 ? headline : headline.slice(0, at);
+  const after = at === -1 ? "" : headline.slice(at + headlineEmphasis.length);
 
   return (
     <section className="relative isolate overflow-hidden px-[var(--space-gutter)] pt-32 pb-[var(--space-section)] lg:pt-40">
@@ -50,23 +56,24 @@ export function Hero() {
           </div>
         </RevealOnLoad>
 
-        <h1 className="font-display mt-7 max-w-4xl text-display-xl font-light">
-          <RevealOnLoad index={1} y={20}>
-            <span className="block">{line1}</span>
-          </RevealOnLoad>
-          <RevealOnLoad index={2} y={20}>
-            <span className="block text-[var(--fg)]/55">{line2}</span>
-          </RevealOnLoad>
-        </h1>
+        <RevealOnLoad index={1} y={20}>
+          <h1 className="font-display mt-7 max-w-4xl text-display-xl font-light">
+            {before}
+            <span className="text-gold-sheen italic">{headlineEmphasis}</span>
+            {after}
+          </h1>
+        </RevealOnLoad>
 
-        <RevealOnLoad index={3}>
-          <p className="mt-8 max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
-            {site.hero.subhead}
-          </p>
+        <RevealOnLoad index={2}>
+          <div className="mt-8 max-w-2xl space-y-4 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
+            {site.hero.subhead.map((para) => (
+              <p key={para}>{para}</p>
+            ))}
+          </div>
         </RevealOnLoad>
 
         <RevealOnLoad
-          index={4}
+          index={3}
           className="mt-10 flex flex-wrap items-center gap-3"
         >
           <Link
@@ -89,7 +96,7 @@ export function Hero() {
 
         {/* Portfolio strip. States what the company is, and doubles as an
             internal link surface on the highest authority page. */}
-        <RevealOnLoad index={5} className="rule-t mt-16 pt-8">
+        <RevealOnLoad index={4} className="rule-t mt-16 pt-8">
           <p className="eyebrow">Three systems, one standard</p>
           <ul className="mt-5 grid gap-px bg-[var(--hairline)] sm:grid-cols-3">
             {offerings.map((offering) => (

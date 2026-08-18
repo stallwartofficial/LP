@@ -18,7 +18,7 @@ export const site = {
   tagline: "Built Beyond.",
 
   /** What the company is, in one line. No em dash: this feeds the tab title. */
-  companyDescriptor: "AI Systems Built Beyond",
+  companyDescriptor: "AI and Software Engineering, Built Beyond",
 
   /** Expanded positioning line, used under the wordmark and in the footer. */
   positioning:
@@ -26,17 +26,34 @@ export const site = {
 
   domain: "https://stallwart.in", // TODO: confirm, drives every canonical URL
 
-  /** Company description. Feeds Organization schema and default metadata. */
+  /**
+   * Company description. Feeds Organization schema and default metadata.
+   * Deliberately in step with the hero copy: a meta description that
+   * contradicts the h1 splits the ranking signal for the same query.
+   */
   description:
-    "Stallwart builds systems with AI that carry the operational work a business cannot afford to drop. Reliable, honest about their limits, and engineered to scale. Sales pipelines, AI governance, and video production, built beyond the demo.",
+    "Stallwart is an AI and software engineering company building production grade AI systems, intelligent automation, and custom software products for complex problems that demand more than off the shelf solutions. Engineered for reliability, security, and scale.",
 
   hero: {
-    /** Split on the pipe for line by line reveal. */
-    headline: "Systems with AI,|built beyond the demo.",
-    subhead:
-      "Anything performs on rehearsed input. Stallwart builds systems that hold at real volume, on the exceptions nobody scoped, on the Friday your best operator is out. Reliable, honest, and built to scale.",
+    headline: "Engineering the impossible into production.",
+    /**
+     * The one word set in gold. The headline is split around it, so changing
+     * either string keeps the emphasis in the right place. Must appear in
+     * `headline` verbatim or the headline simply renders unemphasised.
+     */
+    headlineEmphasis: "impossible",
+    /**
+     * Two paragraphs rather than one wall: the first states what the company
+     * is, the second states how it works. Original copy carried an em dash
+     * before "built for the real world"; replaced with a comma per the
+     * punctuation rule above.
+     */
+    subhead: [
+      "Stallwart is an AI and software engineering company that builds production grade AI systems, intelligent automation, and custom software products for complex problems that demand more than off the shelf solutions.",
+      "We take ambitious ideas from first principles to production, engineering technology for reliability, security, scalability, and continuous evolution, built for the real world and not just the demo.",
+    ],
     primaryCta: { label: "Book a Call", href: "/contact" },
-    secondaryCta: { label: "See what we build", href: "/offer" },
+    secondaryCta: { label: "See What We Build", href: "/offer" },
     scrollCue: "How we build",
   },
 
