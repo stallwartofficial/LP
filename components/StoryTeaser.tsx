@@ -27,7 +27,7 @@ export function StoryTeaser() {
       className="section-y rule-t px-[var(--space-gutter)]"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[17rem_minmax(0,34rem)] lg:justify-center lg:gap-14">
           {/* ---------------- The taped photograph ---------------- */}
           <div className="pinboard rounded-2xl border border-[var(--hairline)] p-8 sm:p-10">
             <figure className="photo-taped bg-[var(--bg-raised)] p-3">
@@ -72,7 +72,7 @@ export function StoryTeaser() {
               problem, and almost nobody was treating it like one.
             </blockquote>
 
-            <p className="mt-8 max-w-xl text-[var(--fg)]/75">
+            <p className="mt-8 text-[var(--fg)]/75">
               {site.founder.name} founded {site.company} after meeting the same
               failure in building after building. The enquiry nobody answered in
               time. The draft that sat in review. The compliance question
@@ -80,13 +80,13 @@ export function StoryTeaser() {
               more to hold than there were hands to hold it.
             </p>
 
-            <p className="mt-4 max-w-xl text-[var(--fg)]/75">
+            <p className="mt-4 text-[var(--fg)]/75">
               The standard that came out of it is the company: systems built with
               AI that are reliable enough to leave alone, honest enough to trust,
               and scalable enough to still be right at ten times the volume.
             </p>
 
-            <p className="mt-4 max-w-xl text-sm text-[var(--fg)]/60">
+            <p className="mt-4 text-sm text-[var(--fg)]/60">
               {site.founder.credential}
             </p>
 
