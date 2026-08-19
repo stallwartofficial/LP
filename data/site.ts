@@ -32,17 +32,20 @@ export const site = {
    * contradicts the h1 splits the ranking signal for the same query.
    */
   description:
-    "Stallwart engineers the impossible into production: AI systems, automation, and custom software built for reliability, security, and scale.",
+    "Stallwart builds AI systems engineered to run unattended, audited, and trusted, from first principles to production and built for reliability, security, and scale.",
 
   hero: {
+    /** Hero-only tagline. Kept separate from the shared `tagline` above so the
+        footer, ContactBanner and OG images keep the company standard. */
+    tagline: "From first principles to production.",
     /** Split on the pipe: one line per clause. */
-    headline: "Engineering the impossible|into production.",
+    headline: "AI systems engineered to run|unattended, audited, and trusted.",
     /**
      * The one word set in gold. The headline is split around it, so changing
      * either string keeps the emphasis in the right place. Must appear in
      * `headline` verbatim or the headline simply renders unemphasised.
      */
-    headlineEmphasis: "impossible",
+    headlineEmphasis: "trusted",
     /**
      * Two paragraphs rather than one wall: the first states what the company
      * is, the second states how it works. Original copy carried an em dash
@@ -50,7 +53,7 @@ export const site = {
      * punctuation rule above.
      */
     subhead: [
-      "We engineer the impossible into production. Production grade AI systems, intelligent automation, and custom software for problems no product solves, taken from first principles to production and built for reliability, security, and scale.",
+      "AI systems engineered to run unattended, audited, and trusted: production grade automation and custom software for problems no product solves, taken from first principles to production and built for reliability, security, and scale.",
     ],
     primaryCta: { label: "Book a Call", href: "/contact" },
     secondaryCta: { label: "See What We Build", href: "/offer" },

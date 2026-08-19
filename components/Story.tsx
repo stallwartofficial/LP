@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { site } from "@/data/site";
-import { offerings } from "@/data/offerings";
 
 // The company's story, as two fixed columns.
 //
@@ -39,56 +38,43 @@ export function Story() {
         {/* --- Prose: last on mobile, bottom-left on desktop. --- */}
         <div className="order-3 space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85 lg:col-start-1 lg:row-start-2">
             <p className="[&::first-letter]:font-display [&::first-letter]:mr-2 [&::first-letter]:float-left [&::first-letter]:text-[3.75rem] [&::first-letter]:font-light [&::first-letter]:leading-[0.82] [&::first-letter]:text-[var(--accent-text)]">
-              Businesses rarely fail at strategy. They fail at follow through.
-              The work that has to happen every day, by someone, on time, and
-              that nobody has ever found interesting. The enquiry that came in
-              at seven in the evening. The draft that sat in review for nine
-              days. The compliance question everyone quietly hoped belonged to
-              somebody else.
+              {site.founder.name} has spent five years building AI systems for
+              production, not for demos, a distinction the rest of the industry
+              is only now catching up to. He began working with AI ahead of the
+              curve, at a point when most of the market still treated it as an
+              experimental layer rather than infrastructure, and has been
+              building it into revenue-critical systems ever since.
             </p>
 
             <p>
-              {site.founder.name} founded {site.company} on the observation that
-              this is the same failure everywhere, and that it is almost never a
-              failure of care. Nobody in those buildings needed a lecture about
-              rigour. There were simply more things to hold than there were
-              hands to hold them, and the things that got dropped were always
-              the ones that mattered later rather than now.
+              His engineering background is in SaaS: systems built for companies
+              where downtime, drift, or an unaccountable model isn&apos;t an
+              inconvenience, it&apos;s a customer relationship at risk. One of
+              the products from that period, a knowledge platform now used inside
+              SaaS teams to organize and surface their own documentation, remains
+              in active production today. Not because it shipped fast. Because it
+              was engineered to still be correct at scale, long after the people
+              who built it had moved on to the next system.
             </p>
 
             <p>
-              The obvious answer in 2026 is to point AI at the problem. That is
-              where most of it goes wrong. A model that is confident and
-              unaccountable does not remove the work, it moves the work to
-              whoever now has to check it. The organisation ends up with a new
-              category of risk and the same backlog.
+              That standard is the reason {site.company} exists.{" "}
+              {site.founder.name} founded the company on a direct observation:
+              the AI industry has a confidence problem, not a capability problem.
+              Systems get sold on how convincingly they perform in a controlled
+              demo, and the gap between that performance and real-world
+              reliability becomes someone else&apos;s problem the moment the
+              invoice clears. He built {site.company} to close that gap,
+              engineering AI systems that report their own uncertainty instead of
+              asserting through it, and that are built to be audited, not just
+              believed.
             </p>
 
             <p>
-              So that became the specification rather than the marketing.
-              Reliable, because a system that needs remembering has not removed
-              any work. Honest, because a system that hides its own uncertainty
-              is a liability wearing the costume of an asset. Scalable, because
-              anything that only works at demo volume was a prototype, whatever
-              the invoice said.
-            </p>
-
-            <p>
-              The first system built to that standard was{" "}
-              <strong className="font-medium text-[var(--fg)]">
-                {offerings[0].name}
-              </strong>
-              , because the cost of dropped work showed most plainly there. It
-              will not be the last. The same failure lives in AI governance,
-              where nobody can account for how a decision was reached, which is
-              why {offerings[2].name} is being built to the same standard.
-            </p>
-
-            <p>
-              The name is the standard. {site.tagline.replace(".", "")} means
-              the system holds past the point where a demo ends: at real volume,
-              on the exceptions nobody scoped, on the day the person who
-              understood it is somewhere else.
+              The result is a standard, not a slogan: systems reliable enough to
+              run without supervision, honest enough to earn trust rather than
+              claim it, and engineered from first principles so they hold at
+              scale, not just in the room where they were pitched.
             </p>
           </div>
 

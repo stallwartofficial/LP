@@ -24,9 +24,21 @@ export function Hero() {
   // two is outlined, so the pair reads as claim then consequence.
   const { headline, headlineEmphasis } = site.hero;
   const [lineOne = "", lineTwo = ""] = headline.split("|");
-  const at = lineOne.indexOf(headlineEmphasis);
-  const before = at === -1 ? lineOne : lineOne.slice(0, at);
-  const after = at === -1 ? "" : lineOne.slice(at + headlineEmphasis.length);
+
+  // Render one headline line, setting the emphasis word in gold wherever it
+  // falls (either line). `outlined` gives line two its outline treatment.
+  const renderLine = (line: string, outlined: boolean) => {
+    const cls = outlined ? "text-outline block" : "block";
+    const at = line.indexOf(headlineEmphasis);
+    if (at === -1) return <span className={cls}>{line}</span>;
+    return (
+      <span className={cls}>
+        {line.slice(0, at)}
+        <span className="text-gold-sheen italic">{headlineEmphasis}</span>
+        {line.slice(at + headlineEmphasis.length)}
+      </span>
+    );
+  };
 
   return (
     <section className="relative isolate overflow-hidden px-[var(--space-gutter)] pb-4 pt-16 lg:pb-6 lg:pt-20">
@@ -50,7 +62,7 @@ export function Hero() {
                   className="h-px w-10 bg-[var(--accent)] sm:w-14"
                 />
                 <p className="font-display text-[length:var(--text-step-1)] italic tracking-wide text-[var(--accent-text)]">
-                  {site.tagline}
+                  {site.hero.tagline}
                 </p>
               </div>
             </RevealOnLoad>
@@ -59,14 +71,8 @@ export function Hero() {
                 trailing clause outlined. Presence from contrast, not size. */}
             <RevealOnLoad index={1} y={16}>
               <h1 className="font-display text-hero mt-4 font-normal">
-                <span className="block">
-                  {before}
-                  <span className="text-gold-sheen italic">
-                    {headlineEmphasis}
-                  </span>
-                  {after}
-                </span>
-                <span className="text-outline block">{lineTwo}</span>
+                {renderLine(lineOne, false)}
+                {renderLine(lineTwo, true)}
               </h1>
             </RevealOnLoad>
 

@@ -67,23 +67,23 @@ export function StoryTeaser() {
               <span aria-hidden="true" className="mr-1 text-[var(--accent)]/50">
                 &ldquo;
               </span>
-              Follow through is not a discipline problem. It is an{" "}
-              <span className="text-gold-sheen italic">engineering</span>{" "}
-              problem, and almost nobody was treating it like one.
+              The AI industry has a{" "}
+              <span className="text-gold-sheen italic">confidence</span> problem,
+              not a capability problem.
             </blockquote>
 
             <p className="mt-8 text-[var(--fg)]/75">
-              {site.founder.name} founded {site.company} after meeting the same
-              failure in building after building. The enquiry nobody answered in
-              time. The draft that sat in review. The compliance question
-              everyone hoped belonged to someone else. Never carelessness, just
-              more to hold than there were hands to hold it.
+              {site.founder.name} founded {site.company} on a direct
+              observation: systems get sold on how convincingly they perform in
+              a controlled demo, and the gap between that and real-world
+              reliability becomes someone else&apos;s problem the moment the
+              invoice clears.
             </p>
 
             <p className="mt-4 text-[var(--fg)]/75">
-              The standard that came out of it is the company: systems built with
-              AI that are reliable enough to leave alone, honest enough to trust,
-              and scalable enough to still be right at ten times the volume.
+              He built {site.company} to close that gap, engineering AI systems
+              that report their own uncertainty instead of asserting through it,
+              and that are built to be audited, not just believed.
             </p>
 
             <p className="mt-4 text-sm text-[var(--fg)]/60">
