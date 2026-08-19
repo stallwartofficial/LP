@@ -51,13 +51,12 @@ export function Navbar() {
           className="group flex shrink-0 items-center gap-2.5"
           aria-label={`${site.company}, home`}
         >
-          {/* Intrinsic size is 194x122, so these must keep that ratio or Next
-              warns that CSS is changing one axis without the other. 51x32
-              matches the rendered h-8 exactly. */}
+          {/* Intrinsic emblem is 143x128; width/height keep that ratio so Next
+              doesn't warn about CSS changing one axis. Rendered at h-8. */}
           <Image
             src="/images/logo-mark.png"
             alt=""
-            width={51}
+            width={36}
             height={32}
             priority
             className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[8deg]"
