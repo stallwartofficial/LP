@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { navLinks, site } from "@/data/site";
 import { offerings } from "@/data/offerings";
@@ -10,7 +11,16 @@ export function Footer() {
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <div>
-            <p className="font-display text-display-sm font-light leading-none">
+            {/* Brand sign-off: the emblem over the wordmark. Reuses the 19KB
+                navbar mark, so no extra asset weight. */}
+            <Image
+              src="/images/logo-mark.png"
+              alt=""
+              width={49}
+              height={44}
+              className="h-11 w-auto"
+            />
+            <p className="font-display text-display-sm mt-4 font-light leading-none">
               {site.company}
             </p>
             <p className="mt-4 max-w-xs text-[var(--fg)]/60">
