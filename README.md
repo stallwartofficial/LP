@@ -37,17 +37,22 @@ app/          routes (App Router), route-level metadata, API handlers
   api/        server route handlers (contact-form intake)
   offer/      portfolio index and [slug] offering pages
   blog/       insights index and [slug] posts (case studies live here)
+  privacy/    privacy policy (static)
+  terms/      terms of service (static)
 components/   presentational components, server by default
 data/         all site content as typed modules, the single source of truth
 lib/          seo builders, og image renderer, theme helpers
 public/       static assets, images, llms.txt
 ```
 
+For the design and decision rationale behind the site (positioning, the hero,
+typography, performance, SEO/AEO), see `ENGINEERING_RATIONALE.md`.
+
 ## Architecture notes
 
 **Server components by default.** Only components that need browser APIs are
-marked `"use client"`: `Navbar`, `ThemeToggle`, `CadField`, and the `Contact`
-form. All page copy stays server-rendered, so it is present in the initial HTML.
+marked `"use client"`: `Navbar`, `ThemeToggle`, and the `Contact` form. All page
+copy stays server-rendered, so it is present in the initial HTML.
 
 **Content lives in `data/`.** Copy, offerings, posts, testimonials, trust terms,
 and FAQs are typed modules, never hardcoded in components. Adding an offering to
