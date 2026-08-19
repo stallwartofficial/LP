@@ -20,15 +20,23 @@ export function Footer() {
               height={44}
               className="h-11 w-auto"
             />
-            <p className="font-display text-display-sm mt-4 font-light leading-none">
+            <p className="font-display text-display-sm mt-3 font-light leading-none">
               {site.company}
             </p>
-            <p className="mt-4 max-w-xs text-[var(--fg)]/60">
+            <p className="mt-3 max-w-xs text-[var(--fg)]/60">
               {site.companyDescriptor}.
             </p>
-            <p className="mt-6 text-sm font-medium text-[var(--accent-text)]">
+            <p className="mt-4 text-sm font-medium text-[var(--accent-text)]">
               {site.tagline}
             </p>
+
+            {/* End-of-page action: footers are a real conversion catch-point. */}
+            <Link
+              href="/contact"
+              className="link-draw mt-6 inline-block text-sm font-medium text-[var(--fg)]"
+            >
+              {site.cta.primary} →
+            </Link>
           </div>
 
           <nav aria-label="Footer">
@@ -77,17 +85,23 @@ export function Footer() {
                   {site.contact.email}
                 </a>
               </li>
-              <li className="flex gap-4">
+              <li className="flex gap-5">
                 <a
                   href={site.social.linkedin}
-                  className="link-draw text-sm text-[var(--fg)]/70 hover:text-[var(--fg)]"
+                  className="group inline-flex items-center gap-2 text-sm text-[var(--fg)]/70 transition-colors hover:text-[var(--fg)]"
                 >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                    <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+                  </svg>
                   LinkedIn
                 </a>
                 <a
                   href={site.social.twitter}
-                  className="link-draw text-sm text-[var(--fg)]/70 hover:text-[var(--fg)]"
+                  className="group inline-flex items-center gap-2 text-sm text-[var(--fg)]/70 transition-colors hover:text-[var(--fg)]"
                 >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                    <path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.22-6.82-5.96 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.02 4.12H5.06l12.02 15.65z" />
+                  </svg>
                   X
                 </a>
               </li>
@@ -95,11 +109,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="rule-t mt-14 flex flex-col gap-2 pt-6 text-xs text-[var(--fg)]/65 sm:flex-row sm:justify-between">
+        <div className="rule-t mt-14 flex flex-col gap-3 pt-6 text-xs text-[var(--fg)]/65 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.company}. All rights reserved.
           </p>
-          <p>{site.areaServed.join(" · ")}</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link
+              href="/privacy"
+              className="link-draw hover:text-[var(--fg)]"
+            >
+              Privacy
+            </Link>
+            <Link href="/terms" className="link-draw hover:text-[var(--fg)]">
+              Terms
+            </Link>
+            <span>{site.areaServed.join(" · ")}</span>
+          </div>
         </div>
       </div>
     </footer>

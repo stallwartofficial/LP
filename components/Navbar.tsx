@@ -52,14 +52,14 @@ export function Navbar() {
           aria-label={`${site.company}, home`}
         >
           {/* Intrinsic emblem is 143x128; width/height keep that ratio so Next
-              doesn't warn about CSS changing one axis. Rendered at h-8. */}
+              doesn't warn about CSS changing one axis. Rendered at h-9. */}
           <Image
             src="/images/logo-mark.png"
             alt=""
-            width={36}
-            height={32}
+            width={40}
+            height={36}
             priority
-            className="h-8 w-auto transition-transform duration-500 group-hover:rotate-[8deg]"
+            className="h-9 w-auto transition-transform duration-500 group-hover:rotate-[8deg]"
           />
           <span className="font-display text-lg font-medium tracking-tight">
             {site.company}

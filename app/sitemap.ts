@@ -15,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.domain}/story`, lastModified: now, priority: 0.7 },
     { url: `${site.domain}/blog`, lastModified: now, priority: 0.8 },
     { url: `${site.domain}/contact`, lastModified: now, priority: 0.7 },
+    { url: `${site.domain}/privacy`, lastModified: now, priority: 0.3 },
+    { url: `${site.domain}/terms`, lastModified: now, priority: 0.3 },
   ];
 
   const offeringRoutes: MetadataRoute.Sitemap = offerings.map((o) => ({
