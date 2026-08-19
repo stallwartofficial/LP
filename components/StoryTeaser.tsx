@@ -37,10 +37,10 @@ export function StoryTeaser() {
                   alt={`${site.founder.name}, ${site.founder.role} of ${site.company}`}
                   fill
                   sizes="(min-width: 1024px) 18rem, (min-width: 640px) 60vw, 90vw"
-                  // Eager: the origin block is high enough on the page to be in
-                  // or near the first viewport on a tall screen, so lazy loading
-                  // buys a pop-in rather than a saving on a 137KB asset.
-                  loading="eager"
+                  // Lazy: the origin block sits well below the fold on mobile,
+                  // so eager loading put this 137KB asset on the critical path
+                  // and hurt LCP / Speed Index for no visible benefit.
+                  loading="lazy"
                   className="object-cover object-top"
                 />
               </div>

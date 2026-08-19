@@ -11,11 +11,13 @@ import { organizationSchema } from "@/lib/seo";
 // @theme without a specificity fight between :root and the font classes.
 // Variable font, the full weight axis is available, so display type can sit
 // at 300 for large sizes and 600 for small caps without extra network cost.
-// `SOFT`/`WONK` axes are requested for Fraunces' softer, more editorial cut.
+// Only the `opsz` axis is loaded. SOFT/WONK were requested for an editorial cut
+// but nothing sets them in CSS (the animation that once did was removed), so
+// they were dead weight on the critical-path font that renders the hero (LCP).
 const fraunces = Fraunces({
   variable: "--font-display-loaded",
   subsets: ["latin"],
-  axes: ["SOFT", "WONK", "opsz"],
+  axes: ["opsz"],
   display: "swap",
 });
 
