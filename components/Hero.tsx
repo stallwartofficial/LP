@@ -13,13 +13,14 @@ import { RevealOnLoad } from "./Reveal";
 // Server component. Headline, subhead, and CTAs are in the initial HTML, so the
 // h1 is crawlable with no JavaScript.
 export function Hero() {
-  // Two lines, split on the pipe. The gold emphasis word can sit on either
-  // line; line two carries the outline treatment.
+  // Two lines, split on the pipe. Weight carries the hierarchy: line one sits
+  // light, line two lands in medium, so the pair reads as claim then payoff.
+  // The gold emphasis word can fall on either line.
   const { headline, headlineEmphasis } = site.hero;
   const [lineOne = "", lineTwo = ""] = headline.split("|");
 
-  const renderLine = (line: string, outlined: boolean) => {
-    const cls = outlined ? "text-outline block" : "block";
+  const renderLine = (line: string, weight: string) => {
+    const cls = `block ${weight}`;
     const at = line.indexOf(headlineEmphasis);
     if (at === -1) return <span className={cls}>{line}</span>;
     return (
@@ -54,9 +55,9 @@ export function Hero() {
         </RevealOnLoad>
 
         <RevealOnLoad index={1} y={16}>
-          <h1 className="font-display text-hero mt-6 font-normal">
-            {renderLine(lineOne, false)}
-            {renderLine(lineTwo, true)}
+          <h1 className="font-display text-hero mt-6">
+            {renderLine(lineOne, "font-light")}
+            {renderLine(lineTwo, "font-medium")}
           </h1>
         </RevealOnLoad>
 

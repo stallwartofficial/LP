@@ -513,13 +513,6 @@ p {
   letter-spacing: -0.028em;
   text-wrap: pretty;
 }
-/* The counter-line: line two sits back from the solid line one so the pair
-   reads as claim then consequence, while the gold word still leads. A muted
-   solid, not a hollow -webkit-text-stroke: the stroke read as tacky in light
-   mode. 58% of the foreground clears the 3:1 large-text contrast floor. */
-.text-outline {
-  color: color-mix(in oklab, var(--fg) 58%, transparent);
-}
 
 /* ==========================================================================
    MODERN PLATFORM LAYER
