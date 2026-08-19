@@ -504,31 +504,21 @@ p {
    on their own, which pushed the trust bar and portfolio strip below the fold.
    3.9rem keeps real presence and buys back roughly 46px across the pair. */
 .text-hero {
-  /* Ceiling lowered from 3.9rem so "Engineering the impossible" holds one line
-     instead of wrapping mid-clause. Each clause is its own block in the markup;
-     balance keeps the break clean at every width. */
-  font-size: clamp(2.1rem, 1.5rem + 2.4vw, 3.25rem);
-  line-height: 1.08;
+  /* Ceiling sized so each clause ("AI systems engineered to run") holds one
+     line instead of wrapping mid-clause. Each clause is its own block in the
+     markup; `pretty` fills each line before wrapping (unlike `balance`, which
+     can split a clause that would otherwise fit). */
+  font-size: clamp(2.15rem, 1.4rem + 2.6vw, 3.1rem);
+  line-height: 1.1;
   letter-spacing: -0.028em;
-  text-wrap: balance;
+  text-wrap: pretty;
 }
-/* Outline weight for a counter-line: presence without another colour.
-   The stroke is deliberately NOT --hairline-strong (fg at 22%). At headline
-   size that measured about 1.2:1 against the ground, which is unreadable for
-   real copy rather than decoration. At 62% of the foreground with a 2px stroke
-   it clears the 3:1 large-text floor while still reading as an outline.
-
-   The solid `color` fallback matters: where -webkit-text-stroke is unsupported
-   the text must not render transparent, so the fill is only cleared inside the
-   @supports block. */
+/* The counter-line: line two sits back from the solid line one so the pair
+   reads as claim then consequence, while the gold word still leads. A muted
+   solid, not a hollow -webkit-text-stroke: the stroke read as tacky in light
+   mode. 58% of the foreground clears the 3:1 large-text contrast floor. */
 .text-outline {
-  color: color-mix(in oklab, var(--fg) 62%, transparent);
-}
-@supports (-webkit-text-stroke: 2px black) {
-  .text-outline {
-    color: transparent;
-    -webkit-text-stroke: 2px color-mix(in oklab, var(--fg) 62%, transparent);
-  }
+  color: color-mix(in oklab, var(--fg) 58%, transparent);
 }
 
 /* ==========================================================================
