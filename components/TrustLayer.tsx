@@ -27,8 +27,18 @@ const tiles: Tile[] = [
     statement: "Everything.",
     line: "Source, infrastructure as code, runbooks, and documentation. No licences retained, no dependencies on us.",
   },
-  { area: "cost", kicker: "Cost", title: engagementTerms[0].question },
-  { area: "time", kicker: "Time", title: engagementTerms[1].question },
+  {
+    area: "cost",
+    kicker: "Cost",
+    title: engagementTerms[0].question,
+    line: "Fixed price per phase, approved before work starts. Not billed hourly, so the estimate is our risk.",
+  },
+  {
+    area: "time",
+    kicker: "Time",
+    title: engagementTerms[1].question,
+    line: "Scoping and design run in weeks, not months, with a build date committed at the end.",
+  },
   {
     area: "no",
     kicker: "Candour",
@@ -46,19 +56,19 @@ const tiles: Tile[] = [
     area: "enc",
     kicker: "Security",
     title: commitments[1].title,
-    line: "TLS 1.2 or higher in transit, AES-256 at rest.",
+    line: "TLS 1.2 or higher in transit, AES-256 at rest. Keys stay server side and are never shipped to the browser.",
   },
   {
     area: "ovr",
     kicker: "Control",
     title: commitments[2].title,
-    line: "Every automated action is logged and reversible.",
+    line: "Every automated action is logged and reversible. Any running system can be paused or overridden by your team, and the audit trail exports on request.",
   },
   {
     area: "reg",
     kicker: "Region",
     title: commitments[3].title,
-    line: "Data resident in the region you choose.",
+    line: "Data resident in the region you choose, with processing kept to the jurisdictions you approve. A sub-processor list on request.",
   },
 ];
 
