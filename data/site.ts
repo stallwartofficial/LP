@@ -180,7 +180,6 @@ export const site = {
   },
 
 
-  areaServed: ["United States", "United Arab Emirates"],
 
   contact: {
     email: "hello@stallwart.in", // placeholder, swap with real inbox
