@@ -102,6 +102,23 @@ export function Story() {
                 <span className="mt-2 block text-xs leading-snug text-[var(--fg)]/70">
                   {site.founder.credential}
                 </span>
+                {/* Arun's signature, as a theme-coloured mask so the white-ink
+                    source reads in both light and dark. Decorative: the name
+                    above is the real, accessible identifier. */}
+                <span
+                  aria-hidden="true"
+                  className="mt-3 ml-auto block h-[64px] w-[86px] bg-[var(--fg)]/80"
+                  style={{
+                    maskImage: "url(/images/arun-signature.png)",
+                    WebkitMaskImage: "url(/images/arun-signature.png)",
+                    maskRepeat: "no-repeat",
+                    WebkitMaskRepeat: "no-repeat",
+                    maskSize: "contain",
+                    WebkitMaskSize: "contain",
+                    maskPosition: "right",
+                    WebkitMaskPosition: "right",
+                  }}
+                />
               </figcaption>
             </figure>
 
