@@ -36,7 +36,7 @@ export function StatusPill({
 export function Offerings() {
   return (
     <>
-      <header className="px-[var(--space-gutter)] pb-4 pt-36 lg:pt-44">
+      <header className="px-[var(--space-gutter)] pb-4 pt-28 lg:pt-32">
         <div className="mx-auto max-w-6xl">
           <div className="flex items-center gap-3">
             <span aria-hidden="true" className="h-px w-10 bg-[var(--accent)]" />
