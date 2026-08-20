@@ -12,6 +12,40 @@ import { RevealOnLoad } from "./Reveal";
 //
 // Server component. Headline, subhead, and CTAs are in the initial HTML, so the
 // h1 is crawlable with no JavaScript.
+// A few key phrases in the subhead are lifted into Fraunces italic (the display
+// face, already loaded) for an editorial accent against the sans body. No new
+// fonts, so no performance cost. Phrases not present are simply skipped.
+const EMPHASISE = [
+  "the problems no product solves",
+  "first principles to production",
+];
+
+function emphasise(text: string): React.ReactNode[] {
+  let nodes: React.ReactNode[] = [text];
+  for (const phrase of EMPHASISE) {
+    nodes = nodes.flatMap((node) => {
+      if (typeof node !== "string" || !node.includes(phrase)) return [node];
+      const segs = node.split(phrase);
+      const out: React.ReactNode[] = [];
+      segs.forEach((seg, i) => {
+        if (seg) out.push(seg);
+        if (i < segs.length - 1) {
+          out.push(
+            <span
+              key={`${phrase}-${i}`}
+              className="font-display italic text-[var(--fg)]/95"
+            >
+              {phrase}
+            </span>
+          );
+        }
+      });
+      return out;
+    });
+  }
+  return nodes;
+}
+
 export function Hero() {
   // Two lines, split on the pipe. Weight carries the hierarchy: line one sits
   // light, line two lands in medium, so the pair reads as claim then payoff.
@@ -64,7 +98,7 @@ export function Hero() {
         <RevealOnLoad index={2}>
           <div className="mt-6 max-w-2xl space-y-4 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
             {site.hero.subhead.map((para) => (
-              <p key={para}>{para}</p>
+              <p key={para}>{emphasise(para)}</p>
             ))}
           </div>
         </RevealOnLoad>
