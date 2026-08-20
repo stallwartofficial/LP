@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: Props) {
           faqSchema(post.qa),
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Insights", path: "/blog" },
+            { name: "Case Studies", path: "/blog" },
             { name: post.title, path: `/blog/${post.slug}` },
           ]),
         ]}
