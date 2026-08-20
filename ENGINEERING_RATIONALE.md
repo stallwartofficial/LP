@@ -237,6 +237,13 @@ UI or runtime change.
 
 ## Conventions cheat-sheet (for the next engineer)
 
+- **Single responsive source — the rule.** There is no separate mobile site.
+  Every copy and content change lives in shared `data/` and components and
+  therefore renders at **every** breakpoint automatically. Desktop and mobile
+  differ only in *layout* (how content stacks or reflows), and those differences
+  are deliberate and breakpoint-scoped (`sm:` / `lg:` classes, `.op-bento`).
+  Never fork content per device; if a change "isn't showing on mobile," it is a
+  browser cache, not a missing edit.
 - Content changes go in `data/`, not component JSX.
 - One `h1` per route; keep it in step with the subhead and meta description.
 - No em dashes in user-facing copy.
