@@ -141,7 +141,7 @@ export function Story() {
               href="https://www.linkedin.com/in/nuras/"
               target="_blank"
               rel="noopener noreferrer"
-              className="link-draw mt-5 inline-flex items-center gap-2 text-sm font-medium text-[var(--accent-text)]"
+              className="link-draw mt-5 inline-flex items-center gap-2 whitespace-nowrap text-sm font-medium text-[var(--accent-text)]"
             >
               <svg
                 aria-hidden="true"
