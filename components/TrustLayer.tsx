@@ -99,14 +99,18 @@ export function Commitments() {
           </p>
         </div>
 
-        <div className="op-bento mt-8 flex flex-col gap-3 lg:grid">
+        <div className="op-bento mt-8 flex flex-wrap gap-3 lg:grid">
           {tiles.map((tile) => {
             const isFeature = Boolean(tile.statement);
             return (
               <div
                 key={tile.area}
                 style={{ gridArea: tile.area }}
-                className={`card-lift flex flex-col rounded-2xl border p-5 transition-colors duration-300 ${
+                className={`card-lift flex min-w-0 flex-col rounded-2xl border p-4 transition-colors duration-300 lg:basis-auto lg:p-5 ${
+                  isFeature || tile.accent
+                    ? "basis-full"
+                    : "basis-[calc(50%-0.375rem)]"
+                } ${
                   tile.accent
                     ? "border-[var(--accent)]/40 bg-[color-mix(in_oklab,var(--accent)_6%,var(--surface))]"
                     : "border-[var(--hairline)] bg-[var(--surface)] hover:border-[var(--accent)]/45"
