@@ -25,7 +25,7 @@ export const faqs: Faq[] = [
   {
     question: "Who does Stallwart build for?",
     answer:
-      "B2B organizations, from small teams that need leverage without new headcount up to enterprises that need consistency across large operations.",
+      "B2B organizations, from small teams that need more output without new headcount up to enterprises that need consistency across large operations.",
   },
   {
     question: "What is Extrovert AI?",

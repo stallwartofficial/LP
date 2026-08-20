@@ -35,7 +35,7 @@ export const testimonials: Testimonial[] = [
   {
     highlight: "Leverage without headcount",
     quote:
-      "As a five person team we needed leverage, not more people. This gave us the follow up persistence of a company three times our size.",
+      "As a five person team we needed output, not more people. This gave us the follow up persistence of a company three times our size.",
     role: "Founder",
     industry: "SMB Software",
     initials: "F",
@@ -43,15 +43,17 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-// Placeholder marks for the logo bar. Generic marks until real customer logos
-// are available.
+// Sectors we build for, not invented client logos. Naming fictional companies
+// under "our customers" reads as fabricated proof; naming the kinds of teams we
+// serve is honest and still fills the trust bar. Swap for real customer logos
+// (with permission) once they exist.
 export const logoMarks = [
-  "NORTHPEAK",
-  "VERALIS",
-  "ORBITAL",
-  "CASTWELL",
-  "MERIDIAN",
-  "HALCYON",
-  "FORGEWORKS",
-  "ATLASBAY",
+  "SaaS",
+  "Fintech",
+  "Healthcare",
+  "Logistics",
+  "Marketplaces",
+  "Operations",
+  "Agencies",
+  "B2B",
 ];

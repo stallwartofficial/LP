@@ -28,7 +28,7 @@ export function LogoScroll({ inHero = false }: { inHero?: boolean } = {}) {
             : "mx-auto flex max-w-6xl items-center gap-8 px-[var(--space-gutter)]"
         }
       >
-        <p className="eyebrow shrink-0">Built for teams at scale</p>
+        <p className="eyebrow shrink-0">Built for teams in</p>
 
         <div className="flex min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <div
