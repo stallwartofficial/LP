@@ -1,13 +1,23 @@
-import { faqs } from "@/data/faqs";
+import { faqs as siteFaqs } from "@/data/faqs";
 import { JsonLd } from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
+
+type FaqItem = { question: string; answer: string };
 
 // FAQ as a spec-sheet ledger, matching the standing-commitments motif rather
 // than a generic +/- accordion: a numbered question on the left, its answer set
 // in the right column, ruled rows with the gold-bar hover nudge. Answers are
 // plain text and always present, so the block stays fully crawlable, which is
-// the whole point of an FAQ for AEO.
-export function Faq({ heading = "Questions, answered" }: { heading?: string }) {
+// the whole point of an FAQ for AEO. `items` lets a page pass its own questions
+// (e.g. an offering's FAQs); it defaults to the site-wide set.
+export function Faq({
+  heading = "Questions, answered",
+  items = siteFaqs,
+}: {
+  heading?: string;
+  items?: FaqItem[];
+}) {
+  const faqs = items;
   return (
     <section
       aria-labelledby="faq-heading"

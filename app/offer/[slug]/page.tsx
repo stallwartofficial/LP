@@ -6,7 +6,8 @@ import { blogPosts } from "@/data/blog";
 import { site } from "@/data/site";
 import { JsonLd } from "@/components/JsonLd";
 import { StatusPill } from "@/components/Offerings";
-import { breadcrumbSchema, faqSchema, offeringSchema } from "@/lib/seo";
+import { Faq } from "@/components/Faq";
+import { breadcrumbSchema, offeringSchema } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -48,7 +49,6 @@ export default async function OfferingPage({ params }: Props) {
       <JsonLd
         schema={[
           offeringSchema(offering),
-          ...(offering.faqs.length > 0 ? [faqSchema(offering.faqs)] : []),
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "What We Offer", path: "/offer" },
@@ -108,26 +108,28 @@ export default async function OfferingPage({ params }: Props) {
         </div>
       </header>
 
-      {/* ---- Built for: an editorial line, not a checklist of tiles ---- */}
+      {/* ---- Built for: a spec strip across the width, so it reads as a
+          deliberate set rather than a short hanging list ---- */}
       <section
         aria-labelledby="built-for"
         className="section-y px-[var(--space-gutter)]"
       >
-        <div className="mx-auto max-w-3xl">
-          <p className="eyebrow">Built for</p>
-          <ul
-            aria-labelledby="built-for"
-            className="mt-5 divide-y divide-[var(--hairline)] border-y border-[var(--hairline)]"
-          >
+        <div className="mx-auto max-w-6xl">
+          <p className="eyebrow" id="built-for">
+            Built for
+          </p>
+          <ul className="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
             {offering.builtFor.map((who, i) => (
               <li
                 key={who}
-                className="flex items-baseline gap-4 py-4 text-[length:var(--text-step-1)] text-[var(--fg)]/85"
+                className="border-t border-[var(--hairline)] pt-5"
               >
                 <span className="font-mono text-[10px] tracking-[0.2em] text-[var(--accent-text)]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                {who}
+                <p className="font-display mt-3 text-[length:var(--text-step-1)] leading-snug">
+                  {who}
+                </p>
               </li>
             ))}
           </ul>
@@ -149,9 +151,18 @@ export default async function OfferingPage({ params }: Props) {
               {inDevelopment ? "What it will do" : "How it works"}
             </h2>
 
-            <ol className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2">
+            {/* Steps sit on a continuous rail (border-l with no row gap), each
+                marked by a node, so the sequence reads as a connected flow. */}
+            <ol className="mt-8 grid gap-x-12 sm:grid-cols-2">
               {offering.capabilities.map((c, i) => (
-                <li key={c.title} className="scroll-rise">
+                <li
+                  key={c.title}
+                  className="scroll-rise relative border-l border-[var(--hairline)] py-5 pl-6"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-[-4.5px] top-[1.55rem] h-2 w-2 rounded-full border border-[var(--accent)] bg-[var(--bg)]"
+                  />
                   <div className="flex items-baseline gap-3">
                     <span
                       aria-hidden="true"
@@ -188,12 +199,27 @@ export default async function OfferingPage({ params }: Props) {
             >
               Plugs into what you already use
             </h2>
-            <ul className="mt-8 flex flex-wrap gap-2.5">
+            <p className="mt-4 max-w-2xl text-sm text-[var(--fg)]/60">
+              No rip and replace. It runs on what you already operate.
+            </p>
+            <ul className="mt-6 grid gap-x-12 gap-y-1 sm:grid-cols-2">
               {offering.integrations.map((integration) => (
                 <li
                   key={integration}
-                  className="rounded-full border border-[var(--hairline-strong)] px-4 py-2 text-sm text-[var(--fg)]/75 transition-colors hover:border-[var(--accent)]"
+                  className="row-nudge flex items-baseline gap-3 border-b border-[var(--hairline)] py-3.5 text-sm text-[var(--fg)]/85"
                 >
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--accent-text)]"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
                   {integration}
                 </li>
               ))}
@@ -202,42 +228,9 @@ export default async function OfferingPage({ params }: Props) {
         </section>
       )}
 
-      {/* ---- FAQ (AEO surface) ---- */}
+      {/* ---- FAQ (AEO surface): the shared spec-sheet ledger ---- */}
       {offering.faqs.length > 0 && (
-        <section
-          aria-labelledby="offering-faq"
-          className="section-y rule-t px-[var(--space-gutter)]"
-        >
-          <div className="mx-auto max-w-3xl">
-            <p className="eyebrow">FAQ</p>
-            <h2
-              id="offering-faq"
-              className="font-display mt-3 text-display-sm font-light"
-            >
-              {offering.name}, answered
-            </h2>
-            <dl className="mt-8">
-              {offering.faqs.map((f) => (
-                <div key={f.question} className="rule-t last:rule-b">
-                  <details className="group">
-                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6">
-                      <dt className="font-display text-[length:var(--text-step-1)] transition-colors group-hover:text-[var(--accent-text)]">
-                        {f.question}
-                      </dt>
-                      <span
-                        aria-hidden="true"
-                        className="mt-1 shrink-0 text-[var(--accent-text)] transition-transform duration-500 group-open:rotate-45"
-                      >
-                        +
-                      </span>
-                    </summary>
-                    <dd className="pb-7 text-[var(--fg)]/70">{f.answer}</dd>
-                  </details>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
+        <Faq heading={`${offering.name}, answered`} items={offering.faqs} />
       )}
 
       {/* ---- Related reading ---- */}

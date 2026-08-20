@@ -79,7 +79,7 @@ export const offerings: Offering[] = [
     pricing: "Fixed price per phase, from a paid discovery sprint. Book a call for a scoped quote.",
     tagline: "Your system, engineered from first principles",
     summary:
-      "For problems no product solves. We design and build the system, run it to production, and hand over code you own outright with the documentation to keep it.",
+      "For problems no product solves. Whatever the system is, a SaaS platform, a product, or an internal tool, we build it with AI to the standard the best teams hold, and hand over code you own outright.",
     description:
       "A Stallwart system is whatever the problem needs: a SaaS platform, a customer-facing product, an internal tool. We build it with AI, so it ships faster and holds under real load, engineered to the standard the best teams hold: correct at scale, observable, and yours to own. Most AI work fails at the same point: a promising prototype meets real data, real volume, and real edge cases, and nobody scoped the last 80 percent. We take the problem from first principles instead. That means understanding the workflow before proposing architecture, building against your actual exceptions rather than a clean sample, and treating observability and rollback as part of the build rather than a later phase. You own the code, the infrastructure definitions, and the documentation. No lock in, because a system you cannot maintain without us is not a system we would ship.",
     problem:
