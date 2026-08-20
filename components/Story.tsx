@@ -38,37 +38,36 @@ export function Story() {
         {/* --- Prose: last on mobile, bottom-left on desktop. --- */}
         <div className="order-3 space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85 lg:col-start-1 lg:row-start-2">
             <p className="[&::first-letter]:font-display [&::first-letter]:mr-2 [&::first-letter]:float-left [&::first-letter]:text-[3.75rem] [&::first-letter]:font-light [&::first-letter]:leading-[0.82] [&::first-letter]:text-[var(--accent-text)]">
-              {site.founder.name} has spent {founderYearsWord} years building AI
-              systems for production, not for demos, a distinction the rest of
-              the industry
-              is only now catching up to. He began working with AI ahead of the
-              curve, at a point when most of the market still treated it as an
-              experimental layer rather than infrastructure, and has been
-              building it into revenue-critical systems ever since.
+              {site.founder.name} builds quietly, and then he stands behind what
+              he built. {founderYearsWord.charAt(0).toUpperCase() +
+                founderYearsWord.slice(1)}{" "}
+              years into putting AI into production systems, he has made peace
+              with the unglamorous truth of the work: the demo is the easy part.
+              What matters is the eighty percent nobody applauds, the part that
+              has to be correct at 2am, when the person who wrote it is asleep.
             </p>
 
             <p>
-              His engineering background is in SaaS: systems built for companies
-              where downtime, drift, or an unaccountable model isn&apos;t an
-              inconvenience, it&apos;s a customer relationship at risk. One of
-              the products from that period, a knowledge platform now used inside
-              SaaS teams to organize and surface their own documentation, remains
-              in active production today. Not because it shipped fast. Because it
-              was engineered to still be correct at scale, long after the people
-              who built it had moved on to the next system.
+              He was building with AI before the market took it seriously, when
+              most treated it as an experimental layer rather than
+              infrastructure. His background is in SaaS, where downtime, drift, or
+              an unaccountable model is not an inconvenience but a customer
+              relationship at risk. One platform he built in those years is still
+              in production today, quietly organising the documentation of teams
+              who will never meet him. It did not ship fast. It shipped correct,
+              and it stayed correct, long after the people who built it moved on.
             </p>
 
             <p>
-              That standard is the reason {site.company} exists.{" "}
-              {site.founder.name} founded the company on a direct observation:
-              the AI industry has a confidence problem, not a capability problem.
-              Systems get sold on how convincingly they perform in a controlled
-              demo, and the gap between that performance and real-world
-              reliability becomes someone else&apos;s problem the moment the
-              invoice clears. He built {site.company} to close that gap,
-              engineering AI systems that report their own uncertainty instead of
-              asserting through it, and that are built to be audited, not just
-              believed.
+              {site.company} is the standard he wanted and could not buy. The AI
+              industry, he will tell you plainly, has a confidence problem, not a
+              capability problem: systems get sold on how convincingly they
+              perform in a controlled demo, and the gap between that and
+              real-world reliability becomes the customer&apos;s problem the
+              moment the invoice clears. He built {site.company} to close that
+              gap, engineering AI systems that report their own uncertainty
+              instead of asserting through it, and that are built to be audited,
+              not just believed.
             </p>
 
             <p>
@@ -129,11 +128,12 @@ export function Story() {
               </figcaption>
             </figure>
 
-            {/* The quote, directly below the photo, on the same board. */}
+            {/* A first-person line, directly below the photo, that pairs with
+                the signature: the founder speaking in his own voice. */}
             <blockquote className="mt-5 border-t border-[var(--hairline)] pt-5 font-display text-[length:var(--text-step-1)] font-light italic leading-snug text-[var(--fg)]/85">
-              &ldquo;Building systems with AI that are built beyond the demo:
-              reliable enough to leave alone, honest enough to trust, and
-              scalable enough to still be right at ten times the volume.&rdquo;
+              &ldquo;I build to one standard: reliable, honest, scalable, in that
+              order. If a system needs me to keep it running, I have not finished
+              it.&rdquo;
             </blockquote>
           </div>
         </div>
