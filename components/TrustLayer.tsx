@@ -1,33 +1,32 @@
 import { commitments, engagementTerms } from "@/data/trust";
 
-// "How we operate": the terms of doing business, as an asymmetric bento.
+// "How we operate": the terms of doing business, as a masonry.
 //
-// BENTO (test), true asymmetric. Not a uniform card grid: genuine size variety
-// on a dense-packed 4-column grid. "What you own" is the 2x2 feature; the other
-// terms and the security commitments fill wide and square tiles around it;
-// "When we say no" carries a gold accent. Oversized ghost numbers add texture.
-// Server component, no JS. To revert, restore the previous version from git.
+// Masonry, not a grid. CSS grids leave gaps when tiles have organic sizes;
+// column-flow (CSS multi-column) packs blocks tightly with no vertical gaps and
+// natural, uneven heights, which is the unstructured look we want. Terms and
+// commitments are interleaved and numbered 01 to 08; hovering a tile turns the
+// whole tile gold. Server component, no JS. To revert, restore from git.
 type Tile = {
-  variant: "feature" | "term" | "accent" | "commit";
   kicker: string;
-  num?: string;
+  num: string;
   title: string;
   body: string;
-  span: string;
+  accent?: boolean;
+  feature?: boolean;
 };
 
-// DOM order is chosen so grid-flow-dense packs the tiles into a clean 4x4 on
-// desktop: feature (2x2) + a wide + two squares fill the top two rows, then
-// four wides fill the last two.
+// Interleaved on purpose: terms and commitments alternate rather than sitting in
+// two blocks, so the masonry reads as one mixed wall.
 const tiles: Tile[] = [
-  { variant: "feature", kicker: "Ownership", num: "03", title: engagementTerms[2].question, body: engagementTerms[2].answer, span: "sm:col-span-2 sm:row-span-2 lg:col-span-2 lg:row-span-2" },
-  { variant: "term", kicker: "Cost", num: "01", title: engagementTerms[0].question, body: engagementTerms[0].answer, span: "sm:col-span-2 lg:col-span-2" },
-  { variant: "term", kicker: "Time", num: "02", title: engagementTerms[1].question, body: engagementTerms[1].answer, span: "" },
-  { variant: "accent", kicker: "Candour", num: "04", title: engagementTerms[3].question, body: engagementTerms[3].answer, span: "" },
-  { variant: "commit", kicker: "Commitment", title: commitments[0].title, body: commitments[0].description, span: "" },
-  { variant: "commit", kicker: "Commitment", title: commitments[1].title, body: commitments[1].description, span: "sm:col-span-2 lg:col-span-2" },
-  { variant: "commit", kicker: "Commitment", title: commitments[2].title, body: commitments[2].description, span: "" },
-  { variant: "commit", kicker: "Commitment", title: commitments[3].title, body: commitments[3].description, span: "sm:col-span-2 lg:col-span-4" },
+  { kicker: "Cost", num: "01", title: engagementTerms[0].question, body: engagementTerms[0].answer },
+  { kicker: "Commitment", num: "02", title: commitments[0].title, body: commitments[0].description },
+  { kicker: "Ownership", num: "03", title: engagementTerms[2].question, body: engagementTerms[2].answer, feature: true },
+  { kicker: "Commitment", num: "04", title: commitments[1].title, body: commitments[1].description },
+  { kicker: "Time", num: "05", title: engagementTerms[1].question, body: engagementTerms[1].answer },
+  { kicker: "Commitment", num: "06", title: commitments[2].title, body: commitments[2].description },
+  { kicker: "Candour", num: "07", title: engagementTerms[3].question, body: engagementTerms[3].answer, accent: true },
+  { kicker: "Commitment", num: "08", title: commitments[3].title, body: commitments[3].description },
 ];
 
 export function Commitments() {
@@ -57,83 +56,54 @@ export function Commitments() {
           </p>
         </div>
 
-        <div className="mt-10 grid grid-flow-dense gap-3 sm:grid-cols-2 lg:auto-rows-fr lg:grid-cols-4">
-          {tiles.map((tile) => {
-            const isFeature = tile.variant === "feature";
-            const isAccent = tile.variant === "accent";
-            // The feature pulls its first word out as a large statement so the
-            // 2x2 tile is filled rather than mostly empty.
-            const [lead, ...restParts] = tile.body.split(". ");
-            const featureRest = restParts.join(". ");
-            return (
-              <div
-                key={tile.title}
-                className={`card-lift relative flex flex-col overflow-hidden rounded-2xl border p-5 sm:p-6 ${tile.span} ${
-                  isAccent
-                    ? "border-[var(--accent)]/45 bg-[color-mix(in_oklab,var(--accent)_6%,var(--surface))]"
-                    : isFeature
-                      ? "border-[var(--accent)]/35 bg-[var(--surface)]"
-                      : "border-[var(--hairline)] bg-[var(--surface)]"
-                }`}
-              >
-                {/* Oversized ghost number, texture only. */}
-                {tile.num && (
-                  <span
-                    aria-hidden="true"
-                    className="font-display pointer-events-none absolute -right-2 -top-4 select-none text-[5.5rem] leading-none text-[var(--fg)]/[0.045]"
-                  >
-                    {tile.num}
-                  </span>
-                )}
-
+        {/* Masonry: columns pack top to bottom with no vertical gaps. */}
+        <div className="mt-8 gap-3 [column-fill:balance] sm:columns-2 lg:columns-4">
+          {tiles.map((tile) => (
+            <div
+              key={tile.title}
+              className={`group mb-3 break-inside-avoid rounded-2xl border p-5 transition-colors duration-300 ${
+                tile.accent
+                  ? "border-[var(--accent)]/45 bg-[color-mix(in_oklab,var(--accent)_6%,var(--surface))] hover:border-[var(--accent)]"
+                  : "border-[var(--hairline)] bg-[var(--surface)] hover:border-[var(--accent)]/70"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-2">
                 <span
-                  className={`font-mono relative text-[9px] uppercase tracking-[0.2em] ${
-                    isAccent ? "text-[var(--accent-text)]" : "text-[var(--fg)]/45"
+                  className={`font-mono text-[9px] uppercase tracking-[0.2em] transition-colors ${
+                    tile.accent
+                      ? "text-[var(--accent-text)]"
+                      : "text-[var(--fg)]/45 group-hover:text-[var(--accent-text)]"
                   }`}
                 >
                   {tile.kicker}
                 </span>
-
-                {isAccent ? (
-                  <>
-                    <h3 className="font-display relative mt-3 text-[length:var(--text-step-1)] leading-tight">
-                      When we say{" "}
-                      <span className="text-gold-sheen text-[1.5em] italic">
-                        no
-                      </span>
-                      .
-                    </h3>
-                    <p className="relative mt-2 text-sm leading-relaxed text-[var(--fg)]/75">
-                      {tile.body}
-                    </p>
-                  </>
-                ) : isFeature ? (
-                  // Feature: label, a large statement word, then the detail,
-                  // spread so the 2x2 tile reads full and deliberate.
-                  <>
-                    <h3 className="font-display relative mt-3 text-[length:var(--text-step-1)] font-light leading-tight text-[var(--fg)]/70">
-                      {tile.title}
-                    </h3>
-                    <p className="font-display relative mt-2 text-[clamp(2.5rem,5vw,3.75rem)] font-light italic leading-[0.95]">
-                      {lead}.
-                    </p>
-                    <p className="relative mt-auto pt-6 text-sm leading-relaxed text-[var(--fg)]/70 sm:max-w-md">
-                      {featureRest}
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <h3 className="font-display relative mt-3 text-[length:var(--text-step-1)] leading-tight">
-                      {tile.title}
-                    </h3>
-                    <p className="relative mt-2 text-sm leading-relaxed text-[var(--fg)]/75">
-                      {tile.body}
-                    </p>
-                  </>
-                )}
+                <span className="font-mono text-[10px] tracking-[0.2em] text-[var(--accent-text)]">
+                  {tile.num}
+                </span>
               </div>
-            );
-          })}
+
+              {tile.accent ? (
+                <h3 className="font-display mt-3 text-[length:var(--text-step-1)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
+                  When we say{" "}
+                  <span className="text-gold-sheen text-[1.4em] italic">no</span>.
+                </h3>
+              ) : (
+                <h3
+                  className={`font-display mt-3 leading-tight transition-colors group-hover:text-[var(--accent-text)] ${
+                    tile.feature
+                      ? "text-display-sm font-light"
+                      : "text-[length:var(--text-step-1)]"
+                  }`}
+                >
+                  {tile.title}
+                </h3>
+              )}
+
+              <p className="mt-2 text-sm leading-relaxed text-[var(--fg)]/75 transition-colors group-hover:text-[var(--accent-text)]/90">
+                {tile.body}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
