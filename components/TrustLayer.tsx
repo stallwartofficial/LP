@@ -49,26 +49,26 @@ const tiles: Tile[] = [
     area: "data",
     kicker: "Data",
     title: commitments[0].title,
-    line: "Never sold, never trained on.",
+    line: "Your data is never sold and never trains shared models.",
   },
   {
     area: "reg",
     kicker: "Region",
     title: commitments[3].title,
-    line: "Resident in the region you choose.",
+    line: "Your data stays resident in the region you choose.",
   },
   {
     area: "ovr",
     kicker: "Control",
     title: commitments[2].title,
-    line: "Logged, reversible, and pausable.",
+    line: "Every action is logged and reversible, and any run can be paused.",
   },
   {
     area: "no",
     kicker: "Candour",
     title: "no",
     accent: true,
-    line: "When it is the honest answer.",
+    line: "We say no when off-the-shelf already solves it, or the spend cannot be justified.",
   },
 ];
 
