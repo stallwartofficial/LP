@@ -702,6 +702,24 @@ label[for] {
   cursor: pointer;
 }
 
+/* "How we operate" bento: a designed, gapless tiling. The areas apply at lg;
+   below that the tiles stack in DOM order. Content is sized to each tile (small
+   tiles carry only a label), so nothing stretches empty. */
+.op-bento {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+  .op-bento {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, minmax(8.5rem, 1fr));
+    grid-template-areas:
+      "own own cost time"
+      "own own enc  enc"
+      "data reg reg  no"
+      "data ovr ovr  no";
+  }
+}
+
 /* Form craft: auto-growing textarea, and validation that waits until the user
    has actually finished rather than shouting on first keystroke. */
 textarea { field-sizing: content; }
