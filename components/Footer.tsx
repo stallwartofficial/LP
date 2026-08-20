@@ -110,28 +110,27 @@ export function Footer() {
         </div>
 
         <div className="rule-t mt-14 flex flex-col gap-3 pt-6 text-xs text-[var(--fg)]/65 sm:flex-row sm:items-center sm:justify-between">
-          {/* Year auto-updates; the line stays casual but on-brand ("receipts"
-              nods to auditable, trusted work). */}
-          <p>
-            © {new Date().getFullYear()} {site.company} · Built with resilience,
-            shipped with receipts.
+          {/* Three zones with room to breathe: plain copyright, one personality
+              line (the localhost wink), then the legal links. Year auto-updates. */}
+          <p className="shrink-0">
+            © {new Date().getFullYear()} {site.company}. All rights reserved.
           </p>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <Link
-              href="/privacy"
-              className="link-draw hover:text-[var(--fg)]"
-            >
+          {/* localhost = home. The single wink; real jurisdiction lives on the
+              Privacy page. */}
+          <p
+            title="localhost, naturally"
+            className="order-last text-center text-[var(--fg)]/45 sm:order-none"
+          >
+            127.0.0.1° N · 127.0.0.1° E · Somewhere between the server and the
+            impossible.
+          </p>
+          <div className="flex shrink-0 items-center gap-5">
+            <Link href="/privacy" className="link-draw hover:text-[var(--fg)]">
               Privacy
             </Link>
             <Link href="/terms" className="link-draw hover:text-[var(--fg)]">
               Terms
             </Link>
-            {/* localhost = home. A wink for engineers; real jurisdiction lives
-                on the Privacy page. */}
-            <span title="localhost, naturally">
-              127.0.0.1° N · 127.0.0.1° E · Somewhere between the server and the
-              impossible.
-            </span>
           </div>
         </div>
       </div>
