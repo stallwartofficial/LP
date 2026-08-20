@@ -25,50 +25,50 @@ const tiles: Tile[] = [
     kicker: "Ownership",
     title: engagementTerms[2].question,
     statement: "Everything.",
-    line: "Source, infrastructure as code, runbooks, and documentation. No licences retained, no dependencies on us.",
+    line: "Source, infrastructure as code, runbooks, and documentation. Yours to keep, with no lock-in.",
   },
   {
     area: "cost",
     kicker: "Cost",
     title: engagementTerms[0].question,
-    line: "Fixed price per phase, approved before work starts. Not billed hourly, so the estimate is our risk.",
+    line: "Fixed price per phase, approved up front. Never billed hourly.",
   },
   {
     area: "time",
     kicker: "Time",
     title: engagementTerms[1].question,
-    line: "Scoping and design run in weeks, not months, with a build date committed at the end.",
+    line: "Weeks, not months, with a committed build date.",
+  },
+  {
+    area: "enc",
+    kicker: "Security",
+    title: commitments[1].title,
+    line: "TLS 1.2 or higher in transit, AES-256 at rest. Keys stay server side.",
+  },
+  {
+    area: "data",
+    kicker: "Data",
+    title: commitments[0].title,
+    line: "Never sold, never trained on.",
+  },
+  {
+    area: "reg",
+    kicker: "Region",
+    title: commitments[3].title,
+    line: "Resident in the region you choose.",
+  },
+  {
+    area: "ovr",
+    kicker: "Control",
+    title: commitments[2].title,
+    line: "Logged, reversible, and pausable.",
   },
   {
     area: "no",
     kicker: "Candour",
     title: "no",
     accent: true,
-    line: engagementTerms[3].answer,
-  },
-  {
-    area: "data",
-    kicker: "Data",
-    title: commitments[0].title,
-    line: commitments[0].description,
-  },
-  {
-    area: "enc",
-    kicker: "Security",
-    title: commitments[1].title,
-    line: "TLS 1.2 or higher in transit, AES-256 at rest. Keys stay server side and are never shipped to the browser.",
-  },
-  {
-    area: "ovr",
-    kicker: "Control",
-    title: commitments[2].title,
-    line: "Every automated action is logged and reversible. Any running system can be paused or overridden by your team, and the audit trail exports on request.",
-  },
-  {
-    area: "reg",
-    kicker: "Region",
-    title: commitments[3].title,
-    line: "Data resident in the region you choose, with processing kept to the jurisdictions you approve. A sub-processor list on request.",
+    line: "When it is the honest answer.",
   },
 ];
 
@@ -128,7 +128,7 @@ export function Commitments() {
                 )}
 
                 {isFeature && (
-                  <p className="font-display mt-2 text-[clamp(2rem,4vw,3rem)] italic leading-[0.95]">
+                  <p className="font-display mt-1 text-[clamp(1.75rem,2.6vw,2.4rem)] italic leading-[0.95]">
                     {tile.statement}
                   </p>
                 )}
@@ -136,7 +136,7 @@ export function Commitments() {
                 {tile.line && (
                   <p
                     className={`text-sm leading-relaxed text-[var(--fg)]/70 ${
-                      isFeature ? "mt-auto pt-5 sm:max-w-sm" : "mt-3"
+                      isFeature ? "mt-3 sm:max-w-sm" : "mt-3"
                     }`}
                   >
                     {tile.line}

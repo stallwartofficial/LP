@@ -711,12 +711,11 @@ label[for] {
 @media (min-width: 1024px) {
   .op-bento {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, minmax(8.5rem, 1fr));
+    grid-template-rows: repeat(3, minmax(6rem, auto));
     grid-template-areas:
       "own own cost time"
       "own own enc  enc"
-      "data reg reg  no"
-      "data ovr ovr  no";
+      "data reg  ovr  no";
   }
 }
 
