@@ -99,26 +99,33 @@ export function Story() {
                 <span className="font-mono mt-0.5 block text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
                   {site.founder.role}
                 </span>
-                <span className="mt-2 block text-xs leading-snug text-[var(--fg)]/70">
+                <span className="mt-2.5 block text-sm leading-relaxed text-[var(--fg)]/75">
                   {site.founder.credential}
                 </span>
-                {/* Arun's signature, as a theme-coloured mask so the white-ink
-                    source reads in both light and dark. Decorative: the name
-                    above is the real, accessible identifier. */}
-                <span
-                  aria-hidden="true"
-                  className="mt-3 ml-auto block h-[64px] w-[86px] bg-[var(--fg)]/80"
-                  style={{
-                    maskImage: "url(/images/arun-signature.png)",
-                    WebkitMaskImage: "url(/images/arun-signature.png)",
-                    maskRepeat: "no-repeat",
-                    WebkitMaskRepeat: "no-repeat",
-                    maskSize: "contain",
-                    WebkitMaskSize: "contain",
-                    maskPosition: "right",
-                    WebkitMaskPosition: "right",
-                  }}
-                />
+                {/* Signed sign-off: a labelled row on a hairline, so the
+                    signature reads as an intentional autograph rather than a
+                    floating graphic. Theme-coloured mask so the white-ink source
+                    shows in both modes; the printed name above stays the
+                    accessible identifier. */}
+                <span className="mt-4 flex items-end justify-between gap-3 border-t border-[var(--hairline)] pt-3.5">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--fg)]/45">
+                    Signed
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="block h-[76px] w-[112px] bg-[var(--fg)]/85"
+                    style={{
+                      maskImage: "url(/images/arun-signature.png)",
+                      WebkitMaskImage: "url(/images/arun-signature.png)",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskRepeat: "no-repeat",
+                      maskSize: "contain",
+                      WebkitMaskSize: "contain",
+                      maskPosition: "right bottom",
+                      WebkitMaskPosition: "right bottom",
+                    }}
+                  />
+                </span>
               </figcaption>
             </figure>
 

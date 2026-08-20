@@ -34,7 +34,7 @@ export const commitments: Commitment[] = [
   {
     title: "Regional data handling",
     description:
-      "Data resident in the region you choose across our US and UAE operations. A current sub-processor list is available on request.",
+      "Data resident in the region you choose, with processing kept to the jurisdictions you approve. A current sub-processor list is available on request.",
   },
 ];
 
