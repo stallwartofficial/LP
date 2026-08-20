@@ -99,7 +99,7 @@ export function Commitments() {
           </p>
         </div>
 
-        <div className="op-bento mt-8 grid gap-3">
+        <div className="op-bento mt-8 flex flex-col gap-3 lg:grid">
           {tiles.map((tile) => {
             const isFeature = Boolean(tile.statement);
             return (
