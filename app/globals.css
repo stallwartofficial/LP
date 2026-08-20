@@ -693,6 +693,15 @@ blockquote { hanging-punctuation: first; }
 }
 html { scrollbar-color: color-mix(in oklab, var(--accent) 55%, transparent) var(--surface); }
 
+/* Buttons default to the arrow cursor (unlike links); make every interactive
+   control show the pointer on hover. */
+button:not(:disabled),
+[role="button"],
+summary,
+label[for] {
+  cursor: pointer;
+}
+
 /* Form craft: auto-growing textarea, and validation that waits until the user
    has actually finished rather than shouting on first keystroke. */
 textarea { field-sizing: content; }
