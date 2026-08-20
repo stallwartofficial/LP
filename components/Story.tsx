@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { site } from "@/data/site";
+import { site, founderYearsWord } from "@/data/site";
 
 // The company's story, as two fixed columns.
 //
@@ -38,8 +38,9 @@ export function Story() {
         {/* --- Prose: last on mobile, bottom-left on desktop. --- */}
         <div className="order-3 space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85 lg:col-start-1 lg:row-start-2">
             <p className="[&::first-letter]:font-display [&::first-letter]:mr-2 [&::first-letter]:float-left [&::first-letter]:text-[3.75rem] [&::first-letter]:font-light [&::first-letter]:leading-[0.82] [&::first-letter]:text-[var(--accent-text)]">
-              {site.founder.name} has spent five years building AI systems for
-              production, not for demos, a distinction the rest of the industry
+              {site.founder.name} has spent {founderYearsWord} years building AI
+              systems for production, not for demos, a distinction the rest of
+              the industry
               is only now catching up to. He began working with AI ahead of the
               curve, at a point when most of the market still treated it as an
               experimental layer rather than infrastructure, and has been
@@ -85,7 +86,7 @@ export function Story() {
               <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
                 <Image
                   src="/images/founder.jpg"
-                  alt={`${site.founder.name}, ${site.founder.role} of ${site.company}`}
+                  alt={`${site.founder.fullName}, ${site.founder.role} of ${site.company}`}
                   fill
                   sizes="(min-width: 1024px) 24rem, 80vw"
                   className="object-cover object-top"
@@ -93,7 +94,7 @@ export function Story() {
               </div>
               <figcaption className="mt-3 px-1 pb-1">
                 <span className="font-display block text-[length:var(--text-step-1)] italic">
-                  {site.founder.name}
+                  {site.founder.fullName}
                 </span>
                 <span className="font-mono mt-0.5 block text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
                   {site.founder.role}

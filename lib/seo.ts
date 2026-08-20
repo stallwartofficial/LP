@@ -30,7 +30,7 @@ export function organizationSchema() {
     telephone: site.contact.phone,
     areaServed: site.areaServed,
     sameAs: [site.social.linkedin, site.social.twitter],
-    founder: { "@type": "Person", name: site.founder.name },
+    founder: { "@type": "Person", name: site.founder.fullName },
     knowsAbout: [
       "AI systems engineering",
       "Sales pipeline automation",

@@ -27,7 +27,7 @@ export function Footer() {
               {site.companyDescriptor}.
             </p>
             <p className="mt-4 text-sm font-medium text-[var(--accent-text)]">
-              {site.tagline}
+              {site.hero.tagline}
             </p>
 
             {/* End-of-page action: footers are a real conversion catch-point. */}
@@ -110,8 +110,11 @@ export function Footer() {
         </div>
 
         <div className="rule-t mt-14 flex flex-col gap-3 pt-6 text-xs text-[var(--fg)]/65 sm:flex-row sm:items-center sm:justify-between">
+          {/* Year auto-updates; the line stays casual but on-brand ("receipts"
+              nods to auditable, trusted work). */}
           <p>
-            © {new Date().getFullYear()} {site.company}. All rights reserved.
+            © {new Date().getFullYear()} {site.company} · Built with resilience,
+            shipped with receipts.
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link
@@ -123,7 +126,12 @@ export function Footer() {
             <Link href="/terms" className="link-draw hover:text-[var(--fg)]">
               Terms
             </Link>
-            <span>{site.areaServed.join(" · ")}</span>
+            {/* localhost = home. A wink for engineers; real jurisdiction lives
+                on the Privacy page. */}
+            <span title="localhost, naturally">
+              127.0.0.1° N · 127.0.0.1° E · Somewhere between the server and the
+              impossible.
+            </span>
           </div>
         </div>
       </div>

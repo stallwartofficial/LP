@@ -34,7 +34,7 @@ export function StoryTeaser() {
               <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
                 <Image
                   src="/images/founder.jpg"
-                  alt={`${site.founder.name}, ${site.founder.role} of ${site.company}`}
+                  alt={`${site.founder.fullName}, ${site.founder.role} of ${site.company}`}
                   fill
                   sizes="(min-width: 1024px) 18rem, (min-width: 640px) 60vw, 90vw"
                   // Lazy: the origin block sits well below the fold on mobile,
@@ -47,7 +47,7 @@ export function StoryTeaser() {
 
               <figcaption className="mt-3 px-1 pb-1">
                 <span className="font-display block text-[length:var(--text-step-1)] italic">
-                  {site.founder.name}
+                  {site.founder.fullName}
                 </span>
                 <span className="font-mono mt-0.5 block text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
                   {site.founder.role}

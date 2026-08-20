@@ -203,6 +203,23 @@ p {
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  /* Dark mode needs its own stops. On dark, both edges use the bright gold and
+     the mid stop was darker, so the sheen inverted and went muddy. Here the mid
+     runs brighter than the edges (with a warm highlight band), so the shine
+     reads on the dark ground the way the deep/bright contrast does on light. */
+  .dark .text-gold-sheen {
+    /* background-image, NOT the `background` shorthand: the shorthand resets
+       background-clip to border-box and the gradient would fill the whole box
+       instead of clipping to the glyphs. */
+    background-image: linear-gradient(
+      100deg,
+      var(--color-gold) 0%,
+      var(--color-gold-bright) 38%,
+      #fbe6bd 52%,
+      var(--color-gold-bright) 66%,
+      var(--color-gold) 100%
+    );
+  }
 }
 
 .rule-t { border-top: 1px solid var(--hairline); }
@@ -267,8 +284,8 @@ p {
 /* Row that indents slightly when hovered, for editorial list links. */
 .row-nudge {
   position: relative;
-  transition: padding-left 0.45s var(--ease-out-expo),
-    background-color 0.35s ease;
+  transition: padding-left 0.5s var(--ease-out-expo),
+    background-color 0.5s var(--ease-out-expo);
 }
 /* A left accent bar wipes in, so the hover reads even where a faint tint would
    be invisible on the light ground. */
@@ -285,22 +302,26 @@ p {
   transition: transform 0.4s var(--ease-out-expo);
 }
 .row-nudge:hover {
-  padding-left: 1rem;
-  background-color: color-mix(in oklab, var(--accent) 9%, transparent);
+  padding-left: 0.7rem;
+  background-color: color-mix(in oklab, var(--accent) 6%, transparent);
 }
 .row-nudge:hover::before { transform: scaleY(1); }
 
-/* Card that lifts a hair on hover. Transform only, so it never reflows. */
+/* Card that lifts a hair on hover. Transform + shadow only, so it never
+   reflows. All three properties share one easing so the lift, the border, and
+   the shadow move together instead of the shadow snapping in. */
 .card-lift {
-  transition: transform 0.5s var(--ease-out-expo),
-    border-color 0.4s ease, background-color 0.4s ease;
+  transition: transform 0.45s var(--ease-out-expo),
+    border-color 0.45s var(--ease-out-expo),
+    box-shadow 0.45s var(--ease-out-expo);
+  will-change: transform;
 }
 .card-lift:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: color-mix(in oklab, var(--accent) 55%, transparent);
   /* A soft shadow so the lift is legible on a flat light card, not only in
      dark where the border already reads. */
-  box-shadow: 0 14px 30px -18px color-mix(in oklab, var(--fg) 45%, transparent);
+  box-shadow: 0 18px 40px -20px color-mix(in oklab, var(--fg) 48%, transparent);
 }
 
 /* ===================  SCROLL DRIVEN ANIMATION (no JS)  =================== */
@@ -677,6 +698,13 @@ html { scrollbar-color: color-mix(in oklab, var(--accent) 55%, transparent) var(
 textarea { field-sizing: content; }
 .field:user-invalid {
   border-color: color-mix(in oklab, #c2410c 60%, transparent);
+}
+/* Native <select> dropdown options render with the OS default (white) unless
+   coloured explicitly, which was invisible text in dark mode. Paint them from
+   the theme tokens so the popup matches the site in both modes. */
+.field option {
+  background-color: var(--surface);
+  color: var(--fg);
 }
 
 /* ==========================================================================

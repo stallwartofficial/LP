@@ -14,10 +14,10 @@ import { commitments, engagementTerms } from "@/data/trust";
 // HTML. Reads as a document rather than as marketing, which is the right
 // register for terms.
 const NOTE_STYLES = [
-  { "--note-rot": "-1.1deg", "--tape-rot": "2deg" },
-  { "--note-rot": "0.8deg", "--tape-rot": "-1.6deg" },
-  { "--note-rot": "-0.6deg", "--tape-rot": "1.3deg" },
-  { "--note-rot": "1deg", "--tape-rot": "-1.1deg" },
+  { "--note-rot": "-1.9deg", "--tape-rot": "2deg" },
+  { "--note-rot": "1.5deg", "--tape-rot": "-1.6deg" },
+  { "--note-rot": "-1.3deg", "--tape-rot": "1.3deg" },
+  { "--note-rot": "1.8deg", "--tape-rot": "-1.1deg" },
 ] as const;
 
 export function Commitments() {

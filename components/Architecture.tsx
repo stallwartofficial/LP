@@ -56,7 +56,9 @@ export function Architecture() {
                   </span>
                 </span>
 
-                {/* Which strata this system runs through. */}
+                {/* Which strata this system runs through. Gold = used, grey =
+                    not. The layer names are labelled in the engineering core
+                    below, so the dashes read as a meter without repeating them. */}
                 <span className="mt-2.5 flex flex-wrap gap-1">
                   {architecture.layers.map((layer) => {
                     const uses = offering.layers.includes(layer.name);

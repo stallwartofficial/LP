@@ -1,3 +1,15 @@
+// Founder tenure, derived so the copy never goes stale. Recomputed at build
+// time; the site redeploys well within a year, so "N years" stays current
+// without anyone editing the string. Start year 2021 (about five years in 2026).
+const FOUNDER_SINCE = 2021;
+const YEAR_WORDS = [
+  "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+  "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+];
+const founderYears = new Date().getFullYear() - FOUNDER_SINCE;
+export const founderYearsWord =
+  YEAR_WORDS[founderYears] ?? String(founderYears);
+
 export const site = {
   // STALLWART IS THE SUBJECT OF THIS SITE.
   //
@@ -53,7 +65,7 @@ export const site = {
      * punctuation rule above.
      */
     subhead: [
-      "AI systems engineered to run unattended, audited, and trusted: production grade automation and custom software for problems no product solves, taken from first principles to production and built for reliability, security, and scale.",
+      "Production grade automation and custom software for the problems no product solves, taken from first principles to production and engineered to run unattended, audited, and trusted at scale.",
     ],
     primaryCta: { label: "Book a Call", href: "/contact" },
     secondaryCta: { label: "See What We Build", href: "/offer" },
@@ -64,18 +76,20 @@ export const site = {
    * The founder origin, told in third person. Attributed by name and role only:
    * no quoted words are put in a real person's mouth.
    *
-   * TODO(owner): if you want a signed pull quote from Nuras, send the wording
+   * TODO(owner): if you want a signed pull quote from Arun, send the wording
    * and it goes in the Story page beside this narrative.
    */
   founder: {
-    name: "Nuras",
+    // First name for the narrative and captions; full name for formal spots
+    // (photo credit, image alt, structured-data author).
+    name: "Arun",
+    fullName: "Arun Saravanan",
     role: "Founder",
     conviction:
       "Reliable, honest, and scalable. In that order, and without exception.",
     // Competence anchor. Kept factual and modest; expand only with verifiable
     // detail the founder approves.
-    credential:
-      "A software engineer with roughly five years building production systems, and building with AI since well before it was the default.",
+    credential: `A software engineer with roughly ${founderYearsWord} years building production systems, and building with AI since well before it was the default.`,
   },
 
   /**

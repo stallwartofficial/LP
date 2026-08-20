@@ -66,7 +66,7 @@ export const engagementTerms = [
       "Everything. Source, infrastructure as code, runbooks, documentation. We do not retain licences to work you paid for, and we do not build in dependencies on us.",
   },
   {
-    question: "When we say no",
+    question: "When we say NO",
     answer:
       "When off the shelf software already solves it, when the data to make it work does not exist yet, or when the spend cannot be justified. We would rather lose the engagement than ship something you regret.",
   },
