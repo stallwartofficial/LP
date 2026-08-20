@@ -19,7 +19,7 @@ export function InsightsTeaser() {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <p className="eyebrow">Insights</p>
+            <p className="eyebrow">Case studies</p>
             <h2
               id="insights-teaser-heading"
               className="font-display mt-4 text-display-sm font-light"
