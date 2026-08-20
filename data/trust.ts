@@ -63,7 +63,7 @@ export const engagementTerms = [
   {
     question: "What you own",
     answer:
-      "Everything. Source, infrastructure as code, runbooks, documentation. We do not retain licences to work you paid for, and we do not build in dependencies on us.",
+      "Everything. Source, infrastructure as code, runbooks, documentation. We do not retain licenses to work you paid for, and we do not build in dependencies on us.",
   },
   {
     question: "When we say NO",

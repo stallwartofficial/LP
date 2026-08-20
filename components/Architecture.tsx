@@ -10,7 +10,7 @@ import { offerings } from "@/data/offerings";
 // depends on is stated on the system.
 //
 // Engineering line work only: hairlines, small nodes, monospace labels. Server
-// component, no JavaScript. The single travelling signal is CSS that stops under
+// component, no JavaScript. The single traveling signal is CSS that stops under
 // reduced motion.
 export function Architecture() {
   const { architecture } = site;
@@ -56,7 +56,7 @@ export function Architecture() {
                   </span>
                 </span>
 
-                {/* Which strata this system runs through. Gold = used, grey =
+                {/* Which strata this system runs through. Gold = used, gray =
                     not. The layer names are labelled in the engineering core
                     below, so the dashes read as a meter without repeating them. */}
                 <span className="mt-2.5 flex flex-wrap gap-1">

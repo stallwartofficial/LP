@@ -14,7 +14,7 @@ import type { ReactNode } from "react";
 //   RevealOnLoad  uses `enter-rise`, a @starting-style transition that plays once
 //                 on first paint.
 //
-// Both degrade to visible content where unsupported, and both are cancelled
+// Both degrade to visible content where unsupported, and both are canceled
 // under prefers-reduced-motion (see globals.css), so nothing can be left stuck
 // at opacity 0.
 //

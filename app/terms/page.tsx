@@ -5,10 +5,10 @@ import { site } from "@/data/site";
 // Terms of service.
 //
 // TEMPLATE, NOT LEGAL ADVICE. Plain-language starting point for an informational
-// marketing site. Governing law is stated as India, with US operations noted;
+// marketing site. Governing law is stated as Delaware, USA (the primary market);
 // engagements are governed by separate signed agreements, not this page. Have
 // counsel review before relying on it, and update "Last updated" on any change.
-const LAST_UPDATED = "19 August 2026";
+const LAST_UPDATED = "August 19, 2026";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -44,7 +44,7 @@ export default function TermsPage() {
             <p className="mt-4">
               You may view and use the site for lawful, informational purposes.
               You agree not to misuse it, interfere with its operation, attempt to
-              access it by unauthorised means, or use it to infringe the rights of
+              access it by unauthorized means, or use it to infringe the rights of
               others.
             </p>
           </section>
@@ -102,8 +102,8 @@ export default function TermsPage() {
               Governing law and changes
             </h2>
             <p className="mt-4">
-              These terms are governed by the laws of India, without regard to
-              conflict-of-law rules; we also operate in the United States. We may
+              These terms are governed by the laws of the State of Delaware,
+              United States, without regard to conflict-of-law rules. We may
               update these terms, and material changes will be reflected in the
               date above.
             </p>

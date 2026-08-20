@@ -176,7 +176,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "Why response time behaves like a filter, not a KPI",
         paragraphs: [
-          "Improving your demo to close rate optimises the deals you are already in. Improving response time changes how many deals you are in at all. One is an efficiency gain. The other changes the size of the board.",
+          "Improving your demo to close rate optimizes the deals you are already in. Improving response time changes how many deals you are in at all. One is an efficiency gain. The other changes the size of the board.",
           "That is why teams with strong close rates and weak response times often read as having a lead quality problem. The pipeline looks thin at the top, so the instinct is to buy more leads. The leads were never the constraint.",
         ],
       },
@@ -250,7 +250,7 @@ export const blogPosts: BlogPost[] = [
         heading: "What the system does instead",
         paragraphs: [
           "Extrovert AI collapses every inbound channel into one pipeline at the point of capture, so no source keeps a private backlog nobody is watching.",
-          "Each lead is scored on observed behaviour: trial activity depth, reply patterns, source quality, and firmographic fit. Not on static point values that stop describing the market within a quarter.",
+          "Each lead is scored on observed behavior: trial activity depth, reply patterns, source quality, and firmographic fit. Not on static point values that stop describing the market within a quarter.",
           "Follow up then fires on the cadence that score justifies. High intent trials are contacted while the product is still open in another tab. Low intent downloads enter nurture instead of consuming a rep's afternoon.",
         ],
       },
@@ -312,8 +312,8 @@ export const blogPosts: BlogPost[] = [
     ],
     outcomes: [
       "Business development stops being cyclical. Outreach continues at the same cadence during delivery peaks as during quiet periods.",
-      "Referrals are tracked as pipeline rather than as favours in an inbox, so the highest converting channel finally receives systematic follow up.",
-      "Re engagement turns a dormant back catalogue of past conversations into a renewable pipeline source without new headcount.",
+      "Referrals are tracked as pipeline rather than as favors in an inbox, so the highest converting channel finally receives systematic follow up.",
+      "Re engagement turns a dormant back catalog of past conversations into a renewable pipeline source without new headcount.",
     ],
     metrics: [],
     qa: [

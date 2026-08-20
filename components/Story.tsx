@@ -53,7 +53,7 @@ export function Story() {
               infrastructure. His background is in SaaS, where downtime, drift, or
               an unaccountable model is not an inconvenience but a customer
               relationship at risk. One platform he built in those years is still
-              in production today, quietly organising the documentation of teams
+              in production today, quietly organizing the documentation of teams
               who will never meet him. It did not ship fast. It shipped correct,
               and it stayed correct, long after the people who built it moved on.
             </p>
@@ -103,7 +103,7 @@ export function Story() {
                 </span>
                 {/* Signed sign-off: a labelled row on a hairline, so the
                     signature reads as an intentional autograph rather than a
-                    floating graphic. Theme-coloured mask so the white-ink source
+                    floating graphic. Theme-colored mask so the white-ink source
                     shows in both modes; the printed name above stays the
                     accessible identifier. */}
                 <span className="mt-4 flex items-end justify-between gap-3 border-t border-[var(--hairline)] pt-3.5">
@@ -135,6 +135,24 @@ export function Story() {
               order. If a system needs me to keep it running, I have not finished
               it.&rdquo;
             </blockquote>
+
+            {/* A warm, verifiable touch: reach the founder personally. */}
+            <a
+              href="https://www.linkedin.com/in/nuras/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-draw mt-5 inline-flex items-center gap-2 text-sm font-medium text-[var(--accent-text)]"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-4 w-4"
+              >
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+              </svg>
+              Reach {site.founder.name} on LinkedIn
+            </a>
           </div>
         </div>
       </div>

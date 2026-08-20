@@ -6,10 +6,11 @@ import { site } from "@/data/site";
 //
 // TEMPLATE, NOT LEGAL ADVICE. This is a plain-language starting point derived
 // from what the site actually does (a contact form posting to a webhook, a
-// theme preference in localStorage, standard server logs). Governing context is
-// India (DPDP Act) with US operations. Have counsel review before relying on it,
-// and update the "Last updated" date whenever the substance changes.
-const LAST_UPDATED = "19 August 2026";
+// theme preference in localStorage, standard server logs). Covers India (DPDP
+// Act), the US, and EEA/UK visitors (GDPR: legal bases, cookies, transfers,
+// rights). Have counsel review before relying on it, and update the "Last
+// updated" date whenever the substance changes.
+const LAST_UPDATED = "August 19, 2026";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -75,10 +76,23 @@ export default function PrivacyPage() {
               How we use it
             </h2>
             <p className="mt-4">
-              To respond to your enquiry, to provide and secure the site, and to
-              keep records of our correspondence. We rely on your consent and our
-              legitimate interest in operating the business as the bases for this
-              processing.
+              To respond to your inquiry, to provide and secure the site, and to
+              keep records of our correspondence. For visitors in the EEA or UK,
+              our legal bases under the GDPR are your consent, which you may
+              withdraw at any time, and our legitimate interest in operating and
+              securing the business.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-display-sm font-light text-[var(--fg)]">
+              Cookies
+            </h2>
+            <p className="mt-4">
+              We use no advertising or third-party analytics cookies. The only
+              client-side storage is your light or dark theme preference, kept in
+              your browser and never sent to us, so no cookie-consent banner is
+              required.
             </p>
           </section>
 
@@ -100,10 +114,11 @@ export default function PrivacyPage() {
               Retention and international transfers
             </h2>
             <p className="mt-4">
-              We keep enquiry data only as long as needed for the purpose above or
+              We keep inquiry data only as long as needed for the purpose above or
               as the law requires, then delete it. We operate across India and the
-              United States, so your data may be processed in either location,
-              with appropriate safeguards.
+              United States, so your data may be processed in either location.
+              Where data is transferred out of the EEA or UK, we rely on Standard
+              Contractual Clauses or another lawful transfer mechanism.
             </p>
           </section>
 
@@ -114,7 +129,10 @@ export default function PrivacyPage() {
             <p className="mt-4">
               Subject to applicable law, you may request access to, correction of,
               or deletion of your personal data, and you may withdraw consent at
-              any time. To exercise a right, email{" "}
+              any time. If you are in the EEA or UK, you also have the right to
+              restrict or object to processing, to data portability, and to lodge
+              a complaint with your local supervisory authority. To exercise a
+              right, email{" "}
               <a
                 href={`mailto:${site.contact.email}`}
                 className="link-draw text-[var(--accent-text)]"
@@ -130,7 +148,7 @@ export default function PrivacyPage() {
               Security and changes
             </h2>
             <p className="mt-4">
-              We use reasonable technical and organisational measures to protect
+              We use reasonable technical and organizational measures to protect
               personal data. No method of transmission is perfectly secure. We may
               update this policy; material changes will be reflected in the date
               above.

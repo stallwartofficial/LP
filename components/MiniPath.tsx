@@ -1,10 +1,10 @@
 import type { Offering } from "@/data/offerings";
 
-// A compressed signal path for the portfolio cards: entry, the judgement stage,
+// A compressed signal path for the portfolio cards: entry, the judgment stage,
 // and the terminal state. Three nodes.
 //
 // ALIGNMENT FIX. The nodes previously lived in three 33%-wide flex cells, so
-// their centres sat at 0 / 33 / 66 percent, while the travelling ball stops at
+// their centres sat at 0 / 33 / 66 percent, while the traveling ball stops at
 // 0 / 50 / 100 percent (see globals.css trace-step). The ball never landed on a
 // node. Now the nodes are absolutely positioned at 0 / 50 / 100 with the same
 // -50% shift as the ball, so the ball pauses exactly on each node. The brighten
@@ -39,11 +39,11 @@ export function MiniPath({ offering }: { offering: Offering }) {
           />
         ))}
 
-        {/* The travelling signal. Dwells on each node via trace-step. */}
+        {/* The traveling signal. Dwells on each node via trace-step. */}
         <span className="trace-step absolute top-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]" />
       </div>
 
-      {/* Labels under the nodes: left / centre / right so they track 0/50/100. */}
+      {/* Labels under the nodes: left / center / right so they track 0/50/100. */}
       <div className="mt-2.5 hidden grid-cols-3 [@container(min-width:13rem)]:grid">
         {points.map((point, i) => (
           <span

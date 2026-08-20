@@ -52,7 +52,7 @@ export type Offering = {
    *
    * `kind` drives the node treatment:
    *   input   entry point, hairline only
-   *   model   where a judgement is made, gold ring
+   *   model   where a judgment is made, gold ring
    *   action  something happens in the world, gold ring
    *   output  terminal state, filled
    * `branch` is the escape hatch off a given stage: every honest system has
@@ -113,7 +113,7 @@ export const offerings: Offering[] = [
     builtFor: [
       "CTOs and heads of engineering with a build decision",
       "Teams whose prototype stalled before production",
-      "Organisations that need to own the system outright",
+      "Organizations that need to own the system outright",
     ],
     faqs: [
       {
@@ -129,7 +129,7 @@ export const offerings: Offering[] = [
       {
         question: "Who owns the code and the IP?",
         answer:
-          "You do, outright. Source, infrastructure definitions, and documentation are yours. We do not retain licences to work you paid for and we do not build in dependencies on us.",
+          "You do, outright. Source, infrastructure definitions, and documentation are yours. We do not retain licenses to work you paid for and we do not build in dependencies on us.",
       },
       {
         question: "What technologies do you build on?",
@@ -192,7 +192,7 @@ export const offerings: Offering[] = [
         eyebrow: "Score",
         title: "Ranked on intent, not opinion",
         description:
-          "Leads are ranked on observed behaviour: engagement depth, reply patterns, source quality, and fit. Not on static point values that stop describing your market within a quarter.",
+          "Leads are ranked on observed behavior: engagement depth, reply patterns, source quality, and fit. Not on static point values that stop describing your market within a quarter.",
       },
       {
         eyebrow: "Follow up",
@@ -204,7 +204,7 @@ export const offerings: Offering[] = [
         eyebrow: "Reopen",
         title: "Dormant pipeline, worked continuously",
         description:
-          "Cold leads are re approached with context aware messaging on their timeline rather than yours, turning a dormant back catalogue into a renewable source of pipeline.",
+          "Cold leads are re approached with context aware messaging on their timeline rather than yours, turning a dormant back catalog into a renewable source of pipeline.",
       },
     ],
     builtFor: [
@@ -226,7 +226,7 @@ export const offerings: Offering[] = [
       {
         question: "What does the lead scoring actually use?",
         answer:
-          "Observed buying signals: engagement behaviour, reply patterns, source quality, and firmographic fit. Not manually assigned point values, which go stale as soon as your market shifts.",
+          "Observed buying signals: engagement behavior, reply patterns, source quality, and firmographic fit. Not manually assigned point values, which go stale as soon as your market shifts.",
       },
       {
         question: "Do we need a sales ops person to run it?",
@@ -268,9 +268,9 @@ export const offerings: Offering[] = [
     pricing: "In development. Design-partner pricing for early teams.",
     tagline: "The AI governance platform for teams who will be audited",
     summary:
-      "A governance function for organisations putting AI into real decisions. Inventory what is running, document how it decides, and hold evidence ready before anyone asks for it.",
+      "A governance function for organizations putting AI into real decisions. Inventory what is running, document how it decides, and hold evidence ready before anyone asks for it.",
     description:
-      "Sillage is the governance layer most organisations skipped: models reached production faster than the ability to account for them. It stands up a live register of every AI system in use, a written basis for how each one decides, runtime controls on the decisions they may make, and a continuously assembled evidence trail. It is built to map cleanly onto the frameworks an audit will invoke, including SOC 2 and ISO/IEC 42001, so readiness is a standing state rather than a scramble.",
+      "Sillage is the governance layer most organizations skipped: models reached production faster than the ability to account for them. It stands up a live register of every AI system in use, a written basis for how each one decides, runtime controls on the decisions they may make, and a continuously assembled evidence trail. It is built to map cleanly onto the frameworks an audit will invoke, including SOC 2 and ISO/IEC 42001, so readiness is a standing state rather than a scramble.",
     problem:
       "The exposure is not that AI makes mistakes. It is that when a regulator, customer, or board member asks how a decision was reached, nobody can answer, and the absence of an answer is the finding.",
     capabilities: [
@@ -278,7 +278,7 @@ export const offerings: Offering[] = [
         eyebrow: "Inventory",
         title: "Know what is actually running",
         description:
-          "A live register of every AI system in the organisation, what data each touches, which decisions it influences, and who owns it. Most governance failures start as a system nobody knew was in production.",
+          "A live register of every AI system in the organization, what data each touches, which decisions it influences, and who owns it. Most governance failures start as a system nobody knew was in production.",
       },
       {
         eyebrow: "Document",
@@ -318,7 +318,7 @@ export const offerings: Offering[] = [
       {
         question: "Do you replace our legal or risk team?",
         answer:
-          "No. This service gives them the technical substrate they are currently missing: an accurate register of what is running and how it decides. Legal judgement stays with your counsel.",
+          "No. This service gives them the technical substrate they are currently missing: an accurate register of what is running and how it decides. Legal judgment stays with your counsel.",
       },
     ],
     integrations: [],

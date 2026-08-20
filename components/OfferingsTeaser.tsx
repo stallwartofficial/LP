@@ -27,7 +27,7 @@ export function OfferingsTeaser() {
               id="offerings-teaser-heading"
               className="font-display mt-3 text-display-sm font-light"
             >
-              {offerings.length} offerings. One engine.
+              {offerings.length} offerings. One standard.
             </h2>
           </div>
 
@@ -47,7 +47,7 @@ export function OfferingsTeaser() {
                 className="card-lift enter-rise group flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5"
                 style={
                   {
-                    // Stagger entry and the travelling signal so four cards read
+                    // Stagger entry and the traveling signal so four cards read
                     // as four systems rather than one synchronised block.
                     transitionDelay: `${i * 70}ms`,
                     "--trace-delay": `${i * 0.45}s`,

@@ -15,27 +15,22 @@ export const faqs: Faq[] = [
   {
     question: "What does Stallwart do?",
     answer:
-      "Stallwart builds AI systems that take operational work off a team permanently. The portfolio spans sales infrastructure, editorial production, and AI governance, each offering engineered to run on its own rather than to be operated by hand.",
+      "Stallwart builds AI systems that take operational work off a team permanently. The portfolio spans custom AI engineering, sales infrastructure, and AI governance, each offering engineered to run on its own rather than to be operated by hand.",
   },
   {
     question: "Is Stallwart a product company or a services company?",
     answer:
-      "Both, deliberately. Extrovert AI is a product you run. AI Editing and the AI Compliance Office are services that operate as a function inside your business. What they share is the same standard: the system carries the work, not the customer.",
+      "Both, deliberately. Extrovert AI is a product you run. Custom AI Engineering and Sillage are engineered to operate as a function inside your business. What they share is the same standard: the system carries the work, not the customer.",
   },
   {
     question: "Who does Stallwart build for?",
     answer:
-      "B2B organisations, from small teams that need leverage without new headcount up to enterprises that need consistency across large operations.",
+      "B2B organizations, from small teams that need leverage without new headcount up to enterprises that need consistency across large operations.",
   },
   {
     question: "What is Extrovert AI?",
     answer:
       "Extrovert AI is Stallwart's AI-powered CRM, one offering in the portfolio, not the whole company. It runs the full lead lifecycle on autopilot: capturing leads, scoring them by buying signal, following up, and re-engaging cold pipeline.",
-  },
-  {
-    question: "What does \"Built Beyond\" mean?",
-    answer:
-      "It's the standard we hold every system to. Anything can look convincing in a controlled demo. Built Beyond means the system holds up past that point, at real volume, on real edge cases, on the day the process breaks.",
   },
   {
     question: "How do engagements start?",

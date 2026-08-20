@@ -182,7 +182,7 @@ export function Navbar() {
             href="/contact"
             className="group relative hidden overflow-hidden rounded-full bg-[var(--fg)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] sm:inline-flex"
           >
-            {/* Gold wipe on hover, reads as premium without a colour change. */}
+            {/* Gold wipe on hover, reads as premium without a color change. */}
             <span
               aria-hidden="true"
               className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"

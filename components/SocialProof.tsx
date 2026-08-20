@@ -10,7 +10,7 @@ import { getOffering } from "@/data/offerings";
 // the human section its own material without leaving the palette.
 //
 // Restrained on purpose: 0.6 to 1.2 degrees of rotation, a single tape strip, no
-// drop shadow theatrics. Each note straightens on hover. Rotation is cancelled
+// drop shadow theatrics. Each note straightens on hover. Rotation is canceled
 // under reduced motion.
 //
 // The logo marquee that used to sit above this moved to LogoScroll, directly

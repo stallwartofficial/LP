@@ -27,10 +27,10 @@ export const site = {
   // PUNCTUATION RULE: no em dashes anywhere on this site, including page
   // titles. Use a comma, a colon, a full stop, or a middot.
   company: "Stallwart",
-  tagline: "Built Beyond.",
+  tagline: "From first principles to production.",
 
   /** What the company is, in one line. No em dash: this feeds the tab title. */
-  companyDescriptor: "AI and Software Engineering, Built Beyond",
+  companyDescriptor: "AI and Software Engineering",
 
   /** Expanded positioning line, used under the wordmark and in the footer. */
   positioning:
@@ -118,7 +118,7 @@ export const site = {
       title: "Honest",
       claim: "A system should tell you what it cannot do.",
       description:
-        "Confidence without calibration is the expensive failure mode in AI. Our systems surface their own uncertainty, escalate what they should not decide, and leave an auditable trail behind every judgement they make.",
+        "Confidence without calibration is the expensive failure mode in AI. Our systems surface their own uncertainty, escalate what they should not decide, and leave an auditable trail behind every judgment they make.",
       proof: "Says what it does not know, before it costs you.",
       branches: [
         "Surfaces uncertainty instead of guessing",
@@ -154,7 +154,7 @@ export const site = {
     layers: [
       {
         name: "Intelligence",
-        role: "Where a judgement is made",
+        role: "Where a judgment is made",
         detail:
           "Models are selected and constrained for the decision at hand, and calibrated to report their own uncertainty rather than assert through it.",
       },
@@ -174,7 +174,7 @@ export const site = {
         name: "Production",
         role: "Where it meets reality",
         detail:
-          "Observability, rollback, and load behaviour. The difference between a system that demonstrated well and a system that is still correct on a Tuesday.",
+          "Observability, rollback, and load behavior. The difference between a system that demonstrated well and a system that is still correct on a Tuesday.",
       },
     ],
   },
