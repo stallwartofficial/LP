@@ -6,7 +6,7 @@
 // an audit is actually complete, those are legally verifiable claims.
 //
 // NOTE: the onboarding timeline and integration list that used to live here were
-// specific to Extrovert AI's lead pipeline. Integrations moved onto each
+// specific to Extrovert AI's outbound motion. Integrations moved onto each
 // offering in data/offerings.ts; the engagement steps below are written to hold
 // for any Stallwart engagement.
 

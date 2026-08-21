@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { navLinks, site } from "@/data/site";
 import { offerings } from "@/data/offerings";
+import { AskAI } from "./AskAI";
 
 // Editorial footer: the wordmark at display scale, then real columns. Also a
 // genuine SEO surface, every offering is linked from every page.
@@ -108,6 +109,8 @@ export function Footer() {
             </ul>
           </div>
         </div>
+
+        <AskAI />
 
         <div className="rule-t mt-14 flex flex-col gap-3 pt-6 text-xs text-[var(--fg)]/65 sm:flex-row sm:items-center sm:justify-between">
           {/* Three zones with room to breathe: plain copyright, one personality

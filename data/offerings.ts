@@ -173,90 +173,106 @@ export const offerings: Offering[] = [
     name: "Extrovert AI",
     category: "Product · Revenue",
     status: "available",
-    pricing: "Subscription, priced to your pipeline volume. Book a call for current plans.",
-    tagline: "The AI CRM that works your pipeline for you",
+    pricing: "Subscription, priced to your outbound volume. Book a call for current plans.",
+    tagline: "The AI GTM engine that runs outbound end to end",
     summary:
-      "A CRM that runs the whole lead lifecycle itself. It captures every inbound signal, ranks it on real buying intent, follows up on time, and reopens pipeline that went quiet.",
+      "Give it a company and a website. It researches the account, finds the angle, builds the target list, writes and sends the outreach in your voice, follows up, scores the replies, and books the meeting. Outbound that runs from first contact to a calendar invite without a rep driving each step.",
     description:
-      "A traditional CRM is a system of record. It stores what your reps remember to enter, then waits for someone to act on it. Extrovert AI is a system of action. It captures every inbound lead, scores it on observed buying signals, follows up on the cadence that lead deserves, and reopens pipeline that went cold. Deals move whether or not anyone remembers to move them.",
+      "Outbound is not one job. It is research, targeting, writing, sending, chasing, reading replies, and scheduling, and most teams run that chain by hand across a stack of disconnected tools. Extrovert AI is a single system that runs the whole motion. You give it a target company and its website. It researches the business and its market, decides who is worth contacting and the specific reason to reach out, drafts the outreach grounded in that research and in your team's voice, sends it, follows up on the cadence each account deserves, scores the responses on real intent, and books the meeting straight onto your calendar. Your reps step in for the conversation, not the busywork. It can run fully autonomously or hold every message for approval, and you move between the two as you build trust in it.",
     problem:
-      "Revenue teams rarely have a lead problem. They have a triage problem: high intent and low intent arrive in the same queue, so reps work them in the order they landed rather than the order they are worth.",
+      "Outbound rarely fails for lack of tools. It fails because every step, researching the account, finding the angle, writing the email, chasing the follow up, is manual. A rep can only work a handful of accounts well, so the rest get a generic blast or nothing at all.",
     capabilities: [
       {
-        eyebrow: "Capture",
-        title: "Every signal, one pipeline",
+        eyebrow: "Research",
+        title: "Reads the account before it writes a word",
         description:
-          "Form fills, email replies, site visits, referrals, and ad platform leads are captured at the source and routed into a single pipeline. No channel keeps a private backlog nobody is watching.",
+          "Give it a company name and a website. It researches the business, its market, and recent signals to find a reason to reach out that is specific to that account, not a mail merge field.",
       },
       {
-        eyebrow: "Score",
-        title: "Ranked on intent, not opinion",
+        eyebrow: "Target",
+        title: "Builds the list and the angle",
         description:
-          "Leads are ranked on observed behavior: engagement depth, reply patterns, source quality, and fit. Not on static point values that stop describing your market within a quarter.",
+          "It identifies who is worth contacting and the specific opening for each, so outreach is aimed rather than sprayed across a bought list.",
+      },
+      {
+        eyebrow: "Write and send",
+        title: "Outreach in your voice, sent for you",
+        description:
+          "It drafts each email grounded in the research and in your team's tone, then sends it. Run it autonomously, or hold every message for a one click approval first.",
       },
       {
         eyebrow: "Follow up",
-        title: "Cadence that does not depend on memory",
+        title: "Persistence without the reminders",
         description:
-          "Follow ups fire on the interval each lead's score justifies, in your team's voice. High intent gets contacted while the buying moment is still open.",
+          "It follows up on the interval each account deserves and adjusts to how they reply, so no thread dies because someone forgot to circle back.",
       },
       {
-        eyebrow: "Reopen",
-        title: "Dormant pipeline, worked continuously",
+        eyebrow: "Score and book",
+        title: "Scores the reply, books the meeting",
         description:
-          "Cold leads are re approached with context aware messaging on their timeline rather than yours, turning a dormant back catalog into a renewable source of pipeline.",
+          "It reads responses, scores real buying intent rather than politeness, and puts qualified meetings straight on your calendar. Reps arrive to a booked conversation, not a to do list.",
       },
     ],
     builtFor: [
-      "B2B sales teams from 5 to 500 reps",
-      "Founder led sales with no sales ops function",
-      "Revenue leaders replacing manual triage",
+      "Founder led sales running outbound by hand",
+      "B2B teams whose reps lose the day to research and admin",
+      "Revenue leaders who want more accounts worked without more headcount",
     ],
     faqs: [
       {
-        question: "How is Extrovert AI different from a traditional CRM?",
+        question: "What does Extrovert AI actually do?",
         answer:
-          "A traditional CRM is a system of record. It stores what reps remember to enter and waits for someone to act. Extrovert AI is a system of action: capture, scoring, follow up, and re engagement happen automatically, so pipeline moves whether or not a rep remembers to move it.",
+          "You give it a target company and its website. It researches the account, decides who to contact and why, writes and sends the outreach in your voice, follows up, scores the replies, and books the meeting on your calendar. It runs the outbound motion end to end and your reps take the conversation.",
       },
       {
-        question: "Does Extrovert AI replace our sales team?",
+        question: "Is Extrovert AI an AI SDR?",
         answer:
-          "No. It removes the administrative work that stops reps selling: chasing, logging, and remembering to follow up. Your team spends its time on qualified conversations instead of pipeline maintenance.",
+          "That is a fair shorthand. It does the work a sales development rep does before the conversation: researching accounts, writing and sending outreach, following up, and booking meetings. The difference is it runs the whole outbound motion across every account at once rather than one rep working a single list.",
       },
       {
-        question: "What does the lead scoring actually use?",
+        question: "Is Extrovert AI a CRM?",
         answer:
-          "Observed buying signals: engagement behavior, reply patterns, source quality, and firmographic fit. Not manually assigned point values, which go stale as soon as your market shifts.",
+          "No. A CRM records what your team already did and waits to be updated. Extrovert AI does the work: research, outreach, follow up, scoring, and booking. It connects to the CRM you already keep rather than replacing it.",
       },
       {
-        question: "Do we need a sales ops person to run it?",
+        question: "Does it send email on its own, or do we review first?",
         answer:
-          "No. Extrovert AI is built to run the lead lifecycle without ongoing manual configuration, which is what makes it workable for teams with no sales ops function.",
+          "Your choice, per campaign. It can run fully autonomously or hold every message for approval before it sends, and you move between the two as you build trust in it. Nothing goes out in a mode you did not choose.",
       },
       {
-        question: "Does it replace our existing CRM?",
+        question: "Will the emails read like generic AI spam?",
         answer:
-          "It does not have to. Extrovert AI connects to existing records and channels and layers automation on top, so your team keeps the system it already knows.",
+          "No. Each message is grounded in the specific research on that account and written in your team's voice, which is the opposite of a templated blast. You set the tone and the guardrails it works inside.",
+      },
+      {
+        question: "Does it replace our sales reps?",
+        answer:
+          "No. It removes the research and the manual sending and chasing that stop reps from selling. They spend their time in the booked conversations instead of assembling lists and writing the same email again.",
+      },
+      {
+        question: "How does the scoring work?",
+        answer:
+          "It scores on the reply itself and the engagement it observes, not static point values, so a warm response is surfaced and a polite brush off is not mistaken for intent.",
       },
     ],
     integrations: [
-      "Web forms and landing pages",
-      "Email and calendar",
-      "Existing CRM records",
-      "Ad platform lead forms",
-      "Chat and inbound messaging",
+      "Your email and calendar",
+      "Your CRM records",
+      "Company and contact data sources",
+      "Your sending domain and infrastructure",
+      "Meeting scheduler",
       "Webhooks and custom APIs",
     ],
     flow: {
-      label: "Lead path",
+      label: "Outbound path",
       stages: [
-        { name: "Lead in", kind: "input" },
-        { name: "Qualify", kind: "model" },
+        { name: "Company in", kind: "input" },
+        { name: "Research", kind: "model" },
+        { name: "Outreach sent", kind: "action" },
         { name: "Follow up", kind: "action" },
-        { name: "Pipeline moves", kind: "action" },
-        { name: "Booked", kind: "output" },
+        { name: "Meeting booked", kind: "output" },
       ],
-      branch: { fromIndex: 1, name: "Human escalation" },
+      branch: { fromIndex: 1, name: "Not a fit, skipped" },
     },
     layers: ["Intelligence", "Orchestration", "Production"],
   },

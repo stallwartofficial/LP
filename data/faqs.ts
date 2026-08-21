@@ -30,7 +30,7 @@ export const faqs: Faq[] = [
   {
     question: "What is Extrovert AI?",
     answer:
-      "Extrovert AI is Stallwart's AI-powered CRM, one offering in the portfolio, not the whole company. It runs the full lead lifecycle on autopilot: capturing leads, scoring them by buying signal, following up, and re-engaging cold pipeline.",
+      "Extrovert AI is Stallwart's AI go-to-market engine, one offering in the portfolio, not the whole company. You give it a target company and website and it runs outbound end to end: researching the account, writing and sending outreach in your voice, following up, scoring the replies, and booking the meeting.",
   },
   {
     question: "How do engagements start?",

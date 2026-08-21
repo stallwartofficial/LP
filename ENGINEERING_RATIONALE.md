@@ -124,7 +124,7 @@ breakpoint — no duplicated mobile/desktop blocks.
 
 The mobile order was chosen for the reader, not the source order:
 - **Story (mobile):** heading → portrait → article. The title frames the page,
-  then Nuras's photo, then the long-form.
+  then Arun's photo, then the long-form.
 - **Contact (mobile):** heading → **form** → supporting detail. The form is the
   urgent action, so it comes right after the title, above the "what happens
   next" copy.
@@ -198,8 +198,11 @@ mobile + desktop, before it ships.**
 
 ## 10. Brand / logo
 
-The HD logo is a full lockup (winged emblem + STALLWART + BUILT BEYOND). We use
-only the **emblem**, cropped out of the lockup:
+The HD logo is a full lockup (winged emblem + STALLWART + the retired "BUILT
+BEYOND" tagline). We use only the **emblem**, cropped out of the lockup, which
+also sidesteps the stale tagline baked into the source art. The live tagline is
+"From first principles to production." If a full lockup is ever needed, the
+source art must be re-rendered with the current tagline first:
 - `public/images/logo-mark.png` — 19KB optimized retina emblem, used in the
   navbar (`h-9`) and footer.
 - `app/icon.png` (512px) + `app/favicon.ico` (16/32/48) — browser/tab icons.

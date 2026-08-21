@@ -15,18 +15,18 @@ export type Testimonial = {
 // they exist and are approved for use (see CLAUDE_CODE_INSTRUCTIONS.md #7).
 export const testimonials: Testimonial[] = [
   {
-    highlight: "Reps closing, not chasing",
+    highlight: "Meetings booked, not chased",
     quote:
-      "We stopped losing leads to slow follow up the week we turned it on. The queue reviews itself now, so the team spends its day in conversations instead of assembling a list.",
+      "It researches the account, writes the outreach, and follows up on its own. We turned it on and meetings started landing on the calendar without a rep building a single list.",
     role: "VP of Sales",
     industry: "Mid Market SaaS",
     initials: "VS",
     offering: "extrovert-ai",
   },
   {
-    highlight: "Scoring paid for itself",
+    highlight: "Research on every account",
     quote:
-      "Scoring alone justified the whole thing. We finally know which leads are worth a call before we make it, which changed how we staff the week.",
+      "The outreach actually references the company. Reps used to skip the research to hit send. Now it happens on every account, and the reply rate shows it.",
     role: "Head of Growth",
     industry: "B2B Agency",
     initials: "HG",
@@ -35,7 +35,7 @@ export const testimonials: Testimonial[] = [
   {
     highlight: "Output without headcount",
     quote:
-      "As a five person team we needed output, not more people. This gave us the follow up persistence of a company three times our size.",
+      "As a five person team we needed pipeline, not more headcount. It runs the whole outbound motion end to end, so we cover the accounts a team three times our size would.",
     role: "Founder",
     industry: "SMB Software",
     initials: "F",

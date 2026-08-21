@@ -36,15 +36,17 @@ const nextConfig: NextConfig = {
         destination: "/blog/small-team-follow-up-case-study",
         permanent: true,
       },
-      // The old AI Editing slug became AI Video Creation.
+      // Retired slugs. Point straight at the live destination rather than
+      // chaining through another redirect, which search engines penalize.
+      // The video offering was removed from the portfolio; send it to /offer.
       {
         source: "/offer/ai-editing",
-        destination: "/offer/ai-video-creation",
+        destination: "/offer",
         permanent: true,
       },
       {
         source: "/offer/ai-compliance-office",
-        destination: "/offer/ai-compliance-and-governance",
+        destination: "/offer/sillage",
         permanent: true,
       },
     ];
