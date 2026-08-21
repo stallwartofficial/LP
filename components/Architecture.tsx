@@ -141,7 +141,13 @@ export function Architecture() {
                   <h3 className="font-display mt-3 text-[length:var(--text-step-1)]">
                     {layer.name}
                   </h3>
-                  <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--fg)]/70">
+                  {/* Plain gloss first for the non-specialist, then the mono
+                      role label and the engineering detail for the technical
+                      reader. Layered, not dumbed down. */}
+                  <p className="mt-2 text-xs leading-snug text-[var(--fg)]/85">
+                    {layer.plain}
+                  </p>
+                  <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--fg)]/70">
                     {layer.role}
                   </p>
                   <p className="mt-3 text-xs leading-relaxed text-[var(--fg)]/75">

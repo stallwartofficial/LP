@@ -155,24 +155,28 @@ export const site = {
       {
         name: "Intelligence",
         role: "Where a judgment is made",
+        plain: "Where the AI actually makes a call.",
         detail:
           "Models are selected and constrained for the decision at hand, and calibrated to report their own uncertainty rather than assert through it.",
       },
       {
         name: "Orchestration",
         role: "Where work is routed",
+        plain: "What keeps the work moving without a person pushing it.",
         detail:
           "State, retries, and sequencing. The layer that makes a system run unattended instead of needing a person to advance it.",
       },
       {
         name: "Governance",
         role: "Where limits are enforced",
+        plain: "What keeps it inside your rules, with a record of every step.",
         detail:
           "Policy expressed as runtime controls, not documentation. Approval gates, escalation paths, and an audit trail written as work happens.",
       },
       {
         name: "Production",
         role: "Where it meets reality",
+        plain: "What keeps it reliable once real work hits it.",
         detail:
           "Observability, rollback, and load behavior. The difference between a system that demonstrated well and a system that is still correct on a Tuesday.",
       },
