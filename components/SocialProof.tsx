@@ -47,15 +47,15 @@ export function SocialProof() {
         </div>
 
         {/* The board. Extra top padding leaves room for the tape strips. */}
-        <div className="pinboard mt-12 rounded-2xl border border-[var(--hairline)] px-5 pb-8 pt-12 sm:px-8">
-          <ul className="grid gap-8 md:grid-cols-3 md:gap-6">
+        <div className="pinboard mt-10 rounded-2xl border border-[var(--hairline)] px-5 pb-8 pt-10 sm:mt-12 sm:px-8 sm:pt-12">
+          <ul className="grid gap-6 md:grid-cols-3">
             {testimonials.map((testimonial, i) => (
               <li key={testimonial.role}>
                 <figure
                   className="note-pin flex h-full flex-col rounded-sm bg-[var(--bg-raised)] p-5 sm:p-6"
                   style={NOTE_STYLES[i % NOTE_STYLES.length] as React.CSSProperties}
                 >
-                  <p className="font-display text-[length:var(--text-step-2)] leading-snug">
+                  <p className="font-display text-[length:var(--text-step-1)] leading-snug sm:text-[length:var(--text-step-2)]">
                     {testimonial.highlight}
                   </p>
 

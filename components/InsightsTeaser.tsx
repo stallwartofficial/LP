@@ -36,7 +36,7 @@ export function InsightsTeaser() {
             href="/blog"
             className="link-draw shrink-0 text-sm font-medium text-[var(--accent-text)]"
           >
-            All insights →
+            All case studies →
           </Link>
         </div>
 
@@ -45,7 +45,7 @@ export function InsightsTeaser() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="card-lift scroll-rise group flex flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 sm:p-7"
+              className="card-lift scroll-rise group flex flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5 sm:p-7"
             >
               <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
                 <span
@@ -64,11 +64,13 @@ export function InsightsTeaser() {
                 )}
               </div>
 
-              <h3 className="font-display mt-4 flex-1 text-[length:var(--text-step-2)] font-normal leading-snug">
+              <h3 className="font-display mt-4 flex-1 text-[length:var(--text-step-1)] font-normal leading-snug sm:text-[length:var(--text-step-2)]">
                 {post.title}
               </h3>
 
-              <p className="mt-3 text-sm text-[var(--fg)]/70">{post.excerpt}</p>
+              <p className="mt-3 line-clamp-2 text-sm text-[var(--fg)]/70 sm:line-clamp-none">
+                {post.excerpt}
+              </p>
 
               <span className="rule-t mt-6 flex items-center justify-between pt-4 text-xs text-[var(--fg)]/65">
                 <span>{getOffering(post.offering)?.name ?? post.offering}</span>

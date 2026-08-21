@@ -216,13 +216,53 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Full-bleed mobile sheet, editorial list, not a cramped dropdown. */}
+      {/* Full-bleed mobile sheet, editorial list, not a cramped dropdown. The
+          sheet sits above the nav bar, so it carries its own logo and a close
+          button rather than relying on the (now covered) nav controls. */}
       <div
         id="mobile-nav"
         hidden={!menuOpen}
-        className="pointer-events-auto fixed inset-0 z-40 flex flex-col bg-[var(--bg)]/98 px-[var(--space-gutter)] pb-10 pt-28 backdrop-blur-2xl lg:hidden"
+        className="pointer-events-auto fixed inset-0 z-40 flex flex-col bg-[var(--bg)]/98 px-[var(--space-gutter)] pb-10 pt-6 backdrop-blur-2xl lg:hidden"
       >
-        <ul className="flex flex-col">
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-2.5"
+            aria-label={`${site.company}, home`}
+          >
+            <Image
+              src="/images/logo-mark.png"
+              alt=""
+              width={40}
+              height={36}
+              className="h-9 w-auto"
+            />
+            <span className="font-display text-lg font-medium tracking-tight">
+              {site.company}
+            </span>
+          </Link>
+          <button
+            type="button"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              className="h-4 w-4"
+            >
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+
+        <ul className="mt-10 flex flex-col">
           {navLinks.map((link, i) => {
             const active = pathname === link.href;
             return (
