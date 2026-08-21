@@ -3,14 +3,14 @@ import { Offerings } from "@/components/Offerings";
 import { Commitments } from "@/components/TrustLayer";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbSchema, offeringListSchema } from "@/lib/seo";
+import { breadcrumbSchema, offeringListSchema, pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "What We Offer",
   description:
     "Stallwart is a custom AI engineering firm. Three offerings on one engineering standard: bespoke builds, Extrovert AI, and Sillage for AI governance.",
-  alternates: { canonical: "/offer" },
-};
+  path: "/offer",
+});
 
 // The portfolio overview. Offering-specific depth (features, integrations,
 // product FAQs) lives at /offer/[slug], not here.

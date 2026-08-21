@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { site } from "@/data/site";
 import { offerings, type Offering } from "@/data/offerings";
 import { blogPosts } from "@/data/blog";
@@ -10,6 +11,43 @@ import { blogPosts } from "@/data/blog";
 
 export function canonical(path: string) {
   return { alternates: { canonical: path } };
+}
+
+/**
+ * Per-page metadata with DIFFERENTIATED social tags. Next does not derive
+ * openGraph/twitter from a page's title and description, so a page that sets
+ * only those inherits the root layout's home OG block, and every social preview
+ * looks identical. This builds a page-specific canonical, openGraph, and twitter
+ * card so each URL shares with its own title and description. Use it on every
+ * page that isn't the home route.
+ */
+export function pageMeta({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}): Metadata {
+  const ogTitle = `${title} | ${site.company}`;
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      title: ogTitle,
+      description,
+      url: `${site.domain}${path}`,
+      siteName: site.company,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+    },
+  };
 }
 
 /**

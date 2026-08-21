@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Contact } from "@/components/Contact";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Contact",
   description:
     "Book a demo with Stallwart. Bring us the process that only works because someone remembers it, and we'll show you which part a system can take over.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

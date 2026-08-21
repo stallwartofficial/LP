@@ -50,7 +50,7 @@ const plexMono = IBM_Plex_Mono({
 // body still carries the "unattended, audited, and trusted" keywords too.
 const homeTitle = "Custom software and SaaS company | Stallwart.in";
 const homeDescription =
-  "Stallwart is a custom software and SaaS company building production grade AI systems, intelligent automation, and custom software engineered to run unattended, audited, and trusted, from first principles to production.";
+  "Stallwart is a custom software and SaaS company. We build production grade AI systems and software engineered to run unattended, audited, and trusted.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),

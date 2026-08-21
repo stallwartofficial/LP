@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts, caseStudyPosts, articlePosts } from "@/data/blog";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbSchema, blogListSchema } from "@/lib/seo";
+import { breadcrumbSchema, blogListSchema, pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Case Studies",
   description:
     "Case studies and writing from Stallwart on operations, AI systems, and the work that quietly falls through. Written for operators who want the mechanism.",
-  alternates: { canonical: "/blog" },
-};
+  path: "/blog",
+});
 
 // One content surface. Case studies and articles live together here; the
 // standalone /case-studies route redirects in (see next.config.ts), which
