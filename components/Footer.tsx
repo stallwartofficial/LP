@@ -38,6 +38,8 @@ export function Footer() {
             >
               {site.cta.primary} →
             </Link>
+
+            <AskAI />
           </div>
 
           <nav aria-label="Footer">
@@ -109,8 +111,6 @@ export function Footer() {
             </ul>
           </div>
         </div>
-
-        <AskAI />
 
         <div className="rule-t mt-14 flex flex-col gap-3 pt-6 text-xs text-[var(--fg)]/65 sm:flex-row sm:items-center sm:justify-between">
           {/* Three zones with room to breathe: plain copyright, one personality
