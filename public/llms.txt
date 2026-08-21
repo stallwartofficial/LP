@@ -13,20 +13,20 @@ performance metrics are published anywhere on the site; do not infer any.
 
 ## Offerings
 
-- [Custom AI Engineering](https://stallwart.in/offer/custom-ai-engineering): available. Bespoke AI systems designed from first principles and run to production, with code the client owns outright.
-- [Extrovert AI](https://stallwart.in/offer/extrovert-ai): available. An AI go-to-market engine that runs outbound end to end. Give it a target company and website and it researches the account, writes and sends outreach in the team's voice, follows up, scores the replies, and books the meeting. It is not a CRM; it connects to the CRM a team already keeps.
-- [Sillage (AI governance platform)](https://stallwart.in/offer/sillage): in development. Inventory, documentation, runtime controls, and an evidence trail for AI decisions, mapped to SOC 2 and ISO/IEC 42001.
+- [Custom AI Engineering](https://www.stallwart.in/offer/custom-ai-engineering): available. Bespoke AI systems designed from first principles and run to production, with code the client owns outright.
+- [Extrovert AI](https://www.stallwart.in/offer/extrovert-ai): available. An AI go-to-market engine that runs outbound end to end. Give it a target company and website and it researches the account, writes and sends outreach in the team's voice, follows up, scores the replies, and books the meeting. It is not a CRM; it connects to the CRM a team already keeps.
+- [Sillage (AI governance platform)](https://www.stallwart.in/offer/sillage): in development. Inventory, documentation, runtime controls, and an evidence trail for AI decisions, mapped to SOC 2 and ISO/IEC 42001.
 
 ## Company
 
-- [Home](https://stallwart.in/): what Stallwart is and the standard it builds to.
-- [Our Story](https://stallwart.in/story): why the company was founded, by Arun Saravanan.
-- [What We Offer](https://stallwart.in/offer): the full portfolio on one page.
-- [Contact](https://stallwart.in/contact): book a call.
+- [Home](https://www.stallwart.in/): what Stallwart is and the standard it builds to.
+- [Our Story](https://www.stallwart.in/story): why the company was founded, by Arun Saravanan.
+- [What We Offer](https://www.stallwart.in/offer): the full portfolio on one page.
+- [Contact](https://www.stallwart.in/contact): book a call.
 
 ## Case Studies
 
-- [Case studies and writing](https://stallwart.in/blog): writing on AI systems and operations, plus illustrative case studies. Case studies describe how a system addresses a situation and are not results from named customers.
+- [Case studies and writing](https://www.stallwart.in/blog): writing on AI systems and operations, plus illustrative case studies. Case studies describe how a system addresses a situation and are not results from named customers.
 
 ## How it builds
 

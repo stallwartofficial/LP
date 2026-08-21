@@ -36,7 +36,7 @@ export const site = {
   positioning:
     "We build systems with AI that are reliable, honest, and built to scale.",
 
-  domain: "https://stallwart.in", // TODO: confirm, drives every canonical URL
+  domain: "https://www.stallwart.in", // canonical host, drives every canonical URL
 
   /**
    * Company description. Feeds Organization schema and default metadata.

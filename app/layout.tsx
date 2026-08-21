@@ -43,19 +43,26 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-// Company-led: the site title leads with Stallwart and what the company is.
-// The product descriptor belongs on /offer, not on the company's front door.
+// Home title/description are tuned for search: the front door leads with the
+// "custom software and SaaS company" keywords while sub-pages keep the
+// `%s | Stallwart` template. No unverifiable superlative ("leading"), in step
+// with the site's honesty voice. The H1 stays the positioning line, so the
+// body still carries the "unattended, audited, and trusted" keywords too.
+const homeTitle = "Custom software and SaaS company | Stallwart.in";
+const homeDescription =
+  "Stallwart is a custom software and SaaS company building production grade AI systems, intelligent automation, and custom software engineered to run unattended, audited, and trusted, from first principles to production.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: `${site.company} | ${site.companyDescriptor}`,
+    default: homeTitle,
     template: `%s | ${site.company}`,
   },
-  description: site.description,
+  description: homeDescription,
   alternates: { canonical: "/" },
   openGraph: {
-    title: `${site.company} | ${site.companyDescriptor}`,
-    description: site.description,
+    title: homeTitle,
+    description: homeDescription,
     url: site.domain,
     siteName: site.company,
     type: "website",
@@ -64,8 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.company} | ${site.companyDescriptor}`,
-    description: site.description,
+    title: homeTitle,
+    description: homeDescription,
   },
   // Favicon resolves from app/favicon.ico automatically.
 };
