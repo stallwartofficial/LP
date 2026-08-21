@@ -138,7 +138,7 @@ export function Story() {
 
             {/* A warm, verifiable touch: reach the founder personally. */}
             <a
-              href="https://www.linkedin.com/in/nuras/"
+              href="https://in.linkedin.com/in/nuras"
               target="_blank"
               rel="noopener noreferrer"
               className="link-draw mt-5 inline-block whitespace-nowrap text-sm font-medium text-[var(--accent-text)]"
