@@ -58,7 +58,7 @@ export default async function OfferingPage({ params }: Props) {
       />
 
       {/* ---- Header ---- */}
-      <header className="px-[var(--space-gutter)] pb-4 pt-32 lg:pt-40">
+      <header className="px-[var(--space-gutter)] pb-4 pt-28 lg:pt-40">
         <div className="mx-auto max-w-3xl">
           <Link
             href="/offer"

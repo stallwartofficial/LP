@@ -198,7 +198,7 @@ export function Navbar() {
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--hairline-strong)] lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--hairline-strong)] lg:hidden"
           >
             <span aria-hidden="true" className="relative block h-2.5 w-4">
               <span
@@ -246,7 +246,7 @@ export function Navbar() {
             type="button"
             onClick={() => setMenuOpen(false)}
             aria-label="Close menu"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
           >
             <svg
               aria-hidden="true"

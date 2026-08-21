@@ -40,10 +40,6 @@ export function SocialProof() {
           >
             What changes when the system carries it.
           </h2>
-          <p className="mt-4 text-[var(--fg)]/75">
-            Illustrative accounts by role and sector. We publish named customer
-            quotes when we have them and not before.
-          </p>
         </div>
 
         {/* The board. Extra top padding leaves room for the tape strips. */}

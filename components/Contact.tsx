@@ -110,7 +110,6 @@ export function Contact() {
                   {site.contact.email}
                 </a>
               </li>
-              <li className="text-[var(--fg)]/60">{site.contact.phone}</li>
             </ul>
           </div>
         </div>
@@ -302,7 +301,6 @@ export function Contact() {
                 {site.contact.email}
               </a>
             </li>
-            <li className="text-[var(--fg)]/70">{site.contact.phone}</li>
           </ul>
         </div>
       </div>

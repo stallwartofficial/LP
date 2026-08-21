@@ -65,7 +65,7 @@ export const site = {
      * punctuation rule above.
      */
     subhead: [
-      "Production grade automation and custom software for the problems no product solves, taken from first principles to production and engineered to run unattended, audited, and trusted at scale.",
+      "Production grade automation and custom software for the problems no product solves, engineered to run unattended, audited, and trusted at scale.",
     ],
     primaryCta: { label: "Book a Call", href: "/contact" },
     secondaryCta: { label: "See What We Build", href: "/offer" },

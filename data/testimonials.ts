@@ -33,7 +33,7 @@ export const testimonials: Testimonial[] = [
     offering: "extrovert-ai",
   },
   {
-    highlight: "Leverage without headcount",
+    highlight: "Output without headcount",
     quote:
       "As a five person team we needed output, not more people. This gave us the follow up persistence of a company three times our size.",
     role: "Founder",

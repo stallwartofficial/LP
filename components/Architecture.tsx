@@ -81,8 +81,11 @@ export function Architecture() {
             ))}
           </ul>
 
-          {/* ---------- Converging connectors ---------- */}
-          <div aria-hidden="true" className="relative h-14">
+          {/* ---------- Converging connectors ----------
+              Hidden on mobile: the systems stack in one column there, so a
+              diagram that converges three side-by-side systems would not line up
+              with anything. It returns at sm, where the systems sit in a row. */}
+          <div aria-hidden="true" className="relative hidden h-14 sm:block">
             {/* One drop per system, derived so adding an offering cannot
                 desynchronise the diagram from the portfolio. */}
             <div className="absolute inset-x-0 top-0 flex justify-around">
@@ -108,7 +111,7 @@ export function Architecture() {
           </div>
 
           {/* ---------- The engine, with its layers inside it ---------- */}
-          <div className="rounded-xl border border-[var(--accent)]/50 bg-[var(--bg)] p-5 sm:p-6">
+          <div className="mt-8 rounded-xl border border-[var(--accent)]/50 bg-[var(--bg)] p-5 sm:mt-0 sm:p-6">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <p className="font-display text-[length:var(--text-step-2)]">
                 {site.company} engineering core
@@ -128,7 +131,7 @@ export function Architecture() {
                     {i < architecture.layers.length - 1 && (
                       <span
                         aria-hidden="true"
-                        className="text-sm text-[var(--fg)]/30"
+                        className="hidden text-sm text-[var(--fg)]/30 lg:inline"
                       >
                         →
                       </span>
