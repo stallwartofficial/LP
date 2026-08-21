@@ -23,7 +23,19 @@ const nextConfig: NextConfig = {
       { source: "/case-studies", destination: "/blog", permanent: true },
       {
         source: "/case-studies/saas-sales",
-        destination: "/blog/saas-inbound-triage-case-study",
+        destination: "/blog/saas-outbound-booked-meetings-case-study",
+        permanent: true,
+      },
+      // Two posts were reslugged when Extrovert AI was repositioned from an
+      // inbound CRM to an outbound GTM engine. Preserve the old inbound URLs.
+      {
+        source: "/blog/speed-to-lead-is-the-whole-funnel",
+        destination: "/blog/outbound-is-a-research-problem",
+        permanent: true,
+      },
+      {
+        source: "/blog/saas-inbound-triage-case-study",
+        destination: "/blog/saas-outbound-booked-meetings-case-study",
         permanent: true,
       },
       {

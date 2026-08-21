@@ -59,7 +59,7 @@ export function AskAI() {
               rel="noopener noreferrer"
               aria-label={`Ask ${engine.name} about ${site.company}`}
               title={`Ask ${engine.name} about ${site.company}`}
-              className="inline-flex h-11 w-11 items-center justify-center text-[var(--fg)]/55 transition-colors hover:text-[var(--fg)]"
+              className="inline-flex h-11 w-11 items-center justify-center text-[var(--fg)]/55 transition-colors hover:text-[var(--accent-text)]"
             >
               <svg
                 aria-hidden="true"

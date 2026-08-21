@@ -156,137 +156,172 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: "speed-to-lead-is-the-whole-funnel",
+    slug: "outbound-is-a-research-problem",
     kind: "article",
-    title: "Speed to lead is not a metric. It is the whole funnel.",
+    title: "Outbound was never a sending problem. It is a research problem.",
     excerpt:
-      "Most B2B teams treat lead response time as a reporting line. Structurally it decides how much of your pipeline you ever get to compete for.",
-    topic: "speed to lead, lead response time, B2B sales conversion",
+      "Most teams try to fix outbound by sending more. The constraint was never volume. It is the account research every good message depends on, and that is exactly the step an AI SDR can finally carry at scale.",
+    topic:
+      "AI SDR, AI outbound, autonomous outbound, outbound sales automation, account research, AI GTM engine, cold email personalization",
     offering: "extrovert-ai",
     publishedAt: "2026-02-04",
-    readingMinutes: 5,
+    readingMinutes: 7,
     sections: [
       {
-        heading: "The deals you lose before you know they exist",
+        heading: "The tool stack solved the wrong half of outbound",
         paragraphs: [
-          "Every B2B sales team measures conversion rate. Far fewer measure how much of their pipeline was decided before a rep ever entered the conversation.",
-          "The mechanism is simple. A buyer with a live problem rarely contacts one vendor. They contact several in a single sitting, while the problem is still in front of them. The vendor who answers inside that window is not competing on price, product depth, or references. They are the only participant in the conversation. Everyone who replies the next morning is arguing against a frame someone else already set.",
+          "Over the last decade, outbound sales got a stack. Data providers to build lists, sequencers to send at volume, deliverability tools to land in the inbox, schedulers to book the meeting. Every one of them optimized sending. Almost none of them touched the part that actually decides whether a message works: knowing enough about the account to say something worth reading. So teams became extremely efficient at sending outreach that no longer converts, and reply rates fell across the entire channel.",
+          "The reason is structural, not a discipline failure. A sequencer can send a thousand emails a day. A human sales development rep can only research a handful of accounts a day properly. When sending capacity outruns research capacity by two orders of magnitude, the rational move under quota is to skip the research and send anyway. The stack did not cause spray and pray outbound. It made spray and pray the path of least resistance.",
         ],
       },
       {
-        heading: "Why response time behaves like a filter, not a KPI",
+        heading: "Research is the expensive, invisible, skippable step",
         paragraphs: [
-          "Improving your demo to close rate optimizes the deals you are already in. Improving response time changes how many deals you are in at all. One is an efficiency gain. The other changes the size of the board.",
-          "That is why teams with strong close rates and weak response times often read as having a lead quality problem. The pipeline looks thin at the top, so the instinct is to buy more leads. The leads were never the constraint.",
+          "Good outbound is specific. It references something true about the account: a recent change in the business, a role that just opened, a system the company clearly runs, a problem their category is facing this quarter. That specificity is the whole difference between a message a buyer answers and one they delete in half a second. And it is expensive to produce, because it means reading the company's website, its recent news, its job posts, and its market before writing a single word.",
+          "Because that work is expensive and invisible, research is the first thing to disappear when a rep is behind. Nobody audits whether the research happened. They audit whether the emails went out. So the metric that gets watched, activity, quietly crowds out the input that actually matters, relevance, and the channel degrades one skipped step at a time until the team concludes that outbound is dead. Outbound is not dead. The research was.",
         ],
       },
       {
-        heading: "The failure is invisible in your CRM",
+        heading: "What an AI SDR actually changes",
         paragraphs: [
-          "A lead that goes cold from slow follow up does not appear as a loss. It appears as a lead that never engaged. Nothing in the pipeline report distinguishes a buyer who was not interested from a buyer nobody reached in time.",
-          "So the reporting quietly blames the market, and the team responds by increasing spend at the top of the funnel. Volume rises, response time degrades further, and the ratio gets worse while every dashboard says the strategy is working.",
+          "AI SDR is a fair shorthand for what a system like this does, but the important word is not SDR. It is research. An AI SDR does the reading a human skips under time pressure: given a target company and its website, it researches the business, finds the specific angle, and grounds every message in it. Since sending was never the constraint, automating the sending alone was never going to move the number. Automating the research is what changes the output.",
+          "This is the line between mail merge and an AI GTM engine. Mail merge drops a company name into a fixed template. An AI GTM engine writes a genuinely different, grounded message because it actually looked at a genuinely different, specific account. The first scales bad outbound faster. The second scales the thing a strong rep does on their best day, across every account instead of the few they had time to research.",
         ],
       },
       {
-        heading: "Why hiring does not fix it",
+        heading: "Personalization at scale stopped being a contradiction",
         paragraphs: [
-          "The usual answer is headcount: add an SDR to work the queue faster. That works until volume grows, because triage cost scales with lead count and a person's hours do not.",
-          "The result is that response time degrades again at exactly the moment marketing starts performing. The better your demand generation gets, the worse your speed to lead becomes. That is not a discipline failure. It is arithmetic.",
+          "For years, personalization and scale were a real trade off. You could send a lot, or you could send relevant, not both. That trade off existed for one reason: research did not scale. Once research scales, the trade off dissolves. A system can run account level research on every prospect and write from it, so the thousandth message is as grounded as the first. That is a different economic curve than any human outbound team has ever operated on.",
+          "This matters well beyond reply rate. Generic blasts get marked as spam, which trains inbox providers to bury the whole sending domain, which silently kills deliverability for the legitimate messages too. Relevance is not only a conversion lever. It is how a sending reputation survives contact with volume. A researched message protects the channel; a templated one slowly poisons it.",
         ],
       },
       {
-        heading: "The structural fix",
+        heading: "Where the human still belongs",
         paragraphs: [
-          "Stop making response time a function of queue depth. If every lead is scored on intent at the moment of capture, and follow up fires from that score, then the highest intent lead is contacted first regardless of arrival order or how deep the queue is.",
-          "Speed stops being something a team sustains through discipline and becomes a property of the system. That is the specific problem Extrovert AI exists to remove: not making reps faster at triage, but removing triage as the thing standing between a buyer and a conversation.",
+          "Taking research and sending off a rep's plate does not remove the rep. It relocates them to the part that genuinely needs a person: the conversation. When a booked meeting lands on the calendar, a human takes it. The discovery, the reading of a room, the judgment about what to offer, the negotiation, none of that is automated, and none of it should be. The system runs the motion up to the meeting; the person runs the meeting.",
+          "The honest version of this also knows when not to reach out. An account that is plainly not a fit should be skipped, not blasted, because every irrelevant send costs a little reputation. A system that researches before it writes can make that call in advance, which is precisely what a rep racing a quota rarely has the time to do.",
+        ],
+      },
+      {
+        heading: "How to tell if your outbound is research-starved",
+        paragraphs: [
+          "Three signs. Reply rates are falling while send volume is flat or rising. Reps describe outreach as a numbers game rather than an account game. And nobody can tell you, for a given campaign, what the messages actually said about the accounts. If those are true, the constraint is not your sequencer or your data provider. It is that the research step was quietly deleted to hit activity targets.",
+          "That is the specific gap Extrovert AI exists to close. Not making reps faster at sending, which was never the bottleneck, but doing the account research on every prospect so the message earns the send, then following up on the right cadence, scoring the reply on real intent, and booking the meeting. Outbound stops being a volume game and returns to being an account game, at a scale no human team could ever staff.",
         ],
       },
     ],
     qa: [
       {
-        question: "What is speed to lead?",
+        question: "What is an AI SDR?",
         answer:
-          "Speed to lead is the elapsed time between a prospect making contact and a salesperson responding. It matters because buyers typically contact several vendors in one sitting, so the vendor who replies inside that window often frames the entire evaluation.",
+          "An AI SDR is a system that does the work a sales development rep does before the conversation: researching target accounts, writing and sending outreach grounded in that research, following up, scoring replies, and booking meetings. Unlike a human SDR working one list at a time, it runs the whole outbound motion across every account at once. A person still takes the booked conversation.",
       },
       {
-        question: "Why is lead response time so important in B2B sales?",
+        question: "Why are outbound email reply rates falling?",
         answer:
-          "Because it determines how many deals you compete for at all, rather than how well you compete in the deals you are already in. A slow response does not lower your win rate, it removes you from the opportunity before the win rate applies.",
+          "Because sending tools scaled faster than research did. A sequencer can send thousands of messages while a rep can only research a few accounts a day, so under quota the research gets skipped and outreach becomes generic. Buyers ignore generic outreach, so reply rates fall even as send volume rises.",
       },
       {
-        question: "Why does hiring more SDRs not fix slow lead response?",
+        question: "Does personalized outbound work better than mass cold email?",
         answer:
-          "Triage cost scales with lead volume while a person's available hours do not. Adding headcount improves response time temporarily, then it degrades again as volume grows, which usually happens precisely when demand generation starts working.",
+          "Yes, and increasingly it is the only outbound that works. Messages grounded in specific account research get answered; templated blasts get deleted and damage sending reputation. The old trade off between relevance and scale existed only because research did not scale, and AI research removes it.",
       },
       {
-        question: "How do you improve speed to lead permanently?",
+        question: "Can AI do account research for outbound sales?",
         answer:
-          "Make response order a function of lead intent rather than arrival order. When leads are scored at capture and follow up fires from that score, the highest intent lead is always contacted first regardless of queue depth.",
+          "Yes. Given a company name and website, an AI GTM engine can research the business, its market, and recent signals to find a specific reason to reach out, then write from it. That is the step humans skip under time pressure, and automating it is what actually improves outbound, rather than automating the sending.",
+      },
+      {
+        question: "Does an AI SDR replace human sales reps?",
+        answer:
+          "No. It removes the research, sending, and follow up that consume a rep's day and hands them the booked conversation. Discovery, judgment, and negotiation stay with the person. The system runs the motion up to the meeting; the human runs the meeting.",
       },
     ],
   },
   {
-    slug: "saas-inbound-triage-case-study",
+    slug: "saas-outbound-booked-meetings-case-study",
     kind: "case-study",
-    title: "Case study: cutting a mid market SaaS team's lead response to minutes",
+    title:
+      "Case study: how a mid market SaaS team ran outbound to booked meetings without more SDRs",
     excerpt:
-      "How automatic scoring and follow up change the arithmetic for a SaaS sales team drowning in undifferentiated inbound.",
-    topic: "SaaS lead management, inbound triage, lead scoring",
+      "A SaaS team was blasting a bought list and getting almost nothing. What changed when every account was researched before a word went out, and the whole motion ran itself to a booked meeting.",
+    topic:
+      "SaaS outbound, AI SDR for SaaS, B2B outbound automation, account based outbound, booked meetings, cold email deliverability",
     offering: "extrovert-ai",
     industry: "SaaS Sales",
     persona: "VP of Sales at a 40 to 150 employee B2B SaaS company",
     publishedAt: "2026-01-15",
-    readingMinutes: 6,
+    readingMinutes: 7,
     sections: [
       {
         heading: "Where the work was breaking",
         paragraphs: [
-          "Mid market SaaS teams rarely have a lead problem. They have a lead triage problem. Inbound arrives from trials, demo forms, content downloads, and webinar lists at the same time, and all of it lands in one undifferentiated queue.",
-          "The cost is structural rather than dramatic. A trial signup with obvious intent sits behind forty content downloads with none. By the time a rep works down to it, the prospect has already had a conversation with a competitor who replied the same afternoon.",
-          "Teams in this position usually respond by hiring an SDR to work the queue faster. That adds cost linearly while inbound volume grows non linearly. The queue wins.",
+          "On paper the team had an outbound motion. Buy a list, load a sequence, send. In practice it produced activity dashboards and almost no meetings. Reply rates sat below one percent, the sending domain was starting to land in spam, and the two SDRs spent their days loading contacts and pasting templates rather than talking to buyers. The instinct was to buy a bigger list and hire a third SDR, which would have scaled the exact thing that was not working.",
+          "The real problem sat upstream of the sequence. Nobody had time to research the accounts, so every message said the same generic thing. To a buyer, a message that could have been sent to any company reads as a message that was sent to every company, and it gets deleted accordingly. Volume was never the constraint. Relevance was, and relevance had been quietly cut to keep the volume up.",
+          "This is the trap mid market SaaS teams fall into. Outbound looks like a throughput problem, not enough sends, when it is actually a research problem, nothing worth sending. Throughput is easy to buy. Research is the expensive part, and it was the part being skipped every single day.",
         ],
       },
       {
         heading: "What the system does instead",
         paragraphs: [
-          "Extrovert AI collapses every inbound channel into one pipeline at the point of capture, so no source keeps a private backlog nobody is watching.",
-          "Each lead is scored on observed behavior: trial activity depth, reply patterns, source quality, and firmographic fit. Not on static point values that stop describing the market within a quarter.",
-          "Follow up then fires on the cadence that score justifies. High intent trials are contacted while the product is still open in another tab. Low intent downloads enter nurture instead of consuming a rep's afternoon.",
+          "Extrovert AI was pointed at the same target market, but the motion inverted. For each target company and website, it researches the account first: what the business does, what it clearly runs, what changed recently, and why now might be the moment. Then it writes outreach grounded in that specific research, in the team's voice, and sends it. Nothing goes out that could have been addressed to anyone else.",
+          "Follow up fires on the cadence each account's engagement justifies and adapts to replies, so no thread dies because a rep forgot the fourth touch. Responses are read and scored on real buying intent rather than politeness, and qualified conversations are booked straight onto the reps' calendars.",
+          "It also declines. Accounts that are plainly not a fit are skipped rather than blasted, which protects the sending domain the team had been slowly burning. The whole motion optimizes for a booked meeting, not for send count, which is the number that actually pays the team.",
+        ],
+      },
+      {
+        heading: "Why researched outbound protects the whole channel",
+        paragraphs: [
+          "Generic blasts do not merely underperform. They teach inbox providers to distrust the sending domain, which drags down the messages that would have worked. Deliverability is a reputation, and a reputation is spent every time a batch of irrelevant mail generates spam complaints instead of engagement.",
+          "By sending fewer, researched messages to accounts that actually fit, the domain's reputation recovers and the good messages start arriving again. Relevance and deliverability are the same lever seen from two sides: the outreach that earns a reply is also the outreach that keeps the channel alive.",
+        ],
+      },
+      {
+        heading: "What changed for the reps",
+        paragraphs: [
+          "The two SDRs stopped loading lists and pasting templates. Their day moved from assembling outbound to taking the conversations outbound produced. The work that genuinely needs a human, discovery and qualification on a live call, is the work they now spend their time on.",
+          "The administrative layer that used to eat the day, the research nobody had time for and the follow up nobody remembered, is carried by the system. Outbound volume can now grow without adding SDR headcount, because the part that used to require another person is no longer done by a person.",
         ],
       },
     ],
     outcomes: [
-      "Response time stops being a function of queue depth and becomes a function of score, so the highest intent lead is contacted first regardless of when it arrived.",
-      "Rep time moves from triage to conversation. The queue is reviewed rather than assembled.",
-      "Inbound volume can grow without a proportional increase in sales ops headcount, because the triage layer is no longer a person.",
+      "Outbound stops being a volume game. Every account is researched before a message is sent, so relevance is the default rather than the exception.",
+      "The sending domain recovers, because researched, well-targeted outreach is not what trains inbox providers to route a domain to spam.",
+      "Rep time moves from assembling sequences to taking booked conversations, and outbound volume grows without adding SDR headcount.",
     ],
     metrics: [],
     qa: [
       {
-        question:
-          "What problem do mid market SaaS teams have with inbound leads?",
+        question: "How can a SaaS team improve outbound reply rates?",
         answer:
-          "High intent and low intent leads arrive in the same queue, so reps work them in arrival order rather than value order. Genuinely interested prospects wait behind unqualified traffic and go cold before anyone reaches them.",
+          "By researching each account before sending rather than blasting a bought list. Reply rates collapse when every message is generic and recover when each references something specific and true about the account. An AI SDR does that research on every prospect, which is the step human reps skip under quota.",
       },
       {
-        question: "How does lead scoring fix slow response time?",
+        question: "What is account based outbound?",
         answer:
-          "Scoring every inbound lead on real buying signals at the moment of capture allows follow up to fire by score rather than by arrival order, so the highest intent lead is contacted first even when the queue is deep.",
+          "Outreach built from research on the specific account rather than a template sent to a list. Each message references something true about that company, which is what earns a reply. AI makes it possible to run account based outbound at list scale, because the research no longer has to be done by hand.",
       },
       {
-        question: "Does this require replacing an existing SaaS CRM?",
+        question: "Does AI outbound hurt email deliverability?",
         answer:
-          "No. Extrovert AI connects to existing records and channels and layers automation on top, so the team keeps the system its reps already know.",
+          "Done badly, any outbound hurts deliverability, because generic blasts get marked as spam and train inbox providers to bury the domain. Done well, researched outbound to accounts that fit protects deliverability, because it generates engagement instead of complaints. The differentiator is relevance, not volume.",
+      },
+      {
+        question: "Does this replace our SaaS CRM?",
+        answer:
+          "No. Extrovert AI connects to the CRM the team already keeps and runs the outbound motion on top of it, so reps keep their existing system of record while the research, outreach, follow up, and booking are automated.",
       },
     ],
   },
   {
     slug: "agency-pipeline-case-study",
     kind: "case-study",
-    title: "Case study: ending the feast and famine cycle in agency pipeline",
+    title:
+      "Case study: keeping agency pipeline full through delivery crunches, with automated outbound",
     excerpt:
-      "Agency new business competes with billable work and loses every time. How automated follow up keeps every thread alive through a delivery crunch.",
-    topic: "agency business development, referral follow up, pipeline consistency",
+      "Agency new business dies every time delivery gets busy. What changes when researched outbound runs continuously, whether or not anyone has the hours to do it.",
+    topic:
+      "agency outbound, agency business development, AI SDR for agencies, outbound automation, pipeline consistency",
     offering: "extrovert-ai",
     industry: "Agencies",
     persona: "Head of Growth or founder at a 10 to 60 person B2B agency",
@@ -296,95 +331,120 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "Where the work was breaking",
         paragraphs: [
-          "Agency new business development competes directly with billable work, and billable work wins every time. Pipeline activity becomes cyclical: a quiet month triggers outreach, the resulting work consumes the team, outreach stops, and the pipeline empties again.",
-          "Agency leads also arrive through unusually scattered channels. Referrals in a founder's inbox, conversations on LinkedIn, speaking events, partner introductions, inbound forms. Much of it never reaches a shared system at all.",
-          "The most expensive losses are the quiet ones. A warm referral that received one reply and no second follow up, then signed with someone else six weeks later.",
+          "Agency new business competes directly with billable work, and billable work wins every time. So outbound is cyclical: a quiet month triggers a burst of prospecting, the resulting projects consume the team, prospecting stops, and the pipeline empties again a quarter later. The feast and famine cycle is not a motivation problem. It is that the same people do outbound and delivery, and delivery is always the more urgent of the two.",
+          "When the agency did run outbound, it was thin by necessity. A founder personalized a few emails between calls, sent them, and never had time for the research that makes outbound land or the follow up that makes it convert. The channel got written off as ineffective when it had never actually been run properly.",
+          "The most expensive losses were the quiet ones. A well-fit target the agency could clearly have helped, contacted once during a quiet week, never followed up because delivery got busy, then signed with a competitor who simply kept showing up.",
         ],
       },
       {
         heading: "What the system does instead",
         paragraphs: [
-          "Every channel, including forwarded referrals and inbound messaging, is captured into one pipeline, so new business stops living in individual inboxes.",
-          "Follow up sequences run independently of team capacity. A delivery crunch no longer silently pauses business development, because nurture is not a task anyone has to remember.",
-          "Dormant opportunities are reopened automatically with context aware messaging. Client side buying cycles restart on the client's timeline rather than the agency's, so old pipeline is worked continuously instead of rediscovered.",
+          "Extrovert AI runs the outbound motion continuously, independent of the team's delivery load. It researches each target account, writes grounded outreach in the agency's voice, sends it, follows up on cadence, scores replies, and books the calls. A delivery crunch no longer silently pauses business development, because the motion is not a task anyone has to remember to run.",
+          "Because the research is automated, the outreach is specific rather than the generic template a busy founder would otherwise fire off. It references what the target company does and why the agency is relevant to it right now, which is the difference between a reply and a deletion.",
+          "Dormant targets and past conversations are re approached automatically with context aware messaging on the prospect's timeline, so old pipeline is worked continuously rather than rediscovered by accident in the next quiet month.",
+        ],
+      },
+      {
+        heading: "Why continuity beats intensity in agency outbound",
+        paragraphs: [
+          "The agency growth problem is not that outbound does not work. It is that it gets run in bursts. A steady, researched cadence that never pauses beats an occasional heroic push, because buying windows open on the client's schedule, not the agency's.",
+          "Being the vendor in front of a prospect when their window opens is a function of showing up consistently. That is exactly what a person juggling delivery cannot do and a system can, which is why decoupling outbound from the team's available hours is the whole game for an agency.",
         ],
       },
     ],
     outcomes: [
-      "Business development stops being cyclical. Outreach continues at the same cadence during delivery peaks as during quiet periods.",
-      "Referrals are tracked as pipeline rather than as favors in an inbox, so the highest converting channel finally receives systematic follow up.",
-      "Re engagement turns a dormant back catalog of past conversations into a renewable pipeline source without new headcount.",
+      "Outbound stops being cyclical. Researched outreach runs at the same cadence during delivery peaks as during quiet periods, so pipeline no longer collapses a quarter after every busy stretch.",
+      "Every target account is researched before contact, so agency outreach is specific rather than the generic template a founder sends between calls.",
+      "Dormant targets and past conversations are re engaged automatically, turning a back catalogue of near misses into a renewable pipeline source without new headcount.",
     ],
     metrics: [],
     qa: [
       {
         question: "Why do agencies struggle to keep a consistent pipeline?",
         answer:
-          "Business development competes with billable client work for the same people. When delivery gets busy, outreach and follow up stop, so pipeline arrives in cycles of feast and famine rather than steadily.",
+          "Because business development competes with billable client work for the same people, and delivery always wins. When projects get busy, outbound and follow up stop, so pipeline arrives in cycles of feast and famine rather than steadily. Automating the outbound motion decouples it from the team's delivery load.",
       },
       {
-        question: "How can an agency follow up on referrals more reliably?",
+        question: "How can an agency run outbound without a dedicated sales team?",
         answer:
-          "Capture referrals from inboxes, messaging, and partner introductions into a single pipeline and place them on automatic follow up sequences, so a warm introduction cannot quietly stall after one reply.",
+          "By automating the motion. An AI GTM engine researches target accounts, writes and sends grounded outreach, follows up, and books calls without a person driving each step, so a delivery-focused agency can run continuous outbound it has no headcount to staff by hand.",
       },
       {
-        question: "Can old agency leads that went quiet be reopened?",
+        question: "Can outbound keep running during a delivery crunch?",
         answer:
-          "Yes. Dormant opportunities are re approached automatically with context aware messaging, which matters for agencies because client side buying cycles frequently restart months after first contact.",
+          "Yes, when it does not depend on the team's available hours. Because the research, sending, follow up, and booking are automated, a busy delivery month no longer silently pauses business development, which is the usual cause of the agency feast and famine cycle.",
+      },
+      {
+        question: "Can old agency leads that went quiet be re engaged?",
+        answer:
+          "Yes. Dormant targets and past conversations are re approached automatically with context aware messaging, which matters for agencies because client side buying windows frequently open months after first contact.",
       },
     ],
   },
   {
     slug: "small-team-follow-up-case-study",
     kind: "case-study",
-    title: "Case study: how a five person sales team matched a much larger one",
+    title: "Case study: how a five person team ran enterprise grade outbound",
     excerpt:
-      "Small teams lose deals to follow up, not to product. What changes when persistence stops depending on someone's memory.",
-    topic: "small business sales, SMB CRM, sales follow up automation",
+      "Small teams lose outbound to the research and follow up they have no hours for, not to product. What changes when the whole motion runs without a sales ops function.",
+    topic:
+      "small business outbound, SMB sales automation, AI SDR for small teams, outbound without headcount, founder led sales",
     offering: "extrovert-ai",
     industry: "SMB",
     persona: "Founder or sales lead at a 5 to 25 person B2B company",
     publishedAt: "2026-01-15",
-    readingMinutes: 5,
+    readingMinutes: 6,
     sections: [
       {
         heading: "Where the work was breaking",
         paragraphs: [
-          "A small sales team is not a scaled down enterprise team. It is a team where every person does every job. The same rep sources, qualifies, demos, negotiates, and onboards.",
-          "Follow up is the first casualty. It is the least urgent task on any given day and the most expensive one to skip, because the majority of closes come from a contact after the first.",
-          "Small teams are also structurally disadvantaged on response speed against larger competitors with dedicated SDRs. That is the one variable where being small should be an advantage rather than a handicap.",
+          "A five person company is not a scaled down enterprise. It is a team where every person does every job: the same person sources, researches, writes, sends, follows up, demos, and onboards. Outbound is the first casualty, because it is the least urgent task on any given day and the most expensive one to skip.",
+          "When the team did run outbound, it was shallow by necessity. There was no time to research accounts, so the messages were generic, and no time to follow up, so single-touch outreach died on the vine. Most deals come from a later touch, not the first, so the follow up that never happened was exactly where the pipeline leaked.",
+          "Small teams are also told they cannot compete with larger competitors that field dedicated SDRs. On outbound specifically that has been true, because outbound was gated by human hours the small team simply did not have.",
         ],
       },
       {
         heading: "What the system does instead",
         paragraphs: [
-          "Capture and scoring run without a sales ops function, so a small team gets pipeline hygiene it has no headcount to perform manually.",
-          "Multi touch follow up sequences continue whether or not the founder is in a demo, on a delivery call, or on a plane. That removes the single largest source of small team lead leakage.",
-          "Scoring lets a very small team spend its scarcest resource, attention, only on the leads worth a live conversation, instead of spreading it evenly across everything.",
+          "Extrovert AI gives a five person team the outbound motion a much larger team runs with headcount. It researches each target account, writes grounded outreach in the team's voice, sends it, follows up persistently, scores replies, and books meetings, all without a sales ops function to configure and babysit it.",
+          "Follow up sequences continue whether or not the founder is in a demo, on a delivery call, or on a plane. That removes the single largest source of small team pipeline leakage: the follow up that depends on someone remembering to send it.",
+          "Because the research is automated, the small team's outreach is as specific as a well-staffed competitor's. That is the variable where being small used to be a pure disadvantage, and it is now neutralized.",
+        ],
+      },
+      {
+        heading: "Why small teams gain the most from automated research",
+        paragraphs: [
+          "For a large team, automating account research is an efficiency gain. For a five person team, it is the difference between running outbound and not running it at all. There were never enough hours to research accounts by hand, so without automation the channel simply did not happen.",
+          "The scarcest resource on a small team is attention. Researched, scored outbound spends that attention only on the conversations worth a live call, instead of spreading it thin across everything, which is how a tiny team gets the reach of a much larger one.",
         ],
       },
     ],
     outcomes: [
-      "Response speed becomes independent of team size. A five person team can reply as fast as a competitor with a dedicated SDR bench.",
-      "Follow up persistence stops depending on individual memory and available hours.",
-      "Growth in lead volume no longer forces an immediate hire, because the administrative layer scales without people.",
+      "A five person team runs the same researched outbound motion a much larger team staffs with SDRs, without hiring sales ops.",
+      "Follow up persistence stops depending on individual memory and available hours, closing the biggest source of small team pipeline leakage.",
+      "Growth in target volume no longer forces an immediate hire, because research, sending, follow up, and booking scale without people.",
     ],
     metrics: [],
     qa: [
       {
-        question: "How can a small sales team compete with a much larger one?",
+        question: "How can a small sales team compete with a larger one on outbound?",
         answer:
-          "By automating the layer larger teams solve with headcount. Automated capture, scoring, and follow up let a small team match a larger competitor on response speed and persistence without hiring sales ops or SDR staff.",
+          "By automating the layer larger teams solve with headcount. An AI SDR researches accounts, writes and sends grounded outreach, follows up, and books meetings, so a small team matches a larger competitor on relevance and persistence without hiring sales ops or SDR staff.",
       },
       {
-        question: "What is the biggest source of lost leads for small teams?",
+        question: "What is the biggest source of lost outbound for small teams?",
         answer:
-          "Inconsistent follow up. Most deals close on a later touch rather than the first, and on a small team follow up is the task most often displaced by delivery work.",
+          "Missing follow up and skipped research. Most deals close on a later touch, and on a small team follow up is the task most often displaced by delivery work, while account research never happens at all. Automating both is what closes the leak.",
       },
       {
-        question: "Does a small business need a sales ops person to automate follow up?",
+        question: "Does a small business need a sales ops person to run AI outbound?",
         answer:
-          "No. A system built to run the lead lifecycle without ongoing manual configuration is specifically what makes automation workable for teams with no sales ops function.",
+          "No. A system built to run the outbound motion without ongoing manual configuration is specifically what makes it workable for teams with no sales ops function.",
+      },
+      {
+        question: "Can outbound be personalized without time to research each account?",
+        answer:
+          "Yes, when the research is automated. An AI GTM engine researches each target account and writes from it, so a small team sends account-specific outreach it would never have the hours to produce by hand.",
       },
     ],
   },
