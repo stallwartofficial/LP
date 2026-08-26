@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { ClarityAnalytics } from "@/components/ClarityAnalytics";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/seo";
 
@@ -124,6 +125,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <CookieConsent />
         <GoogleAnalytics />
+        <ClarityAnalytics />
       </body>
     </html>
   );
