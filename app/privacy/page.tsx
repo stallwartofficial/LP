@@ -102,7 +102,8 @@ export default function PrivacyPage() {
             </h2>
             <p className="mt-4">
               Service providers that help us operate, such as hosting and the
-              intake endpoint that receives contact-form submissions. They
+              intake endpoints that receive contact-form and partner-inquiry
+              submissions. They
               process data on our behalf under contract. We may disclose data
               where required by law. A current list of processors is available on
               request.

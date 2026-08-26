@@ -418,10 +418,25 @@ p {
   animation-delay: var(--trace-delay, 0s);
 }
 
+/* Logo: a soft settle-bounce on hover. Works in the navbar (hovering the link
+   group) and the footer (hovering the mark directly). */
+@keyframes logo-bounce {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-5px); }
+  45% { transform: translateY(0); }
+  62% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+.logo-bounce:hover,
+.group:hover .logo-bounce {
+  animation: logo-bounce 0.6s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .trace-x,
   .trace-y,
-  .node-latch {
+  .node-latch,
+  .logo-bounce {
     animation: none !important;
   }
   /* A static trace still needs to be visible, or the diagram loses its path. */

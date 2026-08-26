@@ -56,14 +56,12 @@ const tracks = [
     name: "Referral",
     line: "You bring the client. We build. You're rewarded.",
     body: "Introduce a company whose problem we can solve. We take it from first principles and build to our standard, and you are rewarded per engagement, agreed on the first call.",
-    who: "Consultants, operators, and networks with the right rooms.",
   },
   {
     icon: <DeliveryIcon />,
     name: "Delivery and implementation",
     line: "You own the relationship. We hold the standard.",
     body: "For agencies and consultancies that want to deliver Stallwart-grade systems to their own clients, with or without our name on the work. You keep the relationship; the engineering bar behind it stays ours.",
-    who: "Agencies and consultancies extending what they can ship.",
   },
 ];
 
@@ -145,8 +143,8 @@ export default function PartnerPage() {
           (pitch left, sticky form right), stacked on mobile. ---- */}
       <header className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-32 lg:pt-40">
         <div className="mx-auto grid max-w-6xl items-start gap-x-20 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)]">
-          {/* Pitch */}
-          <div>
+          {/* Intro: first on mobile, top-left on desktop. */}
+          <div className="order-1 lg:col-start-1 lg:row-start-1">
             <div className="flex items-center gap-3">
               <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)]" />
               <p className="eyebrow">Partners</p>
@@ -165,10 +163,37 @@ export default function PartnerPage() {
               name goes on work built to one engineering standard, so it holds up
               long after the handoff.
             </p>
+          </div>
 
-            {/* The two ways in, in the hero, so the left column carries its own
-                weight beside the form and the visitor self-sorts first. */}
-            <ul className="mt-9 grid gap-4 sm:grid-cols-2">
+          {/* Form: right after the intro on mobile, sticky right column that
+              spans both rows on desktop, so the action is never buried. */}
+          <div className="order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-start lg:sticky lg:top-32">
+            <p className="eyebrow">Start here</p>
+            <h2 className="font-display mt-3 text-display-sm font-light">
+              Tell us what you bring.
+            </h2>
+            <p className="mt-4 mb-6 text-sm text-[var(--fg)]/70">
+              A client we can help, or delivery capacity worth extending. If it
+              is a match, the first call sorts out terms and the reward.
+            </p>
+            <PartnerForm />
+            <p className="mt-4 text-center text-xs text-[var(--fg)]/60">
+              Not a partner, but have a project?{" "}
+              <a
+                href="/contact"
+                className="link-draw font-medium text-[var(--accent-text)]"
+              >
+                Book a call instead
+              </a>
+              .
+            </p>
+          </div>
+
+          {/* The two ways in: last on mobile, bottom-left on desktop, so the
+              left column carries its own weight beside the form. */}
+          <div className="order-3 lg:col-start-1 lg:row-start-2">
+            <h2 className="eyebrow">Who we partner with</h2>
+            <ul className="mt-4 grid gap-4 sm:grid-cols-2">
               {tracks.map((track) => (
                 <li
                   key={track.name}
@@ -193,29 +218,6 @@ export default function PartnerPage() {
             <p className="mt-6 text-sm text-[var(--fg)]/60">
               No public rate card. Referral partners are rewarded per engagement,
               agreed on the first call.
-            </p>
-          </div>
-
-          {/* Form: sticky beside the pitch on desktop. */}
-          <div className="lg:sticky lg:top-32">
-            <p className="eyebrow">Start here</p>
-            <h2 className="font-display mt-3 text-display-sm font-light">
-              Tell us what you bring.
-            </h2>
-            <p className="mt-4 mb-6 text-sm text-[var(--fg)]/70">
-              A client we can help, or delivery capacity worth extending. If it
-              is a match, the first call sorts out terms and the reward.
-            </p>
-            <PartnerForm />
-            <p className="mt-4 text-center text-xs text-[var(--fg)]/60">
-              Not a partner, but have a project?{" "}
-              <a
-                href="/contact"
-                className="link-draw font-medium text-[var(--accent-text)]"
-              >
-                Book a call instead
-              </a>
-              .
             </p>
           </div>
         </div>

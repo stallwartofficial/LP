@@ -23,7 +23,7 @@ const HAIR = "rgba(245,241,232,0.14)";
 
 // Read the emblem off disk (no network), inline as a data URI for Satori.
 function emblemDataUri() {
-  const buf = readFileSync(join(process.cwd(), "public/images/logo-mark.png"));
+  const buf = readFileSync(join(process.cwd(), "public/images/logo-lion.png"));
   return `data:image/png;base64,${buf.toString("base64")}`;
 }
 

@@ -54,14 +54,14 @@ export function Navbar() {
           {/* Intrinsic lion mark is 218x256; width/height keep that ratio so
               Next doesn't warn about CSS changing one axis. Rendered at h-9. */}
           <Image
-            src="/images/logo-mark.png"
+            src="/images/logo-lion.png"
             alt=""
             width={218}
             height={256}
             sizes="36px"
             priority
             draggable={false}
-            className="h-9 w-auto transition-transform duration-500 group-hover:rotate-[8deg]"
+            className="logo-bounce h-9 w-auto"
           />
           <span className="text-lg font-medium uppercase tracking-[0.16em] font-[family-name:var(--font-wordmark)]">
             {site.company}
@@ -147,12 +147,12 @@ export function Navbar() {
             aria-label={`${site.company}, home`}
           >
             <Image
-              src="/images/logo-mark.png"
+              src="/images/logo-lion.png"
               alt=""
               width={218}
               height={256}
               sizes="36px"
-              className="h-9 w-auto"
+              className="logo-bounce h-9 w-auto"
             />
             <span className="text-lg font-medium uppercase tracking-[0.16em] font-[family-name:var(--font-wordmark)]">
               {site.company}
