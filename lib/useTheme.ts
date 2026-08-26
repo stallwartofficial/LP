@@ -20,9 +20,11 @@ function getSnapshot() {
   return document.documentElement.classList.contains("dark");
 }
 
-// Server render has no DOM; light is the documented default in globals.css.
+// Server render has no DOM. Dark is the default (the inline script in
+// app/layout.tsx adds the class before paint unless the visitor chose light),
+// so the server snapshot matches that default.
 function getServerSnapshot() {
-  return false;
+  return true;
 }
 
 export function useTheme() {

@@ -58,6 +58,7 @@ export function Navbar() {
             alt=""
             width={218}
             height={256}
+            sizes="36px"
             priority
             draggable={false}
             className="h-9 w-auto transition-transform duration-500 group-hover:rotate-[8deg]"
@@ -150,6 +151,7 @@ export function Navbar() {
               alt=""
               width={218}
               height={256}
+              sizes="36px"
               className="h-9 w-auto"
             />
             <span className="text-lg font-medium uppercase tracking-[0.16em] font-[family-name:var(--font-wordmark)]">

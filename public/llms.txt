@@ -23,6 +23,7 @@ performance metrics are published anywhere on the site; do not infer any.
 - [Our Story](https://www.stallwart.in/story): why the company was founded, by Arun Saravanan.
 - [What We Offer](https://www.stallwart.in/offer): the full portfolio on one page.
 - [Contact](https://www.stallwart.in/contact): book a call.
+- [Partner with us](https://www.stallwart.in/partner): referral and delivery partnerships. You bring the client or delivery capacity; Stallwart holds one engineering standard. Rewarded per engagement, agreed on the first call, no public rate card.
 - Founder: Arun Saravanan, https://in.linkedin.com/in/nuras
 
 ## Case studies and writing

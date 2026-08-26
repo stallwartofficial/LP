@@ -43,6 +43,9 @@ const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   display: "swap",
+  // Micro-labels and readouts, almost all below the fold. Not worth a
+  // render-blocking preload against the hero.
+  preload: false,
 });
 
 // Cinzel: the wordmark face. A Trajan-style classical caps serif used only for
@@ -53,6 +56,9 @@ const cinzel = Cinzel({
   subsets: ["latin"],
   weight: ["500", "600"],
   display: "swap",
+  // Wordmark only (two words). Not on the critical path, so don't preload it and
+  // compete with the hero font for the first render.
+  preload: false,
 });
 
 // Home title/description are tuned for search: the front door leads with the
@@ -101,11 +107,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <JsonLd schema={organizationSchema()} />
-        {/* Applies the stored theme before first paint so there is no flash of
-            the wrong theme. Must stay inline and blocking. */}
+        {/* Applies the theme before first paint so there is no flash. Dark is
+            the default: the site is dark unless the visitor explicitly chose
+            light. Must stay inline and blocking. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'){document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();`,
           }}
         />
       </head>

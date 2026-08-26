@@ -19,6 +19,7 @@ export function Footer() {
               alt=""
               width={218}
               height={256}
+              sizes="44px"
               className="h-11 w-auto"
             />
             <p className="mt-3 text-display-sm font-medium uppercase tracking-[0.14em] leading-none font-[family-name:var(--font-wordmark)]">
@@ -55,6 +56,15 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              {/* Footer-only for now: not in the top nav. */}
+              <li>
+                <Link
+                  href="/partner"
+                  className="link-draw text-sm text-[var(--fg)]/70 hover:text-[var(--fg)]"
+                >
+                  Partner with us
+                </Link>
+              </li>
             </ul>
           </nav>
 
