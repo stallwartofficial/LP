@@ -166,6 +166,28 @@ export default function PartnerPage() {
               long after the handoff.
             </p>
 
+            {/* The two ways in, in the hero, so the left column carries its own
+                weight beside the form and the visitor self-sorts first. */}
+            <ul className="mt-9 grid gap-4 sm:grid-cols-2">
+              {tracks.map((track) => (
+                <li
+                  key={track.name}
+                  className="flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5"
+                >
+                  <span className="text-[var(--accent-text)]">{track.icon}</span>
+                  <p className="font-display mt-3 text-[length:var(--text-step-1)] leading-tight">
+                    {track.name}
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-[var(--accent-text)]">
+                    {track.line}
+                  </p>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--fg)]/70">
+                    {track.body}
+                  </p>
+                </li>
+              ))}
+            </ul>
+
             <p className="mt-6 text-sm text-[var(--fg)]/60">
               No public rate card. Referral partners are rewarded per engagement,
               agreed on the first call.
@@ -197,52 +219,7 @@ export default function PartnerPage() {
         </div>
       </header>
 
-      {/* ---- Tracks ---- */}
-      <section
-        aria-labelledby="tracks"
-        className="section-y px-[var(--space-gutter)]"
-      >
-        <div className="mx-auto max-w-6xl">
-          <p className="eyebrow" id="tracks">
-            Who we partner with
-          </p>
-          <h2 className="font-display mt-3 text-display-sm font-light">
-            Two ways in.
-          </h2>
-          <p className="mt-3 max-w-xl text-sm text-[var(--fg)]/60">
-            Both are real and running today. Technology and integration
-            partnerships follow once the products are ready for them.
-          </p>
-
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-            {tracks.map((track) => (
-              <li
-                key={track.name}
-                className="flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 sm:p-7"
-              >
-                <span className="text-[var(--accent-text)]">{track.icon}</span>
-                <h3 className="font-display mt-4 text-[length:var(--text-step-2)] leading-tight">
-                  {track.name}
-                </h3>
-                <p className="mt-2 text-sm font-medium text-[var(--accent-text)]">
-                  {track.line}
-                </p>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--fg)]/75">
-                  {track.body}
-                </p>
-                <p className="rule-t mt-5 pt-4 text-xs text-[var(--fg)]/70">
-                  <span className="font-mono uppercase tracking-[0.14em] text-[var(--accent-text)]">
-                    For
-                  </span>
-                  <span className="mt-1 block leading-snug">{track.who}</span>
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ---- How it works: a continuous spine ---- */}
+      {/* ---- How it works ---- */}
       <section
         aria-labelledby="how"
         className="section-y rule-t bg-[var(--surface)] px-[var(--space-gutter)]"
@@ -256,25 +233,23 @@ export default function PartnerPage() {
             From introduction to launch.
           </h2>
 
-          <ol className="mt-8 grid gap-x-12 sm:grid-cols-2">
+          <ol className="mt-10 grid gap-x-12 gap-y-10 sm:grid-cols-2">
             {steps.map((step) => (
-              <li
-                key={step.n}
-                className="relative border-l border-[var(--hairline)] py-5 pl-6"
-              >
+              <li key={step.n} className="flex gap-5">
                 <span
                   aria-hidden="true"
-                  className="absolute left-[-4.5px] top-[1.55rem] h-2 w-2 rounded-full border border-[var(--accent)] bg-[var(--bg)]"
-                />
-                <span className="font-mono text-[11px] tracking-[0.2em] text-[var(--accent)]/60">
+                  className="text-gold-sheen font-display shrink-0 text-[3.25rem] font-light leading-[0.85]"
+                >
                   {step.n}
                 </span>
-                <h3 className="font-display mt-2 text-[length:var(--text-step-1)]">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--fg)]/75">
-                  {step.body}
-                </p>
+                <div className="border-t border-[var(--hairline)] pt-3">
+                  <h3 className="font-display text-[length:var(--text-step-1)] leading-tight">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--fg)]/75">
+                    {step.body}
+                  </p>
+                </div>
               </li>
             ))}
           </ol>
