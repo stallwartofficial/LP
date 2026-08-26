@@ -172,9 +172,11 @@ export default function PartnerPage() {
               {tracks.map((track) => (
                 <li
                   key={track.name}
-                  className="flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5"
+                  className="group flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5 transition-colors duration-300 hover:border-[var(--accent)]/40"
                 >
-                  <span className="text-[var(--accent-text)]">{track.icon}</span>
+                  <span className="text-[var(--accent-text)] transition-transform duration-300 group-hover:-translate-y-0.5">
+                    {track.icon}
+                  </span>
                   <p className="font-display mt-3 text-[length:var(--text-step-1)] leading-tight">
                     {track.name}
                   </p>
