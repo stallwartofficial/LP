@@ -36,7 +36,7 @@ export function Faq({
               {heading}
             </h2>
           </div>
-          <p className="font-mono shrink-0 text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/55">
+          <p className="font-mono shrink-0 text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/60">
             {String(faqs.length).padStart(2, "0")} answered
           </p>
         </div>
