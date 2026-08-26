@@ -64,7 +64,7 @@ export function organizationSchema() {
     url: site.domain,
     description: site.description,
     slogan: site.tagline,
-    email: site.contact.email,
+    ...(site.contact.email ? { email: site.contact.email } : {}),
     sameAs: [site.social.linkedin, site.social.twitter],
     founder: { "@type": "Person", name: site.founder.fullName },
     knowsAbout: [

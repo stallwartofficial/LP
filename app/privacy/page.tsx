@@ -132,13 +132,25 @@ export default function PrivacyPage() {
               any time. If you are in the EEA or UK, you also have the right to
               restrict or object to processing, to data portability, and to lodge
               a complaint with your local supervisory authority. To exercise a
-              right, email{" "}
-              <a
-                href={`mailto:${site.contact.email}`}
-                className="link-draw text-[var(--accent-text)]"
-              >
-                {site.contact.email}
-              </a>
+              right,{" "}
+              {site.contact.email ? (
+                <>
+                  email{" "}
+                  <a
+                    href={`mailto:${site.contact.email}`}
+                    className="link-draw text-[var(--accent-text)]"
+                  >
+                    {site.contact.email}
+                  </a>
+                </>
+              ) : (
+                <Link
+                  href="/contact"
+                  className="link-draw text-[var(--accent-text)]"
+                >
+                  contact us through our contact form
+                </Link>
+              )}
               .
             </p>
           </section>
@@ -160,13 +172,25 @@ export default function PrivacyPage() {
               Contact
             </h2>
             <p className="mt-4">
-              Questions about this policy? Email{" "}
-              <a
-                href={`mailto:${site.contact.email}`}
-                className="link-draw text-[var(--accent-text)]"
-              >
-                {site.contact.email}
-              </a>
+              Questions about this policy?{" "}
+              {site.contact.email ? (
+                <>
+                  Email{" "}
+                  <a
+                    href={`mailto:${site.contact.email}`}
+                    className="link-draw text-[var(--accent-text)]"
+                  >
+                    {site.contact.email}
+                  </a>
+                </>
+              ) : (
+                <Link
+                  href="/contact"
+                  className="link-draw text-[var(--accent-text)]"
+                >
+                  reach us through our contact form
+                </Link>
+              )}
               , or see our{" "}
               <Link href="/terms" className="link-draw text-[var(--accent-text)]">
                 Terms of Service

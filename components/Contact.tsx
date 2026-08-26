@@ -99,19 +99,21 @@ export function Contact() {
             </div>
           </dl>
 
-          <div className="rule-t mt-10 hidden pt-8 lg:block">
-            <p className="eyebrow">Direct</p>
-            <ul className="mt-4 space-y-2 text-sm">
-              <li>
-                <a
-                  href={`mailto:${site.contact.email}`}
-                  className="link-draw text-[var(--fg)]/75 hover:text-[var(--fg)]"
-                >
-                  {site.contact.email}
-                </a>
-              </li>
-            </ul>
-          </div>
+          {site.contact.email && (
+            <div className="rule-t mt-10 hidden pt-8 lg:block">
+              <p className="eyebrow">Direct</p>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li>
+                  <a
+                    href={`mailto:${site.contact.email}`}
+                    className="link-draw text-[var(--fg)]/75 hover:text-[var(--fg)]"
+                  >
+                    {site.contact.email}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* ---- The form: second on mobile, sticky right column on desktop. ---- */}
@@ -131,15 +133,20 @@ export function Contact() {
                 Got it.
               </p>
               <p className="mt-3 text-[var(--fg)]/70">
-                We&apos;ll be in touch shortly to find a time. If it&apos;s
-                urgent, reply straight to{" "}
-                <a
-                  href={`mailto:${site.contact.email}`}
-                  className="link-draw text-[var(--accent-text)]"
-                >
-                  {site.contact.email}
-                </a>
-                .
+                We&apos;ll be in touch shortly to find a time.
+                {site.contact.email && (
+                  <>
+                    {" "}
+                    If it&apos;s urgent, reply straight to{" "}
+                    <a
+                      href={`mailto:${site.contact.email}`}
+                      className="link-draw text-[var(--accent-text)]"
+                    >
+                      {site.contact.email}
+                    </a>
+                    .
+                  </>
+                )}
               </p>
               <Link
                 href="/offer"
@@ -262,8 +269,10 @@ export function Contact() {
                   role="alert"
                   className="mt-5 rounded-xl border border-red-500/40 bg-red-500/5 p-3 text-sm text-red-600 dark:text-red-400"
                 >
-                  {error ?? "Something went wrong."} You can also email{" "}
-                  {site.contact.email}.
+                  {error ?? "Something went wrong."}
+                  {site.contact.email && (
+                    <> You can also email {site.contact.email}.</>
+                  )}
                 </p>
               )}
 
@@ -290,19 +299,21 @@ export function Contact() {
 
         {/* Direct-contact line, mobile only. The desktop layout carries its
             own copy of this inside the argument column. */}
-        <div className="order-4 border-t border-[var(--hairline)] pt-6 lg:hidden">
-          <p className="eyebrow">Direct</p>
-          <ul className="mt-3 space-y-1.5 text-sm">
-            <li>
-              <a
-                href={`mailto:${site.contact.email}`}
-                className="link-draw text-[var(--fg)]/85"
-              >
-                {site.contact.email}
-              </a>
-            </li>
-          </ul>
-        </div>
+        {site.contact.email && (
+          <div className="order-4 border-t border-[var(--hairline)] pt-6 lg:hidden">
+            <p className="eyebrow">Direct</p>
+            <ul className="mt-3 space-y-1.5 text-sm">
+              <li>
+                <a
+                  href={`mailto:${site.contact.email}`}
+                  className="link-draw text-[var(--fg)]/85"
+                >
+                  {site.contact.email}
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );

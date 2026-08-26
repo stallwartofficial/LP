@@ -27,7 +27,7 @@ export const site = {
   // PUNCTUATION RULE: no em dashes anywhere on this site, including page
   // titles. Use a comma, a colon, a full stop, or a middot.
   company: "Stallwart",
-  tagline: "From first principles to production.",
+  tagline: "From first principles to production",
 
   /** What the company is, in one line. No em dash: this feeds the tab title. */
   companyDescriptor: "AI and Software Engineering",
@@ -49,7 +49,7 @@ export const site = {
   hero: {
     /** Hero-only tagline. Kept separate from the shared `tagline` above so the
         footer, ContactBanner and OG images keep the company standard. */
-    tagline: "From first principles to production.",
+    tagline: "From first principles to production",
     /** Split on the pipe: one line per clause. */
     headline: "AI systems engineered to run|unattended, audited, and trusted.",
     /**
@@ -186,7 +186,7 @@ export const site = {
 
 
   contact: {
-    email: "stallwartofficial@gmail.com",
+    email: "", // TODO(owner): set the confirmed official inbox; email UI stays hidden while this is empty
     address: "Address on file, contact us for details", // placeholder
   },
   cta: {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono, Cinzel } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { Navbar } from "@/components/Navbar";
@@ -45,6 +45,16 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+// Cinzel: the wordmark face. A Trajan-style classical caps serif used only for
+// the "STALLWART" logotype beside the lion mark (navbar + footer), not for body
+// or headings. All-caps by design, so it is applied with uppercase + tracking.
+const cinzel = Cinzel({
+  variable: "--font-wordmark",
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  display: "swap",
+});
+
 // Home title/description are tuned for search: the front door leads with the
 // "custom software and SaaS company" keywords while sub-pages keep the
 // `%s | Stallwart` template. No unverifiable superlative ("leading"), in step
@@ -83,7 +93,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`h-full antialiased ${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}
+      className={`h-full antialiased ${fraunces.variable} ${plexSans.variable} ${plexMono.variable} ${cinzel.variable}`}
       // Tells Next the smooth scrolling in globals.css is intentional, so it
       // suppresses it during route transitions instead of warning about it.
       data-scroll-behavior="smooth"

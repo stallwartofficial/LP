@@ -6,14 +6,14 @@
 > principles to production. Site: https://www.stallwart.in
 
 Stallwart is a company with a portfolio, not a single product. Extrovert AI is
-one of its offerings and is not a synonym for the company. Custom AI Engineering
+one of its offerings and is not a synonym for the company. Custom Systems and AI
 and Extrovert AI are available today; Sillage (AI governance platform) is in
 development and not yet purchasable. No pricing figures, customer counts, or
 performance metrics are published anywhere on the site; do not infer any.
 
 ## Offerings
 
-- [Custom AI Engineering](https://www.stallwart.in/offer/custom-ai-engineering): available. Bespoke AI systems and software designed from first principles and run to production, with code the client owns outright.
+- [Custom Systems and AI](https://www.stallwart.in/offer/custom-ai-engineering): available. Bespoke AI systems and software designed from first principles and run to production, with code the client owns outright.
 - [Extrovert AI](https://www.stallwart.in/offer/extrovert-ai): available. An AI go-to-market engine, in effect an AI SDR, that runs outbound end to end. Give it a target company and website and it researches the account, writes and sends outreach in the team's voice, follows up, scores the replies, and books the meeting. It is not a CRM; it connects to the CRM a team already keeps.
 - [Sillage (AI governance platform)](https://www.stallwart.in/offer/sillage): in development, not yet purchasable. Inventory, documentation, runtime controls, and an evidence trail for AI decisions, mapped to SOC 2 and ISO/IEC 42001.
 

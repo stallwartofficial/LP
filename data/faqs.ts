@@ -20,7 +20,7 @@ export const faqs: Faq[] = [
   {
     question: "Is Stallwart a product company or a services company?",
     answer:
-      "Both, deliberately. Extrovert AI is a product you run. Custom AI Engineering and Sillage are engineered to operate as a function inside your business. What they share is the same standard: the system carries the work, not the customer.",
+      "Both, deliberately. Extrovert AI is a product you run. Custom Systems and AI and Sillage are engineered to operate as a function inside your business. What they share is the same standard: the system carries the work, not the customer.",
   },
   {
     question: "Who does Stallwart build for?",

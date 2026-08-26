@@ -17,11 +17,11 @@ export function Footer() {
             <Image
               src="/images/logo-mark.png"
               alt=""
-              width={49}
-              height={44}
+              width={218}
+              height={256}
               className="h-11 w-auto"
             />
-            <p className="font-display text-display-sm mt-3 font-light leading-none">
+            <p className="mt-3 text-display-sm font-medium uppercase tracking-[0.14em] leading-none font-[family-name:var(--font-wordmark)]">
               {site.company}
             </p>
             <p className="mt-3 max-w-xs text-[var(--fg)]/60">
@@ -80,19 +80,21 @@ export function Footer() {
 
             <h2 className="eyebrow mt-8">Get in touch</h2>
             <ul className="mt-5 space-y-3">
-              <li>
-                <a
-                  href={`mailto:${site.contact.email}`}
-                  className="link-draw text-sm text-[var(--fg)]/70 hover:text-[var(--fg)]"
-                >
-                  {site.contact.email}
-                </a>
-              </li>
+              {site.contact.email && (
+                <li>
+                  <a
+                    href={`mailto:${site.contact.email}`}
+                    className="link-draw text-sm text-[var(--fg)]/70 hover:text-[var(--fg)]"
+                  >
+                    {site.contact.email}
+                  </a>
+                </li>
+              )}
               <li className="-my-2 flex gap-1">
                 <a
                   href={site.social.linkedin}
                   aria-label={`${site.company} on LinkedIn`}
-                  className="inline-flex h-11 w-11 items-center justify-center text-[var(--fg)]/60 transition-colors hover:text-[var(--fg)]"
+                  className="inline-flex h-11 w-11 items-center justify-center text-[var(--fg)]/60 transition-colors hover:text-[#0A66C2]"
                 >
                   <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px]">
                     <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />

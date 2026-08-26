@@ -56,25 +56,22 @@ export function Architecture() {
                   </span>
                 </span>
 
-                {/* Which strata this system runs through. Gold = used, gray =
-                    not. The layer names are labelled in the engineering core
-                    below, so the dashes read as a meter without repeating them. */}
+                {/* The four shared engineering layers as a uniform gold meter.
+                    Every build moves through the same four, which is the whole
+                    claim of this section, so the dashes read as one consistent
+                    set rather than a per-system on/off that muddied the point. */}
                 <span className="mt-2.5 flex flex-wrap gap-1">
-                  {architecture.layers.map((layer) => {
-                    const uses = offering.layers.includes(layer.name);
-                    return (
-                      <span
-                        key={layer.name}
-                        title={`${layer.name}: ${uses ? "used" : "not used"}`}
-                        className={`h-1 w-5 rounded-full ${
-                          uses ? "bg-[var(--accent)]" : "bg-[var(--hairline-strong)]"
-                        }`}
-                        aria-hidden="true"
-                      />
-                    );
-                  })}
+                  {architecture.layers.map((layer) => (
+                    <span
+                      key={layer.name}
+                      title={layer.name}
+                      className="h-1 w-5 rounded-full bg-[var(--accent)]"
+                      aria-hidden="true"
+                    />
+                  ))}
                   <span className="sr-only">
-                    Runs through {offering.layers.join(", ")}.
+                    Runs through{" "}
+                    {architecture.layers.map((l) => l.name).join(", ")}.
                   </span>
                 </span>
               </li>

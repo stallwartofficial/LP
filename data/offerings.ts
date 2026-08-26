@@ -3,7 +3,7 @@
 // Extrovert AI is ONE offering here, not the subject of the site. Each entry
 // gets its own detail page at /offer/[slug] where its capabilities live.
 //
-// Order is deliberate: Custom AI Engineering leads because it is available
+// Order is deliberate: Custom Systems and AI leads because it is available
 // today and is what the hero's positioning claims. The two in-development
 // services follow the shipped product rather than heading the list.
 //
@@ -73,11 +73,11 @@ export type Offering = {
 export const offerings: Offering[] = [
   {
     slug: "custom-ai-engineering",
-    name: "Custom AI Engineering",
+    name: "Custom Systems and AI",
     category: "Engagement · Build",
     status: "available",
     pricing: "Fixed price per phase, from a paid discovery sprint. Book a call for a scoped quote.",
-    tagline: "Your system, engineered from first principles",
+    tagline: "Build the system your business actually needs",
     summary:
       "For problems no product solves. Whatever the system is, a SaaS platform, a product, or an internal tool, we build it with AI to the standard the best teams hold, and hand over code you own outright.",
     description:
