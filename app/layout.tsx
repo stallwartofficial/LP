@@ -5,6 +5,7 @@ import { site } from "@/data/site";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/seo";
 
@@ -122,6 +123,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <CookieConsent />
+        <GoogleAnalytics />
       </body>
     </html>
   );
