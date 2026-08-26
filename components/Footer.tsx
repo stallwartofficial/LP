@@ -118,14 +118,6 @@ export function Footer() {
           <p className="shrink-0">
             © {new Date().getFullYear()} {site.company}. All rights reserved.
           </p>
-          {/* localhost = home. The single wink; real jurisdiction lives on the
-              Privacy page. */}
-          <p
-            title="localhost, naturally"
-            className="order-last text-center text-[var(--fg)]/45 sm:order-none"
-          >
-            127.0.0.1° N · 127.0.0.1° E
-          </p>
           <div className="flex shrink-0 items-center gap-5">
             <Link href="/privacy" className="link-draw hover:text-[var(--fg)]">
               Privacy

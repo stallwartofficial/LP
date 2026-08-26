@@ -186,8 +186,7 @@ export const site = {
 
 
   contact: {
-    email: "hello@stallwart.in", // placeholder, swap with real inbox
-    phone: "+1 (000) 000-0000", // placeholder
+    email: "stallwartofficial@gmail.com",
     address: "Address on file, contact us for details", // placeholder
   },
   cta: {
