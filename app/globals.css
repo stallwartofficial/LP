@@ -861,6 +861,13 @@ textarea { field-sizing: content; }
 @keyframes draw-stroke { to { stroke-dashoffset: 0; } }
 .check-draw { stroke-dashoffset: 0; }
 
+/* Orbit signals: gold pulses that travel from the core out to each node (SMIL
+   animateMotion). SMIL is unaffected by the reduced-motion CSS reset, so hide
+   the dots explicitly when the viewer prefers reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-signal { display: none; }
+}
+
 /* The mutual-terms columns can be swapped by clicking the exchange node. The
    incoming content slides in from the side it came from. Guarded so reduced
    motion just cross-cuts instantly. */

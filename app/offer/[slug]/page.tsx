@@ -7,9 +7,250 @@ import { site } from "@/data/site";
 import { JsonLd } from "@/components/JsonLd";
 import { StatusPill } from "@/components/Offerings";
 import { Faq } from "@/components/Faq";
+import { Reveal } from "@/components/Reveal";
 import { breadcrumbSchema, offeringSchema } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
+
+// Line-work marks for the "further reading" cards, in the site's hairline + gold
+// idiom (currentColor, so they inherit the theme) rather than a raster icon set.
+const ArticleMark = () => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-5 w-5"
+  >
+    <path d="M6 3h8l4 4v14H6z" />
+    <path d="M14 3v4h4" />
+    <path d="M9 12h6M9 15.5h6M9 8.5h2.5" />
+  </svg>
+);
+
+const CaseStudyMark = () => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-5 w-5"
+  >
+    <path d="M4 20h16" />
+    <path d="M7 20v-6M12 20V6M17 20v-9" />
+  </svg>
+);
+
+const JournalMark = () => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-5 w-5"
+  >
+    <path d="M5 5h14v14H5z" />
+    <path d="M9 5v14M12.5 9.5h3.5M12.5 13h3.5" />
+  </svg>
+);
+
+// --- Persona marks for "Built for". A small line-icon library, so each
+// audience gets an icon in the site's hairline + gold idiom.
+const personaIcons = {
+  chip: (
+    <>
+      <rect x="7" y="7" width="10" height="10" rx="1.5" />
+      <path d="M10 4v3M14 4v3M10 17v3M14 17v3M4 10h3M4 14h3M17 10h3M17 14h3" />
+    </>
+  ),
+  graph: (
+    <>
+      <path d="M4 19h16" />
+      <path d="M5 15l4-4 3 2 5-6" />
+      <path d="M17 7h2v2" />
+    </>
+  ),
+  building: (
+    <>
+      <path d="M5 21V5l7-2v18M12 21V9l6 2v10M4 21h16" />
+      <path d="M8 8v0M8 12v0M8 16v0M15 13v0M15 17v0" />
+    </>
+  ),
+  people: (
+    <>
+      <circle cx="9" cy="8" r="2.5" />
+      <path d="M4 20a5 5 0 0 1 10 0" />
+      <path d="M16 6.5a2.3 2.3 0 0 1 0 4.4M17 14.5a5 5 0 0 1 3 5.5" />
+    </>
+  ),
+  gears: (
+    <>
+      <circle cx="10" cy="10" r="3" />
+      <path d="M10 4v2M10 14v2M4 10h2M14 10h2M6 6l1.4 1.4M14 14l0 0M13.6 6.4 12.2 7.8M6.4 13.6 7.8 12.2" />
+      <path d="M17 15.5a2 2 0 1 0 2.8 2.8" />
+    </>
+  ),
+  layers: (
+    <>
+      <path d="M12 3 21 8 12 13 3 8z" />
+      <path d="M3 12l9 5 9-5M3 16l9 5 9-5" />
+    </>
+  ),
+  key: (
+    <>
+      <circle cx="8" cy="8" r="3.5" />
+      <path d="M10.6 10.6 20 20M16.5 16.5 19 14M13.5 13.5 16 11" />
+    </>
+  ),
+  shield: (
+    <>
+      <path d="M12 3l7 3v5c0 4.6-3 7.7-7 9-4-1.3-7-4.4-7-9V6z" />
+      <path d="M9 11.5l2 2 4-4" />
+    </>
+  ),
+  checklist: (
+    <>
+      <rect x="6" y="4" width="12" height="16" rx="1.5" />
+      <path d="M9 9l1.4 1.4L13 8M9 15l1.4 1.4L13 14M15.5 9.2h0.01M15.5 15.2h0.01" />
+    </>
+  ),
+} as const;
+
+const PersonaIcon = ({ name }: { name: keyof typeof personaIcons }) => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-9 w-9"
+  >
+    {personaIcons[name]}
+  </svg>
+);
+
+// --- Surfaces as a hub-and-spoke orbit: the product core at the centre, each
+// integration a labelled node around it, connectors drawing in on scroll and
+// the core pulsing. Long category labels sit in pills so they stay readable.
+// Decorative geometry is aria-hidden; the pill labels are real text, and a
+// plain list carries the same content on small screens.
+function SurfaceOrbit({ items }: { items: string[] }) {
+  const W = 660;
+  const H = 560;
+  const cx = W / 2;
+  const cy = H / 2;
+  const rx = 272;
+  const ry = 210;
+  const cycle = 3.2; // seconds for one signal to travel core -> node
+  // Half-step offset off top dead-centre, so no node points straight up into
+  // the floating nav (or straight down into the section edge), for any count.
+  const pts = items.map((label, i) => {
+    const ang =
+      (-90 + 180 / items.length + i * (360 / items.length)) * (Math.PI / 180);
+    return { label, x: cx + rx * Math.cos(ang), y: cy + ry * Math.sin(ang) };
+  });
+
+  return (
+    <div className="relative mx-auto hidden h-[560px] w-full max-w-[660px] sm:block">
+      <svg
+        aria-hidden="true"
+        viewBox={`0 0 ${W} ${H}`}
+        className="absolute inset-0 h-full w-full"
+      >
+        <g stroke="var(--hairline-strong)" strokeWidth="1.25">
+          {pts.map((p, i) => (
+            <line
+              key={i}
+              className="check-draw"
+              style={
+                { "--len": Math.hypot(p.x - cx, p.y - cy) } as React.CSSProperties
+              }
+              x1={cx}
+              y1={cy}
+              x2={p.x}
+              y2={p.y}
+            />
+          ))}
+        </g>
+
+        {/* Core: a soft pulsing ring around a solid gold node. */}
+        <circle
+          cx={cx}
+          cy={cy}
+          r="34"
+          fill="none"
+          stroke="var(--accent)"
+          strokeWidth="1"
+          opacity="0.4"
+          className="animate-soft-pulse"
+        />
+        <circle
+          cx={cx}
+          cy={cy}
+          r="22"
+          fill="var(--surface)"
+          stroke="var(--accent)"
+          strokeWidth="1.5"
+        />
+        <circle cx={cx} cy={cy} r="4.5" fill="var(--accent)" />
+
+        {/* Signals: a gold light that travels from the core out to each node,
+            staggered so they emanate around the hub in turn. */}
+        {pts.map((p, i) => {
+          const begin = `${((i * cycle) / items.length).toFixed(2)}s`;
+          return (
+            <circle
+              key={i}
+              r="4"
+              className="orbit-signal"
+              fill="var(--accent)"
+              style={{ filter: "drop-shadow(0 0 5px var(--accent))" }}
+            >
+              <animateMotion
+                dur={`${cycle}s`}
+                begin={begin}
+                repeatCount="indefinite"
+                keyPoints="0;1"
+                keyTimes="0;1"
+                calcMode="linear"
+                path={`M ${cx} ${cy} L ${p.x} ${p.y}`}
+              />
+              <animate
+                attributeName="opacity"
+                dur={`${cycle}s`}
+                begin={begin}
+                repeatCount="indefinite"
+                values="0;1;1;0"
+                keyTimes="0;0.15;0.75;1"
+              />
+            </circle>
+          );
+        })}
+      </svg>
+
+      {pts.map((p, i) => (
+        <span
+          key={i}
+          style={{ left: `${(p.x / W) * 100}%`, top: `${(p.y / H) * 100}%` }}
+          className="group absolute max-w-[9.5rem] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-[var(--hairline-strong)] bg-[var(--surface)] px-3.5 py-2 text-center font-mono text-[9.5px] font-medium uppercase leading-[1.5] tracking-[0.12em] text-[var(--fg)]/70 shadow-[0_8px_24px_-14px_rgba(0,0,0,0.55)] transition-all duration-300 hover:-translate-y-[calc(50%+2px)] hover:border-[var(--accent)]/70 hover:text-[var(--fg)]"
+        >
+          {items[i]}
+        </span>
+      ))}
+    </div>
+  );
+}
 
 export function generateStaticParams() {
   return offerings.map((o) => ({ slug: o.slug }));
@@ -57,9 +298,10 @@ export default async function OfferingPage({ params }: Props) {
         ]}
       />
 
-      {/* ---- Header ---- */}
-      <header className="px-[var(--space-gutter)] pb-4 pt-28 lg:pt-40">
-        <div className="mx-auto max-w-3xl">
+      {/* ---- Header: pitch on the left, a compact action card on the right so
+          a ready buyer can act without scrolling the whole page. ---- */}
+      <header className="px-[var(--space-gutter)] pb-4 pt-24 lg:pt-28">
+        <div className="mx-auto max-w-6xl">
           <Link
             href="/offer"
             className="link-draw text-sm text-[var(--accent-text)]"
@@ -67,44 +309,114 @@ export default async function OfferingPage({ params }: Props) {
             ← Everything we build
           </Link>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <span className="eyebrow">{offering.category}</span>
-            <StatusPill status={offering.status} />
+          <div className="mt-7 grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,1fr)_23rem] lg:items-start">
+            {/* Left: the pitch. */}
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="eyebrow">{offering.category}</span>
+                <StatusPill status={offering.status} />
+              </div>
+
+              <h1 className="font-display mt-5 text-display-lg font-light">
+                {offering.name}
+              </h1>
+              <p className="mt-4 max-w-2xl text-[length:var(--text-step-2)] font-light text-[var(--fg)]/60">
+                {offering.tagline}
+              </p>
+
+              {/* The problem, stated before the pitch. */}
+              <p className="mt-9 max-w-2xl border-l-2 border-[var(--accent)] pl-5 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
+                {offering.problem}
+              </p>
+
+              <p className="mt-7 max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
+                {offering.description}
+              </p>
+
+              {inDevelopment && (
+                <p className="mt-9 max-w-2xl rounded-2xl border border-[var(--accent)]/30 bg-[var(--surface)] p-6 text-sm text-[var(--fg)]/75">
+                  <strong className="font-medium text-[var(--fg)]">
+                    This offering is still being built.
+                  </strong>{" "}
+                  It is not available yet, and we would rather say so than
+                  describe something that does not exist. If it is relevant to
+                  your team, book a call and we will tell you honestly where it
+                  stands.
+                </p>
+              )}
+            </div>
+
+            {/* Right: sticky glass action card. */}
+            <aside className="relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/55 p-6 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl lg:sticky lg:top-24">
+              {/* Frosted-glass touches: a lit top edge and a soft gold sheen. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,var(--hairline-strong),transparent)]"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_100%_0%,color-mix(in_oklab,var(--accent)_10%,transparent),transparent_55%)]"
+              />
+
+              <div className="relative">
+                <p className="eyebrow">
+                  {inDevelopment ? "Early access" : "Get started"}
+                </p>
+
+                <p className="mt-4 flex flex-wrap items-baseline gap-x-2 border-t border-[var(--hairline)] pt-4 text-sm text-[var(--fg)]/80">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                    {inDevelopment ? "Status" : "Pricing"}
+                  </span>
+                  <span>
+                    {inDevelopment
+                      ? "Not available yet. Book a call and we will tell you honestly where it stands."
+                      : offering.pricingShort ?? offering.pricing}
+                  </span>
+                </p>
+
+                {offering.builds && offering.builds.length > 0 && (
+                  <div className="mt-5 border-t border-[var(--hairline)] pt-4">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                      What we build
+                    </span>
+                    <ul className="mt-3 flex flex-wrap justify-center gap-1.5">
+                      {offering.builds.map((b) => (
+                        <li
+                          key={b}
+                          className="cursor-default whitespace-nowrap rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)]/40 px-2.5 py-1 text-[11px] text-[var(--fg)]/75 transition-colors duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--accent)]/[0.08] hover:text-[var(--fg)]"
+                        >
+                          {b}
+                        </li>
+                      ))}
+                      {/* Signals the list is illustrative, not exhaustive. */}
+                      <li className="whitespace-nowrap rounded-full border border-[var(--accent)]/50 bg-[var(--accent)]/10 px-2.5 py-1 text-[11px] font-medium text-[var(--accent-text)]">
+                        and more
+                      </li>
+                    </ul>
+                  </div>
+                )}
+
+                <Link
+                  href="/contact"
+                  className="btn-wipe mt-6 block rounded-full bg-[var(--fg)] px-6 py-3.5 text-center text-sm font-medium text-[var(--bg)]"
+                >
+                  {site.cta.primary}
+                </Link>
+                <Link
+                  href="/offer"
+                  className="group mt-3 flex items-center justify-center gap-2 rounded-full border border-[var(--hairline-strong)] px-6 py-3 text-sm font-medium text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
+                >
+                  See other products
+                  <span
+                    aria-hidden="true"
+                    className="arrow-shift text-[var(--accent-text)]"
+                  >
+                    →
+                  </span>
+                </Link>
+              </div>
+            </aside>
           </div>
-
-          <h1 className="font-display mt-5 text-display-lg font-light">
-            {offering.name}
-          </h1>
-          <p className="mt-4 text-[length:var(--text-step-2)] font-light text-[var(--fg)]/60">
-            {offering.tagline}
-          </p>
-
-          <p className="mt-6 inline-flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-[var(--hairline)] pt-5 text-sm text-[var(--fg)]/80">
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
-              Pricing
-            </span>
-            {offering.pricing}
-          </p>
-
-          {/* The problem, stated before the pitch. */}
-          <p className="mt-9 border-l-2 border-[var(--accent)] pl-5 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
-            {offering.problem}
-          </p>
-
-          <p className="mt-7 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
-            {offering.description}
-          </p>
-
-          {inDevelopment && (
-            <p className="mt-9 rounded-2xl border border-[var(--accent)]/30 bg-[var(--surface)] p-6 text-sm text-[var(--fg)]/75">
-              <strong className="font-medium text-[var(--fg)]">
-                This offering is still being built.
-              </strong>{" "}
-              It is not available yet, and we would rather say so than describe
-              something that does not exist. If it is relevant to your team, book
-              a call and we will tell you honestly where it stands.
-            </p>
-          )}
         </div>
       </header>
 
@@ -118,21 +430,34 @@ export default async function OfferingPage({ params }: Props) {
           <p className="eyebrow" id="built-for">
             Built for
           </p>
-          <ul className="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-            {offering.builtFor.map((who, i) => (
-              <li
-                key={who}
-                className="border-t border-[var(--hairline)] pt-5"
+          <div className="mt-8 grid gap-px overflow-hidden rounded-2xl bg-[var(--hairline)] sm:grid-cols-3">
+            {offering.builtFor.map((b, i) => (
+              <Reveal
+                as="div"
+                index={i}
+                key={b.role}
+                className="group relative overflow-hidden bg-[var(--bg)] p-6 transition-colors duration-300 hover:bg-[var(--surface)]"
               >
-                <span className="font-mono text-[10px] tracking-[0.2em] text-[var(--accent-text)]">
+                {/* Faint gold watermark numeral behind the content. Flat fill
+                    and kept fully inside the cell so it never clips. */}
+                <span
+                  aria-hidden="true"
+                  className="font-display pointer-events-none absolute right-4 top-3 text-[4.25rem] font-light leading-none text-[var(--accent)] opacity-[0.12] transition-opacity duration-300 group-hover:opacity-[0.2]"
+                >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="font-display mt-3 text-[length:var(--text-step-1)] leading-snug">
-                  {who}
+                <span className="relative block text-[var(--accent-text)] transition-transform duration-300 group-hover:-translate-y-0.5">
+                  <PersonaIcon name={b.icon as keyof typeof personaIcons} />
+                </span>
+                <h3 className="font-display relative mt-4 text-[length:var(--text-step-1)] font-light leading-tight">
+                  {b.role}
+                </h3>
+                <p className="relative mt-1.5 text-sm leading-snug text-[var(--fg)]/60">
+                  {b.note}
                 </p>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
@@ -142,7 +467,7 @@ export default async function OfferingPage({ params }: Props) {
           aria-labelledby="capabilities"
           className="section-y rule-t bg-[var(--surface)] px-[var(--space-gutter)]"
         >
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-5xl">
             <p className="eyebrow">Mechanism</p>
             <h2
               id="capabilities"
@@ -151,34 +476,27 @@ export default async function OfferingPage({ params }: Props) {
               {inDevelopment ? "What it will do" : "How it works"}
             </h2>
 
-            {/* Steps sit on a continuous rail (border-l with no row gap), each
-                marked by a node, so the sequence reads as a connected flow. */}
-            <ol className="mt-8 grid gap-x-12 sm:grid-cols-2">
+            {/* Clean numbered grid. The phase label (e.g. "01 Scope") already
+                carries the sequence, so there is no separate index to duplicate
+                it. A hairline warms to gold on hover. */}
+            <ol className="mt-10 grid gap-x-14 gap-y-10 sm:grid-cols-2">
               {offering.capabilities.map((c, i) => (
-                <li
+                <Reveal
+                  as="li"
+                  index={i}
                   key={c.title}
-                  className="scroll-rise relative border-l border-[var(--hairline)] py-5 pl-6"
+                  className="group border-t border-[var(--hairline)] pt-5 transition-colors duration-300 hover:border-[var(--accent)]/50"
                 >
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-[-4.5px] top-[1.55rem] h-2 w-2 rounded-full border border-[var(--accent)] bg-[var(--bg)]"
-                  />
-                  <div className="flex items-baseline gap-3">
-                    <span
-                      aria-hidden="true"
-                      className="font-mono text-[11px] tracking-[0.2em] text-[var(--accent)]/60"
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="eyebrow">{c.eyebrow}</span>
-                  </div>
-                  <h3 className="font-display mt-2 text-[length:var(--text-step-1)]">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--accent-text)]">
+                    {c.eyebrow}
+                  </span>
+                  <h3 className="font-display mt-3 text-[length:var(--text-step-2)] font-light leading-tight transition-colors duration-300 group-hover:text-[var(--accent-text)]">
                     {c.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--fg)]/75">
+                  <p className="mt-2.5 text-sm leading-relaxed text-[var(--fg)]/70">
                     {c.description}
                   </p>
-                </li>
+                </Reveal>
               ))}
             </ol>
           </div>
@@ -191,7 +509,7 @@ export default async function OfferingPage({ params }: Props) {
           aria-labelledby="integrations"
           className="section-y rule-t px-[var(--space-gutter)]"
         >
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-5xl">
             <p className="eyebrow">Surfaces</p>
             <h2
               id="integrations"
@@ -202,23 +520,32 @@ export default async function OfferingPage({ params }: Props) {
             <p className="mt-4 max-w-2xl text-sm text-[var(--fg)]/60">
               No rip and replace. It runs on what you already operate.
             </p>
-            <ul className="mt-6 grid gap-x-12 gap-y-1 sm:grid-cols-2">
+
+            {/* Desktop: the product core at the centre, your stack orbiting it. */}
+            <div className="mt-8">
+              <SurfaceOrbit items={offering.integrations} />
+            </div>
+
+            {/* Mobile: the same surfaces as a plain, tappable list. */}
+            <ul className="mt-6 grid gap-x-10 gap-y-1 sm:hidden">
               {offering.integrations.map((integration) => (
                 <li
                   key={integration}
-                  className="row-nudge flex items-baseline gap-3 border-b border-[var(--hairline)] py-3.5 text-sm text-[var(--fg)]/85"
+                  className="flex items-baseline gap-3 border-b border-[var(--hairline)] py-3.5 text-sm text-[var(--fg)]/85"
                 >
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="2.5"
+                    strokeWidth="1.75"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--accent-text)]"
+                    className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-text)]"
                   >
-                    <path d="M20 6 9 17l-5-5" />
+                    <path d="M7 8V6a3 3 0 0 1 6 0v2" />
+                    <rect x="4" y="8" width="12" height="7" rx="1.5" />
+                    <path d="M16 11h4" />
                   </svg>
                   {integration}
                 </li>
@@ -239,7 +566,7 @@ export default async function OfferingPage({ params }: Props) {
           aria-labelledby="related"
           className="section-y rule-t px-[var(--space-gutter)]"
         >
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-6xl">
             <p className="eyebrow">Further reading</p>
             <h2
               id="related"
@@ -247,51 +574,76 @@ export default async function OfferingPage({ params }: Props) {
             >
               {offering.name} in practice
             </h2>
-            <ul className="mt-8">
-              {related.map((post) => (
-                <li key={post.slug} className="rule-t last:rule-b">
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="row-nudge group flex items-baseline justify-between gap-6 py-5"
-                  >
-                    <span>
-                      <span className="text-[10px] uppercase tracking-[0.14em] text-[var(--accent-text)]">
-                        {post.kind === "case-study" ? "Case study" : "Article"}
-                      </span>
-                      <span className="font-display mt-1 block text-[length:var(--text-step-1)]">
-                        {post.title}
-                      </span>
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="arrow-shift shrink-0 text-[var(--accent-text)]"
+
+            {/* Two-up cards plus a journal companion card, so a single related
+                post is never a stranded card in a wide empty row. */}
+            <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+              {related.map((post, i) => {
+                const isCase = post.kind === "case-study";
+                return (
+                  <Reveal as="li" index={i} key={post.slug}>
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="card-lift group flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-colors duration-300 hover:border-[var(--accent)]/40"
                     >
+                      <div className="flex items-center justify-between">
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--accent-text)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[var(--accent)]/60">
+                          {isCase ? <CaseStudyMark /> : <ArticleMark />}
+                        </span>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-text)]">
+                          {isCase ? "Case study" : "Article"}
+                        </span>
+                      </div>
+                      <h3 className="font-display mt-5 text-[length:var(--text-step-1)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
+                        {post.title}
+                      </h3>
+                      <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-[var(--fg)]/70">
+                        {post.excerpt}
+                      </p>
+                      <div className="mt-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/55">
+                        <span>{post.readingMinutes}m read</span>
+                        <span
+                          aria-hidden="true"
+                          className="arrow-shift text-[var(--accent-text)]"
+                        >
+                          →
+                        </span>
+                      </div>
+                    </Link>
+                  </Reveal>
+                );
+              })}
+
+              {/* Journal companion, always last. */}
+              <Reveal as="li" index={related.length}>
+                <Link
+                  href="/blog"
+                  className="card-lift group flex h-full flex-col justify-between rounded-2xl border border-dashed border-[var(--hairline-strong)] p-6 transition-colors duration-300 hover:border-[var(--accent)]/50"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--accent-text)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[var(--accent)]/60">
+                    <JournalMark />
+                  </span>
+                  <div className="mt-5">
+                    <h3 className="font-display text-[length:var(--text-step-1)] leading-tight">
+                      More in the journal
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--fg)]/60">
+                      Case studies and notes from the work.
+                    </p>
+                  </div>
+                  <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-text)]">
+                    Browse all
+                    <span aria-hidden="true" className="arrow-shift">
                       →
                     </span>
-                  </Link>
-                </li>
-              ))}
+                  </span>
+                </Link>
+              </Reveal>
             </ul>
           </div>
         </section>
       )}
 
-      {/* ---- Close ---- */}
-      <section className="section-y rule-t px-[var(--space-gutter)]">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="font-display text-display-sm font-light">
-            {inDevelopment
-              ? "Want to hear where this is going?"
-              : `See ${offering.name} on your own workflow.`}
-          </h2>
-          <Link
-            href="/contact"
-            className="btn-wipe mt-7 inline-block rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)]"
-          >
-            {site.cta.primary}
-          </Link>
-        </div>
-      </section>
     </>
   );
 }

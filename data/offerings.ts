@@ -36,14 +36,23 @@ export type Offering = {
   /** The problem this offering exists to remove. Sharpens the pitch. */
   problem: string;
   capabilities: Capability[];
-  /** Who it is built for. Also feeds schema audience. */
-  builtFor: string[];
+  /** Who it is built for. `role` is the short label, `note` the fuller line,
+   *  `icon` names a mark in the offer page's icon set. `role` feeds schema
+   *  audience. */
+  builtFor: { role: string; note: string; icon: string }[];
   /** Offering specific FAQs. Rendered and emitted as FAQPage on its page. */
   faqs: { question: string; answer: string }[];
   integrations: string[];
+  /** Optional: the kinds of things this offering can build, shown as tags in
+   *  the offer page's action card. Only set for the build-anything offering;
+   *  specific products leave it undefined so their card stays focused. */
+  builds?: string[];
   /** Pricing MODEL, how a customer is charged. Not an invented figure.
    *  TODO(owner): replace the bracketed ranges with real numbers. */
   pricing: string;
+  /** Optional compact pricing label for the action card, when the full
+   *  sentence would make the card too tall. Falls back to `pricing`. */
+  pricingShort?: string;
   /**
    * The system's signal path, rendered as a concept diagram beside its module
    * on the home page. This is NOT a mock dashboard: it states the actual
@@ -77,6 +86,7 @@ export const offerings: Offering[] = [
     category: "Engagement · Build",
     status: "available",
     pricing: "Fixed price per phase, from a paid discovery sprint. Book a call for a scoped quote.",
+    pricingShort: "Fixed price per phase",
     tagline: "Build the system your business actually needs",
     summary:
       "For problems no product solves. Whatever the system is, a SaaS platform, a product, or an internal tool, we build it with AI to the standard the best teams hold, and hand over code you own outright.",
@@ -111,9 +121,21 @@ export const offerings: Offering[] = [
       },
     ],
     builtFor: [
-      "CTOs and heads of engineering with a build decision",
-      "Teams whose prototype stalled before production",
-      "Organizations that need to own the system outright",
+      {
+        role: "Engineering leaders",
+        note: "CTOs and heads of engineering with a build decision",
+        icon: "chip",
+      },
+      {
+        role: "Stalled prototypes",
+        note: "teams whose prototype never reached production",
+        icon: "graph",
+      },
+      {
+        role: "Full ownership",
+        note: "organizations that need to own the system outright",
+        icon: "key",
+      },
     ],
     faqs: [
       {
@@ -154,6 +176,27 @@ export const offerings: Offering[] = [
       "Identity and access management",
       "Existing CI and observability",
       "On premise and residency constrained",
+    ],
+    builds: [
+      "Custom software",
+      "Web apps",
+      "Mobile apps",
+      "SaaS",
+      "micro-SaaS",
+      "Marketplaces",
+      "E-commerce",
+      "Customer portals",
+      "CRMs",
+      "HRMS",
+      "ERPs",
+      "Internal tools",
+      "Dashboards",
+      "Automations",
+      "AI agents",
+      "Chatbots and copilots",
+      "APIs",
+      "Integrations",
+      "Data pipelines",
     ],
     flow: {
       label: "Engagement path",
@@ -214,9 +257,21 @@ export const offerings: Offering[] = [
       },
     ],
     builtFor: [
-      "Founder led sales running outbound by hand",
-      "B2B teams whose reps lose the day to research and admin",
-      "Revenue leaders who want more accounts worked without more headcount",
+      {
+        role: "Founder-led sales",
+        note: "running outbound by hand",
+        icon: "people",
+      },
+      {
+        role: "B2B reps",
+        note: "losing the day to research and admin",
+        icon: "gears",
+      },
+      {
+        role: "Revenue leaders",
+        note: "who want more accounts worked without more headcount",
+        icon: "graph",
+      },
     ],
     faqs: [
       {
@@ -316,9 +371,21 @@ export const offerings: Offering[] = [
       },
     ],
     builtFor: [
-      "Regulated industries deploying AI in decisions",
-      "Teams facing SOC 2, ISO 42001, or the EU AI Act",
-      "Boards asking how AI decisions are governed",
+      {
+        role: "Regulated industries",
+        note: "deploying AI in decisions",
+        icon: "shield",
+      },
+      {
+        role: "Compliance teams",
+        note: "facing SOC 2, ISO 42001, or the EU AI Act",
+        icon: "checklist",
+      },
+      {
+        role: "Boards and risk",
+        note: "asking how AI decisions are governed",
+        icon: "building",
+      },
     ],
     faqs: [
       {

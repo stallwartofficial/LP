@@ -124,7 +124,7 @@ export function offeringSchema(offering: Offering) {
     },
     audience: {
       "@type": "BusinessAudience",
-      audienceType: offering.builtFor.join("; "),
+      audienceType: offering.builtFor.map((b) => b.role).join("; "),
     },
     ...(offering.capabilities.length > 0 && {
       featureList: offering.capabilities.map((c) => c.title),

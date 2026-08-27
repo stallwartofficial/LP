@@ -204,5 +204,6 @@ export const navLinks = [
   { label: "Our Story", href: "/story" },
   { label: "What We Offer", href: "/offer" },
   { label: "Case Studies", href: "/blog" },
+  { label: "Partner", href: "/partner" },
   { label: "Contact", href: "/contact" },
 ] as const;
