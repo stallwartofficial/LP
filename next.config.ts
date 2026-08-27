@@ -5,6 +5,23 @@ const nextConfig: NextConfig = {
   // picks up an unrelated lockfile from the user's home directory.
   turbopack: { root: import.meta.dirname },
 
+  // Long-lived immutable cache for static brand images. Their content is
+  // versioned by filename (logo-lion.png etc.), so a year of caching is safe
+  // and keeps them off the repeat-view critical path.
+  async headers() {
+    return [
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
+
   async redirects() {
     return [
       {
