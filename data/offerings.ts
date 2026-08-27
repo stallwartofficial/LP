@@ -217,6 +217,7 @@ export const offerings: Offering[] = [
     category: "Product · Revenue",
     status: "available",
     pricing: "Subscription, priced to your outbound volume. Book a call for current plans.",
+    pricingShort: "Priced to outbound volume",
     tagline: "The AI GTM engine that runs outbound end to end",
     summary:
       "Give it a company and a website. It researches the account, finds the angle, builds the target list, writes and sends the outreach in your voice, follows up, scores the replies, and books the meeting. Outbound that runs from first contact to a calendar invite without a rep driving each step.",

@@ -396,6 +396,41 @@ export default async function OfferingPage({ params }: Props) {
                   </div>
                 )}
 
+                {/* Products (no build list) surface their motion instead: the
+                    capability steps as an arrow sequence, so the card shows what
+                    it does end to end, not just the price. */}
+                {!offering.builds && offering.capabilities.length > 0 && (
+                  <div className="mt-5 border-t border-[var(--hairline)] pt-4">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                      What it does
+                    </span>
+                    <div className="mt-3 flex flex-wrap items-center gap-x-1 gap-y-2">
+                      {offering.capabilities.flatMap((c, i) => {
+                        const chip = (
+                          <span
+                            key={c.eyebrow}
+                            className="whitespace-nowrap rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)]/40 px-2.5 py-1 text-[11px] text-[var(--fg)]/80 transition-colors duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--accent)]/[0.08] hover:text-[var(--fg)]"
+                          >
+                            {c.eyebrow}
+                          </span>
+                        );
+                        return i === 0
+                          ? [chip]
+                          : [
+                              <span
+                                key={`arrow-${i}`}
+                                aria-hidden="true"
+                                className="text-xs text-[var(--accent-text)]/50"
+                              >
+                                →
+                              </span>,
+                              chip,
+                            ];
+                      })}
+                    </div>
+                  </div>
+                )}
+
                 <Link
                   href="/contact"
                   className="btn-wipe mt-6 block rounded-full bg-[var(--fg)] px-6 py-3.5 text-center text-sm font-medium text-[var(--bg)]"
