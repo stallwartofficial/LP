@@ -6,6 +6,7 @@ import { getOffering } from "@/data/offerings";
 import { site } from "@/data/site";
 import { JsonLd } from "@/components/JsonLd";
 import { MarkPostRead } from "@/components/BlogReadState";
+import { BlogDiagram } from "@/components/BlogDiagram";
 import { articleSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -120,16 +121,9 @@ export default async function BlogPostPage({ params }: Props) {
             <span>{site.company}</span>
           </p>
 
-          {isCaseStudy && (
-            <p className="mt-8 border-l-2 border-[var(--accent)] pl-5 text-sm text-[var(--fg)]/65">
-              <strong className="font-medium text-[var(--fg)]/85">
-                Illustrative scenario.
-              </strong>{" "}
-              Written for {post.persona}. This is pre launch, so it describes how
-              the system addresses the situation rather than results from a named
-              customer.
-            </p>
-          )}
+
+          {/* ---- Diagram ---- */}
+          {post.diagram && <BlogDiagram name={post.diagram} />}
 
           {/* ---- Body ---- */}
           <div className="mt-14 space-y-14">
@@ -143,7 +137,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <p
                       key={para}
                       className={
-                        si === 0 && pi === 0
+                        si === 0 && pi === 0 && !post.diagram
                           ? "[&::first-letter]:font-display [&::first-letter]:mr-2 [&::first-letter]:float-left [&::first-letter]:text-[3.75rem] [&::first-letter]:font-light [&::first-letter]:leading-[0.82] [&::first-letter]:text-[var(--accent-text)]"
                           : undefined
                       }
@@ -152,8 +146,43 @@ export default async function BlogPostPage({ params }: Props) {
                     </p>
                   ))}
                 </div>
+                {section.list && section.list.length > 0 && (
+                  <ol className="mt-6 space-y-3">
+                    {section.list.map((item, li) => (
+                      <li key={item} className="flex gap-4">
+                        <span
+                          aria-hidden="true"
+                          className="font-mono text-[13px] text-[var(--accent-text)]"
+                        >
+                          {String(li + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/85">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                )}
               </section>
             ))}
+
+            {/* ---- Key takeaways ---- */}
+            {post.keyTakeaways && post.keyTakeaways.length > 0 && (
+              <section className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/50 p-6 sm:p-8">
+                <h2 className="eyebrow">The short version</h2>
+                <ul className="mt-5 space-y-3">
+                  {post.keyTakeaways.map((t) => (
+                    <li key={t} className="flex gap-3 text-[var(--fg)]/85">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
+                      />
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
             {/* ---- Case study only: structural outcomes ---- */}
             {post.outcomes && post.outcomes.length > 0 && (

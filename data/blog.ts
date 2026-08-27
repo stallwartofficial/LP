@@ -34,8 +34,15 @@ export type BlogPost = {
   persona?: string;
   publishedAt: string;
   readingMinutes: number;
-  /** Section headed body. Every post reads as structured, scannable editorial. */
-  sections: { heading: string; paragraphs: string[] }[];
+  /** Name of the inline SVG diagram to render under the intro (see
+   *  components/BlogDiagram.tsx). Optional. */
+  diagram?: string;
+  /** Section headed body. Every post reads as structured, scannable editorial.
+   *  An optional `list` renders as a checklist/framework under the paragraphs. */
+  sections: { heading: string; paragraphs: string[]; list?: string[] }[];
+  /** Scannable summary, rendered as a highlighted block and strong GEO snippet
+   *  bait. Optional. */
+  keyTakeaways?: string[];
   /** Case studies only: the structural shifts, rendered as a list. */
   outcomes?: string[];
   /**
@@ -48,93 +55,171 @@ export type BlogPost = {
   qa: QaBlock[];
 };
 
-export const blogPosts: BlogPost[] = [
+const rawBlogPosts: BlogPost[] = [
   {
     slug: "why-ai-pilots-dont-reach-production",
     kind: "article",
-    title: "Why AI pilots do not reach production",
+    title: "Why AI pilots fail to reach production (and how to fix it)",
     excerpt:
-      "Most enterprise AI never ships. The reason is rarely the model. It is the 80 percent of the system the pilot was allowed to skip.",
+      "Most enterprise AI never ships, and the model is rarely the reason. Here is the load-bearing 80 percent every pilot skips, and the checklist that separates a demo from a system you can actually run.",
     topic:
-      "enterprise AI in production, AI pilot to production, why AI projects fail, production AI engineering",
+      "why AI projects fail, AI pilot to production, AI proof of concept to production, enterprise AI in production, production AI engineering, MLOps, AI POC to production",
     offering: "custom-ai-engineering",
     publishedAt: "2026-02-18",
-    readingMinutes: 6,
+    readingMinutes: 8,
+    diagram: "pilot-production",
     sections: [
       {
         heading: "The pilot proves the wrong thing",
         paragraphs: [
-          "A pilot is built to answer one question: can the model do the interesting part at all. It almost always can. So the pilot succeeds, the demo lands, and everyone concludes the hard part is done. It is not. The hard part was never the interesting 20 percent. It is the load-bearing 80 percent the pilot was allowed to ignore: malformed inputs, partial failures, retries, permissions, audit, rollback, and the request that fits no category.",
-          "That gap is why the industry's own numbers are so bleak. A large majority of enterprise AI initiatives never reach durable production, and the failures cluster after the pilot, not during it. The model was fine. The system around it was never built.",
+          "Most enterprise AI never reaches durable production, and the reason is almost never the model. The pilot proves the interesting 20 percent works; production is the load-bearing 80 percent the pilot was allowed to skip. That is the whole story, and everything below is why.",
+          "A pilot is built to answer one question: can the model do the interesting part at all. It almost always can. So the pilot succeeds, the demo lands, and everyone concludes the hard part is done. It is not. The hard part was never the clever bit. It is malformed inputs, partial failures, retries, permissions, audit trails, rollback, cost ceilings, and the request that fits no category you planned for.",
+          "That is why industry surveys keep putting the share of enterprise AI that reaches production in the minority, and why the failures cluster after the pilot rather than during it. Nothing was wrong with the model. The system around it was never built. A working prototype is real evidence about the problem. It is almost never the foundation of the thing that survives contact with production.",
         ],
       },
       {
-        heading: "Production is a different discipline",
+        heading: "A demo and a production system are different problems",
         paragraphs: [
-          "A demo runs once, on chosen input, with a human watching. Production runs continuously, on adversarial input, with nobody watching. Those are not two points on one scale. They are different engineering problems, and the second one is what you are actually buying.",
-          "The move that changes outcomes is unglamorous: treat observability, evaluation, and rollback as part of the build, not a later phase. A system you cannot watch is a system you cannot trust, and a system you cannot roll back is one you cannot deploy twice.",
+          "A demo runs once, on input you chose, with a human watching and ready to explain away anything odd. Production runs continuously, on input nobody vetted, with nobody watching. These are not two points on one scale. They are different engineering problems, and the second one is what you are actually paying for.",
+          "Consider a support agent that summarizes tickets. In the demo it reads three clean tickets and writes three clean summaries. In production it meets a ticket with a pasted stack trace, a customer writing in two languages, a thread that references an attachment that no longer exists, and a spike of ten thousand tickets in an hour because something upstream broke. The model is the same. The system is not, and the system is what decides whether this ships.",
+          "The move that changes outcomes is unglamorous: treat observability, evaluation, and rollback as part of the build, not a later phase. A system you cannot watch is a system you cannot trust, and a system you cannot roll back is one you can only deploy once.",
         ],
       },
       {
-        heading: "What to require before you scale a pilot",
+        heading: "The load-bearing 80 percent, itemized",
         paragraphs: [
-          "Ask three questions of any pilot before you fund its path to production. What does it do when the input is wrong. Who is paged when it fails, and what can they do. How do you turn it off without turning off everything around it. If a pilot cannot answer those, it has not been de-risked; it has only been demonstrated.",
-          "This is why Stallwart scopes from first principles rather than from the prototype. The prototype is useful evidence about the problem. It is almost never the foundation of the system that survives contact with production.",
+          "When a pilot stalls on the way to production, it is usually missing some of these. None of them are glamorous. All of them are the difference between a demo and a system.",
+        ],
+        list: [
+          "Input validation and guardrails, so malformed or adversarial input fails safely instead of silently.",
+          "Retries, timeouts, and fallbacks for every part that calls a model or an external service.",
+          "Permissions and data boundaries, so the system can only see and do what it should.",
+          "Observability: logs, traces, and evaluations that tell you what the system did and whether it was right.",
+          "Rollback and versioning, so a bad change can be undone without taking everything else down.",
+          "Cost and rate controls, so a loop or a spike does not produce a surprise invoice.",
+          "Human escalation paths for the request that fits no category, because there is always one.",
         ],
       },
+      {
+        heading: "A checklist before you fund the path to production",
+        paragraphs: [
+          "Before you scale a pilot, make it answer these. If it cannot, it has been demonstrated, not de-risked, and the gap is exactly where the budget disappears.",
+        ],
+        list: [
+          "What does it do when the input is wrong? A shrug is not an answer; a safe, logged failure is.",
+          "Who is paged when it fails, and what can they actually do about it at 2am?",
+          "How do you turn it off in isolation, without turning off everything around it?",
+          "How do you know it is still correct next month, not just correct in the demo?",
+          "What does one unit of work cost, and what stops that cost from running away?",
+        ],
+      },
+      {
+        heading: "How to build for production from the start",
+        paragraphs: [
+          "The teams that ship do not bolt this on at the end. They scope from first principles: what the system must never do, how it fails, who owns each failure, and what correct means, all before a line is written. The prototype informs that scope. It does not define it.",
+          "That is how Stallwart builds. We treat the interesting 20 percent as the easy part, because it is, and put the engineering into the 80 percent that decides whether the thing runs unattended, stays auditable, and remains yours to own and extend. A system you cannot maintain without us is not a system we would ship.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Most enterprise AI fails after the pilot, not during it, and the model is rarely the cause.",
+      "A demo and a production system are different engineering problems; the second is what you are buying.",
+      "The 80 percent that decides it: validation, retries, permissions, observability, rollback, cost control, and escalation.",
+      "De-risk a pilot by making it answer what it does on bad input, who is paged, how to turn it off, how you know it stays correct, and what it costs.",
     ],
     qa: [
       {
         question: "Why do most enterprise AI projects fail to reach production?",
         answer:
-          "Because the pilot proves the model can do the interesting part, which was never the risk. The failure lives in the surrounding system: input validation, retries, permissions, observability, audit, and rollback. That 80 percent is skipped in a pilot and is exactly what production requires.",
+          "Because the pilot proves the model can do the interesting part, which was never the real risk. The failure lives in the surrounding system: input validation, retries, permissions, observability, audit, rollback, and cost control. That load-bearing 80 percent is skipped in a pilot and is exactly what production requires.",
       },
       {
         question:
           "What is the difference between an AI demo and an AI system in production?",
         answer:
-          "A demo runs once on chosen input with a person watching. Production runs continuously on unpredictable input with nobody watching. They are different engineering problems, and observability, evaluation, and rollback are what separate them.",
+          "A demo runs once on chosen input with a person watching. Production runs continuously on unpredictable input with nobody watching. They are different engineering problems, and observability, evaluation, rollback, and safe failure are what separate them.",
+      },
+      {
+        question: "How do you take an AI proof of concept to production?",
+        answer:
+          "Scope from first principles rather than from the prototype: define what the system must never do, how it fails, who owns each failure, and what correct means. Then build the 80 percent a pilot skips, validation, retries, permissions, observability, and rollback, and treat evaluation as continuous rather than a one-time check.",
       },
       {
         question: "How do you de-risk an AI pilot before scaling it?",
         answer:
-          "Require it to answer three questions: what it does when input is wrong, who is paged on failure and what they can do, and how it can be turned off in isolation. A pilot that cannot answer these has been demonstrated, not de-risked.",
+          "Require it to answer five questions: what it does when input is wrong, who is paged on failure and what they can do, how it can be turned off in isolation, how you know it stays correct over time, and what one unit of work costs. A pilot that cannot answer these has been demonstrated, not de-risked.",
+      },
+      {
+        question: "Is the model the reason most AI projects stall?",
+        answer:
+          "Rarely. In practice the model does the interesting part well; the project stalls on the engineering around it. That is why swapping models seldom rescues a stalled project, and why the durable fix is building the production system, not tuning the demo.",
       },
     ],
   },
   {
     slug: "ai-governance-before-the-audit",
     kind: "article",
-    title: "AI governance before the audit, not after",
+    title: "AI governance checklist: audit-ready for SOC 2, ISO 42001, EU AI Act",
     excerpt:
-      "Most teams assemble AI governance the week a regulator, customer, or board asks. By then the finding is already written. The absence of an answer is the finding.",
+      "Most teams assemble AI governance the week a regulator, customer, or board asks, and by then the finding is already written. Here is what SOC 2, ISO 42001, and the EU AI Act actually want, and the checklist that keeps you ready before the question comes.",
     topic:
-      "AI governance, AI compliance, EU AI Act, ISO 42001, SOC 2, AI audit readiness, AI risk management",
+      "AI governance, AI governance checklist, AI compliance, EU AI Act, EU AI Act compliance, ISO 42001, ISO/IEC 42001, SOC 2, AI audit readiness, AI risk management, AI governance framework",
     offering: "sillage",
     publishedAt: "2026-02-25",
-    readingMinutes: 6,
+    readingMinutes: 8,
+    diagram: "governance-layers",
     sections: [
       {
         heading: "The exposure is not that AI makes mistakes",
         paragraphs: [
           "Every model makes mistakes; that is priced in. The exposure that ends careers is different: when a regulator, an enterprise customer, or a board member asks how a specific decision was reached, nobody can answer. The absence of an answer is the finding. It does not matter that the decision was probably fine. Governance is being able to account for it, on demand, in writing.",
-          "Frameworks are converging on exactly this. SOC 2 asks which controls you operate and whether they held. ISO/IEC 42001 asks for a managed AI management system, not a good intention. The EU AI Act asks for documentation, risk classification, human oversight, and logging for higher-risk uses. All three reward the same thing: an evidence trail that already exists.",
+          "So the real question is not whether your AI is accurate. It is whether, on the day you are asked, you can produce the record: what was running, what data it saw, what it decided, who was accountable, and what stopped it from doing something it should not. If that record has to be assembled after the question, you have already lost the argument.",
+        ],
+      },
+      {
+        heading: "What SOC 2, ISO 42001, and the EU AI Act actually ask for",
+        paragraphs: [
+          "The three frameworks people worry about are asking for the same underlying thing in different vocabularies. SOC 2 is about controls: which ones you operate around access, change, and monitoring, and evidence that they held over a period. It cares less about your AI being clever and more about whether the controls around it are real and documented.",
+          "ISO/IEC 42001 asks for an AI management system: a governed, repeatable way of deciding what AI you deploy, how you assess its risks, who is accountable, and how you review it over time. It rewards a system, not a memo written the night before.",
+          "The EU AI Act is risk-tiered. Many business uses are limited or minimal risk with light transparency duties, but higher-risk uses carry real obligations: documentation, risk management, human oversight, logging, and traceability. The through-line across all three is the same, an evidence trail that already exists when someone asks for it.",
         ],
       },
       {
         heading: "Governance assembled after the fact is theatre",
         paragraphs: [
           "The common pattern is a scramble. The week before a review, a team reconstructs what its AI systems do from memory, screenshots, and hope. What they produce is a snapshot, not a control. It describes what the system was that week, not what it does, and an auditor who has seen it before knows the difference.",
-          "The alternative is to make the record a byproduct of running the system rather than a project. An inventory that updates as systems ship. A written basis for each decision, kept current. Runtime controls that actually intervene, so policy is enforced rather than filed. Logs and approvals assembled continuously, so an audit is a query against evidence that already exists.",
+          "The alternative is to make the record a byproduct of running the system rather than a project. An inventory that updates as systems ship. A written basis for each decision, kept current. Runtime controls that actually intervene, so policy is enforced rather than filed. Logs and approvals assembled continuously, so an audit becomes a query against evidence that already exists.",
+        ],
+      },
+      {
+        heading: "An AI governance checklist you can keep current",
+        paragraphs: [
+          "You do not need all of this on day one. You need each item to be a byproduct of running the system, not a document you regenerate under pressure.",
+        ],
+        list: [
+          "A live inventory of every model in use, the data it touches, and the decisions it influences.",
+          "A written, current basis for how each system decides, and what it is explicitly not allowed to decide.",
+          "Risk classification per use case, mapped to the obligations that tier actually triggers.",
+          "Human oversight and escalation built in, so high-stakes decisions route to a person by design, not by luck.",
+          "Runtime controls that enforce policy at the moment of the decision, not a policy document that describes it.",
+          "Continuous logging of inputs, outputs, approvals, and overrides, retained and queryable.",
+          "Rollback, so any automated action can be reversed and re-run under review.",
+          "A named owner for each system and each control.",
         ],
       },
       {
         heading: "What a governable AI system looks like",
         paragraphs: [
-          "It knows what is running: a live register of every model in use, the data each touches, and the decisions each influences. It can explain itself: a plain-language account of how each system decides and what it is not permitted to decide. It escalates: the decisions it should never make alone route to a human by design, not by luck. And it is reversible: every automated action is logged and can be rolled back.",
+          "Put simply, a governable system does four things. It knows what is running: a live register of every model, the data each touches, and the decisions each influences. It can explain itself: a plain-language account of how each system decides and what it is not permitted to decide. It escalates: the decisions it should never make alone route to a human by design. And it is reversible: every automated action is logged and can be rolled back.",
           "This is the layer Sillage is being built to stand up, and it is the same governance layer every Stallwart system ships with. Governance you can produce on the day you are asked is the only kind that counts.",
         ],
       },
+    ],
+    keyTakeaways: [
+      "The costly exposure is not that AI errs; it is being unable to account for a decision when asked.",
+      "SOC 2, ISO 42001, and the EU AI Act reward the same thing: an evidence trail that already exists.",
+      "Governance assembled the week of a review is a snapshot, not a control, and auditors can tell.",
+      "A governable system knows what is running, explains itself, escalates, and is reversible.",
     ],
     qa: [
       {
@@ -149,6 +234,16 @@ export const blogPosts: BlogPost[] = [
           "They reward the same thing: an evidence trail that already exists. SOC 2 asks which controls you operate and whether they held, ISO/IEC 42001 asks for a managed AI management system, and the EU AI Act asks for documentation, risk classification, human oversight, and logging for higher-risk uses.",
       },
       {
+        question: "What belongs on an AI governance checklist?",
+        answer:
+          "A live model inventory, a written basis for how each system decides and what it may not decide, per-use-case risk classification, human oversight and escalation, runtime policy enforcement, continuous logging of inputs, outputs, and approvals, rollback, and a named owner for each system and control.",
+      },
+      {
+        question: "Does the EU AI Act apply to my AI system?",
+        answer:
+          "It depends on the use case, because the Act is risk-tiered. Many business uses are limited or minimal risk with light transparency duties, while higher-risk uses carry documentation, risk-management, human-oversight, and logging obligations. The practical move is to classify each use case early and map it to the obligations that tier triggers.",
+      },
+      {
         question: "What makes an AI system governable?",
         answer:
           "Four properties: a live inventory of what is running, a written basis for how each system decides, escalation of decisions it should not make alone, and reversibility so every automated action is logged and can be rolled back.",
@@ -158,14 +253,15 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "outbound-is-a-research-problem",
     kind: "article",
-    title: "Outbound was never a sending problem. It is a research problem.",
+    title: "AI SDR: why outbound is a research problem, not a sending one",
     excerpt:
       "Most teams try to fix outbound by sending more. The constraint was never volume. It is the account research every good message depends on, and that is exactly the step an AI SDR can finally carry at scale.",
     topic:
-      "AI SDR, AI outbound, autonomous outbound, outbound sales automation, account research, AI GTM engine, cold email personalization",
+      "AI SDR, what is an AI SDR, AI sales development rep, AI outbound, autonomous outbound, outbound sales automation, account research, AI GTM engine, cold email personalization, personalization at scale",
     offering: "extrovert-ai",
     publishedAt: "2026-02-04",
-    readingMinutes: 7,
+    readingMinutes: 9,
+    diagram: "outbound-research",
     sections: [
       {
         heading: "The tool stack solved the wrong half of outbound",
@@ -208,7 +304,18 @@ export const blogPosts: BlogPost[] = [
           "Three signs. Reply rates are falling while send volume is flat or rising. Reps describe outreach as a numbers game rather than an account game. And nobody can tell you, for a given campaign, what the messages actually said about the accounts. If those are true, the constraint is not your sequencer or your data provider. It is that the research step was quietly deleted to hit activity targets.",
           "That is the specific gap Extrovert AI exists to close. Not making reps faster at sending, which was never the bottleneck, but doing the account research on every prospect so the message earns the send, then following up on the right cadence, scoring the reply on real intent, and booking the meeting. Outbound stops being a volume game and returns to being an account game, at a scale no human team could ever staff.",
         ],
+        list: [
+          "Reply rates are falling while send volume is flat or rising.",
+          "Reps describe outreach as a numbers game rather than an account game.",
+          "For a given campaign, nobody can say what the messages actually said about the accounts.",
+        ],
       },
+    ],
+    keyTakeaways: [
+      "Outbound tools scaled sending; the constraint was always research, which does not scale by hand.",
+      "An AI SDR automates the research a rep skips under quota, not just the sending, which is why it moves the number.",
+      "Once research scales, personalization and volume stop being a trade-off, and relevance protects deliverability.",
+      "The human still takes the meeting; the system runs the motion up to it.",
     ],
     qa: [
       {
@@ -242,16 +349,17 @@ export const blogPosts: BlogPost[] = [
     slug: "saas-outbound-booked-meetings-case-study",
     kind: "case-study",
     title:
-      "Case study: how a mid market SaaS team ran outbound to booked meetings without more SDRs",
+      "How a mid-market SaaS team booked meetings without hiring SDRs",
     excerpt:
       "A SaaS team was blasting a bought list and getting almost nothing. What changed when every account was researched before a word went out, and the whole motion ran itself to a booked meeting.",
     topic:
-      "SaaS outbound, AI SDR for SaaS, B2B outbound automation, account based outbound, booked meetings, cold email deliverability",
+      "SaaS outbound, AI SDR for SaaS, B2B outbound automation, account based outbound, how to improve outbound reply rates, booked meetings, cold email deliverability",
     offering: "extrovert-ai",
     industry: "SaaS Sales",
     persona: "VP of Sales at a 40 to 150 employee B2B SaaS company",
     publishedAt: "2026-01-15",
     readingMinutes: 7,
+    diagram: "before-after",
     sections: [
       {
         heading: "Where the work was breaking",
@@ -316,17 +424,17 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "agency-pipeline-case-study",
     kind: "case-study",
-    title:
-      "Case study: keeping agency pipeline full through delivery crunches, with automated outbound",
+    title: "How an agency kept its pipeline full through delivery crunches",
     excerpt:
       "Agency new business dies every time delivery gets busy. What changes when researched outbound runs continuously, whether or not anyone has the hours to do it.",
     topic:
-      "agency outbound, agency business development, AI SDR for agencies, outbound automation, pipeline consistency",
+      "agency outbound, how to keep agency pipeline full, agency business development, AI SDR for agencies, outbound automation, pipeline consistency",
     offering: "extrovert-ai",
     industry: "Agencies",
     persona: "Head of Growth or founder at a 10 to 60 person B2B agency",
     publishedAt: "2026-01-15",
     readingMinutes: 6,
+    diagram: "agency-continuity",
     sections: [
       {
         heading: "Where the work was breaking",
@@ -384,16 +492,17 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "small-team-follow-up-case-study",
     kind: "case-study",
-    title: "Case study: how a five person team ran enterprise grade outbound",
+    title: "How a 5-person team ran enterprise-grade outbound, no sales ops",
     excerpt:
       "Small teams lose outbound to the research and follow up they have no hours for, not to product. What changes when the whole motion runs without a sales ops function.",
     topic:
-      "small business outbound, SMB sales automation, AI SDR for small teams, outbound without headcount, founder led sales",
+      "small business outbound, SMB outbound automation, SMB sales automation, AI SDR for small teams, outbound without headcount, founder led sales",
     offering: "extrovert-ai",
     industry: "SMB",
     persona: "Founder or sales lead at a 5 to 25 person B2B company",
     publishedAt: "2026-01-15",
     readingMinutes: 6,
+    diagram: "small-team-stack",
     sections: [
       {
         heading: "Where the work was breaking",
@@ -448,7 +557,367 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "what-is-an-ai-sdr",
+    kind: "article",
+    title: "What is an AI SDR? A plain-English guide",
+    excerpt:
+      "An AI SDR runs the outbound motion a sales development rep does before the conversation, research, writing, sending, follow-up, and booking, across every account at once. Here is what that means, how it differs from a sequencer, and where a human still belongs.",
+    topic:
+      "what is an AI SDR, AI SDR, AI sales development rep, AI SDR vs human SDR, autonomous outbound, AI GTM engine, AI outbound automation",
+    offering: "extrovert-ai",
+    publishedAt: "2026-03-04",
+    readingMinutes: 7,
+    diagram: "outbound-research",
+    sections: [
+      {
+        heading: "The short definition",
+        paragraphs: [
+          "An AI SDR is a system that runs the work a sales development rep does before a conversation happens: it researches target accounts, writes and sends outreach grounded in that research, follows up, scores replies on real intent, and books qualified meetings. The difference from a human SDR is not that it is faster at any one step. It is that it runs the whole motion across every account at once, instead of one list at a time.",
+          "The name is a useful shorthand, but the important word is not SDR. It is research. Outbound underperforms almost never because of sending; it underperforms because nobody had time to learn enough about each account to say something worth reading. An AI SDR carries exactly that step, at a scale no human team can staff.",
+        ],
+      },
+      {
+        heading: "What an AI SDR actually does",
+        paragraphs: [
+          "Point it at a target company and its website, and it runs the full sequence without a person driving each step.",
+        ],
+        list: [
+          "Researches the account: what the business does, what it runs, what changed recently, and why now.",
+          "Builds the target list and the specific angle for each contact worth reaching.",
+          "Writes personalized outreach grounded in that research, in your team's voice.",
+          "Sends it, then follows up on the cadence each account's engagement justifies.",
+          "Scores replies on real buying intent rather than politeness.",
+          "Books qualified meetings straight onto a rep's calendar.",
+        ],
+      },
+      {
+        heading: "AI SDR vs a sequencer vs a human SDR",
+        paragraphs: [
+          "A sequencer sends. It automates the delivery of a message you already wrote, to a list you already built. It does nothing about whether the message is worth sending, which is why bolting more sequencing onto weak outbound just scales the weakness.",
+          "A human SDR can research deeply, but only a handful of accounts a day, and research is the first thing that gets cut under quota. An AI SDR sits where the constraint actually is: it does the research on every account and writes from it, then handles the sending and follow-up a sequencer would, and the qualification a human would, up to the point a live conversation begins.",
+        ],
+      },
+      {
+        heading: "When a team needs an AI SDR",
+        paragraphs: [
+          "The clearest signal is reply rates falling while send volume holds or climbs, which means the channel is sending more of something that no longer works. Other signals: reps spending the day assembling outreach rather than talking to buyers, follow-up that dies because someone forgot the fourth touch, and outbound that pauses entirely whenever the team gets busy.",
+          "If those are true, the fix is not a bigger list or another SDR hire, which scale the part that was never the problem. It is automating the research and persistence so every account gets the outreach a strong rep would send on their best day.",
+        ],
+      },
+      {
+        heading: "Where the human still belongs",
+        paragraphs: [
+          "An AI SDR does not replace the rep; it relocates them. Discovery, reading the room, judgment about what to offer, and negotiation stay with a person, because those are the parts that genuinely need one. The system runs the motion up to the meeting; the human runs the meeting. It should also decline: an account that is plainly not a fit is skipped rather than blasted, which protects the sending reputation the whole channel depends on.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "An AI SDR runs the pre-conversation outbound motion, research, writing, sending, follow-up, scoring, and booking, across every account at once.",
+      "The value is automating research, the step humans skip under quota, not automating sending, which was never the constraint.",
+      "It differs from a sequencer (which only sends) and from a human SDR (who can only research a few accounts a day).",
+      "A person still takes the meeting; the system runs everything up to it.",
+    ],
+    qa: [
+      {
+        question: "What is an AI SDR?",
+        answer:
+          "An AI SDR is a system that runs the outbound work a sales development rep does before the conversation: researching accounts, writing and sending grounded outreach, following up, scoring replies, and booking meetings, across every account at once. A person still takes the booked conversation.",
+      },
+      {
+        question: "How is an AI SDR different from a sequencer?",
+        answer:
+          "A sequencer only automates sending a message you already wrote to a list you already built. An AI SDR does the research that decides whether a message is worth sending, writes from it, then handles sending, follow-up, and qualification. Sequencing scales delivery; an AI SDR scales relevance.",
+      },
+      {
+        question: "Does an AI SDR replace human sales reps?",
+        answer:
+          "No. It removes the research, sending, and follow-up that consume a rep's day and hands them the booked conversation. Discovery, judgment, and negotiation stay with the person.",
+      },
+      {
+        question: "How does an AI SDR personalize outreach at scale?",
+        answer:
+          "By automating account research. Given a company and its website, it researches the business, its market, and recent signals to find a specific reason to reach out, then writes from that research, so the thousandth message is as grounded as the first.",
+      },
+      {
+        question: "When should a team use an AI SDR?",
+        answer:
+          "When reply rates are falling despite steady or rising send volume, when reps spend the day assembling outreach instead of selling, or when outbound pauses whenever delivery gets busy. Those signal a research and persistence gap, which is exactly what an AI SDR closes.",
+      },
+    ],
+  },
+  {
+    slug: "ai-production-readiness-checklist",
+    kind: "article",
+    title: "AI production readiness checklist: is your AI ready to ship?",
+    excerpt:
+      "A working demo is not a shippable system. This is the production readiness checklist that separates the two, the questions to answer before you deploy, and the failure modes that sink AI projects after the pilot.",
+    topic:
+      "AI production readiness, AI readiness checklist, is my AI ready for production, AI production checklist, deploy AI to production, MLOps checklist, LLM in production",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-03-11",
+    readingMinutes: 8,
+    diagram: "pilot-production",
+    sections: [
+      {
+        heading: "What production readiness actually means",
+        paragraphs: [
+          "Production readiness is not whether the model works on a good day. It is whether the system around the model keeps working on a bad one: when the input is malformed, a dependency times out, traffic spikes, or a request arrives that fits no category you planned for. A demo answers can it work. Production readiness answers will it keep working, unattended, when nobody is watching.",
+          "The gap between the two is where most AI projects die, and it is almost never the model's fault. The pilot proves the interesting 20 percent; readiness is the load-bearing 80 percent the pilot skipped. Use the checklist below as a go or no-go gate before you fund a path to production.",
+        ],
+      },
+      {
+        heading: "The AI production readiness checklist",
+        paragraphs: [
+          "If you cannot answer yes to each of these, the system has been demonstrated, not readied. Treat any no as a build item, not a footnote.",
+        ],
+        list: [
+          "Inputs: malformed and adversarial input fails safely and is logged, never silently mishandled.",
+          "Reliability: every model and external call has timeouts, retries, and a defined fallback.",
+          "Evaluation: you can measure whether outputs are correct, and you run that continuously, not once.",
+          "Observability: logs and traces show what the system did and why, at the level of a single request.",
+          "Permissions: the system can only read and act within explicit data and access boundaries.",
+          "Rollback and versioning: any change can be reverted without taking down everything around it.",
+          "Cost and rate control: a loop or a spike cannot produce a runaway bill.",
+          "Human escalation: high-stakes or out-of-category requests route to a person by design.",
+          "Ownership: a named person is paged on failure and can act on it.",
+        ],
+      },
+      {
+        heading: "The go or no-go questions",
+        paragraphs: [
+          "Behind the checklist sit five questions any pilot must answer before it earns a production budget.",
+        ],
+        list: [
+          "What does it do when the input is wrong?",
+          "Who is paged when it fails, and what can they do at 2am?",
+          "How do you turn it off in isolation, without turning off everything around it?",
+          "How do you know it is still correct next month, not just correct in the demo?",
+          "What does one unit of work cost, and what stops that cost from running away?",
+        ],
+      },
+      {
+        heading: "The failure modes that sink AI after the pilot",
+        paragraphs: [
+          "The common ones are predictable. Silent failure, where a bad output looks like a good one and nobody notices until a customer does. No evaluation, so quality drifts and the team finds out from complaints. No rollback, so a bad change means an outage instead of an undo. And runaway cost, where a retry loop or a traffic spike turns a small feature into a large invoice. Every one of these is a system problem, not a model problem, which is why swapping models rarely fixes them.",
+        ],
+      },
+      {
+        heading: "How to get to production, not just to a demo",
+        paragraphs: [
+          "Scope from first principles rather than from the prototype: define what the system must never do, how it fails, who owns each failure, and what correct means, before a line is written. Build the checklist items as part of the system, not a later phase. And treat evaluation as continuous, so you learn about drift from a dashboard rather than a customer.",
+          "That is how Stallwart builds. The interesting 20 percent is the easy part; the engineering goes into the 80 percent that decides whether the thing runs unattended, stays auditable, and remains yours to own and extend.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Production readiness is about the system around the model, not the model on a good day.",
+      "Work the checklist: safe inputs, reliability, evaluation, observability, permissions, rollback, cost control, escalation, and ownership.",
+      "Answer five go or no-go questions before funding production: bad input, paging, isolation, ongoing correctness, and cost.",
+      "The failure modes that sink AI after the pilot, silent failure, no evals, no rollback, runaway cost, are system problems, not model problems.",
+    ],
+    qa: [
+      {
+        question: "What is AI production readiness?",
+        answer:
+          "Production readiness is whether the system around a model keeps working under bad conditions, malformed input, failed dependencies, spikes, and out-of-category requests, unattended. It is distinct from a demo, which only proves the model can work on chosen input with a person watching.",
+      },
+      {
+        question: "What is on an AI production readiness checklist?",
+        answer:
+          "Safe handling of malformed and adversarial input, timeouts and retries and fallbacks, continuous evaluation, request-level observability, explicit permissions, rollback and versioning, cost and rate control, human escalation, and a named owner who is paged on failure.",
+      },
+      {
+        question: "How do I know if my AI is ready for production?",
+        answer:
+          "Make it answer five questions: what it does on wrong input, who is paged on failure and what they can do, how to turn it off in isolation, how you know it stays correct over time, and what one unit of work costs. If it cannot, it has been demonstrated, not readied.",
+      },
+      {
+        question: "Why do AI projects fail after the pilot?",
+        answer:
+          "Because the pilot proves the model, which was never the risk, and skips the system: input validation, reliability, evaluation, observability, rollback, and cost control. Those show up only in production, which is why failures cluster after the pilot rather than during it.",
+      },
+    ],
+  },
+  {
+    slug: "ai-gtm-engine-autonomous-outbound",
+    kind: "article",
+    title: "AI GTM engine: how autonomous outbound replaces the SDR stack",
+    excerpt:
+      "The outbound stack automated sending and left the hard part, research and judgment, to people who ran out of hours. An AI GTM engine runs the whole motion instead. Here is what autonomous outbound means, and what it does not.",
+    topic:
+      "AI GTM engine, autonomous outbound, AI outbound, outbound automation, go to market automation, replace SDR stack, AI SDR, AI go to market",
+    offering: "extrovert-ai",
+    publishedAt: "2026-03-18",
+    readingMinutes: 8,
+    diagram: "small-team-stack",
+    sections: [
+      {
+        heading: "What an AI GTM engine is",
+        paragraphs: [
+          "An AI GTM engine is a single system that runs the outbound go-to-market motion end to end: it researches accounts, decides who to contact and why, writes and sends grounded outreach, follows up, scores replies, and books meetings. It replaces a stack of disconnected tools, and the coordination work between them, with one system that owns the whole sequence.",
+          "The distinction that matters is not that it uses AI. It is where the AI is applied. Bolting a language model onto a sequencer to generate email variants is still a sending tool. An engine applies the intelligence to the step that actually decides outcomes, the research and judgment about each account, and then carries the message all the way to a booked conversation.",
+        ],
+      },
+      {
+        heading: "The old stack versus one engine",
+        paragraphs: [
+          "The typical outbound stack is a data provider, an enrichment tool, a sequencer, a deliverability layer, a scheduler, and a CRM, stitched together by a person. Every tool optimizes sending; none of them owns whether the message was worth sending, and the human in the middle is the one expected to supply the research and judgment the tools cannot.",
+          "An AI GTM engine collapses that. Instead of a person coordinating six tools and supplying the missing research, one system runs the motion and does the research itself. The output is not more sends. It is booked meetings, which is the number the stack was never actually optimizing for.",
+        ],
+      },
+      {
+        heading: "What autonomous actually means",
+        paragraphs: [
+          "Autonomous does not mean unaccountable. A good engine runs on a dial. At one end, it drafts everything and holds each message for a one-click approval, so a person stays in the loop while trust is built. At the other, it runs the full motion on its own. Teams usually start with approval on and move the dial as they see the outreach hold up.",
+          "It also has to know when not to act. An account that is plainly not a fit should be skipped, not messaged, because every irrelevant send spends a little sending reputation. Autonomy without that judgment is just faster spam, which is the opposite of the point.",
+        ],
+      },
+      {
+        heading: "Why this protects the channel, not just the number",
+        paragraphs: [
+          "Generic outreach at volume trains inbox providers to distrust the sending domain, which quietly buries the legitimate messages too. Because an engine researches before it writes and declines poor-fit accounts, it generates engagement rather than complaints, and the sending reputation the whole channel depends on survives contact with scale. Relevance and deliverability turn out to be the same lever seen from two sides.",
+        ],
+      },
+      {
+        heading: "Where an AI GTM engine fits",
+        paragraphs: [
+          "It fits any team where sending was never the bottleneck and research was: founder-led sales with no hours for it, SDR teams losing the day to admin, revenue leaders who want more accounts worked without more headcount, agencies running outbound for clients, and lean teams scaling without a sales-ops hire. The engine runs the motion; people take the conversations it produces.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "An AI GTM engine runs the outbound motion end to end and replaces the coordinated tool stack, not just the sequencer.",
+      "The intelligence belongs on research and judgment, the step that decides outcomes, not on generating more email variants.",
+      "Autonomous means a dial: hold every message for approval, or run the full motion, and move between them as trust builds.",
+      "Because it researches and declines poor-fit accounts, it protects sending reputation instead of burning it.",
+    ],
+    qa: [
+      {
+        question: "What is an AI GTM engine?",
+        answer:
+          "An AI GTM engine is a single system that runs the outbound go-to-market motion end to end, research, targeting, writing, sending, follow-up, reply scoring, and booking, replacing a stack of disconnected tools and the person who used to coordinate them.",
+      },
+      {
+        question: "What is autonomous outbound?",
+        answer:
+          "Outbound that runs the full motion without a person driving each step, on a dial from holding every message for approval to running entirely on its own. Autonomous does not mean unaccountable: a good engine also declines poor-fit accounts rather than messaging everyone.",
+      },
+      {
+        question:
+          "How is an AI GTM engine different from adding AI to a sequencer?",
+        answer:
+          "A sequencer with AI still only sends; it generates variants of a message to a list you built. An engine applies the intelligence to the research and judgment that decide whether a message is worth sending, then carries it to a booked meeting. One scales sending, the other scales relevance.",
+      },
+      {
+        question: "Does autonomous outbound hurt email deliverability?",
+        answer:
+          "Done badly, any high-volume outbound hurts deliverability. Done well, an engine that researches before it writes and skips poor-fit accounts generates engagement instead of spam complaints, which protects the sending domain. The differentiator is relevance, not volume.",
+      },
+    ],
+  },
+  {
+    slug: "adding-ai-to-your-product",
+    kind: "article",
+    title: "Adding AI to your product without the pilot graveyard",
+    excerpt:
+      "A working AI demo inside your product is the easy part. The reason most AI features never ship is the scaffolding around them. Here is how to add AI to a product so it survives real users, and how to scope the feature so it ships.",
+    topic:
+      "how to add AI to your product, building AI features, AI product development, AI native product, ship AI features, AI feature engineering, LLM feature in product",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-03-25",
+    readingMinutes: 8,
+    diagram: "ai-in-product",
+    sections: [
+      {
+        heading: "Why most AI features never ship",
+        paragraphs: [
+          "Adding AI to a product usually starts well. Someone wires a model to a promising use case, the demo lands in a review, and the feature is declared nearly done. Then it meets real users, and the gap opens: the model that summarized three clean inputs now faces pasted noise, missing context, prompt injection, a spike of traffic, and an output that is confidently wrong in a way a customer will screenshot. The feature was built; the feature that ships was not.",
+          "This is the product version of why AI pilots do not reach production. The interesting part, the model doing something clever, is the 20 percent. The 80 percent that decides whether it ships is the scaffolding around it, and that scaffolding is exactly what a demo is allowed to skip.",
+        ],
+      },
+      {
+        heading: "The feature is the easy part",
+        paragraphs: [
+          "For an AI feature to survive contact with users, the work is mostly around the model, not inside it. Treat these as part of the feature, not a later hardening phase, because retrofitting them after launch is how features get pulled.",
+        ],
+        list: [
+          "Input handling: validate, bound, and sanitize what reaches the model, including hostile input and prompt injection.",
+          "Evaluation: a way to measure whether outputs are good, run continuously, so quality drift is visible before customers find it.",
+          "Guardrails: constraints on what the feature can output or do, and a safe response when it hits them.",
+          "Fallbacks: a defined behavior when the model is slow, wrong, or unavailable, so the product degrades gracefully.",
+          "Observability: request-level logs and traces, so you can explain and debug a specific bad output.",
+          "Cost and latency control, so a feature does not become an unpredictable line on the bill or a slow path in the UI.",
+        ],
+      },
+      {
+        heading: "Buy the model, build the system",
+        paragraphs: [
+          "The model is increasingly a commodity you rent: a managed API, or an open-weight model you host where data residency requires it. That choice matters, but it is not the moat and it is not the risk. The defensible, hard part is the system that turns a general model into a feature your users trust: the data you ground it on, the evaluation that keeps it honest, and the product surface around it. Swapping the underlying model should be a config change, not a rebuild, which is only true if the system was built to make it so.",
+        ],
+      },
+      {
+        heading: "How to scope an AI feature so it ships",
+        paragraphs: [
+          "Start from the failure, not the demo. Define what the feature must never do, how it behaves when the model is wrong, and what correct looks like well enough to measure. Decide where a human stays in the loop for the high-stakes cases. Then build the smallest version that is genuinely production-ready, rather than the most impressive version that is only demo-ready. A narrow feature that users trust beats a broad one they learn to distrust.",
+        ],
+      },
+      {
+        heading: "Building more with AI, safely",
+        paragraphs: [
+          "The upside is real. Once a team can ship AI features that survive users, AI stops being a risky one-off and becomes a way to build more product, faster. Capabilities that were previously too fuzzy to attempt become tractable, because the scaffolding that makes fuzzy things reliable already exists. That is the position worth reaching, and it is what Stallwart builds toward: AI-native products where the interesting part is the feature and the part that decides whether it ships is handled.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "A working AI demo inside a product is the easy 20 percent; the scaffolding around it is what ships.",
+      "Build input handling, evaluation, guardrails, fallbacks, observability, and cost control as part of the feature, not later.",
+      "Buy the model, build the system: model choice should be a config change, not the moat or the risk.",
+      "Scope from the failure, ship the smallest genuinely production-ready version, and keep a human in the loop for high-stakes cases.",
+    ],
+    qa: [
+      {
+        question: "How do you add AI to a product?",
+        answer:
+          "Wire a model to a specific use case, then build the scaffolding that makes it trustworthy with real users: input validation, continuous evaluation, guardrails, fallbacks, observability, and cost control. The model is the easy part; the system around it is what decides whether the feature ships.",
+      },
+      {
+        question: "Why do AI features fail to ship?",
+        answer:
+          "Because the demo proves the model on clean input, and real users bring noise, missing context, prompt injection, spikes, and confidently wrong outputs. Without evaluation, guardrails, fallbacks, and observability, the feature works in review and breaks in production, so it gets pulled.",
+      },
+      {
+        question: "Should you build or buy the AI model for a product feature?",
+        answer:
+          "Rent the model, whether a managed API or a self-hosted open-weight model for data residency, and build the system around it. The model is a commodity; the defensible, hard part is grounding data, evaluation, and the product surface. Model choice should be a config change, not a rebuild.",
+      },
+      {
+        question: "How do you scope an AI feature so it actually ships?",
+        answer:
+          "Start from failure: define what the feature must never do, how it behaves when the model is wrong, and what correct means, measurably. Keep a human in the loop for high-stakes cases, and ship the smallest version that is genuinely production-ready rather than the most impressive demo.",
+      },
+    ],
+  },
 ];
+
+// Reading time is computed from the actual body, not hand-typed, so it stays
+// correct whenever content changes. The `readingMinutes` in the raw data above
+// is a seed and is overwritten here. ~220 words per minute.
+function estimateReadingMinutes(post: BlogPost): number {
+  const text = [
+    ...post.sections.flatMap((s) => [...s.paragraphs, ...(s.list ?? [])]),
+    ...(post.keyTakeaways ?? []),
+    ...(post.outcomes ?? []),
+    ...post.qa.flatMap((q) => [q.question, q.answer]),
+  ].join(" ");
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 220));
+}
+
+export const blogPosts: BlogPost[] = rawBlogPosts.map((p) => ({
+  ...p,
+  readingMinutes: estimateReadingMinutes(p),
+}));
 
 export function getBlogPost(slug: string) {
   return blogPosts.find((p) => p.slug === slug);
