@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { blogPosts, caseStudyPosts, articlePosts } from "@/data/blog";
+import { BlogPostRow } from "@/components/BlogReadState";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, blogListSchema, pageMeta } from "@/lib/seo";
 
@@ -70,41 +70,7 @@ export default function BlogIndexPage() {
                senior than a card grid and fits more in less height. */
             <ol className="border-t border-[var(--hairline)]">
               {blogPosts.map((post) => (
-                <li key={post.slug} className="border-b border-[var(--hairline)]">
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="row-nudge group grid items-baseline gap-2 py-5 sm:grid-cols-[7rem_minmax(0,1fr)_auto] sm:gap-6"
-                  >
-                    <span
-                      className={`font-mono text-[10px] uppercase tracking-[0.14em] ${
-                        post.kind === "case-study"
-                          ? "text-[var(--accent-text)]"
-                          : "text-[var(--fg)]/60"
-                      }`}
-                    >
-                      {post.kind === "case-study" ? "Case study" : "Article"}
-                    </span>
-
-                    <span className="min-w-0">
-                      <span className="font-display block text-[length:var(--text-step-2)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
-                        {post.title}
-                      </span>
-                      <span className="mt-1 block truncate text-sm text-[var(--fg)]/70">
-                        {post.excerpt}
-                      </span>
-                    </span>
-
-                    <span className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/60">
-                      {post.readingMinutes}m
-                      <span
-                        aria-hidden="true"
-                        className="arrow-shift text-[var(--accent-text)]"
-                      >
-                        →
-                      </span>
-                    </span>
-                  </Link>
-                </li>
+                <BlogPostRow key={post.slug} post={post} />
               ))}
             </ol>
           )}

@@ -5,6 +5,7 @@ import { blogPosts, getBlogPost } from "@/data/blog";
 import { getOffering } from "@/data/offerings";
 import { site } from "@/data/site";
 import { JsonLd } from "@/components/JsonLd";
+import { MarkPostRead } from "@/components/BlogReadState";
 import { articleSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -43,6 +44,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <MarkPostRead slug={post.slug} />
       <JsonLd
         schema={[
           articleSchema({

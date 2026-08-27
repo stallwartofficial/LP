@@ -109,8 +109,10 @@ export default function PrivacyPage() {
                 <strong className="font-medium text-[var(--fg)]">
                   Essential.
                 </strong>{" "}
-                Your theme and cookie choices are kept in your browser&apos;s
-                local storage and never sent to us. No tracking is involved.
+                Your theme and cookie choices, and which articles you have
+                opened, are kept in your browser&apos;s local storage so the site
+                feels familiar when you return. This stays on your device, is
+                never sent to us, and involves no tracking.
               </li>
               <li>
                 <strong className="font-medium text-[var(--fg)]">
