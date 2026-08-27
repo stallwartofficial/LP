@@ -10,8 +10,8 @@ export function Footer() {
   return (
     <footer className="rule-t px-[var(--space-gutter)] pb-10 pt-[var(--space-section)]">
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)]">
-          <div>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
+          <div className="col-span-2 lg:col-span-1">
             {/* Brand sign-off: the emblem over the wordmark. Reuses the 19KB
                 navbar mark, so no extra asset weight. */}
             <Image

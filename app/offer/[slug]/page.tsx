@@ -311,34 +311,40 @@ export default async function OfferingPage({ params }: Props) {
             ← Everything we build
           </Link>
 
-          <div className="mt-7 grid gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,1fr)_23rem] lg:items-start">
-            {/* Left: the pitch. */}
-            <div>
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="eyebrow">{offering.category}</span>
-                <StatusPill status={offering.status} />
+          <div className="mt-7 flex flex-col gap-y-6 lg:grid lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-x-12 lg:gap-y-10 lg:items-start">
+            {/* Left: the pitch. `contents` on mobile so the action card slots
+                between the intro/quote and the deeper paragraph/map. */}
+            <div className="contents lg:col-start-1 lg:row-start-1 lg:flex lg:flex-col">
+              {/* Intro + quote: above the card on every breakpoint. */}
+              <div className="order-1 lg:order-none">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="eyebrow">{offering.category}</span>
+                  <StatusPill status={offering.status} />
+                </div>
+
+                <h1 className="font-display mt-5 text-display-lg font-light">
+                  {offering.name}
+                </h1>
+                <p className="mt-4 max-w-2xl text-[length:var(--text-step-2)] font-light text-[var(--fg)]/60">
+                  {offering.tagline}
+                </p>
+
+                {/* The problem, the one-line hook, stays above the card. */}
+                <p className="mt-8 max-w-2xl border-l-2 border-[var(--accent)] pl-5 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
+                  {offering.problem}
+                </p>
               </div>
 
-              <h1 className="font-display mt-5 text-display-lg font-light">
-                {offering.name}
-              </h1>
-              <p className="mt-4 max-w-2xl text-[length:var(--text-step-2)] font-light text-[var(--fg)]/60">
-                {offering.tagline}
-              </p>
-
-              {/* The problem, stated before the pitch. */}
-              <p className="mt-9 max-w-2xl border-l-2 border-[var(--accent)] pl-5 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85">
-                {offering.problem}
-              </p>
-
+              {/* The deeper read: after the card on mobile. */}
+              <div className="order-3 lg:order-none">
               {!offering.howItWorks && (
-                <p className="mt-7 max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
+                <p className="max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75 lg:mt-7">
                   {offering.description}
                 </p>
               )}
 
               {inDevelopment && (
-                <p className="mt-9 max-w-2xl rounded-2xl border border-[var(--accent)]/30 bg-[var(--surface)] p-6 text-sm text-[var(--fg)]/75">
+                <p className="mt-6 max-w-2xl rounded-2xl border border-[var(--accent)]/30 bg-[var(--surface)] p-6 text-sm text-[var(--fg)]/75 lg:mt-9">
                   <strong className="font-medium text-[var(--fg)]">
                     This offering is still being built.
                   </strong>{" "}
@@ -351,7 +357,7 @@ export default async function OfferingPage({ params }: Props) {
 
               {/* How-it-works map, filling the space beneath the intro. */}
               {offering.howItWorks && (
-                <div className="mt-10">
+                <div className="mt-2 lg:mt-10">
                   <div className="flex items-center gap-3">
                     <span
                       aria-hidden="true"
@@ -368,10 +374,12 @@ export default async function OfferingPage({ params }: Props) {
                   />
                 </div>
               )}
+              </div>
             </div>
 
-            {/* Right: sticky glass action card. */}
-            <aside className="relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/55 p-6 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl lg:sticky lg:top-24">
+            {/* Right: sticky glass action card. Between intro/quote and the
+                deeper read on mobile (order-2); right column on desktop. */}
+            <aside className="order-2 relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/55 p-5 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:p-6 lg:order-none lg:col-start-2 lg:row-start-1 lg:sticky lg:top-24">
               {/* Frosted-glass touches: a lit top edge and a soft gold sheen. */}
               <div
                 aria-hidden="true"
@@ -586,13 +594,21 @@ export default async function OfferingPage({ params }: Props) {
           <p className="eyebrow" id="built-for">
             Built for
           </p>
-          <div className="mt-8 grid gap-px overflow-hidden rounded-2xl bg-[var(--hairline)] sm:grid-cols-3">
-            {offering.builtFor.map((b, i) => (
+          {/* Mobile: two small cards per row; a lone final card (odd count)
+              spans full width with a larger icon. Desktop: three across. */}
+          <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-[var(--hairline)] sm:grid-cols-3">
+            {offering.builtFor.map((b, i) => {
+              const wide =
+                i === offering.builtFor.length - 1 &&
+                offering.builtFor.length % 2 === 1;
+              return (
               <Reveal
                 as="div"
                 index={i}
                 key={b.role}
-                className="group relative overflow-hidden bg-[var(--bg)] p-6 transition-colors duration-300 hover:bg-[var(--surface)]"
+                className={`group relative overflow-hidden bg-[var(--bg)] p-5 transition-colors duration-300 hover:bg-[var(--surface)] sm:p-6 ${
+                  wide ? "col-span-2 sm:col-span-1" : ""
+                }`}
               >
                 {/* Faint gold watermark numeral behind the content. Flat fill
                     and kept fully inside the cell so it never clips. */}
@@ -602,7 +618,13 @@ export default async function OfferingPage({ params }: Props) {
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="relative block text-[var(--accent-text)] transition-transform duration-300 group-hover:-translate-y-0.5">
+                <span
+                  className={`relative block text-[var(--accent-text)] transition-transform duration-300 group-hover:-translate-y-0.5 ${
+                    wide
+                      ? "[&>svg]:h-12 [&>svg]:w-12 sm:[&>svg]:h-9 sm:[&>svg]:w-9"
+                      : ""
+                  }`}
+                >
                   <PersonaIcon name={b.icon as keyof typeof personaIcons} />
                 </span>
                 <h3 className="font-display relative mt-4 text-[length:var(--text-step-1)] font-light leading-tight">
@@ -612,7 +634,8 @@ export default async function OfferingPage({ params }: Props) {
                   {b.note}
                 </p>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
           </div>
         </section>
@@ -634,21 +657,21 @@ export default async function OfferingPage({ params }: Props) {
               {inDevelopment ? "What it will do" : "How it works"}
             </h2>
 
-            <ol className="mt-10 grid gap-x-14 gap-y-10 sm:grid-cols-2">
+            <ol className="mt-8 grid grid-cols-2 gap-x-4 gap-y-7 sm:mt-10 sm:gap-x-14 sm:gap-y-10">
               {offering.capabilities.map((c, i) => (
                 <Reveal
                   as="li"
                   index={i}
                   key={c.title}
-                  className="group border-t border-[var(--hairline)] pt-5 transition-colors duration-300 hover:border-[var(--accent)]/50"
+                  className="group border-t border-[var(--hairline)] pt-4 transition-colors duration-300 hover:border-[var(--accent)]/50 sm:pt-5"
                 >
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--accent-text)]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent-text)] sm:text-[11px] sm:tracking-[0.22em]">
                     {c.eyebrow}
                   </span>
-                  <h3 className="font-display mt-3 text-[length:var(--text-step-2)] font-light leading-tight transition-colors duration-300 group-hover:text-[var(--accent-text)]">
+                  <h3 className="font-display mt-2 text-[length:var(--text-step-1)] font-light leading-tight transition-colors duration-300 group-hover:text-[var(--accent-text)] sm:mt-3 sm:text-[length:var(--text-step-2)]">
                     {c.title}
                   </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-[var(--fg)]/70">
+                  <p className="mt-2 text-[13px] leading-relaxed text-[var(--fg)]/70 sm:mt-2.5 sm:text-sm">
                     {c.description}
                   </p>
                 </Reveal>
@@ -732,30 +755,30 @@ export default async function OfferingPage({ params }: Props) {
 
             {/* Two-up cards plus a journal companion card, so a single related
                 post is never a stranded card in a wide empty row. */}
-            <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+            <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-5">
               {related.map((post, i) => {
                 const isCase = post.kind === "case-study";
                 return (
                   <Reveal as="li" index={i} key={post.slug}>
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="card-lift group flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-colors duration-300 hover:border-[var(--accent)]/40"
+                      className="card-lift group flex h-full flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-4 transition-colors duration-300 hover:border-[var(--accent)]/40 sm:p-6"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--accent-text)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[var(--accent)]/60">
+                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--accent-text)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[var(--accent)]/60 sm:h-10 sm:w-10">
                           {isCase ? <CaseStudyMark /> : <ArticleMark />}
                         </span>
-                        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-text)]">
+                        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--accent-text)] sm:text-[10px] sm:tracking-[0.14em]">
                           {isCase ? "Case study" : "Article"}
                         </span>
                       </div>
-                      <h3 className="font-display mt-5 text-[length:var(--text-step-1)] leading-tight transition-colors group-hover:text-[var(--accent-text)]">
+                      <h3 className="font-display mt-4 text-[length:var(--text-step-0)] leading-tight transition-colors group-hover:text-[var(--accent-text)] sm:mt-5 sm:text-[length:var(--text-step-1)]">
                         {post.title}
                       </h3>
-                      <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-[var(--fg)]/70">
+                      <p className="mt-2 hidden flex-1 text-sm leading-relaxed text-[var(--fg)]/70 sm:line-clamp-2 sm:block">
                         {post.excerpt}
                       </p>
-                      <div className="mt-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/55">
+                      <div className="mt-3 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--fg)]/55 sm:mt-5 sm:text-[10px] sm:tracking-[0.14em]">
                         <span>{post.readingMinutes}m read</span>
                         <span
                           aria-hidden="true"
@@ -773,20 +796,20 @@ export default async function OfferingPage({ params }: Props) {
               <Reveal as="li" index={related.length}>
                 <Link
                   href="/blog"
-                  className="card-lift group flex h-full flex-col justify-between rounded-2xl border border-dashed border-[var(--hairline-strong)] p-6 transition-colors duration-300 hover:border-[var(--accent)]/50"
+                  className="card-lift group flex h-full flex-col justify-between rounded-2xl border border-dashed border-[var(--hairline-strong)] p-4 transition-colors duration-300 hover:border-[var(--accent)]/50 sm:p-6"
                 >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--accent-text)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[var(--accent)]/60">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--accent-text)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[var(--accent)]/60 sm:h-10 sm:w-10">
                     <JournalMark />
                   </span>
-                  <div className="mt-5">
-                    <h3 className="font-display text-[length:var(--text-step-1)] leading-tight">
+                  <div className="mt-4 sm:mt-5">
+                    <h3 className="font-display text-[length:var(--text-step-0)] leading-tight sm:text-[length:var(--text-step-1)]">
                       More in the journal
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[var(--fg)]/60">
+                    <p className="mt-2 hidden text-sm leading-relaxed text-[var(--fg)]/60 sm:block">
                       Case studies and notes from the work.
                     </p>
                   </div>
-                  <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-text)]">
+                  <span className="mt-3 inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--accent-text)] sm:mt-5 sm:text-[10px] sm:tracking-[0.14em]">
                     Browse all
                     <span aria-hidden="true" className="arrow-shift">
                       →
