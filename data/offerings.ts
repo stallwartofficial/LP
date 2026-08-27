@@ -53,6 +53,19 @@ export type Offering = {
   /** Optional compact pricing label for the action card, when the full
    *  sentence would make the card too tall. Falls back to `pricing`. */
   pricingShort?: string;
+  /** Optional explicit "what it does" motion for the action card, ending in
+   *  the outcome. Falls back to the capability labels when unset. The last
+   *  item renders as the accented outcome. */
+  motion?: string[];
+  /** When true, the offer page renders the pay-as-you-go usage estimator. */
+  usagePricing?: boolean;
+  /** Optional rich "how it works" map. When set, it replaces the capabilities
+   *  grid and the long description paragraph, and the card drops "What it does"
+   *  (this map tells that story in full). */
+  howItWorks?: {
+    steps: { icon: string; title: string; body: string }[];
+    logic: string[];
+  };
   /**
    * The system's signal path, rendered as a concept diagram beside its module
    * on the home page. This is NOT a mock dashboard: it states the actual
@@ -217,7 +230,45 @@ export const offerings: Offering[] = [
     category: "Product · Revenue",
     status: "available",
     pricing: "Subscription, priced to your outbound volume. Book a call for current plans.",
-    pricingShort: "Priced to outbound volume",
+    pricingShort: "Pay as you go, no subscription",
+    motion: ["Research", "Target", "Write and send", "Follow up", "Meeting booked"],
+    usagePricing: true,
+    howItWorks: {
+      steps: [
+        {
+          icon: "search",
+          title: "Research",
+          body: "AI researches ICPs, companies, decision-makers, and intent signals from across the web.",
+        },
+        {
+          icon: "target",
+          title: "Target",
+          body: "Identifies and prioritizes the right people to reach out to, by fit, timing, and likelihood to respond.",
+        },
+        {
+          icon: "pencil",
+          title: "Personalize and write",
+          body: "Crafts hyper-personalized outreach over email and LinkedIn, grounded in a relevant value proposition.",
+        },
+        {
+          icon: "send",
+          title: "Send and engage",
+          body: "Sends the outreach, manages follow-ups automatically, and handles replies intelligently.",
+        },
+        {
+          icon: "calendar",
+          title: "Meeting booked",
+          body: "Qualified prospects are booked straight onto your calendar.",
+        },
+      ],
+      logic: [
+        "Focuses on the right audience, not everyone.",
+        "Personalization drives higher response rates.",
+        "Multi-channel outreach increases the chance of engagement.",
+        "Automated follow-ups keep conversations alive.",
+        "The end goal is always real conversations and real opportunities.",
+      ],
+    },
     tagline: "The AI GTM engine that runs outbound end to end",
     summary:
       "Give it a company and a website. It researches the account, finds the angle, builds the target list, writes and sends the outreach in your voice, follows up, scores the replies, and books the meeting. Outbound that runs from first contact to a calendar invite without a rep driving each step.",
@@ -264,14 +315,34 @@ export const offerings: Offering[] = [
         icon: "people",
       },
       {
-        role: "B2B reps",
+        role: "SDR and BDR teams",
         note: "losing the day to research and admin",
         icon: "gears",
       },
       {
+        role: "RevOps and sales ops",
+        note: "stitching a disconnected outbound stack",
+        icon: "chip",
+      },
+      {
         role: "Revenue leaders",
-        note: "who want more accounts worked without more headcount",
+        note: "more accounts worked without more headcount",
         icon: "graph",
+      },
+      {
+        role: "Marketing teams",
+        note: "turning demand into booked pipeline",
+        icon: "graph",
+      },
+      {
+        role: "Agencies",
+        note: "running outbound for their clients",
+        icon: "layers",
+      },
+      {
+        role: "Lean teams",
+        note: "scaling GTM without hiring",
+        icon: "key",
       },
     ],
     faqs: [

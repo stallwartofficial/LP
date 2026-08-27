@@ -8,6 +8,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { StatusPill } from "@/components/Offerings";
 import { Faq } from "@/components/Faq";
 import { Reveal } from "@/components/Reveal";
+import { UsagePricing } from "@/components/UsagePricing";
+import { HowItWorksMap } from "@/components/HowItWorksMap";
 import { breadcrumbSchema, offeringSchema } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -329,9 +331,11 @@ export default async function OfferingPage({ params }: Props) {
                 {offering.problem}
               </p>
 
-              <p className="mt-7 max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
-                {offering.description}
-              </p>
+              {!offering.howItWorks && (
+                <p className="mt-7 max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
+                  {offering.description}
+                </p>
+              )}
 
               {inDevelopment && (
                 <p className="mt-9 max-w-2xl rounded-2xl border border-[var(--accent)]/30 bg-[var(--surface)] p-6 text-sm text-[var(--fg)]/75">
@@ -343,6 +347,26 @@ export default async function OfferingPage({ params }: Props) {
                   your team, book a call and we will tell you honestly where it
                   stands.
                 </p>
+              )}
+
+              {/* How-it-works map, filling the space beneath the intro. */}
+              {offering.howItWorks && (
+                <div className="mt-10">
+                  <div className="flex items-center gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="h-px w-8 bg-[var(--accent)]"
+                    />
+                    <p className="eyebrow">How it works</p>
+                    <span className="text-sm text-[var(--fg)]/45">
+                      From insight to meeting, on autopilot.
+                    </span>
+                  </div>
+                  <HowItWorksMap
+                    steps={offering.howItWorks.steps}
+                    logic={offering.howItWorks.logic}
+                  />
+                </div>
               )}
             </div>
 
@@ -363,16 +387,25 @@ export default async function OfferingPage({ params }: Props) {
                   {inDevelopment ? "Early access" : "Get started"}
                 </p>
 
-                <p className="mt-4 flex flex-wrap items-baseline gap-x-2 border-t border-[var(--hairline)] pt-4 text-sm text-[var(--fg)]/80">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
-                    {inDevelopment ? "Status" : "Pricing"}
-                  </span>
-                  <span>
-                    {inDevelopment
-                      ? "Not available yet. Book a call and we will tell you honestly where it stands."
-                      : offering.pricingShort ?? offering.pricing}
-                  </span>
-                </p>
+                {offering.usagePricing && !inDevelopment ? (
+                  <div className="mt-4 border-t border-[var(--hairline)] pt-4">
+                    <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                      Pricing
+                    </span>
+                    <UsagePricing />
+                  </div>
+                ) : (
+                  <p className="mt-4 flex flex-wrap items-baseline gap-x-2 border-t border-[var(--hairline)] pt-4 text-sm text-[var(--fg)]/80">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                      {inDevelopment ? "Status" : "Pricing"}
+                    </span>
+                    <span>
+                      {inDevelopment
+                        ? "Not available yet. Book a call and we will tell you honestly where it stands."
+                        : offering.pricingShort ?? offering.pricing}
+                    </span>
+                  </p>
+                )}
 
                 {offering.builds && offering.builds.length > 0 && (
                   <div className="mt-5 border-t border-[var(--hairline)] pt-4">
@@ -396,46 +429,131 @@ export default async function OfferingPage({ params }: Props) {
                   </div>
                 )}
 
-                {/* Products (no build list) surface their motion instead: the
-                    capability steps as an arrow sequence, so the card shows what
-                    it does end to end, not just the price. */}
-                {!offering.builds && offering.capabilities.length > 0 && (
-                  <div className="mt-5 border-t border-[var(--hairline)] pt-4">
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
-                      What it does
-                    </span>
-                    <div className="mt-3 flex flex-wrap items-center gap-x-1 gap-y-2">
-                      {offering.capabilities.flatMap((c, i) => {
-                        const chip = (
+                {/* Products (no build list) surface audiences, and "what it
+                    does" unless a full How-it-works map already tells that. */}
+                {!offering.builds &&
+                  (offering.capabilities.length > 0 ||
+                    offering.builtFor.length > 0) && (
+                  <>
+                    {!offering.howItWorks &&
+                      offering.capabilities.length > 0 && (
+                    <div className="mt-5 border-t border-[var(--hairline)] pt-4">
+                      <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                        What it does
+                      </span>
+                      {(() => {
+                        const steps =
+                          offering.motion ??
+                          offering.capabilities.map((c) => c.eyebrow);
+                        const hasOutcome = Boolean(offering.motion);
+                        // Pivot = last chip that stays on the top line; the drop
+                        // hangs beneath it so the flow turns down there.
+                        const pivotIdx = Math.max(
+                          1,
+                          Math.ceil(steps.length / 2) - 1
+                        );
+                        const lead = steps.slice(0, pivotIdx);
+                        const pivot = steps[pivotIdx];
+                        const drop = steps.slice(pivotIdx + 1);
+                        const chip = (label: string, accent: boolean) => (
                           <span
-                            key={c.eyebrow}
-                            className="whitespace-nowrap rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)]/40 px-2.5 py-1 text-[11px] text-[var(--fg)]/80 transition-colors duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--accent)]/[0.08] hover:text-[var(--fg)]"
+                            key={label}
+                            className={
+                              accent
+                                ? "whitespace-nowrap rounded-full border border-[var(--accent)]/50 bg-[var(--accent)]/10 px-2.5 py-1 text-[11px] font-medium text-[var(--accent-text)]"
+                                : "whitespace-nowrap rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)]/40 px-2.5 py-1 text-[11px] text-[var(--fg)]/80 transition-colors duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--accent)]/[0.08] hover:text-[var(--fg)]"
+                            }
                           >
-                            {c.eyebrow}
+                            {label}
                           </span>
                         );
-                        return i === 0
-                          ? [chip]
-                          : [
-                              <span
-                                key={`arrow-${i}`}
-                                aria-hidden="true"
-                                className="text-xs text-[var(--accent-text)]/50"
-                              >
-                                →
-                              </span>,
-                              chip,
-                            ];
-                      })}
+                        const arrow = (k: string) => (
+                          <span
+                            key={k}
+                            aria-hidden="true"
+                            className="text-xs text-[var(--accent-text)]/50"
+                          >
+                            →
+                          </span>
+                        );
+                        const top = [...lead, pivot];
+                        return (
+                          <div className="mt-3 space-y-1">
+                            {/* Line 1 ends with the flow turning down off the
+                                last step, so the drop reads from there. */}
+                            <div className="flex flex-wrap items-center gap-x-1 gap-y-1">
+                              {top.flatMap((label, i) =>
+                                i === 0
+                                  ? [chip(label, false)]
+                                  : [arrow(`t-${i}`), chip(label, false)]
+                              )}
+                              {drop.length > 0 && (
+                                <span
+                                  aria-hidden="true"
+                                  className="ml-0.5 shrink-0 text-[var(--accent-text)]/70"
+                                >
+                                  <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="h-4 w-4"
+                                  >
+                                    <path d="M12 4v13" />
+                                    <path d="M7 12l5 5 5-5" />
+                                  </svg>
+                                </span>
+                              )}
+                            </div>
+                            {drop.length > 0 && (
+                              <div className="flex flex-wrap items-center gap-x-1 gap-y-1">
+                                {drop.flatMap((label, i) => {
+                                  const gi = pivotIdx + 1 + i;
+                                  const acc =
+                                    hasOutcome && gi === steps.length - 1;
+                                  return i === 0
+                                    ? [chip(label, acc)]
+                                    : [arrow(`d-${i}`), chip(label, acc)];
+                                })}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })()}
+                      <p className="mt-3 text-[11px] italic leading-snug text-[var(--fg)]/50">
+                        Your whole GTM on autopilot. You just show up to the
+                        meeting.
+                      </p>
                     </div>
-                  </div>
+                    )}
+
+                    {offering.builtFor.length > 0 && (
+                      <div className="mt-5 border-t border-[var(--hairline)] pt-4">
+                        <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                          Built for
+                        </span>
+                        <ul className="mt-3 flex flex-wrap justify-center gap-1.5">
+                          {offering.builtFor.map((b) => (
+                            <li
+                              key={b.role}
+                              className="whitespace-nowrap rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)]/40 px-2.5 py-1 text-[11px] text-[var(--fg)]/80 transition-colors duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--accent)]/[0.08] hover:text-[var(--fg)]"
+                            >
+                              {b.role}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 <Link
                   href="/contact"
                   className="btn-wipe mt-6 block rounded-full bg-[var(--fg)] px-6 py-3.5 text-center text-sm font-medium text-[var(--bg)]"
                 >
-                  {site.cta.primary}
+                  {offering.usagePricing ? "Try it now →" : site.cta.primary}
                 </Link>
                 <Link
                   href="/offer"
@@ -452,16 +570,19 @@ export default async function OfferingPage({ params }: Props) {
               </div>
             </aside>
           </div>
+
         </div>
       </header>
 
-      {/* ---- Built for: a spec strip across the width, so it reads as a
-          deliberate set rather than a short hanging list ---- */}
-      <section
-        aria-labelledby="built-for"
-        className="section-y px-[var(--space-gutter)]"
-      >
-        <div className="mx-auto max-w-6xl">
+      {/* ---- Built for. Only for the build-anything offering; products show
+          their audiences inside the action card instead, so this standalone
+          section would just repeat them. ---- */}
+      {offering.builds && (
+        <section
+          aria-labelledby="built-for"
+          className="section-y px-[var(--space-gutter)]"
+        >
+          <div className="mx-auto max-w-6xl">
           <p className="eyebrow" id="built-for">
             Built for
           </p>
@@ -493,11 +614,13 @@ export default async function OfferingPage({ params }: Props) {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
-      {/* ---- Capabilities ---- */}
-      {offering.capabilities.length > 0 && (
+      {/* ---- How it works (grid). Offerings with a rich map render it in the
+          hero instead, so this section is for the rest. ---- */}
+      {!offering.howItWorks && offering.capabilities.length > 0 && (
         <section
           aria-labelledby="capabilities"
           className="section-y rule-t bg-[var(--surface)] px-[var(--space-gutter)]"
@@ -511,9 +634,6 @@ export default async function OfferingPage({ params }: Props) {
               {inDevelopment ? "What it will do" : "How it works"}
             </h2>
 
-            {/* Clean numbered grid. The phase label (e.g. "01 Scope") already
-                carries the sequence, so there is no separate index to duplicate
-                it. A hairline warms to gold on hover. */}
             <ol className="mt-10 grid gap-x-14 gap-y-10 sm:grid-cols-2">
               {offering.capabilities.map((c, i) => (
                 <Reveal
