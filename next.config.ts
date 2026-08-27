@@ -9,7 +9,45 @@ const nextConfig: NextConfig = {
   // versioned by filename (logo-lion.png etc.), so a year of caching is safe
   // and keeps them off the repeat-view critical path.
   async headers() {
+    const securityHeaders = [
+      // HSTS now asserts includeSubDomains (only apex + www exist, both HTTPS,
+      // no wildcard DNS, so it is safe). Preload deliberately omitted: it is
+      // hard to reverse. NOTE(owner): if the Vercel dashboard also sets HSTS,
+      // remove it there so this is the single source and there is no duplicate.
+      {
+        key: "Strict-Transport-Security",
+        value: "max-age=63072000; includeSubDomains",
+      },
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "X-Frame-Options", value: "DENY" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      {
+        key: "Permissions-Policy",
+        value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
+      },
+      {
+        // Report-Only first: this reports violations to the console without
+        // blocking, so the allowlist (self + GA + Clarity + inline) can be
+        // verified in the wild before switching to an enforced
+        // Content-Security-Policy. Tighten 'unsafe-inline' with a nonce later.
+        key: "Content-Security-Policy-Report-Only",
+        value: [
+          "default-src 'self'",
+          "base-uri 'self'",
+          "object-src 'none'",
+          "frame-ancestors 'none'",
+          "form-action 'self'",
+          "img-src 'self' data: https://*.google-analytics.com https://*.clarity.ms",
+          "font-src 'self'",
+          "style-src 'self' 'unsafe-inline'",
+          "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms",
+          "connect-src 'self' https://*.google-analytics.com https://*.clarity.ms",
+        ].join("; "),
+      },
+    ];
+
     return [
+      { source: "/:path*", headers: securityHeaders },
       {
         source: "/images/:path*",
         headers: [

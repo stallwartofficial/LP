@@ -26,6 +26,17 @@ function clean(value: unknown): string {
 }
 
 export async function POST(request: Request) {
+  // Reject cross-site browser POSTs (a cheap CSRF / form-spam guard). Same-origin
+  // and local dev are allowed; non-browser callers send no Origin and pass.
+  const origin = request.headers.get("origin");
+  if (
+    origin &&
+    !/^https?:\/\/(www\.)?stallwart\.in$/.test(origin) &&
+    !/^http:\/\/localhost(:\d+)?$/.test(origin)
+  ) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   let body: PartnerBody;
 
   try {
