@@ -836,3 +836,59 @@ textarea { field-sizing: content; }
   .photo-taped { rotate: 0deg !important; }
   .photo-taped:hover { translate: none; }
 }
+
+/* ==========================================================================
+   PARTNER PROCESS SPINE + MUTUAL EXCHANGE
+   --------------------------------------------------------------------------
+   Two scroll-driven set pieces for /partner, built on the same view()-timeline
+   idiom as .scroll-rise: no JS, no observers, and where the timeline is
+   unsupported (or motion is reduced) the final state is simply shown. A rail
+   that draws itself as the steps enter reads as a process assembling; a
+   partnership that has two mutual sides gets a rail down the middle and checks
+   that draw in, so the section is structure rather than two floating lists.
+   ========================================================================== */
+
+/* A connector rail that grows from one end to the other as it scrolls in.
+   The element is the visible line; the pseudo-static fallback keeps it full. */
+@keyframes spine-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes spine-grow-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+.spine-x { transform: scaleX(1); transform-origin: left center; }
+.spine-y { transform: scaleY(1); transform-origin: top center; }
+
+/* A check mark whose stroke draws in. --len is the path length; set generously
+   so any check fully hides then reveals. */
+@keyframes draw-stroke { to { stroke-dashoffset: 0; } }
+.check-draw { stroke-dashoffset: 0; }
+
+/* The mutual-terms columns can be swapped by clicking the exchange node. The
+   incoming content slides in from the side it came from. Guarded so reduced
+   motion just cross-cuts instantly. */
+@keyframes swap-from-right { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
+@keyframes swap-from-left { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .swap-from-right { animation: swap-from-right 0.4s var(--ease-out-expo, ease-out) both; }
+  .swap-from-left { animation: swap-from-left 0.4s var(--ease-out-expo, ease-out) both; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .spine-x {
+      animation: spine-grow-x linear both;
+      animation-timeline: view();
+      animation-range: entry 12% cover 42%;
+    }
+    .spine-y {
+      animation: spine-grow-y linear both;
+      animation-timeline: view();
+      animation-range: entry 6% cover 55%;
+    }
+    .check-draw {
+      stroke-dasharray: var(--len, 30);
+      stroke-dashoffset: var(--len, 30);
+      animation: draw-stroke 0.6s var(--ease-out-expo, ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 4% cover 26%;
+    }
+  }
+}
