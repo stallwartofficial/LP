@@ -10,7 +10,7 @@ import { site } from "@/data/site";
 // Act), the US, and EEA/UK visitors (GDPR: legal bases, cookies, transfers,
 // rights). Have counsel review before relying on it, and update the "Last
 // updated" date whenever the substance changes.
-const LAST_UPDATED = "August 19, 2026";
+const LAST_UPDATED = "August 27, 2026";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -65,8 +65,19 @@ export default function PrivacyPage() {
                 <strong className="font-medium text-[var(--fg)]">
                   Preferences.
                 </strong>{" "}
-                Your light or dark theme choice is stored locally in your browser
-                and never sent to us.
+                Your light or dark theme choice and your cookie choice are stored
+                locally in your browser and never sent to us.
+              </li>
+              <li>
+                <strong className="font-medium text-[var(--fg)]">
+                  Analytics and session activity.
+                </strong>{" "}
+                We use Google Analytics and Microsoft Clarity to understand how
+                the site is used. These collect your IP address, device and
+                browser type, pages viewed, referring links, and interaction
+                events such as clicks and scrolling. Microsoft Clarity also
+                records anonymized session replays (mouse movement, taps, and
+                page structure), with input fields masked by default.
               </li>
             </ul>
           </section>
@@ -76,11 +87,12 @@ export default function PrivacyPage() {
               How we use it
             </h2>
             <p className="mt-4">
-              To respond to your inquiry, to provide and secure the site, and to
-              keep records of our correspondence. For visitors in the EEA or UK,
-              our legal bases under the GDPR are your consent, which you may
-              withdraw at any time, and our legitimate interest in operating and
-              securing the business.
+              To respond to your inquiry, to provide and secure the site, to keep
+              records of our correspondence, and to measure and improve how the
+              site performs. For visitors in the EEA or UK, our legal bases under
+              the GDPR are your consent for analytics and other non-essential
+              cookies, which you may withdraw at any time, and our legitimate
+              interest in operating and securing the business.
             </p>
           </section>
 
@@ -89,10 +101,32 @@ export default function PrivacyPage() {
               Cookies
             </h2>
             <p className="mt-4">
-              We use no advertising or third-party analytics cookies. The only
-              client-side storage is your light or dark theme preference, kept in
-              your browser and never sent to us, so no cookie-consent banner is
-              required.
+              A cookie notice appears on your first visit. We use local storage
+              and cookies in two categories:
+            </p>
+            <ul className="mt-4 list-disc space-y-2 pl-5">
+              <li>
+                <strong className="font-medium text-[var(--fg)]">
+                  Essential.
+                </strong>{" "}
+                Your theme and cookie choices are kept in your browser&apos;s
+                local storage and never sent to us. No tracking is involved.
+              </li>
+              <li>
+                <strong className="font-medium text-[var(--fg)]">
+                  Analytics.
+                </strong>{" "}
+                Google Analytics sets first-party cookies (for example _ga) to
+                distinguish visitors, and Microsoft Clarity sets cookies (for
+                example _clck and _clsk) for session analytics and replay. We use
+                these only to understand and improve the site. They are never
+                used for advertising, and we do not sell the data.
+              </li>
+            </ul>
+            <p className="mt-4">
+              You can opt out of analytics through your browser&apos;s cookie
+              settings, the Google Analytics opt-out browser add-on, or private
+              browsing. We do not use advertising or cross-site tracking cookies.
             </p>
           </section>
 
@@ -101,12 +135,12 @@ export default function PrivacyPage() {
               Who we share it with
             </h2>
             <p className="mt-4">
-              Service providers that help us operate, such as hosting and the
-              intake endpoints that receive contact-form and partner-inquiry
-              submissions. They
-              process data on our behalf under contract. We may disclose data
-              where required by law. A current list of processors is available on
-              request.
+              Service providers that help us operate: hosting, the intake
+              endpoints that receive contact-form and partner-inquiry
+              submissions, Google (Google Analytics), and Microsoft (Microsoft
+              Clarity). They process data on our behalf under contract. We may
+              disclose data where required by law. A current list of processors
+              is available on request.
             </p>
           </section>
 
