@@ -88,11 +88,6 @@ export function HowItWorksMap({
           const last = i === steps.length - 1;
           return (
             <Reveal as="li" index={i} key={s.title} className="group relative">
-              {/* Numbered badge over the pill's corner. */}
-              <span className="absolute -left-1.5 -top-2 z-10">
-                <Badge n={i + 1} accent={last} />
-              </span>
-
               <div
                 className={`flex items-center gap-2 rounded-xl border px-3 py-2.5 transition-all duration-300 group-hover:-translate-y-0.5 ${
                   last
