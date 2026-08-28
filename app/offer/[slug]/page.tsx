@@ -357,21 +357,19 @@ export default async function OfferingPage({ params }: Props) {
 
               {/* How-it-works map, filling the space beneath the intro. */}
               {offering.howItWorks && (
-                <div className="mt-2 lg:mt-10">
+                <div className="mt-6 lg:mt-10">
                   <div className="flex items-center gap-3">
                     <span
                       aria-hidden="true"
                       className="h-px w-8 bg-[var(--accent)]"
                     />
                     <p className="eyebrow">How it works</p>
-                    <span className="text-sm text-[var(--fg)]/45">
-                      From insight to meeting, on autopilot.
-                    </span>
                   </div>
-                  <HowItWorksMap
-                    steps={offering.howItWorks.steps}
-                    logic={offering.howItWorks.logic}
-                  />
+                  <h2 className="font-display mt-3 text-display-sm font-light">
+                    Put your entire GTM{" "}
+                    <span className="text-gold-sheen italic">on autopilot.</span>
+                  </h2>
+                  <HowItWorksMap steps={offering.howItWorks.steps} />
                 </div>
               )}
               </div>
@@ -559,13 +557,13 @@ export default async function OfferingPage({ params }: Props) {
 
                 <Link
                   href="/contact"
-                  className="btn-wipe mt-6 block rounded-full bg-[var(--fg)] px-6 py-3.5 text-center text-sm font-medium text-[var(--bg)]"
+                  className="btn-wipe mt-6 block rounded-full bg-[var(--fg)] px-7 py-3.5 text-center text-sm font-medium text-[var(--bg)]"
                 >
                   {offering.usagePricing ? "Try it now →" : site.cta.primary}
                 </Link>
                 <Link
                   href="/offer"
-                  className="group mt-3 flex items-center justify-center gap-2 rounded-full border border-[var(--hairline-strong)] px-6 py-3 text-sm font-medium text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
+                  className="group mt-3 flex items-center justify-center gap-2 rounded-full border border-[var(--hairline-strong)] px-7 py-3.5 text-sm font-medium text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
                 >
                   See other products
                   <span

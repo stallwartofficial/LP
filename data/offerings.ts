@@ -238,27 +238,27 @@ export const offerings: Offering[] = [
         {
           icon: "search",
           title: "Research",
-          body: "AI researches ICPs, companies, decision-makers, and intent signals from across the web.",
+          body: "Finds the right accounts and buying signals.",
         },
         {
           icon: "target",
           title: "Target",
-          body: "Identifies and prioritizes the right people to reach out to, by fit, timing, and likelihood to respond.",
+          body: "Prioritizes who to reach, and when.",
         },
         {
           icon: "pencil",
           title: "Personalize and write",
-          body: "Crafts hyper-personalized outreach over email and LinkedIn, grounded in a relevant value proposition.",
+          body: "Writes personalized email and LinkedIn outreach.",
         },
         {
           icon: "send",
           title: "Send and engage",
-          body: "Sends the outreach, manages follow-ups automatically, and handles replies intelligently.",
+          body: "Sends, follows up, and handles replies.",
         },
         {
           icon: "calendar",
           title: "Meeting booked",
-          body: "Qualified prospects are booked straight onto your calendar.",
+          body: "Books qualified meetings on your calendar.",
         },
       ],
       logic: [
