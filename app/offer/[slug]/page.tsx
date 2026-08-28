@@ -365,7 +365,7 @@ export default async function OfferingPage({ params }: Props) {
                     />
                     <p className="eyebrow">How it works</p>
                   </div>
-                  <h2 className="font-display mt-3 text-display-sm font-light">
+                  <h2 className="font-display mt-3 text-[length:var(--text-step-2)] font-light">
                     Put your entire GTM{" "}
                     <span className="text-gold-sheen italic">on autopilot.</span>
                   </h2>
