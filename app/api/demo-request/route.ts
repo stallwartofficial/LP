@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase/server";
 
 type DemoRequestBody = {
   name?: string;
@@ -57,56 +58,37 @@ export async function POST(request: Request) {
     );
   }
 
-  const id = crypto.randomUUID();
-
-  // Server-side only, never expose this URL to the browser (constraint 12).
-  // Set DEMO_WEBHOOK_URL in .env.local / Vercel env vars. Accepts any generic
-  // webhook receiver: Zapier, Make, n8n, or a CRM intake endpoint.
-  const webhookUrl = process.env.DEMO_WEBHOOK_URL;
-
-  if (!webhookUrl) {
-    // Fail loudly in the server log but never to the visitor, a prospect
-    // should not see infrastructure state. Without this warning a
-    // misconfigured deploy silently discards real leads.
-    console.error(
-      "[demo-request] DEMO_WEBHOOK_URL is not set, submission accepted but NOT delivered anywhere."
-    );
-    return NextResponse.json({ success: true, id });
-  }
-
+  // Persist to Supabase (public.inquiries). The database defaults handle id,
+  // created_at, status ("new"), and source ("website"), so we send only the
+  // mapped fields. message maps to pain_point; teamSize to team_size.
   try {
-    const res = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id,
-        name,
-        email,
-        company,
-        teamSize,
-        interest,
-        message,
-        submittedAt: new Date().toISOString(),
-        source: "stallwart.in/contact",
-      }),
-      signal: AbortSignal.timeout(8000),
+    const { error } = await supabaseAdmin().from("inquiries").insert({
+      name,
+      email,
+      company,
+      team_size: teamSize,
+      interest,
+      pain_point: message,
     });
 
-    if (!res.ok) {
-      // Log status only, never the response body or the submitted PII.
-      console.error(`[demo-request] webhook rejected: ${res.status}`);
+    if (error) {
+      // Log the code only, never the submitted PII.
+      console.error(
+        `[demo-request] insert failed: ${error.code ?? error.message}`
+      );
       return NextResponse.json(
         { error: "We couldn't submit your request. Please email us instead." },
         { status: 502 }
       );
     }
   } catch {
-    console.error("[demo-request] webhook unreachable or timed out.");
+    // Missing env or client error. Never leak infrastructure state to the user.
+    console.error("[demo-request] Supabase client error.");
     return NextResponse.json(
       { error: "We couldn't submit your request. Please email us instead." },
       { status: 502 }
     );
   }
 
-  return NextResponse.json({ success: true, id });
+  return NextResponse.json({ success: true });
 }
