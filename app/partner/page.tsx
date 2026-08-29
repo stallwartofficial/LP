@@ -3,90 +3,66 @@ import { JsonLd } from "@/components/JsonLd";
 import { Faq } from "@/components/Faq";
 import { PartnerForm } from "@/components/PartnerForm";
 import { Reveal } from "@/components/Reveal";
-import { PartnerEcosystem, type PartnerModel } from "@/components/PartnerEcosystem";
+import { type PartnerModel } from "@/components/PartnerEcosystem";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Partner with Stallwart",
   description:
-    "Join the Stallwart partner ecosystem. Technology, solution, cloud, strategic, referral, and research partnerships to build, deploy, and scale intelligent AI systems together.",
+    "Join the Stallwart partner ecosystem. Solutions, white-label, delivery, and referral partnerships to build, sell, and scale intelligent AI systems and custom software together.",
   path: "/partner",
 });
 
-// The six ways to partner. Real text, driven into the interactive ecosystem map
-// and the mobile list from one source.
+// The four ways to partner. Real text, driven into the interactive carousel and
+// the mobile list from one source.
 const models: PartnerModel[] = [
   {
-    key: "technology",
-    short: "Technology",
-    name: "Technology Partners",
-    tagline: "Integrate your platform.",
-    blurb:
-      "Connect your platform, API, or model to Stallwart systems and ship products that are more capable together than either side is alone. We build to stable, documented surfaces, so the integration holds.",
-  },
-  {
-    key: "solution",
+    key: "solutions",
     short: "Solutions",
-    name: "Solution Partners",
-    tagline: "Deliver end to end.",
+    name: "Solutions Partner",
+    tagline: "Bring Stallwart products to your customers.",
     blurb:
-      "Pair your industry expertise with Stallwart's engineering to take a client from problem to production. You own the relationship and the domain; the engineering standard behind the work stays ours.",
+      "You own the customer. We provide the products, technology, and engineering. You sell it as a Stallwart-powered solution.",
   },
   {
-    key: "cloud",
-    short: "Cloud",
-    name: "Cloud & Infrastructure Partners",
-    tagline: "Build the foundation.",
+    key: "whitelabel",
+    short: "White-label",
+    name: "White-label Partner",
+    tagline: "Your brand. Stallwart technology.",
     blurb:
-      "Stand up secure, scalable AI and data infrastructure together, engineered to hold under real load with observability and rollback built in, not bolted on.",
+      "Sell Stallwart-built products under your own brand. We stay invisible; the product and the customer are yours.",
   },
   {
-    key: "strategic",
-    short: "Strategic",
-    name: "Strategic Partners",
-    tagline: "Co-create what's next.",
+    key: "delivery",
+    short: "Delivery",
+    name: "Delivery Partner",
+    tagline: "Bring the opportunity. We build it.",
     blurb:
-      "Co-build new products, capabilities, and markets around emerging AI and deep tech. A shared roadmap and shared upside, not a one-off statement of work.",
+      "You bring the client or project; we bring the engineering team. Built for agencies and consultants who win work but need the capacity to build.",
   },
   {
     key: "referral",
     short: "Referral",
-    name: "Referral & Channel Partners",
-    tagline: "Open new markets.",
+    name: "Referral Partner",
+    tagline: "Connect the opportunity. Grow together.",
     blurb:
-      "Bring Stallwart to new customers, industries, and geographies. You make the introduction or carry the offer to market; you are rewarded per engagement, agreed on the first call.",
-  },
-  {
-    key: "research",
-    short: "Research",
-    name: "Research & Innovation Partners",
-    tagline: "Turn research into product.",
-    blurb:
-      "Work with research and academic teams on frontier AI, then turn findings into systems that ship. Where a promising idea becomes something people can actually run.",
+      "Introduce businesses that need our products or engineering, and share in the deal that follows. The simplest way to grow with us.",
   },
 ];
 
-// Tangible benefits, not corporate wallpaper.
+// The four strongest partner benefits, not corporate wallpaper.
 const benefits = [
   {
     title: "Expand your capabilities",
     body: "Pair your expertise with Stallwart's AI and systems engineering, and take on work neither side could ship alone.",
   },
   {
-    title: "Create new solutions",
-    body: "Co-build products around emerging technology instead of retrofitting AI onto tools that were never designed for it.",
-  },
-  {
     title: "Reach new markets",
     body: "Move into new customers, industries, and geographies on the strength of a joint solution, not a cold pitch.",
   },
   {
-    title: "Go to market together",
-    body: "Launch joint offers, campaigns, and customer programs. A real go-to-market motion, not a logo swap.",
-  },
-  {
     title: "Build with AI",
-    body: "Work hands-on with a team that ships practical AI, automation, and intelligent systems into production, not demos.",
+    body: "Work with a team that ships practical AI, automation, and intelligent systems into production, not demos.",
   },
   {
     title: "Create long-term value",
@@ -96,14 +72,13 @@ const benefits = [
 
 // Who can become a partner — org types, so a visitor can self-identify.
 const orgTypes = [
-  "Technology companies",
-  "AI & data companies",
-  "Cloud & infrastructure providers",
-  "Consulting & system integrators",
+  "Agencies",
+  "Consultants",
   "SaaS companies",
-  "Startups & emerging innovators",
-  "Research & academic institutions",
-  "Industry & community organizations",
+  "Technology companies",
+  "Entrepreneurs",
+  "IT providers",
+  "Independent professionals",
 ];
 
 const steps = [
@@ -120,7 +95,7 @@ const steps = [
   {
     n: "03",
     title: "Define the model",
-    body: "Referral, technology, solution, strategic — we shape terms to the deal, on the first call.",
+    body: "Solutions, white-label, delivery, or referral. We shape terms to the deal on the first call.",
   },
   {
     n: "04",
@@ -138,12 +113,12 @@ const partnerFaqs = [
   {
     question: "What kinds of partnerships does Stallwart offer?",
     answer:
-      "Six models: technology and integration, solution and implementation, cloud and infrastructure, strategic and co-innovation, referral and channel, and research and innovation. You choose the one that fits how you want to work with us, and we shape the terms to the specific opportunity.",
+      "Four models: a Solutions Partner brings Stallwart products to their own customers; a White-label Partner offers Stallwart-built products under their own brand; a Delivery Partner brings the opportunity while Stallwart provides the engineering and technical delivery; and a Referral Partner introduces businesses and shares in the resulting opportunity. You choose how you want to work with us, and we shape the terms to the specific deal.",
   },
   {
     question: "Who can become a Stallwart partner?",
     answer:
-      "Technology and AI companies, cloud and infrastructure providers, consulting and system integration firms, SaaS companies, startups, research and academic institutions, and industry or community organizations. If you build, deliver, or take intelligent systems to market, there is a way to partner.",
+      "Agencies, consultants, SaaS companies, technology companies, entrepreneurs, IT providers, and independent professionals. Partner type is separate from who can partner: the four models describe how you work with us, and almost any organization that serves clients or wins projects can fit one of them.",
   },
   {
     question: "How do I become a Stallwart partner?",
@@ -158,12 +133,12 @@ const partnerFaqs = [
   {
     question: "Is there a fee to partner with Stallwart?",
     answer:
-      "There is no published rate card. Referral and channel partners are rewarded per engagement, and every arrangement is structured on the first call so it stays fitted to the deal rather than forced into a template.",
+      "There is no published rate card. Referral partners participate in the commercial opportunity they originate, and every arrangement is structured on the first call so it stays fitted to the deal rather than forced into a template.",
   },
   {
-    question: "Does Stallwart offer AI technology and integration partnerships?",
+    question: "What is a white-label partnership with Stallwart?",
     answer:
-      "Yes. Technology partners integrate their platform, API, or model with Stallwart systems to ship connected, scalable AI solutions. We build against stable, documented surfaces so the integration keeps working in production.",
+      "As a White-label Partner you package and sell Stallwart-built products under your own brand. Stallwart stays invisible and powers the technology behind the experience, so the product and the relationship are entirely yours to the customer.",
   },
 ];
 
@@ -177,89 +152,128 @@ export default function PartnerPage() {
         ])}
       />
 
-      {/* ---- Hero ---- */}
-      <header className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-32 text-center lg:pt-40">
-        <div className="mx-auto max-w-3xl">
-          <div className="flex items-center justify-center gap-3">
-            <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)]" />
-            <p className="eyebrow">Partner ecosystem</p>
-            <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)]" />
+      {/* ---- Hero: left-aligned pitch + stats, glass CTA box on the right ---- */}
+      <header className="px-[var(--space-gutter)] pb-16 pt-28 lg:pt-32">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start lg:gap-16">
+          {/* Left: the pitch */}
+          <div>
+            <div className="flex items-center gap-3">
+              <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)]" />
+              <p className="eyebrow">Partner ecosystem</p>
+            </div>
+
+            <h1 className="font-display mt-5 text-display font-light">
+              Build what&apos;s next,{" "}
+              <span className="text-gold-sheen italic">together.</span>
+            </h1>
+
+            <p className="mt-5 max-w-lg text-[length:var(--text-step-1)] text-[var(--fg)]/75">
+              Partner with us to build, deploy, and scale intelligent systems,
+              engineered to one standard and yours to own.
+            </p>
+
+            {/* Ecosystem: the four models as a 2×2 grid, all visible. */}
+            <div
+              id="ecosystem"
+              aria-labelledby="ecosystem-heading"
+              className="mt-6 scroll-mt-24 lg:mt-7"
+            >
+              <p className="eyebrow">The ecosystem</p>
+              <h2
+                id="ecosystem-heading"
+                className="font-display mt-3 text-[length:var(--text-step-2)] font-light"
+              >
+                Four ways to partner with Stallwart.
+              </h2>
+              <p className="mt-3 max-w-xl text-sm text-[var(--fg)]/65">
+                Different strengths. One direction. Find the one that fits how
+                you work.
+              </p>
+
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                {models.map((m, i) => (
+                  <li
+                    key={m.key}
+                    className="group flex flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5 transition-colors duration-300 hover:border-[var(--accent)]/50"
+                  >
+                    <div className="flex items-baseline gap-2.5">
+                      <span className="text-gold-sheen font-display text-lg font-light leading-none">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-text)]">
+                        {m.name}
+                      </span>
+                    </div>
+                    <h3 className="font-display mt-3 text-[length:var(--text-step-1)] font-light leading-tight">
+                      {m.tagline}
+                    </h3>
+                    <p className="mt-2 text-[13px] leading-relaxed text-[var(--fg)]/70">
+                      {m.blurb}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          <h1 className="font-display mt-6 text-display-lg font-light">
-            Build what&apos;s next,{" "}
-            <span className="text-gold-sheen italic">together.</span>
-          </h1>
+          {/* Right: glass card holding the application form. */}
+          <aside
+            id="apply"
+            className="relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/55 p-6 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl scroll-mt-24 sm:p-7 lg:sticky lg:top-28"
+          >
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,var(--hairline-strong),transparent)]"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_100%_0%,color-mix(in_oklab,var(--accent)_10%,transparent),transparent_55%)]"
+            />
 
-          <p className="mx-auto mt-7 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/75">
-            Stallwart partners with technology companies, solution providers, and
-            innovators to build, deploy, and scale intelligent systems —
-            engineered to one standard, and owned by the people who run them.
-          </p>
+            <div className="relative">
+              <p className="eyebrow">Become a partner</p>
+              <h2 className="font-display mt-3 text-[length:var(--text-step-2)] font-light leading-tight">
+                Find where you fit.
+              </h2>
 
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href="#apply"
-              className="group relative w-full overflow-hidden rounded-full bg-[var(--fg)] px-7 py-3.5 text-center text-sm font-medium text-[var(--bg)] sm:w-auto"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
-              />
-              <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
-                Become a partner →
-              </span>
-            </a>
-            <a
-              href="#ecosystem"
-              className="w-full rounded-full border border-[var(--hairline-strong)] px-7 py-3.5 text-center text-sm font-medium text-[var(--fg)] transition-colors hover:border-[var(--accent)]/60 sm:w-auto"
-            >
-              Explore the ecosystem →
-            </a>
-          </div>
+              <ul className="mt-4 flex flex-wrap justify-center gap-2">
+                {orgTypes.map((type) => (
+                  <li
+                    key={type}
+                    className="rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)]/40 px-2.5 py-1 text-[11px] text-[var(--fg)]/70"
+                  >
+                    {type}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-6 border-t border-[var(--hairline)] pt-6">
+                <PartnerForm />
+              </div>
+            </div>
+          </aside>
         </div>
       </header>
 
-      {/* ---- Ecosystem: the interactive map ---- */}
+      {/* ---- Why + How, combined: the payoff, then the path ---- */}
       <section
-        id="ecosystem"
-        aria-labelledby="ecosystem-heading"
-        className="section-y rule-t bg-[var(--surface)] px-[var(--space-gutter)] scroll-mt-24"
-      >
-        <div className="mx-auto max-w-6xl">
-          <div className="max-w-2xl">
-            <p className="eyebrow">The ecosystem</p>
-            <h2
-              id="ecosystem-heading"
-              className="font-display mt-3 text-display-sm font-light"
-            >
-              Six ways to partner with Stallwart.
-            </h2>
-            <p className="mt-4 text-sm text-[var(--fg)]/65">
-              We are building an ecosystem, not collecting logos. Every model
-              below is a way to create value together — pick the one that matches
-              how you work.
-            </p>
-          </div>
-
-          <div className="mt-12">
-            <PartnerEcosystem models={models} />
-          </div>
-        </div>
-      </section>
-
-      {/* ---- Why partner ---- */}
-      <section
-        aria-labelledby="why"
+        aria-labelledby="why-how"
         className="section-y rule-t px-[var(--space-gutter)]"
       >
         <div className="mx-auto max-w-6xl">
-          <p className="eyebrow">Why partner with Stallwart</p>
-          <h2 id="why" className="font-display mt-3 text-display-sm font-light">
-            What you actually get.
+          <p className="eyebrow">Why partner, and how it works</p>
+          <h2
+            id="why-how"
+            className="font-display mt-3 text-display-sm font-light"
+          >
+            The payoff, and the path in.
           </h2>
 
-          <ul className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {/* What you get: the four strongest benefits */}
+          <p className="mt-12 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--accent-text)]">
+            What you get
+          </p>
+          <ul className="mt-6 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {benefits.map((b, i) => (
               <Reveal as="li" index={i} key={b.title} className="group">
                 <span
@@ -281,57 +295,12 @@ export default function PartnerPage() {
               </Reveal>
             ))}
           </ul>
-        </div>
-      </section>
 
-      {/* ---- Who we partner with ---- */}
-      <section
-        aria-labelledby="who"
-        className="section-y rule-t bg-[var(--surface)] px-[var(--space-gutter)]"
-      >
-        <div className="mx-auto max-w-5xl">
-          <div className="max-w-2xl">
-            <p className="eyebrow">Who we partner with</p>
-            <h2 id="who" className="font-display mt-3 text-display-sm font-light">
-              Find where you fit.
-            </h2>
-            <p className="mt-4 text-sm text-[var(--fg)]/65">
-              Partnerships span the organizations building, delivering, and
-              taking intelligent systems to market.
-            </p>
-          </div>
-
-          <ul className="mt-10 flex flex-wrap gap-3">
-            {orgTypes.map((type, i) => (
-              <Reveal
-                as="li"
-                index={i}
-                key={type}
-                className="group flex items-center gap-2.5 rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)] px-4 py-2.5 text-sm text-[var(--fg)]/80 transition-colors hover:border-[var(--accent)]/60 hover:text-[var(--fg)]"
-              >
-                <span
-                  aria-hidden="true"
-                  className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]/70 transition-colors group-hover:bg-[var(--accent)]"
-                />
-                {type}
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ---- How partnership works: process spine ---- */}
-      <section
-        aria-labelledby="how"
-        className="section-y rule-t px-[var(--space-gutter)]"
-      >
-        <div className="mx-auto max-w-6xl">
-          <p className="eyebrow">How partnership works</p>
-          <h2 id="how" className="font-display mt-3 text-display-sm font-light">
-            From first conversation to scale.
-          </h2>
-
-          <div className="relative mt-16">
+          {/* How it works: the process spine */}
+          <p className="mt-16 border-t border-[var(--hairline)] pt-12 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--accent-text)]">
+            How it works
+          </p>
+          <div className="relative mt-12">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-x-[9%] top-3 hidden h-px overflow-hidden bg-[var(--hairline-strong)] sm:block"
@@ -377,37 +346,6 @@ export default function PartnerPage() {
               ))}
             </ol>
           </div>
-        </div>
-      </section>
-
-      {/* ---- Apply ---- */}
-      <section
-        id="apply"
-        aria-labelledby="apply-heading"
-        className="section-y rule-t bg-[var(--surface)] px-[var(--space-gutter)] scroll-mt-24"
-      >
-        <div className="mx-auto grid max-w-6xl gap-y-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,29rem)] lg:items-start lg:gap-x-20">
-          <div className="lg:sticky lg:top-32">
-            <p className="eyebrow">Become a partner</p>
-            <h2
-              id="apply-heading"
-              className="font-display mt-3 text-display-sm font-light"
-            >
-              Become a Stallwart partner.
-            </h2>
-            <p className="mt-5 max-w-lg text-[length:var(--text-step-1)] text-[var(--fg)]/75">
-              Whether you are building breakthrough technology, delivering
-              enterprise solutions, entering new markets, or looking to co-create
-              what&apos;s next — we&apos;d like to hear from you.
-            </p>
-            <p className="mt-5 max-w-lg text-sm text-[var(--fg)]/60">
-              We reply to every serious application from a person, review the fit
-              honestly, and shape terms to the specific opportunity. No rate card,
-              no template.
-            </p>
-          </div>
-
-          <PartnerForm />
         </div>
       </section>
 

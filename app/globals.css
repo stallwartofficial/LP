@@ -721,6 +721,10 @@ blockquote { hanging-punctuation: first; }
 }
 html { scrollbar-color: color-mix(in oklab, var(--accent) 55%, transparent) var(--surface); }
 
+/* Hide the scrollbar on horizontal card rails (still scrollable / swipeable). */
+.scrollbar-none { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
 /* Buttons default to the arrow cursor (unlike links); make every interactive
    control show the pointer on hover. */
 button:not(:disabled),

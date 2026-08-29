@@ -6,8 +6,9 @@ import Link from "next/link";
 type Status = "idle" | "loading" | "success" | "error";
 
 const fieldClass =
-  "mt-2 w-full rounded-xl border border-[var(--hairline-strong)] bg-transparent px-4 py-3 outline-none transition-colors placeholder:text-[var(--fg)]/35 focus:border-[var(--accent)]";
-const labelClass = "block text-sm font-medium text-[var(--fg)]/85";
+  "mt-1.5 w-full rounded-lg border border-[var(--hairline-strong)] bg-transparent px-3 py-2.5 text-[13px] outline-none transition-colors placeholder:text-[var(--fg)]/35 focus:border-[var(--accent)]";
+const labelClass =
+  "block text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--fg)]/70";
 
 // Partner inquiry form. Posts JSON to /api/partner-inquiry, which forwards it
 // server-side (webhook now, Firebase later). Same interaction model as the
@@ -44,10 +45,7 @@ export function PartnerForm() {
 
   if (status === "success") {
     return (
-      <div
-        role="status"
-        className="rounded-2xl border border-[var(--accent)]/40 bg-[var(--surface)] p-8"
-      >
+      <div role="status">
         <span
           aria-hidden="true"
           className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--color-ink)]"
@@ -72,11 +70,9 @@ export function PartnerForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 sm:p-8"
-    >
-      <div className="space-y-5">
+    <form onSubmit={handleSubmit} noValidate={false}>
+      {/* Two-column grid: paired fields per row; the message spans both. */}
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelClass}>
             Name
@@ -86,6 +82,7 @@ export function PartnerForm() {
             name="name"
             type="text"
             required
+            maxLength={100}
             autoComplete="name"
             placeholder="Jordan Mehta"
             className={`field ${fieldClass}`}
@@ -101,6 +98,7 @@ export function PartnerForm() {
             name="email"
             type="email"
             required
+            maxLength={150}
             autoComplete="email"
             placeholder="jordan@company.com"
             className={`field ${fieldClass}`}
@@ -116,6 +114,7 @@ export function PartnerForm() {
             name="company"
             type="text"
             required
+            maxLength={120}
             autoComplete="organization"
             placeholder="Company name"
             className={`field ${fieldClass}`}
@@ -131,8 +130,28 @@ export function PartnerForm() {
             id="role"
             name="role"
             type="text"
+            maxLength={100}
             autoComplete="organization-title"
-            placeholder="Founder, Head of Partnerships…"
+            placeholder="Head of Partnerships"
+            className={`field ${fieldClass}`}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="website" className={labelClass}>
+            Website{" "}
+            <span className="font-normal text-[var(--fg)]/65">(optional)</span>
+          </label>
+          <input
+            id="website"
+            name="website"
+            type="text"
+            inputMode="url"
+            maxLength={200}
+            autoComplete="url"
+            placeholder="company.com"
+            pattern="^\s*(https?:\/\/)?[\w-]+(\.[\w-]+)+.*$"
+            title="Enter a valid website, e.g. company.com"
             className={`field ${fieldClass}`}
           />
         </div>
@@ -145,41 +164,21 @@ export function PartnerForm() {
             id="partnerType"
             name="partnerType"
             defaultValue=""
+            required
             className={`field ${fieldClass}`}
           >
-            <option value="">Select…</option>
-            <option value="Technology / Integration">
-              Technology / Integration
+            <option value="" disabled>
+              Select…
             </option>
-            <option value="Solution / Implementation">
-              Solution / Implementation
-            </option>
-            <option value="Cloud / Infrastructure">Cloud / Infrastructure</option>
-            <option value="Strategic / Co-innovation">
-              Strategic / Co-innovation
-            </option>
-            <option value="Referral / Channel">Referral / Channel</option>
-            <option value="Research / Innovation">Research / Innovation</option>
+            <option value="Solutions">Solutions</option>
+            <option value="White-label">White-label</option>
+            <option value="Delivery">Delivery</option>
+            <option value="Referral">Referral</option>
             <option value="Other">Other</option>
           </select>
         </div>
 
-        <div>
-          <label htmlFor="website" className={labelClass}>
-            Website{" "}
-            <span className="font-normal text-[var(--fg)]/65">(optional)</span>
-          </label>
-          <input
-            id="website"
-            name="website"
-            type="text"
-            autoComplete="url"
-            placeholder="company.com"
-            className={`field ${fieldClass}`}
-          />
-        </div>
-
-        <div>
+        <div className="sm:col-span-2">
           <label htmlFor="message" className={labelClass}>
             What would you like to build together?{" "}
             <span className="font-normal text-[var(--fg)]/65">(optional)</span>
@@ -188,6 +187,7 @@ export function PartnerForm() {
             id="message"
             name="message"
             rows={4}
+            maxLength={2000}
             placeholder="The opportunity you see, the customers you serve, or the technology you'd integrate…"
             className={`field ${fieldClass}`}
           />
