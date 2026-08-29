@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-// "Plugs into what you already use" as an interactive isometric stack.
+// "Plugs into what you already use" as a broad, centered isometric stack.
 //
 // Each surface you already run is a floating glass layer; the top one is lit in
-// gold. Layers are connected by dotted leaders to labels on the right. Hovering a
-// layer (or its label) lifts it forward, brightens it, and highlights the pair —
-// so the whole thing reads as one system sitting on top of your stack. The scene
-// bobs gently unless prefers-reduced-motion is set. Real, on-brand line icons —
-// no third-party logos, so we never imply a named integration we don't have.
+// gold. Dotted leaders fan out evenly from the stack to labels on the right, so
+// the connections read as deliberate rather than a mismatched column. Hovering a
+// layer or its label lifts and brightens the pair and warms its leader. The
+// scene bobs gently unless prefers-reduced-motion is set. On-brand line icons,
+// no third-party logos — we never imply a named integration we don't have.
 //
 // Desktop only; on small screens the offer page renders the plain tappable list.
 
@@ -83,29 +83,81 @@ function LayerIcon({ label }: { label: string }) {
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-8 w-8"
+      className="h-11 w-11"
     >
       {iconFor(label)}
     </svg>
   );
 }
 
-const GAP = 42; // vertical separation between layers, in the 3D space
+const W = 860;
+const H = 500;
+const GAP = 46; // vertical separation between layers, in the 3D space
+const ANCHOR = { x: 384, y: 150 }; // stack's measured visual centre, where leaders fan from
+const LABEL_X = 566; // left edge of the label column
 
 export function IntegrationStack({ items }: { items: string[] }) {
-  const layers = items.slice(0, 5); // the stack stays elegant at up to five
+  const layers = items;
   const n = layers.length;
   const [hi, setHi] = useState<number | null>(null);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const labelY = (i: number) => 74 + (i * (H - 148)) / Math.max(1, n - 1);
 
   return (
-    <div className="relative hidden min-h-[440px] items-center sm:flex">
-      <div className="animate-stack-float relative mx-auto w-full">
-        <div className="grid grid-cols-[1fr_auto] items-center gap-2">
-          {/* The isometric stack */}
-          <div
-            className="relative"
-            style={{ perspective: "1600px", perspectiveOrigin: "60% 50%" }}
-          >
+    <div className="relative mx-auto mt-6 hidden h-[500px] w-full max-w-[860px] sm:block">
+      <div className="animate-stack-float absolute inset-0">
+        {/* Fan leaders from the stack out to each label. */}
+        <svg
+          aria-hidden="true"
+          viewBox={`0 0 ${W} ${H}`}
+          preserveAspectRatio="none"
+          className="absolute inset-0 h-full w-full"
+        >
+          {layers.map((_, i) => {
+            const on = hi === i;
+            return (
+              <line
+                key={i}
+                x1={ANCHOR.x}
+                y1={ANCHOR.y}
+                x2={LABEL_X - 16}
+                y2={labelY(i)}
+                stroke={on ? "var(--accent)" : "var(--fg)"}
+                strokeOpacity={on ? 0.9 : 0.28}
+                strokeWidth={on ? 1.4 : 1}
+                strokeDasharray="1 7"
+                strokeLinecap="round"
+                className="transition-all duration-300"
+              />
+            );
+          })}
+        </svg>
+
+        {/* The stack, centered in the left ~58% of the field. Hover is driven by
+            pointer height (top of the stack = first layer, bottom = last), so the
+            overlapping layers can never flicker or fight over the pointer. */}
+        <div
+          className="absolute left-0 top-0 grid h-full w-[58%] place-items-center"
+          onMouseMove={(e) => {
+            // Pick the layer whose actual on-screen centre is nearest the
+            // pointer, so the mapping is exact regardless of the 3D projection.
+            let best = 0;
+            let bestD = Infinity;
+            panelRefs.current.forEach((el, idx) => {
+              if (!el) return;
+              const r = el.getBoundingClientRect();
+              const d = Math.abs(e.clientY - (r.top + r.height / 2));
+              if (d < bestD) {
+                bestD = d;
+                best = idx;
+              }
+            });
+            setHi(best);
+          }}
+          onMouseLeave={() => setHi(null)}
+        >
+          <div style={{ perspective: "1700px", perspectiveOrigin: "55% 50%" }}>
             <div
               className="grid justify-items-center"
               style={{
@@ -116,78 +168,71 @@ export function IntegrationStack({ items }: { items: string[] }) {
               {layers.map((label, i) => {
                 const top = i === 0;
                 const on = hi === i;
-                // Top layer highest; hovered layer lifts further.
-                const z = (n - 1 - i) * GAP + (on ? 34 : 0);
+                const z = (n - 1 - i) * GAP + (on ? 38 : 0);
                 return (
-                  <button
+                  // Panels are purely visual: the labels drive all hover, so the
+                  // overlapping layers can never fight over the pointer.
+                  <div
                     key={label}
-                    type="button"
-                    onMouseEnter={() => setHi(i)}
-                    onMouseLeave={() => setHi(null)}
-                    onFocus={() => setHi(i)}
-                    onBlur={() => setHi(null)}
+                    aria-hidden="true"
+                    ref={(el) => {
+                      panelRefs.current[i] = el;
+                    }}
                     style={{
                       gridArea: "1 / 1",
                       transform: `translateZ(${z}px)`,
                       transition:
-                        "transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background-color 0.3s, box-shadow 0.3s",
+                        "transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background-color 0.3s, box-shadow 0.3s, opacity 0.3s",
                     }}
-                    className={`flex h-[150px] w-[150px] items-center justify-center rounded-[26px] border backdrop-blur-md outline-none ${
+                    className={`pointer-events-none flex h-[180px] w-[180px] items-center justify-center rounded-[30px] border ${
                       top
-                        ? "border-[var(--accent)]/60 bg-[color-mix(in_oklab,var(--accent)_16%,transparent)] text-[var(--accent-text)] shadow-[0_30px_60px_-20px_color-mix(in_oklab,var(--accent)_55%,transparent)]"
+                        ? "border-[var(--accent)]/60 bg-[color-mix(in_oklab,var(--accent)_20%,var(--surface))] shadow-[0_34px_66px_-20px_color-mix(in_oklab,var(--accent)_55%,transparent)]"
                         : on
-                          ? "border-[var(--accent)]/70 bg-[color-mix(in_oklab,var(--accent)_10%,color-mix(in_oklab,var(--fg)_8%,transparent))] text-[var(--fg)] shadow-[0_28px_60px_-22px_color-mix(in_oklab,var(--accent)_55%,transparent)]"
-                          : "border-[var(--fg)]/20 bg-[color-mix(in_oklab,var(--fg)_11%,transparent)] text-[var(--fg)]/75 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
+                          ? "border-[var(--accent)]/70 bg-[color-mix(in_oklab,var(--accent)_16%,var(--surface))] shadow-[0_30px_64px_-22px_color-mix(in_oklab,var(--accent)_55%,transparent)]"
+                          : "border-[var(--fg)]/26 bg-[color-mix(in_oklab,var(--fg)_12%,var(--surface))] shadow-[0_26px_54px_-24px_rgba(0,0,0,0.7)]"
                     }`}
                   >
                     {/* Counter-rotate the icon so it faces the viewer flat. */}
                     <span
-                      style={{
-                        transform: "rotateZ(-42deg) rotateX(-54deg)",
-                      }}
+                      style={{ transform: "rotateZ(-42deg) rotateX(-54deg)" }}
                       className={
                         top || on
                           ? "text-[var(--accent-text)]"
-                          : "text-[var(--accent-text)]/70"
+                          : "text-[var(--accent-text)]/90"
                       }
                     >
                       <LayerIcon label={label} />
                     </span>
-                  </button>
+                  </div>
                 );
               })}
             </div>
           </div>
-
-          {/* Labels, one per layer, with a dotted leader. */}
-          <ul className="relative z-10 ml-2 flex flex-col justify-center gap-3">
-            {layers.map((label, i) => {
-              const on = hi === i;
-              return (
-                <li key={label} className="flex items-center gap-2">
-                  <span
-                    aria-hidden="true"
-                    className={`h-px w-6 border-t border-dashed transition-colors duration-300 ${
-                      on ? "border-[var(--accent)]" : "border-[var(--fg)]/25"
-                    }`}
-                  />
-                  <button
-                    type="button"
-                    onMouseEnter={() => setHi(i)}
-                    onMouseLeave={() => setHi(null)}
-                    className={`rounded-full border px-3.5 py-2 text-left font-mono text-[10px] font-medium uppercase leading-[1.4] tracking-[0.1em] transition-colors duration-300 ${
-                      on
-                        ? "border-[var(--accent)]/60 bg-[var(--surface)] text-[var(--fg)]"
-                        : "border-[var(--hairline-strong)] bg-[var(--surface)]/70 text-[var(--fg)]/70"
-                    }`}
-                  >
-                    {label}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
         </div>
+
+        {/* Labels, evenly spaced, aligned to the fan. */}
+        {layers.map((label, i) => {
+          const on = hi === i;
+          return (
+            <button
+              key={label}
+              type="button"
+              onMouseEnter={() => setHi(i)}
+              onMouseLeave={() => setHi(null)}
+              style={{
+                left: `${(LABEL_X / W) * 100}%`,
+                top: `${(labelY(i) / H) * 100}%`,
+              }}
+              className={`absolute -translate-y-1/2 rounded-full border px-4 py-2.5 text-left font-mono text-[10px] font-medium uppercase leading-[1.4] tracking-[0.12em] transition-colors duration-300 ${
+                on
+                  ? "border-[var(--accent)]/70 bg-[var(--surface)] text-[var(--fg)]"
+                  : "border-[var(--hairline-strong)] bg-[var(--surface)]/70 text-[var(--fg)]/70"
+              }`}
+            >
+              {label}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

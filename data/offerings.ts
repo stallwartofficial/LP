@@ -112,26 +112,22 @@ export const offerings: Offering[] = [
       {
         eyebrow: "01 Scope",
         title: "Problem framing first",
-        description:
-          "We map your real workflow, where it breaks, and what failure costs — before any architecture.",
+        description: "Map the workflow and what failure costs — before architecture.",
       },
       {
         eyebrow: "02 Design",
         title: "Architecture you can interrogate",
-        description:
-          "A written design: data flow, model boundaries, failure modes, and what the system may never do. Reviewed with your engineers.",
+        description: "A written design your engineers review before we build.",
       },
       {
         eyebrow: "03 Build",
         title: "Built against real exceptions",
-        description:
-          "Engineered on your data and edge cases, and tested on failure modes — not the happy path.",
+        description: "Engineered on your data and edge cases, not the happy path.",
       },
       {
         eyebrow: "04 Handover",
         title: "Code you own and run",
-        description:
-          "Source, infrastructure as code, runbooks, and observability. Your team runs it without us. Support is a choice, not a dependency.",
+        description: "Source, runbooks, and observability. Yours to run — no lock-in.",
       },
     ],
     builtFor: [

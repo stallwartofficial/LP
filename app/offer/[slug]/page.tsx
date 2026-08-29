@@ -610,32 +610,30 @@ export default async function OfferingPage({ params }: Props) {
           className="section-y rule-t px-[var(--space-gutter)]"
         >
           <div className="mx-auto max-w-6xl">
-            {/* Two columns on desktop: the pitch on the left, the interactive
-                3D stack on the right. On mobile the stack collapses out and the
-                plain list carries the same surfaces. */}
-            <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-              <div>
-                <p className="eyebrow">Surfaces</p>
-                <h2
-                  id="integrations"
-                  className="font-display mt-3 text-display-sm font-light"
-                >
-                  Plugs into what you already use
-                </h2>
-                <p className="mt-4 max-w-md text-sm text-[var(--fg)]/60">
-                  No rip and replace. It runs on what you already operate.
-                </p>
-                <a
-                  href="/contact"
-                  className="link-draw mt-6 hidden text-sm font-medium text-[var(--accent-text)] sm:inline-block"
-                >
-                  Talk through your stack →
-                </a>
-              </div>
-
-              {/* Desktop: your surfaces as a floating isometric stack. */}
-              <IntegrationStack items={offering.integrations} />
+            {/* The pitch sits in the corner; the interactive 3D stack takes the
+                broad space below and uses the full width. On mobile the stack
+                collapses out and the plain list carries the same surfaces. */}
+            <div className="max-w-md">
+              <p className="eyebrow">Surfaces</p>
+              <h2
+                id="integrations"
+                className="font-display mt-3 text-display-sm font-light"
+              >
+                Plugs into what you already use
+              </h2>
+              <p className="mt-4 text-sm text-[var(--fg)]/60">
+                No rip and replace. It runs on what you already operate.
+              </p>
+              <a
+                href="/contact"
+                className="link-draw mt-6 hidden text-sm font-medium text-[var(--accent-text)] sm:inline-block"
+              >
+                Talk through your stack →
+              </a>
             </div>
+
+            {/* Desktop: your surfaces as a broad floating isometric stack. */}
+            <IntegrationStack items={offering.integrations} />
 
             {/* Mobile: the same surfaces as a plain, tappable list. */}
             <ul className="mt-6 grid gap-x-10 gap-y-1 sm:hidden">

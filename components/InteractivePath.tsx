@@ -127,6 +127,20 @@ export function InteractivePath({ steps }: { steps: PathStep[] }) {
         const key = iconKey(`${s.label} ${s.title}`, i);
         return (
           <div key={s.num}>
+            {/* Number, above the icon */}
+            <span
+              aria-hidden="true"
+              style={{
+                left: `${(p.x / W) * 100}%`,
+                top: `calc(${(p.y / H) * 100}% - 2.9rem)`,
+              }}
+              className={`text-gold-sheen font-display pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 text-xl font-light leading-none transition-opacity duration-300 ${
+                on ? "opacity-100" : "opacity-75"
+              }`}
+            >
+              {s.num}
+            </span>
+
             {/* Node */}
             <button
               type="button"
@@ -162,34 +176,25 @@ export function InteractivePath({ steps }: { steps: PathStep[] }) {
               </span>
             </button>
 
-            {/* Caption, below the node */}
+            {/* Caption, below the icon: label, tight title, two-line body */}
             <div
               style={{
                 left: `${(p.x / W) * 100}%`,
-                top: `calc(${(p.y / H) * 100}% + 2.6rem)`,
+                top: `calc(${(p.y / H) * 100}% + 2.5rem)`,
               }}
-              className="pointer-events-none absolute w-[13.5rem] -translate-x-1/2"
+              className="pointer-events-none absolute w-[12.5rem] -translate-x-1/2 text-center"
             >
-              <div className="flex items-baseline justify-center gap-2">
-                <span
-                  className={`text-gold-sheen font-display text-lg font-light leading-none transition-opacity duration-300 ${
-                    on ? "opacity-100" : "opacity-70"
-                  }`}
-                >
-                  {s.num}
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
-                  {s.label}
-                </span>
-              </div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent-text)]">
+                {s.label}
+              </span>
               <h3
-                className={`font-display mt-1.5 text-center text-[length:var(--text-step-1)] font-light leading-tight transition-colors duration-300 ${
+                className={`font-display mt-1 text-[length:var(--text-step-1)] font-light leading-tight transition-colors duration-300 ${
                   on ? "text-[var(--fg)]" : "text-[var(--fg)]/85"
                 }`}
               >
                 {s.title}
               </h3>
-              <p className="mt-1.5 text-center text-[12.5px] leading-snug text-[var(--fg)]/65">
+              <p className="mt-1.5 text-[12.5px] leading-snug text-[var(--fg)]/65">
                 {s.body}
               </p>
             </div>
