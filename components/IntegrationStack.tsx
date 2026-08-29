@@ -15,7 +15,61 @@ import { useRef, useState } from "react";
 
 type Icon = { test: RegExp; node: React.ReactNode };
 
+// Ordered most-specific first: the first test that matches a label wins.
 const ICONS: Icon[] = [
+  {
+    // email / inbox — an envelope
+    test: /email|inbox|\bmail\b/i,
+    node: (
+      <>
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="M3.5 7l8.5 6 8.5-6" />
+      </>
+    ),
+  },
+  {
+    // calendar / meeting / scheduler
+    test: /calendar|meeting|schedul/i,
+    node: (
+      <>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <path d="M8 3v4M16 3v4M4 10h16" />
+      </>
+    ),
+  },
+  {
+    // CRM — a contact record card
+    test: /crm/i,
+    node: (
+      <>
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <circle cx="8.5" cy="11" r="2" />
+        <path d="M5.5 16c0-1.7 1.3-3 3-3s3 1.3 3 3" />
+        <path d="M14 10h4M14 13.5h4" />
+      </>
+    ),
+  },
+  {
+    // sending domain / DNS — a globe
+    test: /domain|sending|dns/i,
+    node: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3 12h18" />
+        <path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" />
+      </>
+    ),
+  },
+  {
+    // webhooks / APIs / services — braces
+    test: /webhook|api|service|integration/i,
+    node: (
+      <>
+        <path d="M8 4H7a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h1" />
+        <path d="M16 4h1a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-1" />
+      </>
+    ),
+  },
   {
     test: /cloud/i,
     node: (
@@ -23,21 +77,13 @@ const ICONS: Icon[] = [
     ),
   },
   {
-    test: /data|warehouse|storage/i,
+    // data / warehouse / sources / records — a database
+    test: /data|warehouse|storage|source|record/i,
     node: (
       <>
         <ellipse cx="12" cy="6" rx="7" ry="3" />
         <path d="M5 6v12c0 1.66 3.13 3 7 3s7-1.34 7-3V6" />
         <path d="M5 12c0 1.66 3.13 3 7 3s7-1.34 7-3" />
-      </>
-    ),
-  },
-  {
-    test: /api|service|integration/i,
-    node: (
-      <>
-        <path d="M8 4H7a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h1" />
-        <path d="M16 4h1a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-1" />
       </>
     ),
   },
@@ -93,8 +139,10 @@ function LayerIcon({ label }: { label: string }) {
 const W = 860;
 const H = 500;
 const GAP = 46; // vertical separation between layers, in the 3D space
-const ANCHOR = { x: 384, y: 150 }; // stack's measured visual centre, where leaders fan from
 const LABEL_X = 566; // left edge of the label column
+const LAYER_X = 380; // measured right edge of the stack (roughly constant per layer)
+const LAYER_TOP = 52; // measured screen centre of the top layer, in viewBox units
+const LAYER_SPAN = 203; // vertical distance from the top layer to the bottom layer
 
 export function IntegrationStack({ items }: { items: string[] }) {
   const layers = items;
@@ -103,11 +151,14 @@ export function IntegrationStack({ items }: { items: string[] }) {
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const labelY = (i: number) => 74 + (i * (H - 148)) / Math.max(1, n - 1);
+  // Each layer's own screen height, so its connector starts on that layer —
+  // making the layer↔label mapping visible (top layer → top label, and so on).
+  const layerY = (i: number) => LAYER_TOP + (i * LAYER_SPAN) / Math.max(1, n - 1);
 
   return (
     <div className="relative mx-auto mt-6 hidden h-[500px] w-full max-w-[860px] sm:block">
       <div className="animate-stack-float absolute inset-0">
-        {/* Fan leaders from the stack out to each label. */}
+        {/* One connector per layer: from that layer out to its own label. */}
         <svg
           aria-hidden="true"
           viewBox={`0 0 ${W} ${H}`}
@@ -119,8 +170,8 @@ export function IntegrationStack({ items }: { items: string[] }) {
             return (
               <line
                 key={i}
-                x1={ANCHOR.x}
-                y1={ANCHOR.y}
+                x1={LAYER_X}
+                y1={layerY(i)}
                 x2={LABEL_X - 16}
                 y2={labelY(i)}
                 stroke={on ? "var(--accent)" : "var(--fg)"}
@@ -134,26 +185,16 @@ export function IntegrationStack({ items }: { items: string[] }) {
           })}
         </svg>
 
-        {/* The stack, centered in the left ~58% of the field. Hover is driven by
-            pointer height (top of the stack = first layer, bottom = last), so the
-            overlapping layers can never flicker or fight over the pointer. */}
+        {/* The stack, centered in the left ~58% of the field. Hover is resolved
+            with elementFromPoint, so it selects the layer actually painted under
+            the pointer (the visible sliver) — accurate despite the overlap. */}
         <div
           className="absolute left-0 top-0 grid h-full w-[58%] place-items-center"
           onMouseMove={(e) => {
-            // Pick the layer whose actual on-screen centre is nearest the
-            // pointer, so the mapping is exact regardless of the 3D projection.
-            let best = 0;
-            let bestD = Infinity;
-            panelRefs.current.forEach((el, idx) => {
-              if (!el) return;
-              const r = el.getBoundingClientRect();
-              const d = Math.abs(e.clientY - (r.top + r.height / 2));
-              if (d < bestD) {
-                bestD = d;
-                best = idx;
-              }
-            });
-            setHi(best);
+            const hit = document
+              .elementFromPoint(e.clientX, e.clientY)
+              ?.closest("[data-idx]");
+            if (hit) setHi(Number(hit.getAttribute("data-idx")));
           }}
           onMouseLeave={() => setHi(null)}
         >
@@ -168,23 +209,28 @@ export function IntegrationStack({ items }: { items: string[] }) {
               {layers.map((label, i) => {
                 const top = i === 0;
                 const on = hi === i;
-                const z = (n - 1 - i) * GAP + (on ? 38 : 0);
+                const z = (n - 1 - i) * GAP; // fixed position — layers never move
+                // Layers stacked in FRONT of the active one fade, so the active
+                // layer is revealed in place instead of flying out.
+                const covered = hi !== null && i < hi;
                 return (
                   // Panels are purely visual: the labels drive all hover, so the
                   // overlapping layers can never fight over the pointer.
                   <div
                     key={label}
                     aria-hidden="true"
+                    data-idx={i}
                     ref={(el) => {
                       panelRefs.current[i] = el;
                     }}
                     style={{
                       gridArea: "1 / 1",
-                      transform: `translateZ(${z}px)`,
+                      transform: `translateZ(${z}px) scale(${on ? 1.05 : 1})`,
+                      opacity: covered ? 0.22 : 1,
                       transition:
-                        "transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background-color 0.3s, box-shadow 0.3s, opacity 0.3s",
+                        "transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background-color 0.3s, box-shadow 0.3s, opacity 0.3s",
                     }}
-                    className={`pointer-events-none flex h-[180px] w-[180px] items-center justify-center rounded-[30px] border ${
+                    className={`flex h-[180px] w-[180px] items-center justify-center rounded-[30px] border ${
                       top
                         ? "border-[var(--accent)]/60 bg-[color-mix(in_oklab,var(--accent)_20%,var(--surface))] shadow-[0_34px_66px_-20px_color-mix(in_oklab,var(--accent)_55%,transparent)]"
                         : on

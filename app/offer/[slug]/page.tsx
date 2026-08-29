@@ -226,7 +226,7 @@ export default async function OfferingPage({ params }: Props) {
               </div>
 
               {/* The deeper read: after the card on mobile. */}
-              <div className="order-3 lg:order-none">
+              <div className="order-2 lg:order-none">
               {!offering.howItWorks && (
                 <p className="max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75 lg:mt-7">
                   {offering.description}
@@ -267,7 +267,7 @@ export default async function OfferingPage({ params }: Props) {
 
             {/* Right: sticky glass action card. Between intro/quote and the
                 deeper read on mobile (order-2); right column on desktop. */}
-            <aside className="order-2 relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/55 p-5 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:p-6 lg:order-none lg:col-start-2 lg:row-start-1 lg:sticky lg:top-24">
+            <aside className="order-3 relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/55 p-5 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:p-6 lg:order-none lg:col-start-2 lg:row-start-1 lg:sticky lg:top-24">
               {/* Frosted-glass touches: a lit top edge and a soft gold sheen. */}
               <div
                 aria-hidden="true"

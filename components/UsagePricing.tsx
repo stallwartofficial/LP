@@ -7,7 +7,8 @@ import { useState } from "react";
 //   emails      = spend / $0.03
 //   warm leads  = 0.2%–0.8% of emails (min 1)
 //   meetings    = 0.1%–0.2% of emails (min 1)
-//   cost / lead = $1–$15 (flat range)
+//   cost / lead = spend ÷ warm leads = COST_PER_EMAIL ÷ warm-rate (budget-
+//                 independent, so it stays consistent with the warm range)
 // Volume and outcomes are shown as ranges so it reads as a rough estimate, not
 // a quote. See the note under the tiles.
 const COST_PER_EMAIL = 0.03;
@@ -16,10 +17,14 @@ const WARM_HIGH = 0.008;
 const MEET_LOW = 0.001;
 const MEET_HIGH = 0.002;
 
+// Cost per warm lead: cheapest at the best warm rate, dearest at the worst.
+const LEAD_COST_LOW = Math.round(COST_PER_EMAIL / WARM_HIGH); // $4
+const LEAD_COST_HIGH = Math.round(COST_PER_EMAIL / WARM_LOW); // $15
+
 const MIN = 2;
 const MAX = 500;
 const STEP = 1;
-const DEFAULT = 50;
+const DEFAULT = 20;
 
 const nf = (n: number) => n.toLocaleString("en-US");
 const atLeastOne = (n: number) => Math.max(1, Math.round(n));

@@ -57,20 +57,25 @@
 :root {
   color-scheme: light;
 
-  --bg: var(--color-cream);
+  /* A touch deeper, cooler cream for the page ground so white panels above it
+     read as genuinely raised, and body text lands with real contrast. */
+  --bg: #eee9dc;
   --bg-raised: #ffffff;
   --fg: var(--color-ink);
-  --surface: var(--color-cream-soft);
+  /* Panels are clean white on the cream ground: cards, sections, and glass now
+     separate clearly instead of blending cream-on-cream. */
+  --surface: #ffffff;
 
   /* --accent: fills, borders, button backgrounds (decorative).
      --accent-text: the same role for actual text, AA contrast safe. */
   --accent: var(--color-gold);
   --accent-text: var(--color-gold-deep);
 
-  --hairline: color-mix(in oklab, var(--fg) 12%, transparent);
-  --hairline-strong: color-mix(in oklab, var(--fg) 22%, transparent);
-  --glow: color-mix(in oklab, var(--accent) 10%, transparent);
-  --grain-opacity: 0.018;
+  /* Stronger hairlines so borders and rules are actually visible on cream. */
+  --hairline: color-mix(in oklab, var(--fg) 16%, transparent);
+  --hairline-strong: color-mix(in oklab, var(--fg) 32%, transparent);
+  --glow: color-mix(in oklab, var(--accent) 14%, transparent);
+  --grain-opacity: 0.02;
 
   /* Mindmap branch identities. Two tokens per branch on purpose:
      -fill is decorative (dots, rules, borders) and may be the bright brand

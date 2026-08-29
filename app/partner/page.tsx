@@ -190,24 +190,24 @@ export default function PartnerPage() {
                 you work.
               </p>
 
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              <ul className="mt-6 grid grid-cols-2 gap-3">
                 {models.map((m, i) => (
                   <li
                     key={m.key}
-                    className="group flex flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5 transition-colors duration-300 hover:border-[var(--accent)]/50"
+                    className="group flex flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-4 transition-colors duration-300 hover:border-[var(--accent)]/50 sm:p-5"
                   >
-                    <div className="flex items-baseline gap-2.5">
-                      <span className="text-gold-sheen font-display text-lg font-light leading-none">
+                    <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                      <span className="text-gold-sheen font-display text-base font-light leading-none sm:text-lg">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-text)]">
+                      <span className="font-mono text-[9px] uppercase tracking-[0.08em] text-[var(--accent-text)] sm:text-[10px] sm:tracking-[0.14em]">
                         {m.name}
                       </span>
                     </div>
-                    <h3 className="font-display mt-3 text-[length:var(--text-step-1)] font-light leading-tight">
+                    <h3 className="font-display mt-2.5 text-[14px] font-light leading-snug sm:mt-3 sm:text-[length:var(--text-step-1)] sm:leading-tight">
                       {m.tagline}
                     </h3>
-                    <p className="mt-2 text-[13px] leading-relaxed text-[var(--fg)]/70">
+                    <p className="mt-2 text-[12px] leading-relaxed text-[var(--fg)]/70 sm:text-[13px]">
                       {m.blurb}
                     </p>
                   </li>
@@ -273,23 +273,23 @@ export default function PartnerPage() {
           <p className="mt-12 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--accent-text)]">
             What you get
           </p>
-          <ul className="mt-6 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-4">
             {benefits.map((b, i) => (
               <Reveal as="li" index={i} key={b.title} className="group">
                 <span
                   aria-hidden="true"
-                  className="text-gold-sheen font-display block text-[2rem] font-light leading-none"
+                  className="text-gold-sheen font-display block text-[1.5rem] font-light leading-none sm:text-[2rem]"
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span
                   aria-hidden="true"
-                  className="mt-4 block h-px w-10 origin-left bg-[var(--hairline-strong)] transition-all duration-500 group-hover:w-16 group-hover:bg-[var(--accent)]"
+                  className="mt-3 block h-px w-8 origin-left bg-[var(--hairline-strong)] transition-all duration-500 group-hover:w-14 group-hover:bg-[var(--accent)] sm:mt-4 sm:w-10"
                 />
-                <h3 className="font-display mt-4 text-[length:var(--text-step-1)] leading-tight">
+                <h3 className="font-display mt-3 text-[14px] leading-snug sm:mt-4 sm:text-[length:var(--text-step-1)] sm:leading-tight">
                   {b.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--fg)]/75">
+                <p className="mt-1.5 text-[12px] leading-relaxed text-[var(--fg)]/75 sm:mt-2 sm:text-sm">
                   {b.body}
                 </p>
               </Reveal>
