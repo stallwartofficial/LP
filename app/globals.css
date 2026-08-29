@@ -384,6 +384,15 @@ p {
 }
 .animate-soft-pulse { animation: soft-pulse 2.6s ease-in-out infinite; }
 
+/* Gentle vertical bob for the surfaces 3D stack, so the layers feel afloat
+   rather than parked. Applied to the (non-3D) scene wrapper so it never fights
+   the isometric transform on the layers themselves. */
+@keyframes stack-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-stack-float { animation: stack-float 6s ease-in-out infinite; }
+
 /* ---------------  SYSTEM DIAGRAMS (engineering texture)  ----------------- */
 /* A signal tracing a connector. Deliberately a single travelling dot on a
    hairline: an engineering trace readout, not a particle field. */
@@ -471,7 +480,8 @@ p {
   .animate-marquee,
   .animate-marquee-slow,
   .animate-aurora,
-  .animate-soft-pulse {
+  .animate-soft-pulse,
+  .animate-stack-float {
     animation: none !important;
   }
   .card-lift:hover { transform: none; box-shadow: none; }

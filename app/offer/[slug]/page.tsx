@@ -10,6 +10,8 @@ import { Faq } from "@/components/Faq";
 import { Reveal } from "@/components/Reveal";
 import { UsagePricing } from "@/components/UsagePricing";
 import { HowItWorksMap } from "@/components/HowItWorksMap";
+import { IntegrationStack } from "@/components/IntegrationStack";
+import { InteractivePath } from "@/components/InteractivePath";
 import { breadcrumbSchema, offeringSchema } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -141,118 +143,6 @@ const PersonaIcon = ({ name }: { name: keyof typeof personaIcons }) => (
     {personaIcons[name]}
   </svg>
 );
-
-// --- Surfaces as a hub-and-spoke orbit: the product core at the centre, each
-// integration a labelled node around it, connectors drawing in on scroll and
-// the core pulsing. Long category labels sit in pills so they stay readable.
-// Decorative geometry is aria-hidden; the pill labels are real text, and a
-// plain list carries the same content on small screens.
-function SurfaceOrbit({ items }: { items: string[] }) {
-  const W = 660;
-  const H = 560;
-  const cx = W / 2;
-  const cy = H / 2;
-  const rx = 272;
-  const ry = 210;
-  const cycle = 3.2; // seconds for one signal to travel core -> node
-  // Half-step offset off top dead-centre, so no node points straight up into
-  // the floating nav (or straight down into the section edge), for any count.
-  const pts = items.map((label, i) => {
-    const ang =
-      (-90 + 180 / items.length + i * (360 / items.length)) * (Math.PI / 180);
-    return { label, x: cx + rx * Math.cos(ang), y: cy + ry * Math.sin(ang) };
-  });
-
-  return (
-    <div className="relative mx-auto hidden h-[560px] w-full max-w-[660px] sm:block">
-      <svg
-        aria-hidden="true"
-        viewBox={`0 0 ${W} ${H}`}
-        className="absolute inset-0 h-full w-full"
-      >
-        <g stroke="var(--hairline-strong)" strokeWidth="1.25">
-          {pts.map((p, i) => (
-            <line
-              key={i}
-              className="check-draw"
-              style={
-                { "--len": Math.hypot(p.x - cx, p.y - cy) } as React.CSSProperties
-              }
-              x1={cx}
-              y1={cy}
-              x2={p.x}
-              y2={p.y}
-            />
-          ))}
-        </g>
-
-        {/* Core: a soft pulsing ring around a solid gold node. */}
-        <circle
-          cx={cx}
-          cy={cy}
-          r="34"
-          fill="none"
-          stroke="var(--accent)"
-          strokeWidth="1"
-          opacity="0.4"
-          className="animate-soft-pulse"
-        />
-        <circle
-          cx={cx}
-          cy={cy}
-          r="22"
-          fill="var(--surface)"
-          stroke="var(--accent)"
-          strokeWidth="1.5"
-        />
-        <circle cx={cx} cy={cy} r="4.5" fill="var(--accent)" />
-
-        {/* Signals: a gold light that travels from the core out to each node,
-            staggered so they emanate around the hub in turn. */}
-        {pts.map((p, i) => {
-          const begin = `${((i * cycle) / items.length).toFixed(2)}s`;
-          return (
-            <circle
-              key={i}
-              r="4"
-              className="orbit-signal"
-              fill="var(--accent)"
-              style={{ filter: "drop-shadow(0 0 5px var(--accent))" }}
-            >
-              <animateMotion
-                dur={`${cycle}s`}
-                begin={begin}
-                repeatCount="indefinite"
-                keyPoints="0;1"
-                keyTimes="0;1"
-                calcMode="linear"
-                path={`M ${cx} ${cy} L ${p.x} ${p.y}`}
-              />
-              <animate
-                attributeName="opacity"
-                dur={`${cycle}s`}
-                begin={begin}
-                repeatCount="indefinite"
-                values="0;1;1;0"
-                keyTimes="0;0.15;0.75;1"
-              />
-            </circle>
-          );
-        })}
-      </svg>
-
-      {pts.map((p, i) => (
-        <span
-          key={i}
-          style={{ left: `${(p.x / W) * 100}%`, top: `${(p.y / H) * 100}%` }}
-          className="group absolute max-w-[9.5rem] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-[var(--hairline-strong)] bg-[var(--surface)] px-3.5 py-2 text-center font-mono text-[9.5px] font-medium uppercase leading-[1.5] tracking-[0.12em] text-[var(--fg)]/70 shadow-[0_8px_24px_-14px_rgba(0,0,0,0.55)] transition-all duration-300 hover:-translate-y-[calc(50%+2px)] hover:border-[var(--accent)]/70 hover:text-[var(--fg)]"
-        >
-          {items[i]}
-        </span>
-      ))}
-    </div>
-  );
-}
 
 export function generateStaticParams() {
   return offerings.map((o) => ({ slug: o.slug }));
@@ -573,6 +463,24 @@ export default async function OfferingPage({ params }: Props) {
                     →
                   </span>
                 </Link>
+
+                {/* Trust row: honest positioning, no fabricated logos or faces. */}
+                <div className="mt-5 flex items-center justify-between border-t border-[var(--hairline)] pt-4">
+                  <span className="font-mono text-[10px] uppercase leading-tight tracking-[0.16em] text-[var(--fg)]/55">
+                    Let&apos;s build
+                    <br />
+                    what&apos;s next
+                  </span>
+                  <span className="flex items-center gap-2 font-mono text-[10px] uppercase leading-tight tracking-[0.16em] text-[var(--accent-text)]">
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"
+                    />
+                    Built for
+                    <br />
+                    bold teams
+                  </span>
+                </div>
               </div>
             </aside>
           </div>
@@ -655,21 +563,37 @@ export default async function OfferingPage({ params }: Props) {
               {inDevelopment ? "What it will do" : "How it works"}
             </h2>
 
-            <ol className="mt-8 grid grid-cols-2 gap-x-4 gap-y-7 sm:mt-10 sm:gap-x-14 sm:gap-y-10">
+            {/* Desktop: a guided journey along a climbing dotted path. */}
+            <div className="mt-4">
+              <InteractivePath
+                steps={offering.capabilities.map((c) => {
+                  const [num, ...rest] = c.eyebrow.split(" ");
+                  return {
+                    num,
+                    label: rest.join(" "),
+                    title: c.title,
+                    body: c.description,
+                  };
+                })}
+              />
+            </div>
+
+            {/* Mobile: the same steps as a plain stepped list. */}
+            <ol className="mt-8 grid grid-cols-2 gap-x-4 gap-y-7 sm:hidden">
               {offering.capabilities.map((c, i) => (
                 <Reveal
                   as="li"
                   index={i}
                   key={c.title}
-                  className="group border-t border-[var(--hairline)] pt-4 transition-colors duration-300 hover:border-[var(--accent)]/50 sm:pt-5"
+                  className="group border-t border-[var(--hairline)] pt-4 transition-colors duration-300 hover:border-[var(--accent)]/50"
                 >
-                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent-text)] sm:text-[11px] sm:tracking-[0.22em]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent-text)]">
                     {c.eyebrow}
                   </span>
-                  <h3 className="font-display mt-2 text-[length:var(--text-step-1)] font-light leading-tight transition-colors duration-300 group-hover:text-[var(--accent-text)] sm:mt-3 sm:text-[length:var(--text-step-2)]">
+                  <h3 className="font-display mt-2 text-[length:var(--text-step-1)] font-light leading-tight transition-colors duration-300 group-hover:text-[var(--accent-text)]">
                     {c.title}
                   </h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-[var(--fg)]/70 sm:mt-2.5 sm:text-sm">
+                  <p className="mt-2 text-[13px] leading-relaxed text-[var(--fg)]/70">
                     {c.description}
                   </p>
                 </Reveal>
@@ -685,21 +609,32 @@ export default async function OfferingPage({ params }: Props) {
           aria-labelledby="integrations"
           className="section-y rule-t px-[var(--space-gutter)]"
         >
-          <div className="mx-auto max-w-5xl">
-            <p className="eyebrow">Surfaces</p>
-            <h2
-              id="integrations"
-              className="font-display mt-3 text-display-sm font-light"
-            >
-              Plugs into what you already use
-            </h2>
-            <p className="mt-4 max-w-2xl text-sm text-[var(--fg)]/60">
-              No rip and replace. It runs on what you already operate.
-            </p>
+          <div className="mx-auto max-w-6xl">
+            {/* Two columns on desktop: the pitch on the left, the interactive
+                3D stack on the right. On mobile the stack collapses out and the
+                plain list carries the same surfaces. */}
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+              <div>
+                <p className="eyebrow">Surfaces</p>
+                <h2
+                  id="integrations"
+                  className="font-display mt-3 text-display-sm font-light"
+                >
+                  Plugs into what you already use
+                </h2>
+                <p className="mt-4 max-w-md text-sm text-[var(--fg)]/60">
+                  No rip and replace. It runs on what you already operate.
+                </p>
+                <a
+                  href="/contact"
+                  className="link-draw mt-6 hidden text-sm font-medium text-[var(--accent-text)] sm:inline-block"
+                >
+                  Talk through your stack →
+                </a>
+              </div>
 
-            {/* Desktop: the product core at the centre, your stack orbiting it. */}
-            <div className="mt-8">
-              <SurfaceOrbit items={offering.integrations} />
+              {/* Desktop: your surfaces as a floating isometric stack. */}
+              <IntegrationStack items={offering.integrations} />
             </div>
 
             {/* Mobile: the same surfaces as a plain, tappable list. */}

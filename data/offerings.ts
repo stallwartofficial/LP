@@ -100,37 +100,38 @@ export const offerings: Offering[] = [
     status: "available",
     pricing: "Fixed price per phase, from a paid discovery sprint. Book a call for a scoped quote.",
     pricingShort: "Fixed price per phase",
-    tagline: "Build the system your business actually needs",
+    tagline:
+      "Stop adapting your business to software. Build the system around it.",
     summary:
       "For problems no product solves. Whatever the system is, a SaaS platform, a product, or an internal tool, we build it with AI to the standard the best teams hold, and hand over code you own outright.",
     description:
-      "A Stallwart system is whatever the problem needs: a SaaS platform, a customer-facing product, an internal tool. We build it with AI, so it ships faster and holds under real load, engineered to the standard the best teams hold: correct at scale, observable, and yours to own. Most AI work fails at the same point: a promising prototype meets real data, real volume, and real edge cases, and nobody scoped the last 80 percent. We take the problem from first principles instead. That means understanding the workflow before proposing architecture, building against your actual exceptions rather than a clean sample, and treating observability and rollback as part of the build rather than a later phase. You own the code, the infrastructure definitions, and the documentation. No lock in, because a system you cannot maintain without us is not a system we would ship.",
+      "Custom software and intelligent AI systems, engineered around how your business actually works — and built for what comes next. We design and build custom software, AI systems, and intelligent infrastructure for businesses that have outgrown generic solutions. From SaaS platforms and customer-facing products to AI agents, automation, and internal systems, we turn complex workflows and ambitious ideas into technology that works in the real world. Built from first principles. Engineered to scale. Designed around your data, workflows, and goals.",
     problem:
       "The prototype worked. Then it met production, and the team discovered that the interesting 20 percent was demonstrated and the load bearing 80 percent was never built.",
     capabilities: [
       {
         eyebrow: "01 Scope",
-        title: "Problem framing before architecture",
+        title: "Problem framing first",
         description:
-          "We map how the work actually happens, where it stalls, and what a failure costs. Systems fail from being pointed at the wrong problem far more often than from bad engineering.",
+          "We map your real workflow, where it breaks, and what failure costs — before any architecture.",
       },
       {
         eyebrow: "02 Design",
         title: "Architecture you can interrogate",
         description:
-          "A written technical design covering data flow, model boundaries, failure modes, escalation paths, and the decisions the system is explicitly not permitted to make. Reviewed with your engineers before a line is written.",
+          "A written design: data flow, model boundaries, failure modes, and what the system may never do. Reviewed with your engineers.",
       },
       {
         eyebrow: "03 Build",
-        title: "Built against your real exceptions",
+        title: "Built against real exceptions",
         description:
-          "Calibrated on your data, including the malformed records and the requests that fit no category. Tested on the failure modes rather than the happy path.",
+          "Engineered on your data and edge cases, and tested on failure modes — not the happy path.",
       },
       {
         eyebrow: "04 Handover",
-        title: "Code you own, documented to maintain",
+        title: "Code you own and run",
         description:
-          "Source, infrastructure as code, runbooks, and observability. Your team can operate and extend it without us. Optional support after that is a choice, not a dependency.",
+          "Source, infrastructure as code, runbooks, and observability. Your team runs it without us. Support is a choice, not a dependency.",
       },
     ],
     builtFor: [

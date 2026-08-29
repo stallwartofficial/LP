@@ -109,7 +109,7 @@ export function PartnerForm() {
 
         <div>
           <label htmlFor="company" className={labelClass}>
-            Company
+            Organization
           </label>
           <input
             id="company"
@@ -118,6 +118,21 @@ export function PartnerForm() {
             required
             autoComplete="organization"
             placeholder="Company name"
+            className={`field ${fieldClass}`}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="role" className={labelClass}>
+            Your role{" "}
+            <span className="font-normal text-[var(--fg)]/65">(optional)</span>
+          </label>
+          <input
+            id="role"
+            name="role"
+            type="text"
+            autoComplete="organization-title"
+            placeholder="Founder, Head of Partnerships…"
             className={`field ${fieldClass}`}
           />
         </div>
@@ -133,16 +148,25 @@ export function PartnerForm() {
             className={`field ${fieldClass}`}
           >
             <option value="">Select…</option>
-            <option value="Referral">Referral</option>
-            <option value="Delivery or implementation">
-              Delivery or implementation
+            <option value="Technology / Integration">
+              Technology / Integration
             </option>
+            <option value="Solution / Implementation">
+              Solution / Implementation
+            </option>
+            <option value="Cloud / Infrastructure">Cloud / Infrastructure</option>
+            <option value="Strategic / Co-innovation">
+              Strategic / Co-innovation
+            </option>
+            <option value="Referral / Channel">Referral / Channel</option>
+            <option value="Research / Innovation">Research / Innovation</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
         <div>
           <label htmlFor="website" className={labelClass}>
-            Website or LinkedIn{" "}
+            Website{" "}
             <span className="font-normal text-[var(--fg)]/65">(optional)</span>
           </label>
           <input
@@ -157,14 +181,14 @@ export function PartnerForm() {
 
         <div>
           <label htmlFor="message" className={labelClass}>
-            What do you have in mind?{" "}
+            What would you like to build together?{" "}
             <span className="font-normal text-[var(--fg)]/65">(optional)</span>
           </label>
           <textarea
             id="message"
             name="message"
             rows={4}
-            placeholder="The clients you work with, or the delivery capacity you bring…"
+            placeholder="The opportunity you see, the customers you serve, or the technology you'd integrate…"
             className={`field ${fieldClass}`}
           />
         </div>
