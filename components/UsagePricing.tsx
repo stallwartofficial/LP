@@ -95,7 +95,7 @@ export function UsagePricing() {
         <Tile value={nf(emails)} label="Emails" />
         <Tile value={warm} label="Warm leads" />
         <Tile value={meetings} label="Meetings" accent />
-        <Tile value="$1–$15" label="Cost / lead" />
+        <Tile value={`$${LEAD_COST_LOW}–$${LEAD_COST_HIGH}`} label="Cost / lead" />
       </div>
 
       <p className="mt-2.5 text-[10px] leading-snug text-[var(--fg)]/40">

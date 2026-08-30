@@ -10,9 +10,9 @@ const fieldClass =
 const labelClass =
   "block text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--fg)]/70";
 
-// Partner inquiry form. Posts JSON to /api/partner-inquiry, which forwards it
-// server-side (webhook now, Firebase later). Same interaction model as the
-// contact form: inline validation surfaced from the server, one honest reply.
+// Partner inquiry form. Posts JSON to /api/partner, which validates server-side
+// and inserts into Supabase (public.partner_submissions). Same interaction model
+// as the contact form: inline validation surfaced from the server, one honest reply.
 export function PartnerForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +25,7 @@ export function PartnerForm() {
     const formData = new FormData(e.currentTarget);
 
     try {
-      const res = await fetch("/api/partner-inquiry", {
+      const res = await fetch("/api/partner", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Object.fromEntries(formData)),
