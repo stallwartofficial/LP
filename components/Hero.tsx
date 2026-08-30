@@ -127,7 +127,7 @@ export function Hero() {
       </div>
 
       {/* Trust strip below the claim, still inside the hero. */}
-      <div className="mx-auto w-full max-w-6xl">
+      <div className="-mx-[var(--space-gutter)]">
         <RevealOnLoad index={4} className="mt-10">
           <LogoScroll inHero />
         </RevealOnLoad>

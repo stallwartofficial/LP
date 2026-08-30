@@ -24,7 +24,7 @@ export function LogoScroll({ inHero = false }: { inHero?: boolean } = {}) {
       <div
         className={
           inHero
-            ? "flex items-center gap-8"
+            ? "flex items-center gap-8 px-[var(--space-gutter)]"
             : "mx-auto flex max-w-6xl items-center gap-8 px-[var(--space-gutter)]"
         }
       >

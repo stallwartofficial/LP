@@ -113,11 +113,17 @@ export function Navbar() {
     }`;
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-[var(--space-gutter)] pt-3 sm:pt-5">
+    <header
+      className={`pointer-events-none fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${
+        scrolled
+          ? "border-[var(--hairline)] bg-[var(--bg)]/85 shadow-[0_10px_40px_-16px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+          : "border-transparent"
+      }`}
+    >
       <nav
         aria-label="Primary"
-        className={`pointer-events-auto flex w-full max-w-6xl items-center justify-between gap-6 rounded-full border border-[var(--hairline)] bg-[var(--bg)]/80 pl-4 pr-2 shadow-[0_10px_40px_-14px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-all duration-500 sm:pl-6 sm:pr-3 ${
-          scrolled ? "py-2" : "py-3"
+        className={`pointer-events-auto flex w-full items-center justify-between gap-6 px-[var(--space-gutter)] transition-all duration-500 ${
+          scrolled ? "py-3" : "py-4 sm:py-5"
         }`}
       >
         <Link
