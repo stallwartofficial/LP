@@ -16,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.domain}/blog`, lastModified: now, priority: 0.8 },
     { url: `${site.domain}/contact`, lastModified: now, priority: 0.7 },
     { url: `${site.domain}/partner`, lastModified: now, priority: 0.6 },
+    { url: `${site.domain}/guides`, lastModified: now, priority: 0.7 },
+    { url: `${site.domain}/glossary`, lastModified: now, priority: 0.6 },
+    { url: `${site.domain}/faq`, lastModified: now, priority: 0.6 },
+    { url: `${site.domain}/trust`, lastModified: now, priority: 0.6 },
+    { url: `${site.domain}/principles`, lastModified: now, priority: 0.4 },
+    { url: `${site.domain}/careers`, lastModified: now, priority: 0.4 },
     { url: `${site.domain}/privacy`, lastModified: now, priority: 0.3 },
     { url: `${site.domain}/terms`, lastModified: now, priority: 0.3 },
   ];

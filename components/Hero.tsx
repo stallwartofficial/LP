@@ -67,7 +67,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative isolate overflow-hidden px-[var(--space-gutter)] pb-8 pt-24 lg:pb-12 lg:pt-32">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden px-[var(--space-gutter)] pb-8 pt-24 lg:pt-28">
       {/* One faint drifting wash, centred behind the headline. */}
       <div
         aria-hidden="true"
@@ -77,7 +77,7 @@ export function Hero() {
       </div>
 
       {/* ------------------------- The claim, centred ------------------------- */}
-      <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+      <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col items-center justify-center text-center">
         <RevealOnLoad index={0} y={8}>
           <div className="flex items-center justify-center gap-3">
             <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)] sm:w-12" />
@@ -127,8 +127,8 @@ export function Hero() {
       </div>
 
       {/* Trust strip below the claim, still inside the hero. */}
-      <div className="mx-auto max-w-6xl">
-        <RevealOnLoad index={4} className="mt-14 lg:mt-16">
+      <div className="mx-auto w-full max-w-6xl">
+        <RevealOnLoad index={4} className="mt-10">
           <LogoScroll inHero />
         </RevealOnLoad>
       </div>

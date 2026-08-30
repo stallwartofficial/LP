@@ -5,7 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, blogListSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Case Studies",
+  title: "Blog",
   description:
     "Case studies and writing from Stallwart on operations, AI systems, and the work that quietly falls through. Written for operators who want the mechanism.",
   path: "/blog",
@@ -22,7 +22,7 @@ export default function BlogIndexPage() {
           blogListSchema(),
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Case Studies", path: "/blog" },
+            { name: "Blog", path: "/blog" },
           ]),
         ]}
       />
@@ -31,7 +31,7 @@ export default function BlogIndexPage() {
         <div className="mx-auto max-w-6xl">
           <div className="flex items-center gap-3">
             <span aria-hidden="true" className="h-px w-10 bg-[var(--accent)]" />
-            <p className="eyebrow">Case studies</p>
+            <p className="eyebrow">The blog</p>
           </div>
 
           <h1 className="font-display mt-6 max-w-3xl text-display-lg font-light">

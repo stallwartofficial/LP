@@ -61,7 +61,7 @@ export default async function BlogPostPage({ params }: Props) {
           faqSchema(post.qa),
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Case Studies", path: "/blog" },
+            { name: "Blog", path: "/blog" },
             { name: post.title, path: `/blog/${post.slug}` },
           ]),
         ]}
@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: Props) {
             href="/blog"
             className="link-draw text-sm text-[var(--accent-text)]"
           >
-            ← All insights
+            ← Blog
           </Link>
 
           <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2">

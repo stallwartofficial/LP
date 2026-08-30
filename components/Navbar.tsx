@@ -1,18 +1,66 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { navLinks, site } from "@/data/site";
+import { site } from "@/data/site";
+import { offerings } from "@/data/offerings";
 import { ThemeToggle } from "./ThemeToggle";
 
-// Floating capsule nav. It detaches from the page edge on scroll and gains a
-// blurred shell, so the header reads as an object over the content rather than
-// a band welded to the top of it.
+// Floating capsule nav. Fully transparent over the hero, then on scroll a solid,
+// blurred, shadowed shell slides in and follows. Links group to the right in
+// three dropdowns — Company, Resources, What we build — plus the Book a Call CTA.
+
+// Short, plain, benefit-led descriptors per product (by slug).
+const OFFER_BLURB: Record<string, string> = {
+  "custom-ai-engineering": "We build the system your business needs",
+  "extrovert-ai": "Runs your outbound, end to end",
+  sillage: "Keeps your AI audit-ready",
+};
+
+type MenuItem = { label: string; href: string; blurb?: string; soon?: boolean };
+type Menu = { label: string; href: string | null; items: MenuItem[] };
+
+const menus: Menu[] = [
+  {
+    label: "What we build",
+    href: "/offer",
+    items: offerings.map((o) => ({
+      label: o.name,
+      href: `/offer/${o.slug}`,
+      blurb: OFFER_BLURB[o.slug] ?? o.category,
+      soon: o.status === "in-development",
+    })),
+  },
+  {
+    label: "Company",
+    href: null,
+    items: [
+      { label: "Our Story", href: "/story" },
+      { label: "Principles", href: "/principles" },
+      { label: "Careers", href: "/careers" },
+      { label: "Partner", href: "/partner" },
+    ],
+  },
+  {
+    label: "Resources",
+    href: null,
+    items: [
+      { label: "Blog", href: "/blog" },
+      { label: "Guides", href: "/guides" },
+      { label: "Glossary", href: "/glossary" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Trust & Security", href: "/trust" },
+    ],
+  },
+];
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState<string | null>(null);
+  const timer = useRef<number | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -23,27 +71,53 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (!menuOpen) return;
+    setOpen(null);
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!menuOpen && !open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        setOpen(null);
+      }
     };
-    // Lock the page behind the mobile sheet.
-    document.body.style.overflow = "hidden";
+    if (menuOpen) document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [menuOpen]);
+  }, [menuOpen, open]);
+
+  const openNow = (label: string) => {
+    if (timer.current) window.clearTimeout(timer.current);
+    setOpen(label);
+  };
+  const closeSoon = () => {
+    if (timer.current) window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => setOpen(null), 120);
+  };
+
+  const isActive = (m: Menu) =>
+    m.items.some(
+      (it) => pathname === it.href || pathname.startsWith(`${it.href}/`)
+    );
+
+  const triggerClass = (active: boolean) =>
+    `link-draw text-sm transition-colors ${
+      active
+        ? "text-[var(--accent-text)]"
+        : "text-[var(--fg)]/70 hover:text-[var(--fg)]"
+    }`;
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-[var(--space-gutter)] pt-3 sm:pt-5">
       <nav
         aria-label="Primary"
-        className={`pointer-events-auto flex w-full max-w-6xl items-center justify-between gap-6 rounded-full pl-4 pr-2 transition-all duration-500 sm:pl-6 sm:pr-3 ${
-          scrolled
-            ? "border border-[var(--hairline)] bg-[var(--bg)]/70 py-2 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.25)] backdrop-blur-xl"
-            : "border border-[var(--hairline)]/40 py-3 shadow-[0_6px_26px_-16px_rgba(0,0,0,0.35)]"
+        className={`pointer-events-auto flex w-full max-w-6xl items-center justify-between gap-6 rounded-full border border-[var(--hairline)] bg-[var(--bg)]/80 pl-4 pr-2 shadow-[0_10px_40px_-14px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-all duration-500 sm:pl-6 sm:pr-3 ${
+          scrolled ? "py-2" : "py-3"
         }`}
       >
         <Link
@@ -51,8 +125,6 @@ export function Navbar() {
           className="group flex shrink-0 items-center gap-2.5"
           aria-label={`${site.company}, home`}
         >
-          {/* Intrinsic lion mark is 218x256; width/height keep that ratio so
-              Next doesn't warn about CSS changing one axis. Rendered at h-9. */}
           <Image
             src="/images/logo-lion.png"
             alt=""
@@ -68,76 +140,158 @@ export function Navbar() {
           </span>
         </Link>
 
-        <ul className="hidden items-center gap-7 lg:flex">
-          {navLinks.map((link) => {
-            const active =
-              pathname === link.href || pathname.startsWith(`${link.href}/`);
-            return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`link-draw text-sm transition-colors ${
-                    active
-                      ? "text-[var(--accent-text)]"
-                      : "text-[var(--fg)]/70 hover:text-[var(--fg)]"
-                  }`}
+        {/* Right cluster: three dropdowns + the CTA. */}
+        <div className="flex items-center gap-6">
+          <ul className="hidden items-center gap-7 lg:flex">
+            {menus.map((m) => {
+              const active = isActive(m);
+              const isOpen = open === m.label;
+              return (
+                <li
+                  key={m.label}
+                  className="relative"
+                  onMouseEnter={() => openNow(m.label)}
+                  onMouseLeave={closeSoon}
                 >
-                  {link.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+                  {m.href ? (
+                    <Link
+                      href={m.href}
+                      onFocus={() => openNow(m.label)}
+                      aria-current={active ? "page" : undefined}
+                      className={triggerClass(active)}
+                    >
+                      {m.label}
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-haspopup="true"
+                      onFocus={() => openNow(m.label)}
+                      onClick={() => setOpen(isOpen ? null : m.label)}
+                      className={triggerClass(active)}
+                    >
+                      {m.label}
+                    </button>
+                  )}
 
-        <div className="flex shrink-0 items-center gap-1.5">
-          <ThemeToggle />
+                  {/* Dropdown panel */}
+                  <div
+                    className={`absolute top-full pt-3 transition-all duration-200 ${
+                      m.label === "What we build"
+                        ? "left-0"
+                        : "left-1/2 -translate-x-1/2"
+                    } ${
+                      isOpen
+                        ? "visible translate-y-0 opacity-100"
+                        : "invisible -translate-y-1 opacity-0"
+                    }`}
+                  >
+                    <div
+                      className={`overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--bg)]/90 p-2 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl ${
+                        m.label === "What we build"
+                          ? "w-[21rem]"
+                          : "min-w-[12rem]"
+                      }`}
+                    >
+                      {m.items.map((it) =>
+                        it.blurb ? (
+                          <Link
+                            key={it.href}
+                            href={it.href}
+                            onClick={() => setOpen(null)}
+                            className="group flex flex-col rounded-xl px-3.5 py-3 transition-colors hover:bg-[var(--surface)]"
+                          >
+                            <span className="flex items-center gap-2">
+                              <span className="font-display text-[15px] font-light leading-none transition-colors group-hover:text-[var(--accent-text)]">
+                                {it.label}
+                              </span>
+                              {it.soon && (
+                                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--fg)]/45">
+                                  soon
+                                </span>
+                              )}
+                            </span>
+                            <span className="mt-1 text-xs text-[var(--fg)]/55">
+                              {it.blurb}
+                            </span>
+                          </Link>
+                        ) : (
+                          <Link
+                            key={it.href}
+                            href={it.href}
+                            onClick={() => setOpen(null)}
+                            className="block rounded-xl px-3.5 py-2.5 text-sm text-[var(--fg)]/75 transition-colors hover:bg-[var(--surface)] hover:text-[var(--fg)]"
+                          >
+                            {it.label}
+                          </Link>
+                        )
+                      )}
+                      {m.href && (
+                        <Link
+                          href={m.href}
+                          onClick={() => setOpen(null)}
+                          className="mt-1 flex items-center gap-1.5 border-t border-[var(--hairline)] px-3.5 py-3 text-xs font-medium text-[var(--accent-text)]"
+                        >
+                          See everything we build
+                          <span aria-hidden="true" className="arrow-shift">
+                            →
+                          </span>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
 
-          <Link
-            href="/contact"
-            className="group relative hidden overflow-hidden rounded-full bg-[var(--fg)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] sm:inline-flex"
-          >
-            {/* Gold wipe on hover, reads as premium without a color change. */}
-            <span
-              aria-hidden="true"
-              className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
-            />
-            <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
-              {site.cta.primary}
-            </span>
-          </Link>
+          <div className="flex shrink-0 items-center gap-1.5">
+            <ThemeToggle />
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--hairline-strong)] lg:hidden"
-          >
-            <span aria-hidden="true" className="relative block h-2.5 w-4">
+            <Link
+              href="/contact"
+              className="group relative hidden overflow-hidden rounded-full bg-[var(--fg)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] sm:inline-flex"
+            >
               <span
-                className={`absolute left-0 block h-[1.5px] w-4 bg-current transition-transform duration-300 ${
-                  menuOpen ? "top-1 rotate-45" : "top-0"
-                }`}
+                aria-hidden="true"
+                className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
               />
-              <span
-                className={`absolute left-0 block h-[1.5px] w-4 bg-current transition-transform duration-300 ${
-                  menuOpen ? "top-1 -rotate-45" : "top-2"
-                }`}
-              />
-            </span>
-          </button>
+              <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
+                {site.cta.primary}
+              </span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--hairline-strong)] lg:hidden"
+            >
+              <span aria-hidden="true" className="relative block h-2.5 w-4">
+                <span
+                  className={`absolute left-0 block h-[1.5px] w-4 bg-current transition-transform duration-300 ${
+                    menuOpen ? "top-1 rotate-45" : "top-0"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 block h-[1.5px] w-4 bg-current transition-transform duration-300 ${
+                    menuOpen ? "top-1 -rotate-45" : "top-2"
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* Full-bleed mobile sheet, editorial list, not a cramped dropdown. The
-          sheet sits above the nav bar, so it carries its own logo and a close
-          button rather than relying on the (now covered) nav controls. */}
+      {/* Full-bleed mobile sheet: the three groups as sections. */}
       <div
         id="mobile-nav"
         hidden={!menuOpen}
-        className="pointer-events-auto fixed inset-0 z-40 flex flex-col bg-[var(--bg)]/98 px-[var(--space-gutter)] pb-10 pt-6 backdrop-blur-2xl lg:hidden"
+        className="pointer-events-auto fixed inset-0 z-40 flex flex-col overflow-y-auto bg-[var(--bg)]/98 px-[var(--space-gutter)] pb-10 pt-6 backdrop-blur-2xl lg:hidden"
       >
         <div className="flex items-center justify-between">
           <Link
@@ -178,37 +332,46 @@ export function Navbar() {
           </button>
         </div>
 
-        <ul className="mt-10 flex flex-col">
-          {navLinks.map((link, i) => {
-            const active = pathname === link.href;
-            return (
-              <li key={link.href} className="rule-b">
+        <div className="mt-10 flex flex-col gap-9">
+          {menus.map((m) => (
+            <section key={m.label}>
+              {m.href ? (
                 <Link
-                  href={link.href}
+                  href={m.href}
                   onClick={() => setMenuOpen(false)}
-                  aria-current={active ? "page" : undefined}
-                  className="flex items-baseline gap-4 py-5"
+                  className="eyebrow"
                 >
-                  <span className="w-6 shrink-0 text-xs text-[var(--accent-text)]">
-                    0{i + 1}
-                  </span>
-                  <span
-                    className={`font-display text-display-sm ${
-                      active ? "text-[var(--accent-text)]" : ""
-                    }`}
-                  >
-                    {link.label}
-                  </span>
+                  {m.label}
                 </Link>
-              </li>
-            );
-          })}
-        </ul>
+              ) : (
+                <p className="eyebrow">{m.label}</p>
+              )}
+              <ul className="mt-4 flex flex-col gap-1">
+                {m.items.map((it) => (
+                  <li key={it.href}>
+                    <Link
+                      href={it.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="font-display flex items-center gap-2 py-1.5 text-[length:var(--text-step-2)] font-light"
+                    >
+                      {it.label}
+                      {it.soon && (
+                        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--fg)]/45">
+                          soon
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
 
         <Link
           href="/contact"
           onClick={() => setMenuOpen(false)}
-          className="mt-auto rounded-full bg-[var(--accent)] px-6 py-4 text-center font-medium text-[var(--color-ink)]"
+          className="mt-10 rounded-full bg-[var(--accent)] px-6 py-4 text-center font-medium text-[var(--color-ink)]"
         >
           {site.cta.primary}
         </Link>

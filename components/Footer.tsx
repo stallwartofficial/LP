@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { navLinks, site } from "@/data/site";
+import { site } from "@/data/site";
 import { offerings } from "@/data/offerings";
 import { AskAI } from "./AskAI";
 
@@ -44,9 +44,15 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer">
+            {/* Company: who we are and how to work with us. */}
             <h2 className="eyebrow">Company</h2>
             <ul className="mt-5 space-y-3">
-              {navLinks.map((link) => (
+              {[
+                { label: "Our Story", href: "/story" },
+                { label: "Principles", href: "/principles" },
+                { label: "Careers", href: "/careers" },
+                { label: "Partner", href: "/partner" },
+              ].map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -56,15 +62,27 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-              {/* Footer-only for now: not in the top nav. */}
-              <li>
-                <Link
-                  href="/partner"
-                  className="link-draw text-sm text-[var(--fg)]/70 hover:text-[var(--fg)]"
-                >
-                  Partner with us
-                </Link>
-              </li>
+            </ul>
+
+            {/* Resources: what we publish. */}
+            <h2 className="eyebrow mt-8">Resources</h2>
+            <ul className="mt-5 space-y-3">
+              {[
+                { label: "Blog", href: "/blog" },
+                { label: "Guides", href: "/guides" },
+                { label: "Glossary", href: "/glossary" },
+                { label: "FAQ", href: "/faq" },
+                { label: "Trust & Security", href: "/trust" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="link-draw text-sm text-[var(--fg)]/70 hover:text-[var(--fg)]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
 

@@ -198,12 +198,13 @@ export const site = {
   },
 } as const;
 
-// Case studies now live inside the blog, so there is no separate nav item.
+// Case studies live inside the blog, so the nav says "Blog" (the plainest,
+// most-understood word, and it matches the /blog route). Contact is intentionally
+// omitted from the nav: the "Book a Call" CTA already covers /contact.
 // /case-studies redirects to /blog (see next.config.ts).
 export const navLinks = [
   { label: "Our Story", href: "/story" },
   { label: "What We Offer", href: "/offer" },
-  { label: "Case Studies", href: "/blog" },
+  { label: "Blog", href: "/blog" },
   { label: "Partner", href: "/partner" },
-  { label: "Contact", href: "/contact" },
 ] as const;
