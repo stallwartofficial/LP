@@ -75,10 +75,7 @@ export function CareersForm() {
 
   if (sent) {
     return (
-      <div
-        id="apply"
-        className="rounded-3xl border border-[var(--hairline)] bg-[var(--surface)] p-8 text-center sm:p-10"
-      >
+      <div className="rounded-3xl border border-[var(--hairline)] bg-[var(--surface)] p-8 text-center sm:p-10">
         <span
           aria-hidden="true"
           className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[var(--accent)] text-[var(--accent-text)]"
@@ -118,7 +115,6 @@ export function CareersForm() {
 
   return (
     <form
-      id="apply"
       onSubmit={onSubmit}
       noValidate
       className="rounded-3xl border border-[var(--hairline)] bg-[var(--surface)] p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.5)] sm:p-8"
