@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { LogoScroll } from "./LogoScroll";
 import { RevealOnLoad } from "./Reveal";
+import { HeroField } from "./HeroField";
 
 // The company hero.
 //
@@ -68,13 +69,8 @@ export function Hero() {
 
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden px-[var(--space-gutter)] pb-8 pt-24 lg:pt-28">
-      {/* One faint drifting wash, centred behind the headline. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-      >
-        <div className="animate-aurora absolute -top-[30%] left-1/2 h-[52vh] w-[80vw] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,var(--glow)_0%,transparent_62%)] blur-3xl" />
-      </div>
+      {/* Centered amber glow, radial-masked dot grid, and corner crosshairs. */}
+      <HeroField />
 
       {/* ------------------------- The claim, centred ------------------------- */}
       <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col items-center justify-center text-center">

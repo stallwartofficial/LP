@@ -389,6 +389,49 @@ p {
 }
 .animate-soft-pulse { animation: soft-pulse 2.6s ease-in-out infinite; }
 
+/* ==========================================================================
+   HERO FIELD — centered amber glow + radial-masked dot grid + crosshairs.
+   Theme-aware through tokens (gold on ink, ink on cream). Decorative only.
+   ========================================================================== */
+.hero-field-glow {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  height: 62vh;
+  width: 70vw;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle at center,
+    color-mix(in oklab, var(--accent) 20%, transparent) 0%,
+    transparent 60%
+  );
+  filter: blur(46px);
+  animation: hero-glow-breathe 12s ease-in-out infinite;
+}
+@keyframes hero-glow-breathe {
+  0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+}
+.hero-field-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--fg) 28%, transparent) 1px,
+    transparent 1.6px
+  );
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 58% 52% at 50% 42%,
+    #000 0%,
+    transparent 72%
+  );
+  mask-image: radial-gradient(ellipse 58% 52% at 50% 42%, #000 0%, transparent 72%);
+  opacity: 0.5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-field-glow { animation: none; }
+}
+
 /* Gentle vertical bob for the surfaces 3D stack, so the layers feel afloat
    rather than parked. Applied to the (non-3D) scene wrapper so it never fights
    the isometric transform on the layers themselves. */

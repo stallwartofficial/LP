@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.domain}/trust`, lastModified: now, priority: 0.6 },
     { url: `${site.domain}/principles`, lastModified: now, priority: 0.4 },
     { url: `${site.domain}/careers`, lastModified: now, priority: 0.4 },
+    { url: `${site.domain}/careers/interns`, lastModified: now, priority: 0.5 },
     { url: `${site.domain}/privacy`, lastModified: now, priority: 0.3 },
     { url: `${site.domain}/terms`, lastModified: now, priority: 0.3 },
   ];

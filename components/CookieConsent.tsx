@@ -69,6 +69,13 @@ export function CookieConsent() {
         <div className="flex shrink-0 items-center gap-2 sm:ml-auto">
           <button
             type="button"
+            onClick={() => choose("essential")}
+            className="rounded-full border border-[var(--hairline-strong)] px-5 py-3 text-sm font-medium text-[var(--fg)]/80 transition-colors hover:border-[var(--accent)] hover:text-[var(--fg)]"
+          >
+            Only essentials
+          </button>
+          <button
+            type="button"
             onClick={() => choose("all")}
             className="group relative overflow-hidden rounded-full bg-[var(--fg)] px-6 py-3 text-sm font-medium text-[var(--bg)]"
           >
@@ -77,7 +84,7 @@ export function CookieConsent() {
               className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
             />
             <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
-              Got it
+              Accept
             </span>
           </button>
         </div>

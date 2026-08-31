@@ -135,13 +135,13 @@ export function CareersForm() {
         <div>
           <label className="block">
             <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--fg)]/60">
-              Something you built and shipped
+              Something you built, shipped, or are proud of
             </span>
             <textarea
               value={form.built}
               onChange={(e) => set("built")(e.target.value)}
               rows={4}
-              placeholder="What was it, and what did it survive once real work hit it? In your own words."
+              placeholder="What was it, and why are you proud of it? It doesn't have to be code. In your own words."
               className={`mt-2 w-full resize-y rounded-2xl border bg-[var(--bg)] px-4 py-3 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)] outline-none transition-colors placeholder:text-[var(--fg)]/35 focus:border-[var(--accent)] ${
                 errors.built ? "border-red-500/60" : "border-[var(--hairline-strong)]"
               }`}
