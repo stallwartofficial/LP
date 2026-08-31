@@ -34,7 +34,7 @@ export default function GuidesPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
             Practical, plain-English writing on getting AI past the demo and into
-            production — readiness, governance, outbound, and shipping AI inside a
+            production: readiness, governance, outbound, and shipping AI inside a
             product. The mechanism, not the vocabulary.
           </p>
 

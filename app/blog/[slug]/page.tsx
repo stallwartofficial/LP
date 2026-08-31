@@ -251,7 +251,7 @@ export default async function BlogPostPage({ params }: Props) {
           {/* ---- Close ---- */}
           <div className="rule-t mt-16 pt-12">
             <h2 className="font-display text-display-sm font-light">
-              Recognise this in your own operation?
+              Recognize this in your own operation?
             </h2>
             <p className="mt-4 max-w-lg text-[var(--fg)]/70">
               Bring us the version of it happening in your business and we will

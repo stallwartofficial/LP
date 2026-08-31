@@ -56,7 +56,7 @@ export default function TrustPage() {
             The exposure with AI is rarely that it makes a mistake. It is that
             when a regulator, customer, or board member asks how a decision was
             reached, nobody can answer. Security, data ownership, and
-            accountability are stated here up front — the same standard we hold
+            accountability are stated here up front, the same standard we hold
             in every system we ship.
           </p>
           <p className="mt-4 text-sm text-[var(--fg)]/50">
@@ -93,9 +93,9 @@ export default function TrustPage() {
                 We build systems to be <strong>audit-ready</strong> rather than
                 audited after the fact. Architecture, data flow, decision
                 boundaries, and evidence trails are designed to map cleanly onto
-                the frameworks an audit invokes — including{" "}
+                the frameworks an audit invokes, including{" "}
                 <strong>SOC 2</strong>, <strong>ISO/IEC 42001</strong>, and the{" "}
-                <strong>EU AI Act</strong> — so readiness is a standing state, not
+                <strong>EU AI Act</strong>, so readiness is a standing state, not
                 a scramble.
               </p>
               <p className="mt-4 text-sm text-[var(--fg)]/55">

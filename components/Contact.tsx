@@ -83,21 +83,35 @@ export function Contact() {
 
         {/* ---- Detail: below the form on mobile, bottom-left on desktop. ---- */}
         <div className="order-3 lg:col-start-1 lg:row-start-2">
-          <dl className="grid gap-px bg-[var(--hairline)] sm:grid-cols-2">
-            <div className="bg-[var(--bg)] py-5 pr-5">
-              <dt className="eyebrow">What happens next</dt>
-              <dd className="mt-2 text-sm text-[var(--fg)]/70">
-                A real conversation about your workflow, not a scripted product
-                tour.
-              </dd>
-            </div>
-            <div className="bg-[var(--bg)] p-5 sm:pt-5">
-              <dt className="eyebrow">Who you&apos;ll talk to</dt>
-              <dd className="mt-2 text-sm text-[var(--fg)]/70">
-                Someone who can answer technical questions, not route them.
-              </dd>
-            </div>
-          </dl>
+          <p className="eyebrow">What to expect from the demo</p>
+          <ul className="mt-5 space-y-4">
+            {[
+              "A live walkthrough of the platform, including automated setup and management.",
+              "Personalized, affordable pricing based on your team size and needs.",
+              "A real conversation about your workflow, not a scripted product tour.",
+              "Someone who can answer technical questions on the spot, not route them.",
+            ].map((point) => (
+              <li key={point} className="flex gap-3">
+                <span
+                  aria-hidden="true"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent-text)]"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" className="h-full w-full">
+                    <path
+                      d="M5 13l4 4L19 7"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+                <span className="text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/75">
+                  {point}
+                </span>
+              </li>
+            ))}
+          </ul>
 
           {site.contact.email && (
             <div className="rule-t mt-10 hidden pt-8 lg:block">

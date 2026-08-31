@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { supabaseBrowser } from "@/lib/supabase/client";
 
 // The application card. It lives in the hero, on the right, as the page's main
 // action. Builders over résumés: the "what you built" field is the one that
 // matters, with links around it.
 //
-// TODO(owner): backend not wired yet. On submit this validates and shows the
-// thank-you state locally. When ready, POST the fields to a /api/careers route
-// that inserts into a `careers_submissions` table.
+// On submit it inserts one row into public.career_applications via the browser
+// Supabase client (anon key). RLS allows anon INSERT only, so the key is safe to
+// ship; created_at and status ('new') are set by the table defaults.
 
 type Field = "name" | "email" | "built";
 
@@ -21,6 +22,8 @@ export function CareersForm() {
     built: "",
   });
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
 
   const set = (k: keyof typeof form) => (v: string) =>
@@ -37,11 +40,35 @@ export function CareersForm() {
     return Object.keys(next).length === 0;
   }
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    // Guard against double-clicks / a second submit while one is in flight.
+    if (submitting) return;
     if (!validate()) return;
-    // TODO(owner): replace with a real POST to /api/careers.
-    setSent(true);
+
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const { error } = await supabaseBrowser()
+        .from("career_applications")
+        .insert({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          linkedin_url: form.linkedin.trim() || null,
+          github_url: form.github.trim() || null,
+          project_description: form.built.trim(),
+        });
+      if (error) throw error;
+      setSent(true);
+    } catch (err) {
+      // Log the real error for debugging; never surface DB internals to the user.
+      console.error("Career application submit failed:", err);
+      setSubmitError(
+        "Something went wrong sending your application. Please try again in a moment."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (sent) {
@@ -75,6 +102,8 @@ export function CareersForm() {
           type="button"
           onClick={() => {
             setForm({ name: "", email: "", linkedin: "", github: "", built: "" });
+            setErrors({});
+            setSubmitError(null);
             setSent(false);
           }}
           className="link-draw mt-6 text-sm font-medium text-[var(--accent-text)]"
@@ -153,12 +182,22 @@ export function CareersForm() {
         </div>
       </div>
 
+      {submitError && (
+        <p
+          role="alert"
+          className="mt-6 rounded-2xl border border-red-500/40 bg-red-500/5 p-3 text-sm text-red-600 dark:text-red-400"
+        >
+          {submitError}
+        </p>
+      )}
+
       <button
         type="submit"
-        className="btn-wipe mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--fg)] px-8 py-4 text-sm font-medium text-[var(--bg)]"
+        disabled={submitting}
+        className="btn-wipe mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--fg)] px-8 py-4 text-sm font-medium text-[var(--bg)] disabled:opacity-60"
       >
-        Apply now
-        <span aria-hidden="true">→</span>
+        {submitting ? "Sending…" : "Apply now"}
+        {!submitting && <span aria-hidden="true">→</span>}
       </button>
       <p className="mt-3 text-center text-xs leading-relaxed text-[var(--fg)]/55">
         We read every one. You&apos;ll hear back from a person, not an

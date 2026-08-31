@@ -17,7 +17,7 @@ import { HeroField } from "./HeroField";
 // face, already loaded) for an editorial accent against the sans body. No new
 // fonts, so no performance cost. Phrases not present are simply skipped.
 const EMPHASISE = [
-  "the problems no product solves",
+  "the work that can't be solved off the shelf",
   "first principles to production",
 ];
 
@@ -73,7 +73,7 @@ export function Hero() {
       <HeroField />
 
       {/* ------------------------- The claim, centred ------------------------- */}
-      <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col items-center justify-center text-center">
+      <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center text-center">
         <RevealOnLoad index={0} y={8}>
           <div className="flex items-center justify-center gap-3">
             <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)] sm:w-12" />
@@ -92,9 +92,18 @@ export function Hero() {
         </RevealOnLoad>
 
         <RevealOnLoad index={2}>
-          <div className="mt-6 max-w-2xl space-y-4 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
-            {site.hero.subhead.map((para) => (
-              <p key={para}>{emphasise(para)}</p>
+          <div className="mt-7 max-w-5xl space-y-2 text-[clamp(1.05rem,0.95rem+0.55vw,1.24rem)] leading-relaxed text-[var(--fg)]/75">
+            {site.hero.subhead.map((para, i) => (
+              <p
+                key={para}
+                className={
+                  i === site.hero.subhead.length - 1
+                    ? "font-semibold text-[var(--fg)]/90"
+                    : undefined
+                }
+              >
+                {emphasise(para)}
+              </p>
             ))}
           </div>
         </RevealOnLoad>

@@ -449,7 +449,9 @@ export default async function OfferingPage({ params }: Props) {
                   href="/contact"
                   className="btn-wipe mt-6 block rounded-full bg-[var(--fg)] px-7 py-3.5 text-center text-sm font-medium text-[var(--bg)]"
                 >
-                  {offering.usagePricing ? "Try it now →" : site.cta.primary}
+                  {offering.slug === "custom-ai-engineering"
+                    ? "Tell us what you want to build"
+                    : site.cta.primary}
                 </Link>
                 <Link
                   href="/offer"

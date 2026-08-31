@@ -49,13 +49,6 @@ export function ContactBanner() {
             />
             <span className="relative">{site.cta.primary}</span>
           </Link>
-
-          <a
-            href={`mailto:${site.contact.email}`}
-            className="link-draw px-4 py-4 text-sm text-[var(--color-cream)]/70"
-          >
-            or email us directly
-          </a>
         </div>
       </div>
     </section>

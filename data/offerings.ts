@@ -105,14 +105,14 @@ export const offerings: Offering[] = [
     summary:
       "For problems no product solves. Whatever the system is, a SaaS platform, a product, or an internal tool, we build it with AI to the standard the best teams hold, and hand over code you own outright.",
     description:
-      "Custom software and intelligent AI systems, engineered around how your business actually works — and built for what comes next. We design and build custom software, AI systems, and intelligent infrastructure for businesses that have outgrown generic solutions. From SaaS platforms and customer-facing products to AI agents, automation, and internal systems, we turn complex workflows and ambitious ideas into technology that works in the real world. Built from first principles. Engineered to scale. Designed around your data, workflows, and goals.",
+      "Custom software and intelligent AI systems, engineered around how your business actually works, and built for what comes next. We design and build custom software, AI systems, and intelligent infrastructure for businesses that have outgrown generic solutions. From SaaS platforms and customer-facing products to AI agents, automation, and internal systems, we turn complex workflows and ambitious ideas into technology that works in the real world. Built from first principles. Engineered to scale. Designed around your data, workflows, and goals.",
     problem:
       "The prototype worked. Then it met production, and the team discovered that the interesting 20 percent was demonstrated and the load bearing 80 percent was never built.",
     capabilities: [
       {
         eyebrow: "01 Scope",
         title: "Problem framing first",
-        description: "Map the workflow and what failure costs — before architecture.",
+        description: "Map the workflow and what failure costs, before architecture.",
       },
       {
         eyebrow: "02 Design",
@@ -127,7 +127,7 @@ export const offerings: Offering[] = [
       {
         eyebrow: "04 Handover",
         title: "Code you own and run",
-        description: "Source, runbooks, and observability. Yours to run — no lock-in.",
+        description: "Source, runbooks, and observability. Yours to run, no lock-in.",
       },
     ],
     builtFor: [

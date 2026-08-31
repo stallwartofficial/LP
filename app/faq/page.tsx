@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "What does Stallwart do?",
     answer:
-      "Stallwart builds AI systems and custom software that take operational work off a team permanently. The portfolio spans custom AI engineering, an outbound go-to-market product, and AI governance — each engineered to run on its own rather than to be operated by hand.",
+      "Stallwart builds AI systems and custom software that take operational work off a team permanently. The portfolio spans custom AI engineering, an outbound go-to-market product, and AI governance, each engineered to run on its own rather than to be operated by hand.",
   },
   {
     question: "Is Stallwart a product company or a services company?",
@@ -49,7 +49,7 @@ const faqs = [
   {
     question: "What is Extrovert AI?",
     answer:
-      "Stallwart's AI go-to-market engine — one offering in the portfolio, not the whole company. You give it a target company and website and it runs outbound end to end: researching the account, writing and sending outreach in your voice, following up, scoring replies, and booking the meeting.",
+      "Stallwart's AI go-to-market engine, one offering in the portfolio, not the whole company. You give it a target company and website and it runs outbound end to end: researching the account, writing and sending outreach in your voice, following up, scoring replies, and booking the meeting.",
   },
   {
     question: "What is Sillage?",

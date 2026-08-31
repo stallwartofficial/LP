@@ -65,9 +65,10 @@ export const site = {
      * punctuation rule above.
      */
     subhead: [
-      "Production grade automation and custom software for the problems no product solves, engineered to run unattended, audited, and trusted at scale.",
+      "Production-grade AI systems and custom software for the work that can't be solved off the shelf.",
+      "Engineered for autonomy, governance, and reliability.",
     ],
-    primaryCta: { label: "Book a Call", href: "/contact" },
+    primaryCta: { label: "Book a Demo", href: "/contact" },
     secondaryCta: { label: "See What We Build", href: "/offer" },
     scrollCue: "How we build",
   },
@@ -190,11 +191,14 @@ export const site = {
     address: "Address on file, contact us for details", // placeholder
   },
   cta: {
-    primary: "Book a Call",
+    primary: "Book a Demo",
   },
   social: {
-    linkedin: "https://linkedin.com/company/stallwart", // placeholder
-    twitter: "https://twitter.com/stallwart", // placeholder
+    // Empty until real accounts exist. Both consumers (footer icons and the
+    // Organization sameAs schema) render only when a URL is set, so nothing
+    // links to a non-existent profile.
+    linkedin: "",
+    twitter: "",
   },
 } as const;
 

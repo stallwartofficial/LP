@@ -621,9 +621,9 @@ p {
      line instead of wrapping mid-clause. Each clause is its own block in the
      markup; `pretty` fills each line before wrapping (unlike `balance`, which
      can split a clause that would otherwise fit). */
-  font-size: clamp(2.15rem, 1.4rem + 2.6vw, 3.1rem);
-  line-height: 1.1;
-  letter-spacing: -0.028em;
+  font-size: clamp(2.4rem, 1.6rem + 2.9vw, 3.55rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   text-wrap: pretty;
 }
 

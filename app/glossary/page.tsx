@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMeta({
 const terms = [
   {
     term: "AI SDR",
-    def: "An AI system that does a sales-development rep's job end to end — researching the account, finding the angle, writing and sending outreach, and following up — rather than a tool a human rep operates.",
+    def: "An AI system that does a sales-development rep's job end to end (researching the account, finding the angle, writing and sending outreach, and following up) rather than a tool a human rep operates.",
   },
   {
     term: "AI GTM engine",
@@ -22,11 +22,11 @@ const terms = [
   },
   {
     term: "AI governance",
-    def: "The controls, records, and evidence that let an organization account for how an AI system decides and behaves — so that when a regulator, customer, or board asks, there is an answer.",
+    def: "The controls, records, and evidence that let an organization account for how an AI system decides and behaves, so that when a regulator, customer, or board asks, there is an answer.",
   },
   {
     term: "Production-grade AI",
-    def: "An AI system engineered to run unattended under real data, real volume, and real edge cases, with observability and rollback built in — the opposite of a demo that works once.",
+    def: "An AI system engineered to run unattended under real data, real volume, and real edge cases, with observability and rollback built in, the opposite of a demo that works once.",
   },
   {
     term: "The last 80 percent",
@@ -34,7 +34,7 @@ const terms = [
   },
   {
     term: "Observability",
-    def: "The ability to see what a system is actually doing in production — its inputs, decisions, failures, and rollbacks — as they happen, rather than reconstructing them after an incident.",
+    def: "The ability to see what a system is actually doing in production (its inputs, decisions, failures, and rollbacks) as they happen, rather than reconstructing them after an incident.",
   },
   {
     term: "Human override",
@@ -46,7 +46,7 @@ const terms = [
   },
   {
     term: "ISO/IEC 42001",
-    def: "The international standard for an AI management system — how an organization governs the AI it builds and operates, from risk to accountability.",
+    def: "The international standard for an AI management system: how an organization governs the AI it builds and operates, from risk to accountability.",
   },
   {
     term: "EU AI Act",
@@ -54,7 +54,7 @@ const terms = [
   },
   {
     term: "AEO (Answer Engine Optimization)",
-    def: "Writing and structuring content so AI answer engines can quote it accurately — a superset of SEO, aimed at machines that summarize rather than just rank.",
+    def: "Writing and structuring content so AI answer engines can quote it accurately, a superset of SEO, aimed at machines that summarize rather than just rank.",
   },
   {
     term: "White-label partnership",
@@ -79,7 +79,7 @@ export default function GlossaryPage() {
             <span className="text-gold-sheen italic">defined plainly.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
-            The terms that come up around production AI and go-to-market — each in
+            The terms that come up around production AI and go-to-market, each in
             one clear sentence, no jargon defending itself with more jargon.
           </p>
 

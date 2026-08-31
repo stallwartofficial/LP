@@ -6,40 +6,30 @@ import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Principles",
   description:
-    "What Stallwart believes: reliable before scalable, honest by default, the last 80 percent is the job, you own what we build, governed not just working, and plain words.",
+    "What Stallwart believes: build from first principles, keep momentum, stay obsessed with the customer, and craft with the team.",
   path: "/principles",
 });
 
 const principles = [
   {
     n: "01",
-    h: "Reliable, honest, scalable — in that order.",
-    p: "Correctness comes before growth. A system that scales but drifts is worse than one that is smaller and right. We optimise for the part that has to be correct at 2am, when the person who wrote it is asleep.",
+    h: "Build from first principles",
+    p: "We don't copy the standard approach just because it exists. We break a problem down to what's actually true and build up from there. It's slower to start, and it's the only way to end up with something that holds.",
   },
   {
     n: "02",
-    h: "Honest by default.",
-    p: "We say no when an off-the-shelf tool already solves it or the spend can't be justified. We describe what exists, not what we hope to demo. When you ask where something stands, you get the real answer.",
+    h: "Momentum, why not today?",
+    p: "Speed is a habit, not a sprint. When something can ship today, we ask why it isn't. A small piece in front of real use beats a perfect plan that never leaves the doc.",
   },
   {
     n: "03",
-    h: "The last 80 percent is the job.",
-    p: "The interesting 20 percent demos itself. The load-bearing 80 percent — validation, retries, permissions, escalation, observability, rollback — is what separates a demo from a system you can actually run. That is the work we sign up for.",
+    h: "Customer obsession",
+    p: "We build for the person with the problem, not for our own cleverness. Their reality decides what good means. We'd rather ship the plain thing that helps than the elegant thing that doesn't.",
   },
   {
     n: "04",
-    h: "You own what we build.",
-    p: "Source, infrastructure as code, runbooks, and documentation are yours to keep. No lock-in, because a system you cannot maintain without us is not a system we would ship.",
-  },
-  {
-    n: "05",
-    h: "Governed, not just working.",
-    p: "Every action a system takes is logged, reversible, and pausable. Governance and an evidence trail are part of the build, so that when a regulator, customer, or board asks how a decision was reached, there is an answer.",
-  },
-  {
-    n: "06",
-    h: "Plain words.",
-    p: "We write for operators who want the mechanism, not the vocabulary. If a thing needs jargon to sound impressive, it probably isn't.",
+    h: "Craft with the team",
+    p: "There's usually a best idea, and you can feel when you've found the right abstraction. We get there through discourse, not ego. Being right yourself is good; getting the right idea to emerge from the room is an order of magnitude better.",
   },
 ];
 
@@ -60,29 +50,33 @@ export default function PrinciplesPage() {
             <span className="text-gold-sheen italic">before we build.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
-            A short list, held to. It explains why our systems look the way they
-            do — and why we&apos;ll occasionally talk you out of one.
+            Four, held to. Hover a line to read the why.
           </p>
 
-          <ol className="mt-16 space-y-12">
+          {/* Hover list: titles stay, each description reveals on hover (desktop)
+              and stays open on mobile, where there is no hover. All text is in
+              the DOM, so the page stays fully crawlable. */}
+          <ol className="mt-14">
             {principles.map((p) => (
               <li
                 key={p.n}
-                className="grid gap-3 sm:grid-cols-[auto_1fr] sm:gap-8"
+                className="group grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-6 border-b border-[var(--hairline)] first:border-t sm:gap-x-10"
               >
                 <span
                   aria-hidden="true"
-                  className="text-gold-sheen font-display text-[2.5rem] font-light leading-none"
+                  className="py-7 font-mono text-xs tracking-[0.2em] text-[var(--accent-text)]/70 transition-colors duration-300 group-hover:text-[var(--accent-text)] sm:text-sm"
                 >
                   {p.n}
                 </span>
-                <div>
-                  <h2 className="font-display text-[length:var(--text-step-2)] font-light leading-tight">
-                    {p.h}
-                  </h2>
-                  <p className="mt-3 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
-                    {p.p}
-                  </p>
+                <h2 className="font-display py-7 text-[length:var(--text-step-3)] font-light leading-tight transition-colors duration-300 group-hover:text-[var(--accent-text)]">
+                  {p.h}
+                </h2>
+                <div className="col-start-2 -mt-3 grid grid-rows-[1fr] overflow-hidden transition-[grid-template-rows] duration-500 ease-[var(--ease-out-expo)] sm:grid-rows-[0fr] sm:group-hover:grid-rows-[1fr] motion-reduce:transition-none">
+                  <div className="overflow-hidden">
+                    <p className="max-w-2xl pb-7 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/70">
+                      {p.p}
+                    </p>
+                  </div>
                 </div>
               </li>
             ))}

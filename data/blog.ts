@@ -463,7 +463,7 @@ const rawBlogPosts: BlogPost[] = [
     outcomes: [
       "Outbound stops being cyclical. Researched outreach runs at the same cadence during delivery peaks as during quiet periods, so pipeline no longer collapses a quarter after every busy stretch.",
       "Every target account is researched before contact, so agency outreach is specific rather than the generic template a founder sends between calls.",
-      "Dormant targets and past conversations are re engaged automatically, turning a back catalogue of near misses into a renewable pipeline source without new headcount.",
+      "Dormant targets and past conversations are re engaged automatically, turning a back catalog of near misses into a renewable pipeline source without new headcount.",
     ],
     metrics: [],
     qa: [

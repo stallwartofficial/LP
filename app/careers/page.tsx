@@ -17,7 +17,7 @@ const principles = [
     p: "We don't copy the standard approach just because it exists. We break a problem down to what's actually true and build up from there. It's slower to start, and it's the only way to end up with something that holds.",
   },
   {
-    h: "Momentum — why not today?",
+    h: "Momentum, why not today?",
     p: "Speed is a habit, not a sprint. When something can ship today, we ask why it isn't. A small piece in front of real use beats a perfect plan that never leaves the doc.",
   },
   {
@@ -32,7 +32,7 @@ const principles = [
 
 const process = [
   { n: "1", t: "A first conversation", meta: "30 min", d: "We get to know each other and check for real fit. No trick questions." },
-  { n: "2", t: "A real problem", meta: "your pace", d: "A small, practical exercise close to the actual work. Never free labour." },
+  { n: "2", t: "A real problem", meta: "your pace", d: "A small, practical exercise close to the actual work. Never free labor." },
   { n: "3", t: "Meet the team", meta: "60 min", d: "You talk to the people you'd work with, and interview us just as hard." },
   { n: "4", t: "An offer, plainly", meta: "the fun part", d: "If it's a yes, we explain the whole offer and give you room to decide." },
 ];

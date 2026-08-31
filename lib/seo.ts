@@ -65,7 +65,10 @@ export function organizationSchema() {
     description: site.description,
     slogan: site.tagline,
     ...(site.contact.email ? { email: site.contact.email } : {}),
-    sameAs: [site.social.linkedin, site.social.twitter],
+    ...(() => {
+      const profiles = [site.social.linkedin, site.social.twitter].filter(Boolean);
+      return profiles.length ? { sameAs: profiles } : {};
+    })(),
     founder: { "@type": "Person", name: site.founder.fullName },
     knowsAbout: [
       "AI systems engineering",
