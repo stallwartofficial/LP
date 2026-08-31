@@ -78,8 +78,9 @@
   --grain-opacity: 0.02;
   /* Hero field reads faint on cream, so both the dot grid and the amber glow
      get more presence in light than on ink. */
-  --hero-dot-opacity: 0.9;
-  --hero-glow-amount: 42%;
+  --hero-dot-opacity: 0.6;
+  --hero-glow-amount: 46%;
+  --hero-glow-core: 60%;
 
   /* Mindmap branch identities. Two tokens per branch on purpose:
      -fill is decorative (dots, rules, borders) and may be the bright brand
@@ -113,8 +114,9 @@
   --hairline-strong: color-mix(in oklab, var(--fg) 26%, transparent);
   --glow: color-mix(in oklab, var(--accent) 14%, transparent);
   --grain-opacity: 0.03;
-  --hero-dot-opacity: 0.5;
-  --hero-glow-amount: 20%;
+  --hero-dot-opacity: 0.4;
+  --hero-glow-amount: 18%;
+  --hero-glow-core: 30%;
 
   /* On ink the bright variants already clear AA comfortably, so fill and text
      can share a value. Measured on ink: 11.71, 12.10, 9.16. */
@@ -403,35 +405,43 @@ p {
   position: absolute;
   left: 50%;
   top: 40%;
-  height: 62vh;
-  width: 70vw;
+  height: 56vh;
+  width: 60vw;
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle at center,
-    color-mix(in oklab, var(--accent) var(--hero-glow-amount), transparent) 0%,
-    transparent 60%
+    color-mix(in oklab, var(--color-gold-bright) var(--hero-glow-core), transparent) 0%,
+    color-mix(in oklab, var(--accent) var(--hero-glow-amount), transparent) 32%,
+    transparent 58%
   );
-  filter: blur(46px);
+  filter: blur(38px);
   animation: hero-glow-breathe 12s ease-in-out infinite;
 }
 @keyframes hero-glow-breathe {
   0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
   50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
 }
+/* Dot grid gathered around the glow, fading gradually out toward the sides. */
 .hero-field-grid {
   position: absolute;
   inset: 0;
   background-image: radial-gradient(
-    color-mix(in oklab, var(--fg) 34%, transparent) 1px,
+    color-mix(in oklab, var(--fg) 30%, transparent) 1px,
     transparent 1.6px
   );
-  background-size: 26px 26px;
+  background-size: 24px 24px;
   -webkit-mask-image: radial-gradient(
-    ellipse 58% 52% at 50% 42%,
+    ellipse 66% 60% at 50% 42%,
     #000 0%,
-    transparent 72%
+    #000 20%,
+    transparent 78%
   );
-  mask-image: radial-gradient(ellipse 58% 52% at 50% 42%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(
+    ellipse 66% 60% at 50% 42%,
+    #000 0%,
+    #000 20%,
+    transparent 78%
+  );
   opacity: var(--hero-dot-opacity);
 }
 @media (prefers-reduced-motion: reduce) {
