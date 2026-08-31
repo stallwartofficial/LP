@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { supabaseBrowser } from "@/lib/supabase/client";
 
 // The application card. It lives in the hero, on the right, as the page's main
 // action. Builders over résumés: the "what you built" field is the one that
@@ -49,6 +48,9 @@ export function CareersForm() {
     setSubmitting(true);
     setSubmitError(null);
     try {
+      // Load the Supabase client on demand so supabase-js stays out of the
+      // page's initial JS bundle.
+      const { supabaseBrowser } = await import("@/lib/supabase/client");
       const { error } = await supabaseBrowser()
         .from("career_applications")
         .insert({

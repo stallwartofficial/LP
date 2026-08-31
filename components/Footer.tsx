@@ -124,6 +124,7 @@ export function Footer() {
                   swap these back to <a href> links. */}
               <li className="-my-2 flex gap-1">
                 <span
+                  role="img"
                   aria-label={`${site.company} on LinkedIn (coming soon)`}
                   title="Coming soon"
                   className="inline-flex h-11 w-11 cursor-pointer items-center justify-center text-[var(--fg)]/60 transition-colors hover:text-[#0A66C2]"
@@ -133,6 +134,7 @@ export function Footer() {
                   </svg>
                 </span>
                 <span
+                  role="img"
                   aria-label={`${site.company} on X (coming soon)`}
                   title="Coming soon"
                   className="inline-flex h-11 w-11 cursor-pointer items-center justify-center text-[var(--fg)]/60 transition-colors hover:text-[var(--fg)]"
