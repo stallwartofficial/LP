@@ -76,6 +76,10 @@
   --hairline-strong: color-mix(in oklab, var(--fg) 32%, transparent);
   --glow: color-mix(in oklab, var(--accent) 14%, transparent);
   --grain-opacity: 0.02;
+  /* Hero field reads faint on cream, so both the dot grid and the amber glow
+     get more presence in light than on ink. */
+  --hero-dot-opacity: 0.9;
+  --hero-glow-amount: 42%;
 
   /* Mindmap branch identities. Two tokens per branch on purpose:
      -fill is decorative (dots, rules, borders) and may be the bright brand
@@ -109,6 +113,8 @@
   --hairline-strong: color-mix(in oklab, var(--fg) 26%, transparent);
   --glow: color-mix(in oklab, var(--accent) 14%, transparent);
   --grain-opacity: 0.03;
+  --hero-dot-opacity: 0.5;
+  --hero-glow-amount: 20%;
 
   /* On ink the bright variants already clear AA comfortably, so fill and text
      can share a value. Measured on ink: 11.71, 12.10, 9.16. */
@@ -402,7 +408,7 @@ p {
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle at center,
-    color-mix(in oklab, var(--accent) 20%, transparent) 0%,
+    color-mix(in oklab, var(--accent) var(--hero-glow-amount), transparent) 0%,
     transparent 60%
   );
   filter: blur(46px);
@@ -416,7 +422,7 @@ p {
   position: absolute;
   inset: 0;
   background-image: radial-gradient(
-    color-mix(in oklab, var(--fg) 28%, transparent) 1px,
+    color-mix(in oklab, var(--fg) 34%, transparent) 1px,
     transparent 1.6px
   );
   background-size: 26px 26px;
@@ -426,7 +432,7 @@ p {
     transparent 72%
   );
   mask-image: radial-gradient(ellipse 58% 52% at 50% 42%, #000 0%, transparent 72%);
-  opacity: 0.5;
+  opacity: var(--hero-dot-opacity);
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-field-glow { animation: none; }
