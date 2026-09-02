@@ -14,6 +14,12 @@ export const runtime = "nodejs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = `${site.company}. ${site.hero.tagline}`;
+// Bump when the hero copy or the image composition changes and we need
+// aggressive social caches (WhatsApp especially) to fetch a fresh preview.
+// Next includes route-file content in the generated asset hash, so touching
+// this constant is enough to change the OG URL and defeat the cache.
+const CACHE_BUST = 2;
+void CACHE_BUST;
 
 const INK = "#0a0a0b";
 const GOLD = "#c9a24b";
