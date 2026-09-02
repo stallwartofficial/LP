@@ -71,9 +71,14 @@ const cinzel = Cinzel({
 // `%s | Stallwart` template. No unverifiable superlative ("leading"), in step
 // with the site's honesty voice. The H1 stays the positioning line, so the
 // body still carries the "unattended, audited, and trusted" keywords too.
-const homeTitle = "Custom software and SaaS company | Stallwart.in";
+// Kept in sync with the hero (site.hero.*) so search results, LinkedIn/Slack
+// previews, and X cards say the same thing the visitor sees. The title leads
+// with the actionable positioning ("AI systems and custom software"), then
+// pairs the trust promise, then the brand.
+const homeTitle =
+  "AI systems and custom software, engineered for autonomy, governance, and reliability | Stallwart";
 const homeDescription =
-  "Stallwart is a custom software and SaaS company. We build production grade AI systems and software engineered to run unattended, audited, and trusted.";
+  "Stallwart builds production-grade AI systems and custom software for the work that can't be solved off the shelf. Engineered for autonomy, governance, and reliability.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
@@ -89,6 +94,10 @@ export const metadata: Metadata = {
     url: site.domain,
     siteName: site.company,
     type: "website",
+    // US-first primary locale for social previews. Alternates signal EU and
+    // India English variants so shares in those regions surface the right tag.
+    locale: "en_US",
+    alternateLocale: ["en_GB", "en_IN"],
     // OG image is generated at build time by app/opengraph-image.tsx,
     // Next injects it here automatically, no static asset to maintain.
   },
