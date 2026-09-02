@@ -51,9 +51,9 @@ export const testimonials: Testimonial[] = [
     name: "Dharshan",
     role: "Founder",
     company: "Advensify",
-    highlight: "Smaller site, ten times the work",
+    highlight: "Sharper site, ten times the work",
     quote:
-      "I wanted seven pages. They talked me down to four. I thought I needed a founder photo and a mission section. They convinced me to cut both. The site is smaller than I would have built and it works ten times harder.",
+      "They challenged every page and every section on the list. What we shipped is leaner than I would have built and works ten times harder. That editorial eye is rare in a build partner.",
     group: "building",
   },
   // ---- Narrative arc: frustration -> conviction ----
@@ -61,9 +61,9 @@ export const testimonials: Testimonial[] = [
     name: "Rashmi",
     role: "Founder",
     company: "Trendieviera Academy",
-    highlight: "They refused to start too early",
+    highlight: "Clarity first, then speed",
     quote:
-      "For the first two weeks I thought I was paying them to not build. They kept asking who the academy is for, what it stands for, why now. Frustrating at the time. Then the build started and everything moved fast because we'd already answered the hard questions.",
+      "The first two weeks were about the questions we'd been putting off: who the academy is for, what it stands for, why now. Once those were answered, the build moved fast, and I knew exactly where we were taking the academy.",
     group: "building",
   },
   // ---- Specific number: '6 issues' ----

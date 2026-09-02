@@ -11,6 +11,27 @@ import { testimonials, type Testimonial } from "@/data/testimonials";
 const ROW_ONE: Testimonial[] = testimonials.slice(0, 6);
 const ROW_TWO: Testimonial[] = testimonials.slice(6);
 
+// Mobile order (single swipe row) is curated separately from the desktop
+// marquee: Ken opens (US CEO / ownership), then Pradeep (range + AI), then
+// Jeevitha (brand voice), then the rest by impact.
+const MOBILE_ORDER = [
+  "Ken Morford",
+  "Pradeep",
+  "Jeevitha",
+  "Sukanthen",
+  "Rashmi",
+  "Dharshan",
+  "Kaviarasu",
+  "Ambrose Dass",
+  "Aditya",
+  "Uma",
+  "Arunkumar",
+];
+const byName = new Map(testimonials.map((t) => [t.name, t]));
+const MOBILE_ROW: Testimonial[] = MOBILE_ORDER
+  .map((n) => byName.get(n))
+  .filter((t): t is Testimonial => Boolean(t));
+
 function QuoteMark({ closing = false }: { closing?: boolean }) {
   return (
     <svg
@@ -121,7 +142,7 @@ export function SocialProof() {
         <div
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-[var(--space-gutter)] px-[var(--space-gutter)] pb-2 [-webkit-overflow-scrolling:touch] [scrollbar-width:none]"
         >
-          {testimonials.map((t) => (
+          {MOBILE_ROW.map((t) => (
             <div key={t.name} className="snap-start">
               <Card t={t} />
             </div>
