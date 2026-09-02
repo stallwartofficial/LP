@@ -84,12 +84,13 @@ export function Hero() {
           </div>
         </RevealOnLoad>
 
-        <RevealOnLoad index={1} y={16}>
-          <h1 className="font-display text-hero mt-6">
-            {renderLine(lineOne, "font-light")}
-            {renderLine(lineTwo, "font-medium")}
-          </h1>
-        </RevealOnLoad>
+        {/* H1 is the LCP element on the home page: render it in the initial
+            HTML with no reveal animation so it paints immediately. Wrapping it
+            in RevealOnLoad delayed LCP by ~500ms on mobile-throttled. */}
+        <h1 className="font-display text-hero mt-6">
+          {renderLine(lineOne, "font-light")}
+          {renderLine(lineTwo, "font-medium")}
+        </h1>
 
         <RevealOnLoad index={2}>
           <div className="mt-7 max-w-5xl space-y-2 text-[clamp(1.05rem,0.95rem+0.55vw,1.24rem)] leading-relaxed text-[var(--fg)]/75">

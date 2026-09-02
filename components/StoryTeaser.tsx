@@ -27,9 +27,13 @@ export function StoryTeaser() {
       className="section-y rule-t px-[var(--space-gutter)]"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="grid items-center gap-12 lg:grid-cols-[17rem_minmax(0,34rem)] lg:justify-center lg:gap-14">
+        <div className="grid gap-12 lg:grid-cols-[17rem_minmax(0,34rem)] lg:items-center lg:justify-center lg:gap-14">
+          {/* Mobile order: eyebrow -> photo -> quote+prose. Desktop: photo
+              spans both rows in col 1; eyebrow sits above the text in col 2. */}
+          <p className="eyebrow lg:col-start-2 lg:row-start-1">The origin</p>
+
           {/* ---------------- The taped photograph ---------------- */}
-          <div className="pinboard rounded-2xl border border-[var(--hairline)] p-8 sm:p-10">
+          <div className="pinboard rounded-2xl border border-[var(--hairline)] p-8 sm:p-10 lg:col-start-1 lg:row-span-2 lg:row-start-1">
             <figure className="photo-taped bg-[var(--bg-raised)] p-3">
               <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
                 <Image
@@ -57,9 +61,7 @@ export function StoryTeaser() {
           </div>
 
           {/* ---------------- The origin, in his words ---------------- */}
-          <div>
-            <p className="eyebrow">The origin</p>
-
+          <div className="lg:col-start-2 lg:row-start-2">
             <blockquote
               id="story-teaser-heading"
               className="font-display mt-4 text-display-sm font-light"

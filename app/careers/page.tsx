@@ -86,7 +86,7 @@ export default function CareersPage() {
               matter more than a résumé here.
             </p>
             {/* 2x2, divided by hairlines: reads as designed, not a bullet list. */}
-            <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-[var(--hairline)] bg-[var(--hairline)] sm:grid-cols-2">
+            <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-[var(--hairline)] bg-[var(--hairline)]">
               {principles.map((p, i) => (
                 <div key={p.h} className="bg-[var(--bg)] p-7 sm:p-9">
                   <span className="font-display text-[length:var(--text-step-4)] font-light text-[var(--accent-text)]/70">
@@ -111,7 +111,7 @@ export default function CareersPage() {
             <p className="mt-4 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
               No black box. Here is exactly what happens after you reach out.
             </p>
-            <ol className="relative mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            <ol className="relative mt-12 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
               {/* connecting line sits behind the number nodes only */}
               <span
                 aria-hidden="true"

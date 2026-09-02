@@ -31,7 +31,7 @@ function QuoteMark({ closing = false }: { closing?: boolean }) {
 // closing quote mark at the bottom-right to bracket the passage.
 function Card({ t }: { t: Testimonial }) {
   return (
-    <figure className="mr-6 flex h-72 w-[22rem] shrink-0 flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--card-glow)] sm:w-[24rem]">
+    <figure className="flex h-72 w-[20rem] shrink-0 flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--card-glow)] sm:w-[24rem]">
       <figcaption>
         <span className="block text-sm font-medium text-[var(--fg)]">{t.name}</span>
         <span className="mt-0.5 block text-xs text-[var(--fg)]/75">
@@ -70,7 +70,9 @@ function Row({
         aria-hidden="true"
       >
         {doubled.map((t, i) => (
-          <Card key={`${t.name}-${i}`} t={t} />
+          <div key={`${t.name}-${i}`} className="mr-6">
+            <Card t={t} />
+          </div>
         ))}
       </div>
     </div>
@@ -113,9 +115,20 @@ export function SocialProof() {
         </div>
       </div>
 
-      {/* Full-bleed marquee rows. Screen-reader users get the plain list below
-          (visually hidden). */}
-      <div className="mt-12 flex flex-col gap-6">
+      {/* Mobile: a single horizontal swipe row (user controls the pace).
+          Desktop (sm+): two opposite-direction marquee rows. */}
+      <div className="mt-10 sm:hidden">
+        <div
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-[var(--space-gutter)] px-[var(--space-gutter)] pb-2 [-webkit-overflow-scrolling:touch] [scrollbar-width:none]"
+        >
+          {testimonials.map((t) => (
+            <div key={t.name} className="snap-start">
+              <Card t={t} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="mt-12 hidden flex-col gap-6 sm:flex">
         <Row items={ROW_ONE} duration={18} />
         <Row items={ROW_TWO} reverse duration={22} />
       </div>

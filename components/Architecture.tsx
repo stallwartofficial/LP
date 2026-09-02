@@ -121,7 +121,7 @@ export function Architecture() {
               </p>
             </div>
 
-            <ol className="mt-6 grid gap-px bg-[var(--hairline)] lg:grid-cols-4">
+            <ol className="mt-6 grid grid-cols-2 gap-px bg-[var(--hairline)] lg:grid-cols-4">
               {architecture.layers.map((layer, i) => (
                 <li key={layer.name} className="relative bg-[var(--bg)] p-4">
                   <div className="flex items-baseline justify-between gap-2">
