@@ -105,11 +105,11 @@ export function Navbar() {
       (it) => pathname === it.href || pathname.startsWith(`${it.href}/`)
     );
 
-  const triggerClass = (active: boolean) =>
+  const triggerClass = (active: boolean, isOpen = false) =>
     `link-draw text-sm transition-colors ${
-      active
+      active || isOpen
         ? "text-[var(--accent-text)]"
-        : "text-[var(--fg)]/70 hover:text-[var(--fg)]"
+        : "text-[var(--fg)]/70 hover:text-[var(--accent-text)]"
     }`;
 
   return (
@@ -164,7 +164,7 @@ export function Navbar() {
                       href={m.href}
                       onFocus={() => openNow(m.label)}
                       aria-current={active ? "page" : undefined}
-                      className={triggerClass(active)}
+                      className={triggerClass(active, isOpen)}
                     >
                       {m.label}
                     </Link>
@@ -175,7 +175,7 @@ export function Navbar() {
                       aria-haspopup="true"
                       onFocus={() => openNow(m.label)}
                       onClick={() => setOpen(isOpen ? null : m.label)}
-                      className={triggerClass(active)}
+                      className={triggerClass(active, isOpen)}
                     >
                       {m.label}
                     </button>
@@ -227,7 +227,7 @@ export function Navbar() {
                             key={it.href}
                             href={it.href}
                             onClick={() => setOpen(null)}
-                            className="block rounded-xl px-3.5 py-2.5 text-sm text-[var(--fg)]/75 transition-colors hover:bg-[var(--surface)] hover:text-[var(--fg)]"
+                            className="block rounded-xl px-3.5 py-2.5 text-sm text-[var(--fg)]/75 transition-colors hover:bg-[var(--surface)] hover:text-[var(--accent-text)]"
                           >
                             {it.label}
                           </Link>
@@ -358,7 +358,7 @@ export function Navbar() {
                     <Link
                       href={it.href}
                       onClick={() => setMenuOpen(false)}
-                      className="font-display flex items-center gap-2 py-1.5 text-[length:var(--text-step-2)] font-light"
+                      className="font-display flex items-center gap-2 py-1.5 text-[length:var(--text-step-2)] font-light transition-colors hover:text-[var(--accent-text)] focus-visible:text-[var(--accent-text)]"
                     >
                       {it.label}
                       {it.soon && (

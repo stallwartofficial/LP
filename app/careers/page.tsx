@@ -63,7 +63,7 @@ export default function CareersPage() {
                 href="#roles"
                 className="btn-wipe inline-flex items-center gap-2 rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)]"
               >
-                See open roles <span aria-hidden="true">→</span>
+                See open roles
               </a>
               <Link
                 href="/story"

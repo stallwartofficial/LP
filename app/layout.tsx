@@ -4,6 +4,7 @@ import "./globals.css";
 import { site } from "@/data/site";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { FooterSignature } from "@/components/FooterSignature";
 import { CookieConsent } from "@/components/CookieConsent";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { ClarityAnalytics } from "@/components/ClarityAnalytics";
@@ -124,22 +125,28 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           one level deep; children are still fully checked. <html> carries it
           for the same reason plus the theme class set by the script above. */}
       <body
-        className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--fg)]"
+        className="min-h-full text-[var(--fg)]"
         suppressHydrationWarning
       >
         {/* Nav and footer live here, not per-page: a new route cannot ship
-            without them, and there is one import instead of sixteen. */}
+            without them, and there is one import instead of sixteen.
+            The .page-stack wrapper carries a solid bg + higher z-index so it
+            scrolls OVER the fixed signature behind it, giving the Explee-style
+            reveal as you scroll past the footer. */}
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[var(--accent)] focus:px-4 focus:py-2 focus:text-sm focus:text-[var(--color-ink)]"
         >
           Skip to content
         </a>
-        <Navbar />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <div className="page-stack">
+          <Navbar />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
+        <FooterSignature />
         <CookieConsent />
         <GoogleAnalytics />
         <ClarityAnalytics />

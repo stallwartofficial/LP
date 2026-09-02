@@ -136,13 +136,21 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-body {
+html {
+  /* Root canvas paints the viewport bg so the fixed footer signature can be
+     revealed BEHIND the .page-stack (which owns the paint over content). */
   background: var(--bg);
+}
+body {
   color: var(--fg);
   font-family: var(--font-sans);
   font-size: var(--text-step-0);
   line-height: 1.68;
   overflow-x: clip; /* a wide child must never scroll the whole page */
+  /* Extra scroll room past the page-stack so the fixed signature is revealed.
+     body has no bg (see html above) so this area is transparent, showing the
+     signature behind. */
+  padding-bottom: var(--fs-height);
 }
 
 /* Film grain across the page. The cheapest way to stop a flat digital
@@ -396,6 +404,146 @@ p {
   50% { opacity: 0.35; }
 }
 .animate-soft-pulse { animation: soft-pulse 2.6s ease-in-out infinite; }
+
+/* ==========================================================================
+   FOOTER SIGNATURE — a full-width wordmark, filled with a rich gold gradient
+   and lit from within by a cursor-tracking spotlight. Fixed to the viewport
+   bottom, behind the page content, so it is REVEALED (Explee-style) as the
+   reader scrolls past the footer rather than merely following the scroll.
+   Everything is pure CSS via background-clip:text; the JS only writes two
+   CSS custom properties per frame, so the compositor does the work.
+   ========================================================================== */
+
+/* The scrolling stack that covers the fixed signature until the reader
+   scrolls past it. Solid bg + higher z-index than the signature. */
+.page-stack {
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The signature band — fixed to the bottom of the viewport, sitting behind
+   the page-stack. */
+.fs-fixed {
+  --fs-height: clamp(200px, 32vw, 480px);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  height: var(--fs-height);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: auto;
+}
+:root { --fs-height: clamp(200px, 32vw, 480px); }
+
+.fs-plate {
+  --sx: 50%;
+  --sy: 60%;
+  width: 100%;
+}
+.fs-wordmark {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-wordmark), serif;
+  font-weight: 500;
+  /* Big and edge-to-edge, like Sarvam. */
+  font-size: clamp(4rem, 17vw, 20rem);
+  line-height: 0.85;
+  letter-spacing: 0;
+
+  /* Layer order (top to bottom in CSS, painted top first):
+       1. cursor-tracking spotlight (adds warmth where the pointer is)
+       2. blueprint grid dots at intersections (bright ticks)
+       3. blueprint grid lines — horizontal and vertical hairlines
+       4. gold gradient identity (diagonal ramp: bright, dark, bright)
+     All clipped by the letters. */
+  background-color: transparent;
+  background-image:
+    radial-gradient(
+      circle at var(--sx) var(--sy),
+      var(--fs-spot) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 0 0,
+      var(--fs-dot) 1.6px,
+      transparent 2px
+    ),
+    linear-gradient(to right, var(--fs-line) 1.2px, transparent 1.2px),
+    linear-gradient(to bottom, var(--fs-line) 1.2px, transparent 1.2px),
+    linear-gradient(
+      135deg,
+      var(--fs-gold-a) 0%,
+      var(--fs-gold-b) 30%,
+      var(--fs-gold-c) 55%,
+      var(--fs-gold-b) 80%,
+      var(--fs-gold-a) 100%
+    );
+  background-size:
+    100% 100%,
+    22px 22px,
+    22px 22px,
+    22px 22px,
+    100% 100%;
+  background-position:
+    var(--sx) var(--sy),
+    0 0,
+    0 0,
+    0 0,
+    0 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: background-position 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* Gold ramp + blueprint hairlines. Gradient stops alternate light↔dark so the
+   ramp is clearly a *gradient*, not a flat gold. Blueprint lines are darker
+   than the gradient stops so they stamp across the letters like a schematic.
+   Spot is warm/bright so the cursor draws a real highlight. */
+:root {
+  --fs-gold-a: #7a5414;   /* deep */
+  --fs-gold-b: #c9a24b;   /* mid  */
+  --fs-gold-c: #4a3410;   /* deeper "shadow" band */
+  --fs-line: rgba(20, 12, 4, 0.55);   /* dark line on gold */
+  --fs-dot: rgba(230, 195, 117, 0.9); /* bright tick at intersection */
+  --fs-spot: #e6c375;
+}
+.dark {
+  --fs-gold-a: #7a5414;   /* deep — creates real range against bright */
+  --fs-gold-b: #f2d786;   /* brightest */
+  --fs-gold-c: #b98a2f;   /* mid-bronze */
+  --fs-line: rgba(15, 8, 2, 0.6);
+  --fs-dot: #ffe9a5;
+  --fs-spot: #ffffff;
+}
+
+/* Ambient drift for touch / reduced-motion. */
+.fs-ambient .fs-wordmark {
+  animation: fs-drift 14s ease-in-out infinite;
+  transition: none;
+}
+@keyframes fs-drift {
+  0%, 100% { background-position: 20% 40%, 0 0, 0 0, 0 0; }
+  50% { background-position: 80% 65%, 0 0, 0 0, 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fs-wordmark {
+    transition: none;
+    animation: none !important;
+  }
+}
 
 /* ==========================================================================
    HERO FIELD — centered amber glow + radial-masked dot grid + crosshairs.

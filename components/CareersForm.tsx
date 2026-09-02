@@ -195,7 +195,6 @@ export function CareersForm() {
         className="btn-wipe mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--fg)] px-8 py-4 text-sm font-medium text-[var(--bg)] disabled:opacity-60"
       >
         {submitting ? "Sending…" : "Apply now"}
-        {!submitting && <span aria-hidden="true">→</span>}
       </button>
       <p className="mt-3 text-center text-xs leading-relaxed text-[var(--fg)]/55">
         We read every one. You&apos;ll hear back from a person, not an

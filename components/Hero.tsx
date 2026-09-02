@@ -113,20 +113,10 @@ export function Hero() {
           className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
           <Link
-            href={site.hero.primaryCta.href}
-            className="btn-wipe rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)]"
-          >
-            {site.hero.primaryCta.label}
-          </Link>
-
-          <Link
             href={site.hero.secondaryCta.href}
-            className="group inline-flex items-center gap-2 rounded-full border border-[var(--hairline-strong)] px-7 py-3.5 text-sm font-medium transition-colors hover:border-[var(--accent)]"
+            className="btn-wipe inline-flex items-center rounded-full bg-[var(--fg)] px-8 py-4 text-sm font-medium text-[var(--bg)]"
           >
             {site.hero.secondaryCta.label}
-            <span aria-hidden="true" className="arrow-shift">
-              →
-            </span>
           </Link>
         </RevealOnLoad>
       </div>

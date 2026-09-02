@@ -37,7 +37,7 @@ export function Footer() {
               href="/contact"
               className="link-draw mt-6 inline-block text-sm font-medium text-[var(--fg)]"
             >
-              {site.cta.primary} →
+              {site.cta.primary}
             </Link>
 
             <AskAI />

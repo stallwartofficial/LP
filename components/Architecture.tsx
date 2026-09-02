@@ -41,7 +41,10 @@ export function Architecture() {
 
           <ul className="mt-4 grid gap-3 sm:grid-cols-3">
             {offerings.map((offering) => (
-              <li key={offering.slug} className="rounded-lg border border-[var(--hairline)] p-4">
+              <li
+                key={offering.slug}
+                className="group rounded-lg border border-[var(--hairline)] bg-[var(--surface)] p-4 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[0_10px_30px_-12px_color-mix(in_oklab,var(--accent)_45%,transparent)]"
+              >
                 <span className="flex items-center gap-2">
                   <span
                     aria-hidden="true"
@@ -51,7 +54,7 @@ export function Architecture() {
                         : "border border-[var(--fg)]/40"
                     }`}
                   />
-                  <span className="font-display text-[length:var(--text-step-1)] leading-tight">
+                  <span className="font-display text-[length:var(--text-step-1)] leading-tight transition-colors duration-300 group-hover:text-[var(--accent-text)]">
                     {offering.name}
                   </span>
                 </span>

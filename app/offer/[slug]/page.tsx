@@ -451,19 +451,15 @@ export default async function OfferingPage({ params }: Props) {
                 >
                   {offering.slug === "custom-ai-engineering"
                     ? "Tell us what you want to build"
-                    : site.cta.primary}
+                    : offering.slug === "extrovert-ai"
+                      ? "Try the product"
+                      : site.cta.primary}
                 </Link>
                 <Link
                   href="/offer"
-                  className="group mt-3 flex items-center justify-center gap-2 rounded-full border border-[var(--hairline-strong)] px-7 py-3.5 text-sm font-medium text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
+                  className="mt-3 flex items-center justify-center rounded-full border border-[var(--hairline-strong)] px-7 py-3.5 text-sm font-medium text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
                 >
                   See other products
-                  <span
-                    aria-hidden="true"
-                    className="arrow-shift text-[var(--accent-text)]"
-                  >
-                    →
-                  </span>
                 </Link>
 
                 {/* Trust row: honest positioning, no fabricated logos or faces. */}
