@@ -71,12 +71,10 @@ export default function PrinciplesPage() {
                 <h2 className="font-display py-7 text-[length:var(--text-step-3)] font-light leading-tight transition-colors duration-300 group-hover:text-[var(--accent-text)]">
                   {p.h}
                 </h2>
-                <div className="col-start-2 -mt-3 grid grid-rows-[1fr] overflow-hidden transition-[grid-template-rows] duration-500 ease-[var(--ease-out-expo)] sm:grid-rows-[0fr] sm:group-hover:grid-rows-[1fr] motion-reduce:transition-none">
-                  <div className="overflow-hidden">
-                    <p className="max-w-2xl pb-7 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/70">
-                      {p.p}
-                    </p>
-                  </div>
+                <div className="col-start-2 -mt-3 overflow-hidden pb-7 sm:h-0 sm:pb-0 sm:group-hover:h-auto sm:group-hover:pb-7">
+                  <p className="max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/70 opacity-100 transition-[opacity,transform] duration-400 ease-[var(--ease-out-expo)] sm:-translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 motion-reduce:transition-none">
+                    {p.p}
+                  </p>
                 </div>
               </li>
             ))}
