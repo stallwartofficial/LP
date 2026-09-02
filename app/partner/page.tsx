@@ -185,7 +185,7 @@ export default function PartnerPage() {
               >
                 Four ways to partner with Stallwart.
               </h2>
-              <p className="mt-3 max-w-xl text-sm text-[var(--fg)]/65">
+              <p className="mt-3 max-w-xl text-sm text-[var(--fg)]/75">
                 Different strengths. One direction. Find the one that fits how
                 you work.
               </p>

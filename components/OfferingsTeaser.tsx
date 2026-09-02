@@ -29,7 +29,7 @@ export function OfferingsTeaser() {
             >
               {offerings.length} offerings. One standard.
             </h2>
-            <p className="mt-3 text-sm text-[var(--fg)]/60">
+            <p className="mt-3 text-sm text-[var(--fg)]/72">
               Software and AI that does the work, not another tool your team has
               to run.
             </p>

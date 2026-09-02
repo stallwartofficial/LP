@@ -156,7 +156,7 @@ export default function CareersPage() {
                     Open
                   </span>
                 </div>
-                <p className="mt-1.5 text-sm text-[var(--fg)]/60">
+                <p className="mt-1.5 text-sm text-[var(--fg)]/72">
                   Engineering and Business · Internship
                 </p>
               </div>

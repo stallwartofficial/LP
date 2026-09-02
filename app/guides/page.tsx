@@ -49,7 +49,7 @@ export default function GuidesPage() {
                     <h2 className="font-display text-[length:var(--text-step-2)] font-light leading-tight transition-colors group-hover:text-[var(--accent-text)]">
                       {g.title}
                     </h2>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--fg)]/65">
+                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--fg)]/75">
                       {g.excerpt}
                     </p>
                   </div>
@@ -62,7 +62,7 @@ export default function GuidesPage() {
             ))}
           </ul>
 
-          <p className="mt-12 text-sm text-[var(--fg)]/60">
+          <p className="mt-12 text-sm text-[var(--fg)]/72">
             Looking for the case studies too?{" "}
             <Link href="/blog" className="link-draw font-medium text-[var(--accent-text)]">
               See everything on the blog →

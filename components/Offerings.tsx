@@ -21,7 +21,7 @@ export function StatusPill({
     );
   }
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--hairline-strong)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--fg)]/60">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--hairline-strong)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--fg)]/72">
       <span
         aria-hidden="true"
         className="h-1.5 w-1.5 rounded-full border border-current"

@@ -52,13 +52,13 @@ export function InsightsTeaser() {
                   className={`rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] ${
                     post.kind === "case-study"
                       ? "border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[var(--accent-text)]"
-                      : "border border-[var(--hairline-strong)] text-[var(--fg)]/60"
+                      : "border border-[var(--hairline-strong)] text-[var(--fg)]/72"
                   }`}
                 >
                   {post.kind === "case-study" ? "Case study" : "Article"}
                 </span>
                 {post.industry && (
-                  <span className="text-xs text-[var(--fg)]/65">
+                  <span className="text-xs text-[var(--fg)]/75">
                     {post.industry}
                   </span>
                 )}
@@ -72,7 +72,7 @@ export function InsightsTeaser() {
                 {post.excerpt}
               </p>
 
-              <span className="rule-t mt-6 flex items-center justify-between pt-4 text-xs text-[var(--fg)]/65">
+              <span className="rule-t mt-6 flex items-center justify-between pt-4 text-xs text-[var(--fg)]/75">
                 <span>{getOffering(post.offering)?.name ?? post.offering}</span>
                 <span className="flex items-center gap-3">
                   {post.readingMinutes} min

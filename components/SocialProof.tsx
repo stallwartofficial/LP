@@ -1,80 +1,139 @@
-import { testimonials } from "@/data/testimonials";
-import { getOffering } from "@/data/offerings";
+import { testimonials, type Testimonial } from "@/data/testimonials";
 
-// Testimonials as pinned notes on a board.
-//
-// WHY A DIFFERENT MATERIAL. Everything else on this site is hairlines, mono
-// labels, and schematic line work, which is correct for an engineering company
-// and wrong for the one section that is supposed to sound like a person. Cards
-// made these read as more specification. Paper, tape, and a slight rotation give
-// the human section its own material without leaving the palette.
-//
-// Restrained on purpose: 0.6 to 1.2 degrees of rotation, a single tape strip, no
-// drop shadow theatrics. Each note straightens on hover. Rotation is canceled
-// under reduced motion.
-//
-// The logo marquee that used to sit above this moved to LogoScroll, directly
-// beneath the hero.
-//
-// NOTE: illustrative, role and industry attributed. Not real named companies and
-// not fabricated ones (constraint 7).
+// Testimonials as two full-bleed marquee rows moving in opposite directions.
+// Rows are disjoint (row 1 = first 6, row 2 = last 5), so the same testimonial
+// never appears in both places at once. Different animation durations mean the
+// rows never visually sync. Pauses on hover (whole row) so a reader can
+// actually read a quote. Motion is CSS-only; content is duplicated for a
+// seamless loop.
 
-const NOTE_STYLES = [
-  { "--note-rot": "-1.1deg", "--tape-rot": "2deg" },
-  { "--note-rot": "0.7deg", "--tape-rot": "-1.5deg" },
-  { "--note-rot": "-0.5deg", "--tape-rot": "1.2deg" },
-] as const;
+// Split the reviews so there is no overlap between rows.
+const ROW_ONE: Testimonial[] = testimonials.slice(0, 6);
+const ROW_TWO: Testimonial[] = testimonials.slice(6);
+
+function QuoteMark({ closing = false }: { closing?: boolean }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className={`h-5 w-5 text-[var(--accent-text)] ${closing ? "rotate-180" : ""}`}
+    >
+      <path
+        fill="currentColor"
+        d="M7.5 5C4.5 5 2 7.5 2 10.5V19h7v-8.5H5c0-1.66 1.34-3 3-3V5h-.5zm10 0c-3 0-5.5 2.5-5.5 5.5V19h7v-8.5H15c0-1.66 1.34-3 3-3V5h-.5z"
+      />
+    </svg>
+  );
+}
+
+// Fixed card size so every row has a uniform silhouette and the marquee
+// doesn't jitter. Name/role at the top per the reference; quote below;
+// closing quote mark at the bottom-right to bracket the passage.
+function Card({ t }: { t: Testimonial }) {
+  return (
+    <figure className="mr-6 flex h-72 w-[22rem] shrink-0 flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[0_10px_30px_-12px_color-mix(in_oklab,var(--accent)_45%,transparent)] sm:w-[24rem]">
+      <figcaption>
+        <span className="block text-sm font-medium text-[var(--fg)]">{t.name}</span>
+        <span className="mt-0.5 block text-xs text-[var(--fg)]/75">
+          {t.role} · {t.company}
+        </span>
+      </figcaption>
+      <div className="mt-4 border-t border-[var(--hairline)] pt-4">
+        <QuoteMark />
+      </div>
+      <blockquote className="mt-2 flex-1 overflow-hidden text-sm leading-relaxed text-[var(--fg)]/80">
+        {t.quote}
+      </blockquote>
+      <div className="mt-2 flex justify-end">
+        <QuoteMark closing />
+      </div>
+    </figure>
+  );
+}
+
+function Row({
+  items,
+  reverse = false,
+  duration = 80,
+}: {
+  items: Testimonial[];
+  reverse?: boolean;
+  duration?: number;
+}) {
+  // Content doubled for a seamless -50% loop.
+  const doubled = [...items, ...items];
+  return (
+    <div className="[overflow-x:clip] py-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+      <div
+        className="animate-marquee flex shrink-0 items-stretch"
+        style={{
+          animationDuration: `${duration}s`,
+          animationDirection: reverse ? "reverse" : "normal",
+        }}
+        aria-hidden="true"
+      >
+        {doubled.map((t, i) => (
+          <Card key={`${t.name}-${i}`} t={t} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function SocialProof() {
   return (
     <section
       aria-labelledby="social-proof-heading"
-      className="section-y rule-t px-[var(--space-gutter)]"
+      className="section-y rule-t"
     >
-      <div className="mx-auto max-w-6xl">
-        <div className="max-w-2xl">
-          <p className="eyebrow">In their words</p>
-          <h2
-            id="social-proof-heading"
-            className="font-display mt-3 text-display-sm font-light"
-          >
-            What changes when the system carries it.
-          </h2>
-        </div>
-
-        {/* The board. Extra top padding leaves room for the tape strips. */}
-        <div className="pinboard mt-10 rounded-2xl border border-[var(--hairline)] px-5 pb-8 pt-10 sm:mt-12 sm:px-8 sm:pt-12">
-          <ul className="grid gap-6 md:grid-cols-3">
-            {testimonials.map((testimonial, i) => (
-              <li key={testimonial.role}>
-                <figure
-                  className="note-pin flex h-full flex-col rounded-sm bg-[var(--bg-raised)] p-5 sm:p-6"
-                  style={NOTE_STYLES[i % NOTE_STYLES.length] as React.CSSProperties}
-                >
-                  <p className="font-display text-[length:var(--text-step-1)] leading-snug sm:text-[length:var(--text-step-2)]">
-                    {testimonial.highlight}
-                  </p>
-
-                  <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-[var(--fg)]/75">
-                    {testimonial.quote}
-                  </blockquote>
-
-                  <figcaption className="mt-6 border-t border-[var(--hairline)] pt-4">
-                    <span className="block text-sm font-medium text-[var(--fg)]/85">
-                      {testimonial.role}
-                    </span>
-                    <span className="mt-0.5 block text-xs text-[var(--fg)]/70">
-                      {testimonial.industry} ·{" "}
-                      {getOffering(testimonial.offering)?.name ??
-                        testimonial.offering}
-                    </span>
-                  </figcaption>
-                </figure>
-              </li>
-            ))}
-          </ul>
+      <div className="mx-auto max-w-6xl px-[var(--space-gutter)]">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="eyebrow">In their words</p>
+            <h2
+              id="social-proof-heading"
+              className="group font-display mt-3 w-fit text-display-sm font-light"
+            >
+              <span className="relative inline-block">
+                The customers speak.
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-[var(--accent)] transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-x-100 motion-reduce:transition-none"
+                />
+              </span>
+            </h2>
+            <p className="mt-3 text-[length:var(--text-step-1)] text-[var(--fg)]/70">
+              From the people we&apos;ve built for.
+            </p>
+          </div>
+          <p className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[var(--hairline-strong)] bg-[var(--surface)] px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent-text)]">
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"
+            />
+            0% unsatisfied customers · to date
+          </p>
         </div>
       </div>
+
+      {/* Full-bleed marquee rows. Screen-reader users get the plain list below
+          (visually hidden). */}
+      <div className="mt-12 flex flex-col gap-6">
+        <Row items={ROW_ONE} duration={28} />
+        <Row items={ROW_TWO} reverse duration={36} />
+      </div>
+
+      {/* Accessible fallback: real content, not the visual duplicates. */}
+      <ul className="sr-only">
+        {testimonials.map((t) => (
+          <li key={t.name}>
+            <blockquote>{t.quote}</blockquote>
+            <cite>
+              — {t.name}, {t.role}, {t.company}
+            </cite>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

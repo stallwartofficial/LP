@@ -25,7 +25,7 @@ export function Footer() {
             <p className="mt-3 text-display-sm font-medium uppercase tracking-[0.14em] leading-none font-[family-name:var(--font-wordmark)]">
               {site.company}
             </p>
-            <p className="mt-3 max-w-xs text-[var(--fg)]/60">
+            <p className="mt-3 max-w-xs text-[var(--fg)]/72">
               {site.companyDescriptor}.
             </p>
             <p className="mt-4 text-sm font-medium text-[var(--accent-text)]">
@@ -97,7 +97,7 @@ export function Footer() {
                   >
                     {offering.name}
                     {offering.status === "in-development" && (
-                      <span className="ml-1.5 text-xs text-[var(--fg)]/65">
+                      <span className="ml-1.5 text-xs text-[var(--fg)]/75">
                         (soon)
                       </span>
                     )}
@@ -126,7 +126,7 @@ export function Footer() {
                 <span
                   aria-hidden="true"
                   title="LinkedIn (coming soon)"
-                  className="inline-flex h-11 w-11 cursor-pointer items-center justify-center text-[var(--fg)]/60 transition-colors hover:text-[#0A66C2]"
+                  className="inline-flex h-11 w-11 cursor-pointer items-center justify-center text-[var(--fg)]/72 transition-colors hover:text-[#0A66C2]"
                 >
                   <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px]">
                     <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
@@ -135,7 +135,7 @@ export function Footer() {
                 <span
                   aria-hidden="true"
                   title="X (coming soon)"
-                  className="inline-flex h-11 w-11 cursor-pointer items-center justify-center text-[var(--fg)]/60 transition-colors hover:text-[var(--fg)]"
+                  className="inline-flex h-11 w-11 cursor-pointer items-center justify-center text-[var(--fg)]/72 transition-colors hover:text-[var(--fg)]"
                 >
                   <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px]">
                     <path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.22-6.82-5.96 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.02 4.12H5.06l12.02 15.65z" />
@@ -146,7 +146,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="rule-t mt-14 flex flex-col gap-3 pt-6 text-xs text-[var(--fg)]/65 sm:flex-row sm:items-center sm:justify-between">
+        <div className="rule-t mt-14 flex flex-col gap-3 pt-6 text-xs text-[var(--fg)]/75 sm:flex-row sm:items-center sm:justify-between">
           {/* Three zones with room to breathe: plain copyright, one personality
               line (the localhost wink), then the legal links. Year auto-updates. */}
           <p className="shrink-0">

@@ -213,10 +213,13 @@ p {
        the background-clip:text box, which is only as tall as line-height. The
        negative margins cancel the padding so layout does not shift. */
     padding-right: 0.08em;
-    padding-top: 0.2em;
-    margin-top: -0.2em;
-    padding-bottom: 0.22em;
-    margin-bottom: -0.22em;
+    padding-top: 1em;
+    margin-top: -1em;
+    padding-bottom: 0.3em;
+    margin-bottom: -0.3em;
+    /* Ensure the padded box is not visually clipped by the parent line-box. */
+    line-height: 1.3;
+    overflow: visible;
     background: linear-gradient(
       100deg,
       var(--accent-text) 0%,

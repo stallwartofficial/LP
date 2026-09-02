@@ -218,7 +218,7 @@ export function Navbar() {
                                 </span>
                               )}
                             </span>
-                            <span className="mt-1 text-xs text-[var(--fg)]/55">
+                            <span className="mt-1 text-xs text-[var(--fg)]/72">
                               {it.blurb}
                             </span>
                           </Link>

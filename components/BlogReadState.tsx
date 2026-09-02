@@ -37,7 +37,7 @@ export function BlogPostRow({ post }: { post: BlogPost }) {
           className={`font-mono text-[10px] uppercase tracking-[0.14em] ${
             post.kind === "case-study"
               ? "text-[var(--accent-text)]"
-              : "text-[var(--fg)]/60"
+              : "text-[var(--fg)]/72"
           }`}
         >
           {post.kind === "case-study" ? "Case study" : "Article"}
@@ -46,7 +46,7 @@ export function BlogPostRow({ post }: { post: BlogPost }) {
         <span className="min-w-0">
           <span
             className={`font-display block text-[length:var(--text-step-2)] leading-tight transition-colors group-hover:text-[var(--accent-text)] ${
-              read ? "text-[var(--fg)]/55" : ""
+              read ? "text-[var(--fg)]/72" : ""
             }`}
           >
             {post.title}
@@ -56,7 +56,7 @@ export function BlogPostRow({ post }: { post: BlogPost }) {
           </span>
         </span>
 
-        <span className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/60">
+        <span className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/72">
           <span>{post.readingMinutes}m</span>
           <span
             aria-hidden="true"

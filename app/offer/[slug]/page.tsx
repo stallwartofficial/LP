@@ -215,7 +215,7 @@ export default async function OfferingPage({ params }: Props) {
                 <h1 className="font-display mt-5 text-display-lg font-light">
                   {offering.name}
                 </h1>
-                <p className="mt-4 max-w-2xl text-[length:var(--text-step-2)] font-light text-[var(--fg)]/60">
+                <p className="mt-4 max-w-2xl text-[length:var(--text-step-2)] font-light text-[var(--fg)]/72">
                   {offering.tagline}
                 </p>
 
@@ -418,7 +418,7 @@ export default async function OfferingPage({ params }: Props) {
                           </div>
                         );
                       })()}
-                      <p className="mt-3 text-[11px] italic leading-snug text-[var(--fg)]/50">
+                      <p className="mt-3 text-[11px] italic leading-snug text-[var(--fg)]/70">
                         Your whole GTM on autopilot. You just show up to the
                         meeting.
                       </p>
@@ -464,7 +464,7 @@ export default async function OfferingPage({ params }: Props) {
 
                 {/* Trust row: honest positioning, no fabricated logos or faces. */}
                 <div className="mt-5 flex items-center justify-between border-t border-[var(--hairline)] pt-4">
-                  <span className="font-mono text-[10px] uppercase leading-tight tracking-[0.16em] text-[var(--fg)]/55">
+                  <span className="font-mono text-[10px] uppercase leading-tight tracking-[0.16em] text-[var(--fg)]/72">
                     Let&apos;s build
                     <br />
                     what&apos;s next
@@ -534,7 +534,7 @@ export default async function OfferingPage({ params }: Props) {
                 <h3 className="font-display relative mt-4 text-[length:var(--text-step-1)] font-light leading-tight">
                   {b.role}
                 </h3>
-                <p className="relative mt-1.5 text-sm leading-snug text-[var(--fg)]/60">
+                <p className="relative mt-1.5 text-sm leading-snug text-[var(--fg)]/72">
                   {b.note}
                 </p>
               </Reveal>
@@ -619,7 +619,7 @@ export default async function OfferingPage({ params }: Props) {
               >
                 Plugs into what you already use
               </h2>
-              <p className="mt-4 text-sm text-[var(--fg)]/60">
+              <p className="mt-4 text-sm text-[var(--fg)]/72">
                 No rip and replace. It runs on what you already operate.
               </p>
               <a
@@ -707,7 +707,7 @@ export default async function OfferingPage({ params }: Props) {
                       <p className="mt-2 hidden flex-1 text-sm leading-relaxed text-[var(--fg)]/70 sm:line-clamp-2 sm:block">
                         {post.excerpt}
                       </p>
-                      <div className="mt-3 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--fg)]/55 sm:mt-5 sm:text-[10px] sm:tracking-[0.14em]">
+                      <div className="mt-3 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--fg)]/72 sm:mt-5 sm:text-[10px] sm:tracking-[0.14em]">
                         <span>{post.readingMinutes}m read</span>
                         <span
                           aria-hidden="true"
@@ -734,7 +734,7 @@ export default async function OfferingPage({ params }: Props) {
                     <h3 className="font-display text-[length:var(--text-step-0)] leading-tight sm:text-[length:var(--text-step-1)]">
                       More in the journal
                     </h3>
-                    <p className="mt-2 hidden text-sm leading-relaxed text-[var(--fg)]/60 sm:block">
+                    <p className="mt-2 hidden text-sm leading-relaxed text-[var(--fg)]/72 sm:block">
                       Case studies and notes from the work.
                     </p>
                   </div>

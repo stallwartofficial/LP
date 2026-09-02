@@ -49,7 +49,7 @@ function Tile({
       >
         {value}
       </p>
-      <p className="mt-1 text-[10px] uppercase tracking-[0.1em] text-[var(--fg)]/50">
+      <p className="mt-1 text-[10px] uppercase tracking-[0.1em] text-[var(--fg)]/70">
         {label}
       </p>
     </div>

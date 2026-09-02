@@ -59,7 +59,7 @@ export default function TrustPage() {
             accountability are stated here up front, the same standard we hold
             in every system we ship.
           </p>
-          <p className="mt-4 text-sm text-[var(--fg)]/50">
+          <p className="mt-4 text-sm text-[var(--fg)]/70">
             Last updated: {LAST_UPDATED}
           </p>
 
@@ -98,7 +98,7 @@ export default function TrustPage() {
                 <strong>EU AI Act</strong>, so readiness is a standing state, not
                 a scramble.
               </p>
-              <p className="mt-4 text-sm text-[var(--fg)]/55">
+              <p className="mt-4 text-sm text-[var(--fg)]/72">
                 To be precise: this describes how we design and document systems,
                 not a claim to hold these certifications ourselves. Where a
                 specific attestation is required for an engagement, we will tell

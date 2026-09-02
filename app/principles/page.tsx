@@ -82,7 +82,7 @@ export default function PrinciplesPage() {
             ))}
           </ol>
 
-          <p className="mt-16 text-sm text-[var(--fg)]/60">
+          <p className="mt-16 text-sm text-[var(--fg)]/72">
             The longer version is the{" "}
             <Link href="/story" className="link-draw font-medium text-[var(--accent-text)]">
               founder&apos;s story →

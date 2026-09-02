@@ -124,7 +124,7 @@ export function PartnerForm() {
         <div>
           <label htmlFor="role" className={labelClass}>
             Your role{" "}
-            <span className="font-normal text-[var(--fg)]/65">(optional)</span>
+            <span className="font-normal text-[var(--fg)]/75">(optional)</span>
           </label>
           <input
             id="role"
@@ -140,7 +140,7 @@ export function PartnerForm() {
         <div>
           <label htmlFor="website" className={labelClass}>
             Website{" "}
-            <span className="font-normal text-[var(--fg)]/65">(optional)</span>
+            <span className="font-normal text-[var(--fg)]/75">(optional)</span>
           </label>
           <input
             id="website"
@@ -181,7 +181,7 @@ export function PartnerForm() {
         <div className="sm:col-span-2">
           <label htmlFor="message" className={labelClass}>
             What would you like to build together?{" "}
-            <span className="font-normal text-[var(--fg)]/65">(optional)</span>
+            <span className="font-normal text-[var(--fg)]/75">(optional)</span>
           </label>
           <textarea
             id="message"
@@ -217,7 +217,7 @@ export function PartnerForm() {
         </span>
       </button>
 
-      <p className="mt-4 text-center text-xs text-[var(--fg)]/65">
+      <p className="mt-4 text-center text-xs text-[var(--fg)]/75">
         We reply to every serious inquiry from a person, not a sequence.
       </p>
     </form>

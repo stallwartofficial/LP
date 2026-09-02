@@ -81,13 +81,13 @@ export default async function BlogPostPage({ params }: Props) {
               className={`rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] ${
                 isCaseStudy
                   ? "border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[var(--accent-text)]"
-                  : "border border-[var(--hairline-strong)] text-[var(--fg)]/60"
+                  : "border border-[var(--hairline-strong)] text-[var(--fg)]/72"
               }`}
             >
               {isCaseStudy ? "Case study" : "Article"}
             </span>
             {post.industry && (
-              <span className="text-xs text-[var(--fg)]/60">
+              <span className="text-xs text-[var(--fg)]/72">
                 {post.industry}
               </span>
             )}
@@ -109,7 +109,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.excerpt}
           </p>
 
-          <p className="rule-t mt-8 flex flex-wrap gap-x-4 gap-y-1 pt-5 text-xs text-[var(--fg)]/65">
+          <p className="rule-t mt-8 flex flex-wrap gap-x-4 gap-y-1 pt-5 text-xs text-[var(--fg)]/75">
             <time dateTime={post.publishedAt}>
               {new Date(post.publishedAt).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -211,14 +211,14 @@ export default async function BlogPostPage({ params }: Props) {
                         <dd className="font-display text-display-sm font-light text-[var(--accent-text)]">
                           {m.value}
                         </dd>
-                        <dt className="mt-2 text-sm text-[var(--fg)]/60">
+                        <dt className="mt-2 text-sm text-[var(--fg)]/72">
                           {m.label}
                         </dt>
                       </div>
                     ))}
                   </dl>
                 ) : (
-                  <p className="mt-7 text-sm italic text-[var(--fg)]/60">
+                  <p className="mt-7 text-sm italic text-[var(--fg)]/72">
                     We publish numbers once a customer has verified them.
                     Nothing here yet, which is the honest answer.
                   </p>

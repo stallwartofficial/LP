@@ -79,7 +79,7 @@ export default function InternsPage() {
         <div className="mx-auto max-w-3xl">
           <Link
             href="/careers"
-            className="link-draw text-sm text-[var(--fg)]/60"
+            className="link-draw text-sm text-[var(--fg)]/72"
           >
             ← Careers
           </Link>

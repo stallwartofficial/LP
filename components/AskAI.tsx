@@ -53,7 +53,7 @@ export function AskAI() {
   return (
     <div className="mt-8">
       <p className="eyebrow">Ask AI about us</p>
-      <p className="mt-2 max-w-xs text-sm text-[var(--fg)]/60">
+      <p className="mt-2 max-w-xs text-sm text-[var(--fg)]/72">
         Don&apos;t take our word for it. See how the models describe{" "}
         {site.company}.
       </p>
@@ -66,7 +66,7 @@ export function AskAI() {
               rel="noopener noreferrer"
               aria-label={`Ask ${engine.name} about ${site.company}`}
               title={`Ask ${engine.name} about ${site.company}`}
-              className={`group relative inline-flex h-11 w-11 items-center justify-center text-[var(--fg)]/60 transition-colors ${
+              className={`group relative inline-flex h-11 w-11 items-center justify-center text-[var(--fg)]/72 transition-colors ${
                 "hoverClass" in engine ? engine.hoverClass : ""
               }`}
             >

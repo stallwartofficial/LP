@@ -86,7 +86,7 @@ export function StoryTeaser() {
               and that are built to be audited, not just believed.
             </p>
 
-            <p className="mt-4 text-sm text-[var(--fg)]/60">
+            <p className="mt-4 text-sm text-[var(--fg)]/72">
               {site.founder.credential}
             </p>
 

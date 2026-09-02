@@ -94,7 +94,7 @@ export function Commitments() {
               over control.
             </p>
           </div>
-          <p className="font-mono shrink-0 text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/60">
+          <p className="font-mono shrink-0 text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/72">
             Full detail on request
           </p>
         </div>

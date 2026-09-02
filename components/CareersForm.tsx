@@ -120,7 +120,7 @@ export function CareersForm() {
       className="rounded-3xl border border-[var(--hairline)] bg-[var(--surface)] p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.5)] sm:p-8"
     >
       <p className="eyebrow">Apply now</p>
-      <p className="mt-2 text-sm text-[var(--fg)]/60">
+      <p className="mt-2 text-sm text-[var(--fg)]/72">
         Two minutes, and a real person reads it.
       </p>
 
@@ -161,7 +161,7 @@ export function CareersForm() {
         {/* The field that actually matters. */}
         <div>
           <label className="block">
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--fg)]/60">
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--fg)]/72">
               Something you built, shipped, or are proud of
             </span>
             <textarea
@@ -196,7 +196,7 @@ export function CareersForm() {
       >
         {submitting ? "Sending…" : "Apply now"}
       </button>
-      <p className="mt-3 text-center text-xs leading-relaxed text-[var(--fg)]/55">
+      <p className="mt-3 text-center text-xs leading-relaxed text-[var(--fg)]/72">
         We read every one. You&apos;ll hear back from a person, not an
         autoresponder.
       </p>
@@ -226,7 +226,7 @@ function Text({
   return (
     <div>
       <label className="block">
-        <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--fg)]/60">
+        <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--fg)]/72">
           {label}
           {optional && (
             <span className="normal-case tracking-normal text-[var(--fg)]/40">

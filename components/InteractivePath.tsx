@@ -194,7 +194,7 @@ export function InteractivePath({ steps }: { steps: PathStep[] }) {
               >
                 {s.title}
               </h3>
-              <p className="mt-1.5 text-[12.5px] leading-snug text-[var(--fg)]/65">
+              <p className="mt-1.5 text-[12.5px] leading-snug text-[var(--fg)]/75">
                 {s.body}
               </p>
             </div>

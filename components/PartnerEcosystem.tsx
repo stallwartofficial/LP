@@ -209,7 +209,7 @@ export function PartnerEcosystem({ models }: { models: PartnerModel[] }) {
             Explore {current.short.toLowerCase()} partnerships →
           </a>
         </div>
-        <p className="mt-4 text-center text-xs text-[var(--fg)]/50">
+        <p className="mt-4 text-center text-xs text-[var(--fg)]/70">
           Hover to preview, click to hold. Six ways to build together.
         </p>
       </div>

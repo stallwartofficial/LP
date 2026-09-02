@@ -264,7 +264,7 @@ export function Contact() {
                 <div>
                   <label htmlFor="message" className={labelClass}>
                     What keeps falling through?{" "}
-                    <span className="font-normal text-[var(--fg)]/65">
+                    <span className="font-normal text-[var(--fg)]/75">
                       (optional)
                     </span>
                   </label>
@@ -304,7 +304,7 @@ export function Contact() {
                 </span>
               </button>
 
-              <p className="mt-4 text-center text-xs text-[var(--fg)]/65">
+              <p className="mt-4 text-center text-xs text-[var(--fg)]/75">
                 No newsletter, no drip sequence. One reply from a person.
               </p>
             </form>

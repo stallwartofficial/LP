@@ -24,7 +24,7 @@ export default function TermsPage() {
         <h1 className="font-display mt-4 text-display-lg font-light">
           Terms of Service
         </h1>
-        <p className="mt-4 text-sm text-[var(--fg)]/60">
+        <p className="mt-4 text-sm text-[var(--fg)]/72">
           Last updated: {LAST_UPDATED}
         </p>
 

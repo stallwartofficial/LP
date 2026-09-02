@@ -107,7 +107,7 @@ export function Story() {
                     shows in both modes; the printed name above stays the
                     accessible identifier. */}
                 <span className="mt-4 flex items-end justify-between gap-3 border-t border-[var(--hairline)] pt-3.5">
-                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--fg)]/65">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--fg)]/75">
                     Signed
                   </span>
                   <span
