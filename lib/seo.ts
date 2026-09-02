@@ -14,6 +14,35 @@ export function canonical(path: string) {
 }
 
 /**
+ * Short stable hash of the current hero copy. Appended to the OG image URL as
+ * ?v=<hash> so any hero change (headline, subhead, tagline, emphasis word, CTA
+ * labels) automatically changes the URL. Aggressive social caches — WhatsApp,
+ * iMessage, Slack, LinkedIn — treat the different URL as a new resource and
+ * fetch the fresh preview. Zero-maintenance: no manual version bump ever.
+ */
+export function heroOgCacheKey(): string {
+  const src = [
+    site.hero.headline,
+    site.hero.subhead.join("|"),
+    site.hero.tagline,
+    site.hero.headlineEmphasis,
+    site.hero.primaryCta.label,
+    site.hero.secondaryCta.label,
+  ].join("::");
+  // djb2, stable across builds and Node runtimes, produces a compact base36 id.
+  let h = 5381;
+  for (let i = 0; i < src.length; i++) {
+    h = ((h * 33) ^ src.charCodeAt(i)) >>> 0;
+  }
+  return h.toString(36);
+}
+
+/** Full OG image URL with the auto cache-bust query. */
+export function heroOgImageUrl(): string {
+  return `/opengraph-image?v=${heroOgCacheKey()}`;
+}
+
+/**
  * Per-page metadata with DIFFERENTIATED social tags. Next does not derive
  * openGraph/twitter from a page's title and description, so a page that sets
  * only those inherits the root layout's home OG block, and every social preview

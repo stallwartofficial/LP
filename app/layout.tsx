@@ -9,7 +9,7 @@ import { CookieConsent } from "@/components/CookieConsent";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { ClarityAnalytics } from "@/components/ClarityAnalytics";
 import { JsonLd } from "@/components/JsonLd";
-import { organizationSchema } from "@/lib/seo";
+import { organizationSchema, heroOgImageUrl } from "@/lib/seo";
 
 // Exposed as *-loaded vars so globals.css can keep its own fallback stack in
 // @theme without a specificity fight between :root and the font classes.
@@ -98,13 +98,16 @@ export const metadata: Metadata = {
     // India English variants so shares in those regions surface the right tag.
     locale: "en_US",
     alternateLocale: ["en_GB", "en_IN"],
-    // OG image is generated at build time by app/opengraph-image.tsx,
-    // Next injects it here automatically, no static asset to maintain.
+    // Point WhatsApp/LinkedIn/Slack at the file-based OG image but with an
+    // auto cache-bust query derived from the current hero copy. Any hero
+    // change updates the URL, and aggressive social caches fetch fresh.
+    images: [{ url: heroOgImageUrl(), width: 1200, height: 630, alt: `${site.company}. ${site.hero.tagline}` }],
   },
   twitter: {
     card: "summary_large_image",
     title: homeTitle,
     description: homeDescription,
+    images: [heroOgImageUrl()],
   },
   // Favicon resolves from app/favicon.ico automatically.
 };
