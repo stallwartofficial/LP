@@ -31,7 +31,7 @@ function QuoteMark({ closing = false }: { closing?: boolean }) {
 // closing quote mark at the bottom-right to bracket the passage.
 function Card({ t }: { t: Testimonial }) {
   return (
-    <figure className="flex h-72 w-[20rem] shrink-0 flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--card-glow)] sm:w-[24rem]">
+    <figure className="flex h-96 w-[20rem] shrink-0 flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--card-glow)] sm:w-[24rem]">
       <figcaption>
         <span className="block text-sm font-medium text-[var(--fg)]">{t.name}</span>
         <span className="mt-0.5 block text-xs text-[var(--fg)]/75">
@@ -41,7 +41,7 @@ function Card({ t }: { t: Testimonial }) {
       <div className="mt-4 border-t border-[var(--hairline)] pt-4">
         <QuoteMark />
       </div>
-      <blockquote className="mt-2 flex-1 overflow-hidden text-sm leading-relaxed text-[var(--fg)]/80">
+      <blockquote className="mt-2 flex-1 text-sm leading-relaxed text-[var(--fg)]/80">
         {t.quote}
       </blockquote>
       <div className="mt-2 flex justify-end">
