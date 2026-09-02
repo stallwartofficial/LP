@@ -72,15 +72,20 @@
   --accent-text: var(--color-gold-deep);
 
   /* Stronger hairlines so borders and rules are actually visible on cream. */
-  --hairline: color-mix(in oklab, var(--fg) 16%, transparent);
-  --hairline-strong: color-mix(in oklab, var(--fg) 32%, transparent);
+  --hairline: color-mix(in oklab, var(--fg) 22%, transparent);
+  --hairline-strong: color-mix(in oklab, var(--fg) 38%, transparent);
   --glow: color-mix(in oklab, var(--accent) 14%, transparent);
   --grain-opacity: 0.02;
   /* Hero field reads faint on cream, so both the dot grid and the amber glow
      get more presence in light than on ink. */
-  --hero-dot-opacity: 0.6;
+  --hero-dot-opacity: 0.78;
   --hero-glow-amount: 46%;
   --hero-glow-core: 60%;
+  /* Placeholder tint. Deeper in light for legibility on cream, faint in dark. */
+  --placeholder-fg: color-mix(in oklab, var(--fg) 50%, transparent);
+  /* Card hover glow — deep gold pool under the card. Stronger in light so it
+     reads over cream; softer in dark where the bright accent already lifts. */
+  --card-glow: 0 12px 32px -10px color-mix(in oklab, var(--color-gold-deep) 70%, transparent);
 
   /* Mindmap branch identities. Two tokens per branch on purpose:
      -fill is decorative (dots, rules, borders) and may be the bright brand
@@ -117,6 +122,9 @@
   --hero-dot-opacity: 0.4;
   --hero-glow-amount: 18%;
   --hero-glow-core: 30%;
+  /* Dark keeps the current, subtler tokens. */
+  --placeholder-fg: color-mix(in oklab, var(--fg) 35%, transparent);
+  --card-glow: 0 10px 30px -12px color-mix(in oklab, var(--accent) 45%, transparent);
 
   /* On ink the bright variants already clear AA comfortably, so fill and text
      can share a value. Measured on ink: 11.71, 12.10, 9.16. */
@@ -380,13 +388,21 @@ p {
   }
 }
 
-/* Kinetic marquee, doubled content for a seamless loop. */
+/* Kinetic marquee, doubled content for a seamless loop.
+   The reverse-direction row must use a dedicated keyframe (-50% -> 0%) rather
+   than animation-direction: reverse — reverse+infinite causes a visible jump
+   at each iteration boundary because iterations don't share their end frame. */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
-.animate-marquee { animation: marquee 34s linear infinite; }
-.animate-marquee-slow { animation: marquee 52s linear infinite; }
+@keyframes marquee-right {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+.animate-marquee { animation: marquee 34s linear infinite; will-change: transform; }
+.animate-marquee-slow { animation: marquee 52s linear infinite; will-change: transform; }
+.animate-marquee-right { animation: marquee-right 34s linear infinite; will-change: transform; }
 
 /* Pause the marquee on hover so a reader can actually read it. */
 .marquee-host:hover .animate-marquee,
@@ -519,9 +535,9 @@ p {
   --fs-gold-a: #7a5414;   /* deep */
   --fs-gold-b: #c9a24b;   /* mid  */
   --fs-gold-c: #4a3410;   /* deeper "shadow" band */
-  --fs-line: rgba(20, 12, 4, 0.55);   /* dark line on gold */
-  --fs-dot: rgba(230, 195, 117, 0.9); /* bright tick at intersection */
-  --fs-spot: #e6c375;
+  --fs-line: rgba(20, 12, 4, 0.72);   /* dark line on gold, stronger on cream */
+  --fs-dot: rgba(20, 12, 4, 0.75);    /* dark tick that contrasts with gold */
+  --fs-spot: #fff8e2;                 /* near-white so the cursor spot really lifts */
 }
 .dark {
   --fs-gold-a: #7a5414;   /* deep — creates real range against bright */
@@ -530,6 +546,13 @@ p {
   --fs-line: rgba(15, 8, 2, 0.6);
   --fs-dot: #ffe9a5;
   --fs-spot: #ffffff;
+}
+
+/* Light-mode only: a touch heavier body in testimonial quotes and card labels
+   so the muted copy still reads confidently against cream. */
+html:not(.dark) .fs-line-quote,
+html:not(.dark) blockquote {
+  font-weight: 450;
 }
 
 /* Ambient drift for touch / reduced-motion. */
@@ -694,6 +717,7 @@ p {
   }
   .animate-marquee,
   .animate-marquee-slow,
+  .animate-marquee-right,
   .animate-aurora,
   .animate-soft-pulse,
   .animate-stack-float {

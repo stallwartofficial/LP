@@ -31,7 +31,7 @@ function QuoteMark({ closing = false }: { closing?: boolean }) {
 // closing quote mark at the bottom-right to bracket the passage.
 function Card({ t }: { t: Testimonial }) {
   return (
-    <figure className="mr-6 flex h-72 w-[22rem] shrink-0 flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[0_10px_30px_-12px_color-mix(in_oklab,var(--accent)_45%,transparent)] sm:w-[24rem]">
+    <figure className="mr-6 flex h-72 w-[22rem] shrink-0 flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--card-glow)] sm:w-[24rem]">
       <figcaption>
         <span className="block text-sm font-medium text-[var(--fg)]">{t.name}</span>
         <span className="mt-0.5 block text-xs text-[var(--fg)]/75">
@@ -65,11 +65,8 @@ function Row({
   return (
     <div className="[overflow-x:clip] py-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
       <div
-        className="animate-marquee flex shrink-0 items-stretch"
-        style={{
-          animationDuration: `${duration}s`,
-          animationDirection: reverse ? "reverse" : "normal",
-        }}
+        className={`${reverse ? "animate-marquee-right" : "animate-marquee"} flex shrink-0 items-stretch`}
+        style={{ animationDuration: `${duration}s` }}
         aria-hidden="true"
       >
         {doubled.map((t, i) => (
@@ -103,7 +100,7 @@ export function SocialProof() {
               </span>
             </h2>
             <p className="mt-3 text-[length:var(--text-step-1)] text-[var(--fg)]/70">
-              From the people we&apos;ve built for.
+              From some of the people we&apos;ve built for.
             </p>
           </div>
           <p className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[var(--hairline-strong)] bg-[var(--surface)] px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent-text)]">
@@ -119,8 +116,8 @@ export function SocialProof() {
       {/* Full-bleed marquee rows. Screen-reader users get the plain list below
           (visually hidden). */}
       <div className="mt-12 flex flex-col gap-6">
-        <Row items={ROW_ONE} duration={28} />
-        <Row items={ROW_TWO} reverse duration={36} />
+        <Row items={ROW_ONE} duration={18} />
+        <Row items={ROW_TWO} reverse duration={22} />
       </div>
 
       {/* Accessible fallback: real content, not the visual duplicates. */}

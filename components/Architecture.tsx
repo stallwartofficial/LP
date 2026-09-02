@@ -43,7 +43,7 @@ export function Architecture() {
             {offerings.map((offering) => (
               <li
                 key={offering.slug}
-                className="group rounded-lg border border-[var(--hairline)] bg-[var(--surface)] p-4 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[0_10px_30px_-12px_color-mix(in_oklab,var(--accent)_45%,transparent)]"
+                className="group rounded-lg border border-[var(--hairline)] bg-[var(--surface)] p-4 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--card-glow)]"
               >
                 <span className="flex items-center gap-2">
                   <span

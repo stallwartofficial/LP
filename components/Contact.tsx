@@ -8,7 +8,7 @@ import { offerings } from "@/data/offerings";
 type Status = "idle" | "loading" | "success" | "error";
 
 const fieldClass =
-  "mt-2 w-full rounded-xl border border-[var(--hairline-strong)] bg-transparent px-4 py-3 outline-none transition-colors placeholder:text-[var(--fg)]/35 focus:border-[var(--accent)]";
+  "mt-2 w-full rounded-xl border border-[var(--hairline-strong)] bg-transparent px-4 py-3 outline-none transition-colors placeholder:text-[var(--placeholder-fg)] focus:border-[var(--accent)]";
 const labelClass = "block text-sm font-medium text-[var(--fg)]/85";
 
 // Contact page. On desktop it is two columns: the argument on the left (a form

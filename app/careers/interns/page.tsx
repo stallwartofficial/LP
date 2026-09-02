@@ -87,7 +87,7 @@ export default function InternsPage() {
           <p className="eyebrow mt-8">Open role · Internship</p>
           <h1 className="font-display mt-4 text-display-lg font-light">
             <span className="text-gold-sheen">Interns</span>, in Engineering
-            and <span className="text-gold-sheen italic">Business.</span>
+            and Business.
           </h1>
           <p className="mt-6 text-[length:var(--text-step-2)] leading-relaxed text-[var(--fg)]/80">
             We&apos;re looking for people early in their careers who already

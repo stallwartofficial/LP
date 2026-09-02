@@ -169,7 +169,7 @@ export function CareersForm() {
               onChange={(e) => set("built")(e.target.value)}
               rows={4}
               placeholder="What was it, and why are you proud of it? It doesn't have to be code. In your own words."
-              className={`mt-2 w-full resize-y rounded-2xl border bg-[var(--bg)] px-4 py-3 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)] outline-none transition-colors placeholder:text-[var(--fg)]/35 focus:border-[var(--accent)] ${
+              className={`mt-2 w-full resize-y rounded-2xl border bg-[var(--bg)] px-4 py-3 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)] outline-none transition-colors placeholder:text-[var(--placeholder-fg)] focus:border-[var(--accent)] ${
                 errors.built ? "border-red-500/60" : "border-[var(--hairline-strong)]"
               }`}
             />
@@ -241,7 +241,7 @@ function Text({
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           autoComplete={autoComplete}
-          className={`mt-2 w-full rounded-2xl border bg-[var(--bg)] px-4 py-3 text-[length:var(--text-step-0)] text-[var(--fg)] outline-none transition-colors placeholder:text-[var(--fg)]/35 focus:border-[var(--accent)] ${
+          className={`mt-2 w-full rounded-2xl border bg-[var(--bg)] px-4 py-3 text-[length:var(--text-step-0)] text-[var(--fg)] outline-none transition-colors placeholder:text-[var(--placeholder-fg)] focus:border-[var(--accent)] ${
             error ? "border-red-500/60" : "border-[var(--hairline-strong)]"
           }`}
         />

@@ -6,7 +6,7 @@ import Link from "next/link";
 type Status = "idle" | "loading" | "success" | "error";
 
 const fieldClass =
-  "mt-1.5 w-full rounded-lg border border-[var(--hairline-strong)] bg-transparent px-3 py-2.5 text-[13px] outline-none transition-colors placeholder:text-[var(--fg)]/35 focus:border-[var(--accent)]";
+  "mt-1.5 w-full rounded-lg border border-[var(--hairline-strong)] bg-transparent px-3 py-2.5 text-[13px] outline-none transition-colors placeholder:text-[var(--placeholder-fg)] focus:border-[var(--accent)]";
 const labelClass =
   "block text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--fg)]/70";
 
