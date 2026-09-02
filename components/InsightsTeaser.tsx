@@ -9,7 +9,12 @@ import { getOffering } from "@/data/offerings";
 // Also an internal linking surface. Fresh, crawlable links from the highest
 // authority page to the content built to rank.
 export function InsightsTeaser() {
-  const featured = blogPosts.slice(0, 4);
+  // Curator-picked mix: the leading article followed by the two flagship case
+  // studies. Ordering in data/blog.ts controls which items surface (highest-
+  // impact first). Three cards breathe better than four.
+  const article = blogPosts.find((p) => p.kind === "article");
+  const caseStudies = blogPosts.filter((p) => p.kind === "case-study").slice(0, 2);
+  const featured = [article, ...caseStudies].filter(Boolean) as typeof blogPosts;
 
   return (
     <section
@@ -40,7 +45,7 @@ export function InsightsTeaser() {
           </Link>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
           {featured.map((post) => (
             <Link
               key={post.slug}
