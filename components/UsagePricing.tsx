@@ -21,10 +21,21 @@ const MEET_HIGH = 0.002;
 const LEAD_COST_LOW = Math.round(COST_PER_EMAIL / WARM_HIGH); // $4
 const LEAD_COST_HIGH = Math.round(COST_PER_EMAIL / WARM_LOW); // $15
 
+// Log-scaled slider: the price grows exponentially with position, so entry-
+// level budgets ($2-$20) fill the left half of the track and larger ones
+// ($20-$250) fill the right half. Anchors the eye on the affordable end
+// (default $10 sits just left of centre) instead of stranding it near zero.
 const MIN = 2;
-const MAX = 500;
-const STEP = 1;
-const DEFAULT = 20;
+const MAX = 250;
+const DEFAULT = 10;
+// Internal 0-1000 slider steps mapped through exp() for smooth log motion.
+const SLIDER_STEPS = 1000;
+const LN_MIN = Math.log(MIN);
+const LN_MAX = Math.log(MAX);
+const posToSpend = (pos: number) =>
+  Math.round(Math.exp(LN_MIN + (pos / SLIDER_STEPS) * (LN_MAX - LN_MIN)));
+const spendToPos = (s: number) =>
+  Math.round(((Math.log(s) - LN_MIN) / (LN_MAX - LN_MIN)) * SLIDER_STEPS);
 
 const nf = (n: number) => n.toLocaleString("en-US");
 const atLeastOne = (n: number) => Math.max(1, Math.round(n));
@@ -82,11 +93,11 @@ export function UsagePricing() {
 
       <input
         type="range"
-        min={MIN}
-        max={MAX}
-        step={STEP}
-        value={spend}
-        onChange={(e) => setSpend(Number(e.target.value))}
+        min={0}
+        max={SLIDER_STEPS}
+        step={1}
+        value={spendToPos(spend)}
+        onChange={(e) => setSpend(posToSpend(Number(e.target.value)))}
         aria-label="Monthly budget in dollars"
         className="mt-2.5 w-full accent-[var(--accent)]"
       />

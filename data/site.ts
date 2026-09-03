@@ -68,7 +68,7 @@ export const site = {
       "Production-grade AI systems and custom software for the work that can't be solved off the shelf.",
       "Engineered for autonomy, governance, and reliability.",
     ],
-    primaryCta: { label: "Book a Demo", href: "/contact" },
+    primaryCta: { label: "Book a call", href: "/contact" },
     secondaryCta: { label: "See What We Build", href: "/offer" },
     scrollCue: "How we build",
   },
@@ -191,7 +191,7 @@ export const site = {
     address: "Address on file, contact us for details", // placeholder
   },
   cta: {
-    primary: "Book a Demo",
+    primary: "Book a call",
   },
   social: {
     // Empty until real accounts exist. Both consumers (footer icons and the

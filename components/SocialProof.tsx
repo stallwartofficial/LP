@@ -52,7 +52,7 @@ function QuoteMark({ closing = false }: { closing?: boolean }) {
 // closing quote mark at the bottom-right to bracket the passage.
 function Card({ t }: { t: Testimonial }) {
   return (
-    <figure className="flex h-96 w-[20rem] shrink-0 flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--card-glow)] sm:w-[24rem]">
+    <figure className="flex h-80 w-[20rem] shrink-0 flex-col rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--card-glow)] sm:w-[24rem]">
       <figcaption>
         <span className="block text-sm font-medium text-[var(--fg)]">{t.name}</span>
         <span className="mt-0.5 block text-xs text-[var(--fg)]/75">
@@ -91,7 +91,12 @@ function Row({
         aria-hidden="true"
       >
         {doubled.map((t, i) => (
-          <div key={`${t.name}-${i}`} className="mr-6">
+          // pr-6 (not mr-6) so the trailing gap is part of the wrapper's
+          // width. Browsers exclude a trailing margin from scrollWidth, which
+          // made translate:-50% under-shoot by half a gap (12px) and produced
+          // a visible jump at each loop boundary. Padding is included, so
+          // -50% now lands exactly on the start of the duplicate set.
+          <div key={`${t.name}-${i}`} className="shrink-0 pr-6">
             <Card t={t} />
           </div>
         ))}
