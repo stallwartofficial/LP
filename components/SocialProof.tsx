@@ -160,7 +160,11 @@ export function SocialProof() {
         </div>
       </div>
       <div className="mt-12 hidden flex-col gap-6 sm:flex">
-        <Row items={ROW_ONE} duration={18} />
+        {/* Durations chosen so both rows move at the SAME visible speed
+            (~185 px/s). ROW_ONE has 6 cards, ROW_TWO has 5, so equal
+            durations would make row 1 look faster; the ratio matches
+            their content widths. */}
+        <Row items={ROW_ONE} duration={26} />
         <Row items={ROW_TWO} reverse duration={22} />
       </div>
 
