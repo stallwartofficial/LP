@@ -111,9 +111,9 @@ export const testimonials: Testimonial[] = [
     name: "Arunkumar",
     role: "Founder",
     company: "Medfins International LLP",
-    highlight: "Helped me think",
+    highlight: "Nobody made it about them",
     quote:
-      "They didn't try to sound smart. They helped me think. I've spent a lot of money on consultants who did the opposite.",
+      "I've paid a lot of people to sound smart on calls with me. Stallwart just asked questions. Real ones. The kind I'd been quietly avoiding. And then they sat there while I worked through them. Nothing about them, no next deck, no next call. I got off that call and knew what to do. That was the whole thing.",
     group: "thinking",
   },
   // ---- Brand voice, closer ----
