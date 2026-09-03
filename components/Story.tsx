@@ -84,7 +84,7 @@ export function Story() {
             <figure className="photo-taped bg-[var(--bg-raised)] p-2.5">
               <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
                 <Image
-                  src="/images/founder.jpg"
+                  src="/images/founder-v2.jpg"
                   alt={`${site.founder.fullName}, ${site.founder.role} of ${site.company}`}
                   fill
                   sizes="(min-width: 1024px) 24rem, 80vw"

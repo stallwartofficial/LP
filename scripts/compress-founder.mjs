@@ -24,6 +24,9 @@ async function emit(name, width, format, opts) {
 // 1200w covers the largest desktop render (~18rem @ 2x DPR ~= 576 CSS px x2).
 // 640w is the mobile size (90vw on ~420px screens x2 DPR ~= 800). Both webp.
 // JPG fallback matches the desktop file for browsers ignoring the <picture>.
-await emit("founder.webp", 1200, "webp", { quality: 78, effort: 6 });
-await emit("founder-sm.webp", 640, "webp", { quality: 74, effort: 6 });
-await emit("founder.jpg", 1200, "jpeg", { quality: 78, mozjpeg: true, progressive: true });
+// Filenames are versioned (v2, v3, …) so the URL changes on a portrait swap
+// and every CDN / browser cache refetches instead of serving the previous
+// bytes. Bump the suffix here and in the two <Image src=…> references.
+await emit("founder-v2.webp", 1200, "webp", { quality: 78, effort: 6 });
+await emit("founder-v2-sm.webp", 640, "webp", { quality: 74, effort: 6 });
+await emit("founder-v2.jpg", 1200, "jpeg", { quality: 78, mozjpeg: true, progressive: true });
