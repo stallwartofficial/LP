@@ -84,7 +84,7 @@ export default function PrinciplesPage() {
           </div>
 
           {/* ---------------- Ledger + articles ---------------- */}
-          <div className="mt-20 grid gap-16 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-24">
+          <div className="mt-12 grid gap-10 lg:mt-20 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-24">
             <PrinciplesLedger items={principles.map((p) => ({ n: p.n, h: p.h }))} />
 
             <div className="flex flex-col">
@@ -93,7 +93,10 @@ export default function PrinciplesPage() {
                   key={p.n}
                   id={`principle-${p.n}`}
                   aria-labelledby={`principle-${p.n}-title`}
-                  className={`flex min-h-[70vh] flex-col justify-center py-16 ${
+                  // Mobile: no min-height, tighter padding so the four
+                  // articles are actually scannable. Desktop keeps the
+                  // 70vh feel that the ledger-companion layout needs.
+                  className={`flex flex-col justify-center py-10 lg:min-h-[70vh] lg:py-16 ${
                     i > 0 ? "border-t border-[var(--hairline)]" : ""
                   }`}
                 >

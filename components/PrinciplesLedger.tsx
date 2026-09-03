@@ -40,7 +40,10 @@ export function PrinciplesLedger({
   return (
     <nav
       aria-label="Principles ledger"
-      className="sticky top-32 self-start"
+      // Hidden on mobile; a sticky ledger in a single-column layout overlaps
+      // the article body when the reader scrolls. Desktop keeps it as the
+      // sticky index the design was built around.
+      className="hidden lg:sticky lg:top-32 lg:block lg:self-start"
     >
       <div className="flex items-center gap-3">
         <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)]" />
