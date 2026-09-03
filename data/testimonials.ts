@@ -91,9 +91,9 @@ export const testimonials: Testimonial[] = [
     name: "Ambrose Dass",
     role: "Founder & Principal Architect",
     company: "AMDA Architects",
-    highlight: "Quiet, so the work speaks",
+    highlight: "The site steps back so the work stands up",
     quote:
-      "In architecture, the drawings do the work. A loud website gets in the way. Stallwart understood that without me having to say it. The result is quiet, and it makes the projects look bigger than the site does.",
+      "Most agencies would have pushed us toward something showy. Stallwart did the opposite: they stripped the interface back until the projects had the room to carry the page. Clients now open the site and start talking about the buildings, not the buttons.",
     group: "building",
   },
   // ---- Warm, plan-shaping ----
