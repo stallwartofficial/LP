@@ -60,6 +60,70 @@ const terms = [
     term: "White-label partnership",
     def: "An arrangement where a partner sells a provider's product under their own brand while the provider powers the technology invisibly; the product and the customer relationship stay the partner's.",
   },
+  {
+    term: "SEO (Search Engine Optimization)",
+    def: "The practice of writing and structuring content so search engines rank it for the queries a target reader actually types. Answers the question: can we be found in a list of ten blue links.",
+  },
+  {
+    term: "GEO (Generative Engine Optimization)",
+    def: "The practice of writing content so generative search surfaces (Google AI Overviews, Perplexity, ChatGPT search) select and quote it in their generated answers, rather than the older goal of ranking in a link list.",
+  },
+  {
+    term: "Grounding",
+    def: "Anchoring a model's output in specific source material, retrieved documents, structured data, or verifiable facts, so the response can be audited against the source rather than trusted on its confidence alone.",
+  },
+  {
+    term: "Retrieval Augmented Generation (RAG)",
+    def: "A pattern where a model is given relevant documents retrieved from a knowledge base at query time, so its answer is grounded in that material instead of only its trained weights.",
+  },
+  {
+    term: "Prompt injection",
+    def: "An adversarial input that tricks a model into ignoring its original instructions and following the attacker's instead. A core threat model for any AI system that reads untrusted content.",
+  },
+  {
+    term: "Guardrail",
+    def: "A runtime control that constrains what an AI system is allowed to say or do. Unlike a policy document, a guardrail intervenes at the moment of the decision.",
+  },
+  {
+    term: "Evaluation harness",
+    def: "The tests an AI system is graded against continuously, not once. Catches regressions when a prompt, model, or dependency changes.",
+  },
+  {
+    term: "Model drift",
+    def: "Slow degradation in a model's outputs over time as the world it sees shifts away from the world it was trained on. Detected by continuous evaluation, not by intuition.",
+  },
+  {
+    term: "Deliverability",
+    def: "The share of sent outbound email that lands in the recipient's primary inbox instead of promotions or spam. A function of sender reputation, authentication, and relevance to the recipient.",
+  },
+  {
+    term: "Domain warmup",
+    def: "The gradual ramp of sending volume on a fresh sending domain, so inbox providers build trust in it before real campaigns run. Skipping it burns the domain.",
+  },
+  {
+    term: "Reply rate",
+    def: "The percentage of sent outbound messages that receive any reply. A blunt measure of relevance; positive reply rate is the sharper one.",
+  },
+  {
+    term: "Positive reply rate",
+    def: "The percentage of sent outbound messages that receive an interested reply, not just any reply. The number that decides whether an outbound program actually books meetings.",
+  },
+  {
+    term: "Meeting-book rate",
+    def: "The percentage of sent outbound messages that convert to a booked meeting. The number a founder or a VP of Sales cares about, because it maps directly to pipeline.",
+  },
+  {
+    term: "Lead scoring",
+    def: "Ranking inbound or replied leads by how likely they are to convert, from real intent signals (role, fit, engagement) rather than politeness. Determines who gets the human's time first.",
+  },
+  {
+    term: "Model card",
+    def: "A short, structured document that describes an AI system: what it does, what it was trained on, how it was evaluated, what it should not be used for, and who owns it. The starting point of a governable system.",
+  },
+  {
+    term: "Red teaming",
+    def: "Structured attempts to break an AI system before real users do: adversarial prompts, edge cases, and abuse scenarios, run as part of building the system rather than after an incident.",
+  },
 ];
 
 export default function GlossaryPage() {

@@ -87,6 +87,11 @@ export type Offering = {
       kind: "input" | "model" | "action" | "output";
     }[];
     branch: { fromIndex: number; name: string };
+    /** One-line italic caption under the flow. Must be specific to THIS
+     *  offering — Extrovert AI talks about GTM, Sillage talks about audit,
+     *  Custom Systems talks about the build. A shared line is worse than
+     *  no line, because it reads as boilerplate. */
+    tagline: string;
   };
   /** Which layers of the shared engineering core this system leans on. */
   layers: string[];
@@ -218,6 +223,7 @@ export const offerings: Offering[] = [
         { name: "You own it", kind: "output" },
       ],
       branch: { fromIndex: 1, name: "Walk away with the design" },
+      tagline: "A system built to your business. You own it after we ship.",
     },
     layers: ["Intelligence", "Orchestration", "Governance", "Production"],
   },
@@ -397,6 +403,7 @@ export const offerings: Offering[] = [
         { name: "Meeting booked", kind: "output" },
       ],
       branch: { fromIndex: 1, name: "Not a fit, skipped" },
+      tagline: "Your whole GTM on autopilot. You just show up to the meeting.",
     },
     layers: ["Intelligence", "Orchestration", "Production"],
   },
@@ -415,28 +422,24 @@ export const offerings: Offering[] = [
       "The exposure is not that AI makes mistakes. It is that when a regulator, customer, or board member asks how a decision was reached, nobody can answer, and the absence of an answer is the finding.",
     capabilities: [
       {
-        eyebrow: "Inventory",
-        title: "Know what is actually running",
-        description:
-          "A live register of every AI system in the organization, what data each touches, which decisions it influences, and who owns it. Most governance failures start as a system nobody knew was in production.",
+        eyebrow: "Track",
+        title: "Live AI model registry",
+        description: "Every AI system in production. Data, decisions, owner.",
       },
       {
-        eyebrow: "Document",
-        title: "Decisions with a written basis",
-        description:
-          "Each system gets a plain language account of how it reaches conclusions, what it is not permitted to decide, and where a human is required. Written to be read by a regulator, not only by an engineer.",
+        eyebrow: "Monitor",
+        title: "Every decision, in real time",
+        description: "Drift, anomalies, policy violations surfaced as they happen.",
       },
       {
-        eyebrow: "Control",
-        title: "Guardrails that hold at runtime",
-        description:
-          "Policy expressed as controls that actually intervene, rather than a document nobody reads. Escalation paths for the decisions a system should never make alone.",
+        eyebrow: "Audit",
+        title: "Runtime guardrails, not policy PDFs",
+        description: "Every input, override, and escalation logged. SOC 2, ISO 42001 ready.",
       },
       {
-        eyebrow: "Evidence",
-        title: "Audit readiness as a standing state",
-        description:
-          "Logs, approvals, and reviews assembled continuously, so an audit is a query against existing evidence rather than a six week scramble to reconstruct it.",
+        eyebrow: "Store",
+        title: "Audit trail, queryable on demand",
+        description: "EU AI Act, SOC 2, ISO 42001 evidence exists before the ask.",
       },
     ],
     builtFor: [
@@ -475,15 +478,17 @@ export const offerings: Offering[] = [
     ],
     integrations: [],
     flow: {
-      label: "Decision path",
+      label: "Evidence path",
       stages: [
-        { name: "AI decision", kind: "input" },
-        { name: "Policy check", kind: "model" },
-        { name: "Approval gate", kind: "action" },
-        { name: "Audit trail", kind: "action" },
-        { name: "Evidence held", kind: "output" },
+        { name: "Track", kind: "input" },
+        { name: "Monitor", kind: "model" },
+        { name: "Audit", kind: "action" },
+        { name: "Store", kind: "action" },
+        { name: "Evidence on demand", kind: "output" },
       ],
-      branch: { fromIndex: 2, name: "Rollback" },
+      branch: { fromIndex: 1, name: "Block on policy violation" },
+      tagline:
+        "Every AI decision tracked, monitored, audited, and stored. The evidence exists before anyone asks.",
     },
     layers: ["Governance", "Orchestration"],
   },

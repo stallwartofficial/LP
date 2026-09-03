@@ -338,89 +338,51 @@ export default async function OfferingPage({ params }: Props) {
                         What it does
                       </span>
                       {(() => {
+                        // One flowing line, wrapping naturally only if the
+                        // chips truly don't fit. Removed the artificial pivot
+                        // + down-arrow (which forced a 2-line layout even
+                        // when 4 chips fit on 1). Last chip gets the accent
+                        // treatment when the offering supplied an explicit
+                        // outcome step via `motion`.
                         const steps =
                           offering.motion ??
                           offering.capabilities.map((c) => c.eyebrow);
                         const hasOutcome = Boolean(offering.motion);
-                        // Pivot = last chip that stays on the top line; the drop
-                        // hangs beneath it so the flow turns down there.
-                        const pivotIdx = Math.max(
-                          1,
-                          Math.ceil(steps.length / 2) - 1
-                        );
-                        const lead = steps.slice(0, pivotIdx);
-                        const pivot = steps[pivotIdx];
-                        const drop = steps.slice(pivotIdx + 1);
-                        const chip = (label: string, accent: boolean) => (
-                          <span
-                            key={label}
-                            className={
-                              accent
-                                ? "whitespace-nowrap rounded-full border border-[var(--accent)]/50 bg-[var(--accent)]/10 px-2.5 py-1 text-[11px] font-medium text-[var(--accent-text)]"
-                                : "whitespace-nowrap rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)]/40 px-2.5 py-1 text-[11px] text-[var(--fg)]/80 transition-colors duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--accent)]/[0.08] hover:text-[var(--fg)]"
-                            }
-                          >
-                            {label}
-                          </span>
-                        );
-                        const arrow = (k: string) => (
-                          <span
-                            key={k}
-                            aria-hidden="true"
-                            className="text-xs text-[var(--accent-text)]/50"
-                          >
-                            →
-                          </span>
-                        );
-                        const top = [...lead, pivot];
                         return (
-                          <div className="mt-3 space-y-1">
-                            {/* Line 1 ends with the flow turning down off the
-                                last step, so the drop reads from there. */}
-                            <div className="flex flex-wrap items-center gap-x-1 gap-y-1">
-                              {top.flatMap((label, i) =>
-                                i === 0
-                                  ? [chip(label, false)]
-                                  : [arrow(`t-${i}`), chip(label, false)]
-                              )}
-                              {drop.length > 0 && (
+                          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1.5">
+                            {steps.flatMap((label, i) => {
+                              const accent =
+                                hasOutcome && i === steps.length - 1;
+                              const chip = (
                                 <span
-                                  aria-hidden="true"
-                                  className="ml-0.5 shrink-0 text-[var(--accent-text)]/70"
+                                  key={label}
+                                  className={
+                                    accent
+                                      ? "whitespace-nowrap rounded-full border border-[var(--accent)]/50 bg-[var(--accent)]/10 px-2.5 py-1 text-[11px] font-medium text-[var(--accent-text)]"
+                                      : "whitespace-nowrap rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)]/40 px-2.5 py-1 text-[11px] text-[var(--fg)]/80 transition-colors duration-300 hover:border-[var(--accent)]/60 hover:bg-[var(--accent)]/[0.08] hover:text-[var(--fg)]"
+                                  }
                                 >
-                                  <svg
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="h-4 w-4"
-                                  >
-                                    <path d="M12 4v13" />
-                                    <path d="M7 12l5 5 5-5" />
-                                  </svg>
+                                  {label}
                                 </span>
-                              )}
-                            </div>
-                            {drop.length > 0 && (
-                              <div className="flex flex-wrap items-center gap-x-1 gap-y-1">
-                                {drop.flatMap((label, i) => {
-                                  const gi = pivotIdx + 1 + i;
-                                  const acc =
-                                    hasOutcome && gi === steps.length - 1;
-                                  return i === 0
-                                    ? [chip(label, acc)]
-                                    : [arrow(`d-${i}`), chip(label, acc)];
-                                })}
-                              </div>
-                            )}
+                              );
+                              return i === 0
+                                ? [chip]
+                                : [
+                                    <span
+                                      key={`a-${i}`}
+                                      aria-hidden="true"
+                                      className="text-xs text-[var(--accent-text)]/60"
+                                    >
+                                      →
+                                    </span>,
+                                    chip,
+                                  ];
+                            })}
                           </div>
                         );
                       })()}
                       <p className="mt-3 text-[11px] italic leading-snug text-[var(--fg)]/70">
-                        Your whole GTM on autopilot. You just show up to the
-                        meeting.
+                        {offering.flow.tagline}
                       </p>
                     </div>
                     )}

@@ -11,17 +11,36 @@ const GOLD = "var(--accent)";
 const GOLDT = "var(--accent-text)";
 const SURFACE = "var(--surface)";
 
-function Frame({
-  title,
-  desc,
-  viewBox,
-  children,
-}: {
+// Compact context: when a diagram is used as a card top-panel we render the
+// SVG raw, with no outer figure margin, no border, no caption. React context
+// (via module-level flag would be wrong under concurrency) is overkill for a
+// server-rendered helper, so we thread a `compact` prop through each diagram
+// function via the exported entry point below.
+type FrameProps = {
   title: string;
   desc: string;
   viewBox: string;
   children: React.ReactNode;
-}) {
+  compact?: boolean;
+};
+
+function Frame({ title, desc, viewBox, children, compact }: FrameProps) {
+  if (compact) {
+    return (
+      <svg
+        role="img"
+        aria-label={title}
+        viewBox={viewBox}
+        preserveAspectRatio="xMidYMid meet"
+        className="h-full w-full"
+        fontFamily="var(--font-mono), monospace"
+      >
+        <title>{title}</title>
+        <desc>{desc}</desc>
+        {children}
+      </svg>
+    );
+  }
   return (
     <figure className="my-12 overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]/40 p-5 sm:p-7">
       <svg
@@ -66,10 +85,11 @@ const L = (
 );
 
 // 1. AI pilots -> production: the 20 / 80 split.
-function PilotProduction() {
+function PilotProduction({ compact }: { compact?: boolean } = {}) {
   const load = ["Validation", "Retries", "Permissions", "Observability", "Audit", "Rollback"];
   return (
     <Frame
+      compact={compact}
       title="A pilot proves 20 percent. Production is the other 80."
       desc="A bar split into a small demo segment and a large load-bearing system segment covering validation, retries, permissions, observability, audit, and rollback."
       viewBox="0 0 640 210"
@@ -97,7 +117,7 @@ function PilotProduction() {
 }
 
 // 2. AI governance: the layered stack with governance as the load-bearing one.
-function GovernanceLayers() {
+function GovernanceLayers({ compact }: { compact?: boolean } = {}) {
   const layers = [
     { t: "Intelligence", g: false },
     { t: "Orchestration", g: false },
@@ -107,6 +127,7 @@ function GovernanceLayers() {
   const standards = ["SOC 2", "ISO 42001", "EU AI Act"];
   return (
     <Frame
+      compact={compact}
       title="Governance is a layer, built in, not bolted on before an audit."
       desc="A four-layer stack (intelligence, orchestration, governance, production) with the governance layer highlighted, beside the standards it answers to."
       viewBox="0 0 640 250"
@@ -146,7 +167,7 @@ function GovernanceLayers() {
 }
 
 // 3. AI SDR: research is the constraint the rest of outbound inherits.
-function OutboundResearch() {
+function OutboundResearch({ compact }: { compact?: boolean } = {}) {
   const stages = [
     { t: "Research", g: true },
     { t: "Message", g: false },
@@ -155,6 +176,7 @@ function OutboundResearch() {
   ];
   return (
     <Frame
+      compact={compact}
       title="Outbound is a research problem. Everything downstream inherits it."
       desc="A pipeline of four stages where the first, research, is enlarged and highlighted as the constraint the rest depends on."
       viewBox="0 0 640 170"
@@ -196,9 +218,10 @@ function OutboundResearch() {
 }
 
 // 4. SaaS case study: before (blast) vs after (researched).
-function BeforeAfter() {
+function BeforeAfter({ compact }: { compact?: boolean } = {}) {
   return (
     <Frame
+      compact={compact}
       title="From a bought-list blast to a researched, booked meeting."
       desc="Two columns. Before: bought list to blast to no reply. After: researched account to personalized outreach to a booked meeting."
       viewBox="0 0 640 220"
@@ -239,9 +262,10 @@ function BeforeAfter() {
 }
 
 // 5. Agency: outbound that stays steady while delivery load spikes.
-function AgencyContinuity() {
+function AgencyContinuity({ compact }: { compact?: boolean } = {}) {
   return (
     <Frame
+      compact={compact}
       title="Automated outbound stays flat when delivery load spikes."
       desc="A time axis showing delivery load spiking, manual outbound dipping at the spike, and automated outbound holding a steady line."
       viewBox="0 0 640 210"
@@ -273,10 +297,11 @@ function AgencyContinuity() {
 }
 
 // 6. Small team: one system instead of a stack (and a sales-ops hire).
-function SmallTeamStack() {
+function SmallTeamStack({ compact }: { compact?: boolean } = {}) {
   const tools = ["Data", "Enrichment", "Sequencer", "CRM sync", "Scheduler", "Inbox"];
   return (
     <Frame
+      compact={compact}
       title="One system instead of a stack, and a sales-ops hire."
       desc="A cluster of six disconnected outbound tools collapsing through an arrow into a single system that produces a booked meeting."
       viewBox="0 0 640 230"
@@ -303,10 +328,11 @@ function SmallTeamStack() {
 }
 
 // 7. Adding AI to a product: the feature is small, the scaffolding ships it.
-function AiInProduct() {
+function AiInProduct({ compact }: { compact?: boolean } = {}) {
   const scaffold = ["Validation", "Evals", "Guardrails", "Fallbacks", "Observability", "Rollback"];
   return (
     <Frame
+      compact={compact}
       title="The AI feature is the easy part. The scaffolding is what ships."
       desc="A product frame containing a small highlighted AI feature beside the production scaffolding that surrounds it: validation, evals, guardrails, fallbacks, observability, and rollback."
       viewBox="0 0 640 230"
@@ -331,7 +357,99 @@ function AiInProduct() {
   );
 }
 
-const diagrams: Record<string, () => React.ReactElement> = {
+// 8. AEO vs SEO vs GEO: three endpoints, one page.
+function ThreeEndpoints({ compact }: { compact?: boolean } = {}) {
+  return (
+    <Frame
+      compact={compact}
+      title="SEO ranks. AEO gets quoted. GEO gets cited."
+      desc="A single page in the centre feeding three destinations: a ranked search result, a quoted answer, and a citation in a generated AI answer."
+      viewBox="0 0 640 230"
+    >
+      <rect x="240" y="88" width="160" height="54" rx="10" fill={`color-mix(in oklab, ${GOLD} 14%, transparent)`} stroke={GOLD} />
+      {L(320, 112, "ONE PAGE", { fill: GOLDT, size: 12, anchor: "middle", weight: 500 })}
+      {L(320, 130, "written for all three", { fill: GOLDT, size: 10, anchor: "middle" })}
+      <line x1="240" y1="115" x2="150" y2="60" stroke={HAIR} strokeDasharray="3 3" />
+      <line x1="240" y1="115" x2="150" y2="170" stroke={HAIR} strokeDasharray="3 3" />
+      <line x1="400" y1="115" x2="500" y2="115" stroke={HAIR} strokeDasharray="3 3" />
+      <rect x="30" y="30" width="130" height="60" rx="10" fill={SURFACE} stroke={HAIR} />
+      {L(95, 52, "SEO", { fill: GOLDT, size: 11, anchor: "middle", weight: 500 })}
+      {L(95, 74, "ranked in search", { fill: MUTED, size: 10, anchor: "middle" })}
+      <rect x="30" y="140" width="130" height="60" rx="10" fill={SURFACE} stroke={HAIR} />
+      {L(95, 162, "AEO", { fill: GOLDT, size: 11, anchor: "middle", weight: 500 })}
+      {L(95, 184, "quoted by answer engines", { fill: MUTED, size: 9, anchor: "middle" })}
+      <rect x="480" y="85" width="140" height="60" rx="10" fill={`color-mix(in oklab, ${GOLD} 16%, transparent)`} stroke={GOLD} />
+      {L(550, 107, "GEO", { fill: GOLDT, size: 11, anchor: "middle", weight: 500 })}
+      {L(550, 129, "cited in AI answers", { fill: GOLDT, size: 9, anchor: "middle" })}
+    </Frame>
+  );
+}
+
+// 9. GEO checklist: what a page ready for AI citation looks like.
+function GeoChecklist({ compact }: { compact?: boolean } = {}) {
+  const items = [
+    "Answer up front",
+    "FAQ block + schema",
+    "Article + BreadcrumbList JSON-LD",
+    "Stable canonical URL",
+    "llms.txt at root",
+  ];
+  return (
+    <Frame
+      compact={compact}
+      title="What a page ready for AI citation looks like."
+      desc="A stylised page mock with the elements a language model looks for when selecting a citation: self-contained answer, FAQ block, schema, stable URL, llms.txt."
+      viewBox="0 0 640 260"
+    >
+      <rect x="30" y="24" width="580" height="212" rx="14" fill="none" stroke={HAIR} />
+      {L(48, 16, "READY TO BE CITED", { fill: FAINT, size: 10 })}
+      <rect x="50" y="46" width="540" height="30" rx="6" fill={SURFACE} stroke={HAIR} />
+      {L(64, 66, "The one-sentence answer, in the first paragraph.", { fill: GOLDT, size: 11 })}
+      {items.map((t, i) => {
+        const x = 50 + (i % 2) * 290;
+        const y = 96 + Math.floor(i / 2) * 46;
+        return (
+          <g key={t}>
+            <rect x={x} y={y} width="270" height="34" rx="7" fill={SURFACE} stroke={HAIR} />
+            <circle cx={x + 16} cy={y + 17} r="3" fill={GOLD} />
+            {L(x + 30, y + 21, t, { fill: MUTED, size: 11 })}
+          </g>
+        );
+      })}
+    </Frame>
+  );
+}
+
+// 10. AI SEO in 2026: the second endpoint that changed the game.
+function TwoEndpoints({ compact }: { compact?: boolean } = {}) {
+  return (
+    <Frame
+      compact={compact}
+      title="SEO in 2026: one page, two endpoints."
+      desc="A single page fanning out to two endpoints: a person clicking through, and an AI answer citing the page inside a generated response."
+      viewBox="0 0 640 220"
+    >
+      <rect x="240" y="80" width="160" height="60" rx="10" fill={`color-mix(in oklab, ${GOLD} 14%, transparent)`} stroke={GOLD} />
+      {L(320, 105, "ONE PAGE", { fill: GOLDT, size: 12, anchor: "middle", weight: 500 })}
+      {L(320, 125, "built for both", { fill: GOLDT, size: 10, anchor: "middle" })}
+      <path d="M 400 100 C 460 100 460 60 520 60" stroke={HAIR} strokeDasharray="3 3" fill="none" />
+      <path d="M 400 120 C 460 120 460 160 520 160" stroke={GOLD} strokeDasharray="3 3" fill="none" />
+      <rect x="500" y="30" width="120" height="60" rx="10" fill={SURFACE} stroke={HAIR} />
+      {L(560, 54, "The click", { fill: MUTED, size: 12, anchor: "middle", weight: 500 })}
+      {L(560, 74, "reader lands", { fill: FAINT, size: 10, anchor: "middle" })}
+      <rect x="500" y="130" width="120" height="60" rx="10" fill={`color-mix(in oklab, ${GOLD} 18%, transparent)`} stroke={GOLD} />
+      {L(560, 154, "The citation", { fill: GOLDT, size: 12, anchor: "middle", weight: 500 })}
+      {L(560, 174, "AI answer quotes", { fill: GOLDT, size: 10, anchor: "middle" })}
+      {L(30, 30, "OLD ENDPOINT", { fill: FAINT, size: 10 })}
+      {L(30, 200, "NEW ENDPOINT", { fill: GOLDT, size: 10 })}
+    </Frame>
+  );
+}
+
+const diagrams: Record<
+  string,
+  (props?: { compact?: boolean }) => React.ReactElement
+> = {
   "pilot-production": PilotProduction,
   "governance-layers": GovernanceLayers,
   "outbound-research": OutboundResearch,
@@ -339,9 +457,18 @@ const diagrams: Record<string, () => React.ReactElement> = {
   "agency-continuity": AgencyContinuity,
   "small-team-stack": SmallTeamStack,
   "ai-in-product": AiInProduct,
+  "three-endpoints": ThreeEndpoints,
+  "geo-checklist": GeoChecklist,
+  "two-endpoints": TwoEndpoints,
 };
 
-export function BlogDiagram({ name }: { name: string }) {
+export function BlogDiagram({
+  name,
+  compact = false,
+}: {
+  name: string;
+  compact?: boolean;
+}) {
   const D = diagrams[name];
-  return D ? <D /> : null;
+  return D ? <D compact={compact} /> : null;
 }

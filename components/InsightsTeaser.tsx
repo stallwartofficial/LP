@@ -9,11 +9,14 @@ import { getOffering } from "@/data/offerings";
 // Also an internal linking surface. Fresh, crawlable links from the highest
 // authority page to the content built to rank.
 export function InsightsTeaser() {
-  // Curator-picked mix: the leading article followed by the two flagship case
-  // studies. Ordering in data/blog.ts controls which items surface (highest-
-  // impact first). Three cards breathe better than four.
-  const article = blogPosts.find((p) => p.kind === "article");
-  const caseStudies = blogPosts.filter((p) => p.kind === "case-study").slice(0, 2);
+  // Newest-first: sort by publishedAt DESC so a newly added case study or
+  // article surfaces here automatically, no curator step required. One
+  // leading article + two most recent case studies.
+  const byDate = [...blogPosts].sort((a, b) =>
+    b.publishedAt.localeCompare(a.publishedAt)
+  );
+  const article = byDate.find((p) => p.kind === "article");
+  const caseStudies = byDate.filter((p) => p.kind === "case-study").slice(0, 2);
   const featured = [article, ...caseStudies].filter(Boolean) as typeof blogPosts;
 
   return (

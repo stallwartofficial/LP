@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { blogPosts, caseStudyPosts, articlePosts } from "@/data/blog";
-import { BlogPostRow } from "@/components/BlogReadState";
+import { BlogCardGrid } from "@/components/BlogCardGrid";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, blogListSchema, pageMeta } from "@/lib/seo";
 
@@ -66,13 +66,10 @@ export default function BlogIndexPage() {
           {blogPosts.length === 0 ? (
             <p className="text-[var(--fg)]/70">First posts are on the way.</p>
           ) : (
-            /* One post per full-width row. A ruled editorial list reads more
-               senior than a card grid and fits more in less height. */
-            <ol className="border-t border-[var(--hairline)]">
-              {blogPosts.map((post) => (
-                <BlogPostRow key={post.slug} post={post} />
-              ))}
-            </ol>
+            /* Card grid with an integrated search. Panel tops carry the
+               offering name in Fraunces italic over a warm accent radial,
+               so the grid is visually distinct without stock imagery. */
+            <BlogCardGrid posts={blogPosts} />
           )}
         </div>
       </section>

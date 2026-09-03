@@ -127,15 +127,18 @@ export function InteractivePath({ steps }: { steps: PathStep[] }) {
         const key = iconKey(`${s.label} ${s.title}`, i);
         return (
           <div key={s.num}>
-            {/* Number, above the icon */}
+            {/* Top label. Pushed further from the icon (3.4rem, was 2.9rem)
+                so it clears the dotted path where the curve crosses the
+                node vertically, and given a subtle surface background so
+                it never reads as sitting ON the line even at close crossings. */}
             <span
               aria-hidden="true"
               style={{
                 left: `${(p.x / W) * 100}%`,
-                top: `calc(${(p.y / H) * 100}% - 2.9rem)`,
+                top: `calc(${(p.y / H) * 100}% - 3.4rem)`,
               }}
-              className={`text-gold-sheen font-display pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 text-xl font-light leading-none transition-opacity duration-300 ${
-                on ? "opacity-100" : "opacity-75"
+              className={`text-gold-sheen font-display pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--surface)]/90 px-2 py-0.5 text-[15px] font-normal leading-none backdrop-blur-sm transition-opacity duration-300 ${
+                on ? "opacity-100" : "opacity-85"
               }`}
             >
               {s.num}
@@ -188,8 +191,8 @@ export function InteractivePath({ steps }: { steps: PathStep[] }) {
                 {s.label}
               </span>
               <h3
-                className={`font-display mt-1 text-[length:var(--text-step-1)] font-light leading-tight transition-colors duration-300 ${
-                  on ? "text-[var(--fg)]" : "text-[var(--fg)]/85"
+                className={`font-display mt-1 text-[length:var(--text-step-1)] font-normal leading-tight transition-colors duration-300 ${
+                  on ? "text-[var(--fg)]" : "text-[var(--fg)]/90"
                 }`}
               >
                 {s.title}

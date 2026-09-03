@@ -898,6 +898,639 @@ const rawBlogPosts: BlogPost[] = [
       },
     ],
   },
+  // ---------------- Case study: regulated AI outbound ----------------
+  {
+    slug: "ai-outbound-for-regulated-industries",
+    kind: "case-study",
+    title:
+      "How a regulated fintech ran AI outbound without a compliance rewrite",
+    excerpt:
+      "In healthcare finance every outbound message crosses a compliance desk. Here is what changed when the research, the writing, and the guardrails all sat inside one system, and legal reviewed the framework once instead of every send.",
+    topic:
+      "AI outbound for regulated industries, compliant cold email, AI SDR compliance, healthcare finance outbound, fintech outbound automation, HIPAA cold email, regulated B2B outbound, AI outbound guardrails, compliance-safe AI sales, cost of AI SDR in regulated industry",
+    offering: "extrovert-ai",
+    industry: "Healthcare Finance",
+    persona:
+      "Founder or head of growth at a regulated fintech, healthcare finance, or insurance platform",
+    publishedAt: "2026-08-05",
+    readingMinutes: 7,
+    diagram: "before-after",
+    sections: [
+      {
+        heading: "Where the work was breaking",
+        paragraphs: [
+          "Every outbound message this team wanted to send had to survive two audiences before it survived the buyer: internal legal, and the regulator standing behind them. A single line about outcomes could be read as a health claim. A single line about savings could be read as a financial promise. So the marketing lead drafted, legal redlined, marketing redrafted, legal redlined again, and the message went out three weeks late to a moment that had already passed.",
+          "The workaround the team had settled on was worse than the delay. To keep legal exposure low, outbound had been reduced to a bland, generic template that said almost nothing. It was compliance-safe because it was content-empty, and it converted accordingly. The channel was technically running and functionally dead, which is the specific failure mode a lot of regulated teams end up in.",
+          "The root cause was not legal being slow. It was that every message was a fresh legal object. Nothing was reusable, nothing was pre-approved, and the same three questions were being answered again on every draft. Under that setup, either outbound was too generic to work, or it was too specific to ship.",
+        ],
+      },
+      {
+        heading: "What the system does instead",
+        paragraphs: [
+          "Extrovert AI was pointed at the same market with one structural change: legal reviewed the framework once, not each message. That framework covers what the system may claim, what phrasings trigger a health or financial promise, which numbers require a disclaimer, and which topics are off limits entirely. Those rules are enforced inside the system at generation time, not caught at the end by a person.",
+          "Given that guardrail, the research and writing run the same way any AI outbound should: for each target account, the system reads the business, finds a specific angle a compliant message can be built on, and writes outreach grounded in it. Every draft is checked against the guardrail before it leaves. Anything that would trip a rule is either rewritten to comply or held for a human review, with the reason surfaced.",
+          "The audit trail is a byproduct, not a project. Every message, every claim, every source used to ground it, and every guardrail check is logged and queryable. When legal or a regulator asks how a specific claim was reached and on what basis, the answer already exists.",
+        ],
+      },
+      {
+        heading: "Why regulated teams can now run relevant outbound",
+        paragraphs: [
+          "The old trade-off in regulated outbound was that specificity created risk, so teams generalized until risk was low and reply rates followed. Once the guardrail is enforced at generation time, that trade-off flips. Specific, researched messages can go out at volume because none of them can violate a rule the system enforces before send.",
+          "This is the same lever as consumer-facing AI safety, but pointed at growth. Guardrails do not exist to slow the system down; they exist so the system can be allowed to run faster. In a regulated business, that is the whole difference between AI outbound being a legal fight every week and being a channel the compliance team is comfortable letting scale.",
+        ],
+      },
+      {
+        heading: "What changed for the team",
+        paragraphs: [
+          "Legal's involvement moved from every draft to the quarterly framework review. Marketing stopped drafting to survive redlines and started writing to earn replies. The compliance officer got a searchable log instead of a screenshot inbox, and the sales team stopped waiting three weeks for approvals to reach a moment the market had already moved past.",
+          "The other quiet win was hiring. The team no longer needed to hire an SDR who understood healthcare finance regulation well enough to self-police, because the guardrail was in the system rather than in a person's head. That is a role most founders describe as impossible to fill anyway.",
+        ],
+      },
+    ],
+    outcomes: [
+      "Legal reviewed the framework once, not every send. Approval time dropped from weeks per message to zero per message inside the pre-approved rules.",
+      "Outbound stopped being generic. Researched, specific outreach is now the default because the guardrail catches violations at generation, not at review.",
+      "The audit trail is a byproduct of the system running. Every claim, source, and guardrail check is logged, so a regulator or auditor gets an answer, not a fire drill.",
+    ],
+    metrics: [],
+    qa: [
+      {
+        question: "Can AI outbound be compliant in a regulated industry?",
+        answer:
+          "Yes, when the compliance rules are enforced inside the system at generation time rather than reviewed after the fact. Legal approves the framework once (what may be claimed, which numbers require disclaimers, which topics are off limits), and every draft is checked against it before send. Specific, researched outreach becomes safe to run at volume because nothing that violates a rule can leave the system.",
+      },
+      {
+        question: "How does an AI SDR handle HIPAA or financial compliance rules?",
+        answer:
+          "By treating the rules as first-class configuration, not prompt suggestions. Prohibited claims, required disclaimers, and off-limits topics are enforced at message generation and blocked or flagged for human review before send, and every check is logged for the audit trail.",
+      },
+      {
+        question: "Will compliance slow down AI outbound in healthcare finance or fintech?",
+        answer:
+          "Only if the review is happening at each draft. When the guardrail is enforced by the system, legal reviews the framework once and outreach runs on it, so approval time per message drops effectively to zero inside the pre-approved rules.",
+      },
+      {
+        question: "How do you audit AI outbound after it has been sent?",
+        answer:
+          "By making the audit trail a byproduct of the send, not a project. A compliant AI outbound system logs every message, the sources it grounded on, and every guardrail check, and makes them queryable, so a regulator or internal auditor asking how a claim was reached gets a specific answer from evidence that already exists.",
+      },
+      {
+        question: "Do we still need a compliance-trained SDR to run outbound?",
+        answer:
+          "The role that becomes hard to fill (an SDR who is also a compliance expert) becomes unnecessary when the guardrail lives in the system rather than a person's head. The compliance function still exists; it just moves from policing every send to owning the framework the system enforces.",
+      },
+    ],
+  },
+  // ---------------- Case study: founder-led outbound without SDR ----------------
+  {
+    slug: "founder-outbound-without-hiring-an-sdr",
+    kind: "case-study",
+    title:
+      "How a founder-led services firm hit outbound targets without hiring an SDR",
+    excerpt:
+      "Hiring a sales development rep is a six figure decision that pays off in year two. Here is what a founder-led firm did instead: a researched, in-the-owner's-voice motion that runs on its own and books meetings the founder still takes personally.",
+    topic:
+      "founder led sales, founder led outbound, replace SDR with AI, AI SDR cost vs hiring, cheaper than hiring an SDR, outbound without sales team, AI outbound for services firm, AI SDR for small business, first sales hire, sales development for founders, founder led B2B",
+    offering: "extrovert-ai",
+    industry: "Professional Services",
+    persona:
+      "Founder-CEO of a US-based services, consulting, or marketing firm doing the outbound themselves",
+    publishedAt: "2026-08-12",
+    readingMinutes: 7,
+    diagram: "before-after",
+    sections: [
+      {
+        heading: "Where the work was breaking",
+        paragraphs: [
+          "The founder was the outbound engine. He wrote the messages, he ran the follow-ups, he took the calls, and he closed the work. On the good weeks that produced a pipeline nobody else in the market could match, because every message was thoughtful and every reply landed on the same person who would take the meeting. On every other week, delivery ate the day and outbound stopped.",
+          "The obvious answer, hire an SDR, had already been costed. A US-based SDR would run six figures fully loaded, would take four to six months to be productive, and would produce outreach that sounded like an SDR rather than like the founder. Buyers who had been signing on the strength of a personal note from the owner would notice. The economics of the hire were harder than they looked, because the thing being scaled was not volume; it was voice.",
+          "That is the specific trap founder-led firms sit in. Their advantage in outbound is that the owner writes and the owner replies. The only way to keep the advantage while scaling volume is either to clone the owner or to build a system that runs in the owner's voice, does the research the owner would have done, and hands the owner the conversation to take.",
+        ],
+      },
+      {
+        heading: "What the system does instead",
+        paragraphs: [
+          "Extrovert AI was configured against the founder's actual body of past outreach, so the voice was his, not a template. For each target account, it researches the business the way the founder would have on a quiet day, finds a specific angle, and drafts outreach grounded in it. Follow-ups run on a cadence the founder set, adapt to replies, and stop the moment the account signals fit.",
+          "The rule that made this workable for a founder-led firm was simple: the meeting always lands on the founder's calendar. The system runs the motion right up to the booked call and then hands over, because the reason buyers were signing was the conversation with the owner. Automating anything after the booking would have removed the exact thing that was working.",
+          "Because the research is automated, the founder gets weekly digests of what the system said about which accounts and why, so the voice stays his over time. When he wants a phrase changed, a topic added, or an account skipped, those inputs update the system rather than getting emailed to an SDR who might forget them next Tuesday.",
+        ],
+      },
+      {
+        heading: "Why this beats hiring an early SDR",
+        paragraphs: [
+          "The math on a first SDR hire is worse than it looks. Fully loaded cost lands well into six figures, ramp is four to six months, and the reason the founder was winning (a personal owner-signed note) does not survive the transition. Most founder-led firms who make that hire spend a year rebuilding what they had before it.",
+          "An AI outbound system running in the founder's voice is a different economic curve. It costs a fraction of an SDR per month, runs from day one instead of six months in, and preserves the exact thing that was converting. The founder can also keep taking every meeting because there is one of them and the volume is calibrated to what one person can actually handle, which is another quiet win.",
+        ],
+      },
+      {
+        heading: "What changed for the founder",
+        paragraphs: [
+          "Outbound stopped competing with delivery for the same hours. The motion runs whether or not the founder had a heads-down week, so the pipeline no longer collapses a quarter after every busy stretch. The calendar stays full of meetings the founder still takes personally, which is the reason the firm is winning them.",
+          "The other change was psychological. The founder stopped feeling like every quiet week was a failure of discipline, because it was no longer his job to remember to send. The system remembered. He got to run the business and take the calls, which is what he was doing when the firm was growing fastest in the first place.",
+        ],
+      },
+    ],
+    outcomes: [
+      "Outbound decouples from the founder's available hours. The motion runs during delivery peaks and quiet weeks alike, so pipeline stops collapsing after every busy stretch.",
+      "The owner's voice is preserved. Every message is grounded in real research and written in the founder's voice, so buyers still get the personal note that was converting.",
+      "The first-SDR hire is deferred. The firm scales outbound volume without a six-figure hire, a four-to-six-month ramp, and the loss of owner-signed authenticity.",
+    ],
+    metrics: [],
+    qa: [
+      {
+        question: "Is an AI SDR cheaper than hiring an SDR?",
+        answer:
+          "By a wide margin at the founder-led stage. A US-based SDR fully loaded runs well into six figures a year, ramps for four to six months, and generic templated outreach cannot replicate a founder's voice, which was often the reason early outbound was converting. An AI SDR costs a fraction of that per month, runs from day one, and can be tuned to the founder's actual voice.",
+      },
+      {
+        question: "Can AI outbound sound like the founder rather than a template?",
+        answer:
+          "Yes, when the system is grounded in the founder's real past outreach and reviewed by the founder weekly rather than a generic tone prompt. The output reads like the founder wrote it because the system was configured against how the founder actually writes, and the founder still owns the voice over time.",
+      },
+      {
+        question: "Should a founder-led firm hire an SDR or use AI outbound?",
+        answer:
+          "For most founder-led services firms, AI outbound is the honest first move. The advantage the firm has is that the owner writes and the owner replies, and a first SDR hire tends to erase that advantage while the ramp is being paid for. AI outbound preserves the voice, scales volume, and defers the sales hire to when the pipeline actually justifies it.",
+      },
+      {
+        question: "Do I still take the meetings if AI runs the outbound?",
+        answer:
+          "Yes, and for a founder-led firm you should. The reason buyers replied is a conversation with the owner. The system runs the motion up to the booked meeting and stops there. Discovery, judgment, and closing remain with the person, and that person should be the founder while the founder is still the one closing the work.",
+      },
+      {
+        question: "How long does it take AI outbound to start producing meetings for a founder?",
+        answer:
+          "Days, not months. Once the system has the founder's past outreach for voice, a target account list, and a warmed sending setup, it runs from day one. That is the largest structural difference from a human SDR hire, which typically needs four to six months to ramp before producing meetings reliably.",
+      },
+    ],
+  },
+  // ---------------- Case study: custom AI workflow shipped ----------------
+  {
+    slug: "ai-workflow-that-actually-shipped",
+    kind: "case-study",
+    title:
+      "How an operations team shipped an AI workflow that survived contact with production",
+    excerpt:
+      "Most internal AI workflows die between the demo and the desk. This one runs every day. Here is what got engineered into the system that pilots skip, and what the operations team stopped doing by hand as a result.",
+    topic:
+      "custom AI development, AI workflow automation, AI for operations, internal AI tool, LLM in production, AI system integration, AI production deployment, enterprise AI integration, build AI workflow, AI workflow that shipped, operations AI automation, AI back office automation",
+    offering: "custom-ai-engineering",
+    industry: "Operations",
+    persona:
+      "Head of operations, COO, or technical program manager at a services or B2B company",
+    publishedAt: "2026-08-19",
+    readingMinutes: 8,
+    diagram: "pilot-production",
+    sections: [
+      {
+        heading: "Where the work was breaking",
+        paragraphs: [
+          "The team ran a review process every business day: an operator opened a queue, read a document, cross-referenced two systems, made a judgement call, wrote a summary, and routed the item. On a normal day it took four hours across two people. On a busy day it took the whole day and things sat in the queue overnight, which is where problems tended to compound.",
+          "A previous vendor had built a demo. It worked beautifully on the three examples in the pitch. It fell apart the first week it saw real input: the documents were malformed, the second system was down for a windowed maintenance, the judgement rule the operators actually used was more nuanced than the version that had been encoded, and there was no way to see why the model had chosen what it chose. Within a month the team quietly went back to doing the work by hand.",
+          "That is the pattern that kills most internal AI workflows. The pilot proved the interesting 20 percent. Nobody built the 80 percent that lets the workflow survive a real day: input handling, retries, fallbacks, permissions, observability, escalation for the request that fits no category, and a rollback path when the model is confidently wrong.",
+        ],
+      },
+      {
+        heading: "What the system does instead",
+        paragraphs: [
+          "Stallwart scoped the workflow from failure first. Before a line was written, the team defined what the system must never do (route a high-value item without a human sign-off), how it should behave when its inputs were missing or malformed (log, hold, escalate), and what correct meant, measurably, for each type of item in the queue. The demo was informative; it was not the spec.",
+          "Under that spec, the model does the reading and drafting. The system does everything else: it validates the incoming document, pulls the cross-referenced data with retries and fallbacks when the second system is down, runs the model against the current judgement rule, checks the output against evaluations that run on every item (not just on a quarterly sample), routes low-confidence items to a human review queue with the reasoning attached, and logs every step so the operations lead can answer any question about any decision on demand.",
+          "The judgement rule is a piece of configuration owned by the operations team, not code owned by an engineer. When the rule changes, the team edits it and the system picks it up. That decoupling is what makes the workflow theirs to run, and it is the single most common reason internal AI workflows outlive the team that built them.",
+        ],
+      },
+      {
+        heading: "Why this one survived when the last one did not",
+        paragraphs: [
+          "The previous demo optimized for the impressive path. This one optimized for the failure paths, which is where real workflows spend most of their time. Every failure mode the operators had learned to work around in the manual process was made a first-class case: retry, fallback, escalate, hold, or defer to a human, each with a reason surfaced in the log.",
+          "That is the difference between an AI workflow that ships and one that gets quietly turned off. The interesting 20 percent is table stakes; the 80 percent decides whether an operations lead is willing to bet the queue on it every day. Ownership of the judgement rule by the operations team, rather than an engineering team on a change-request cadence, is what makes the bet sustainable.",
+        ],
+      },
+      {
+        heading: "What changed for the team",
+        paragraphs: [
+          "Two operators used to spend four hours a day on the queue on a normal day, and a full day on a busy one. Now the routine cases flow through and land on the right desk without a human touch. The exceptions, the ones that used to be lost in the flood, are the only ones the operators see, which is exactly the work where their judgement was valuable to begin with.",
+          "The evening slippage stopped. Items no longer sit overnight because the queue keeps moving whether or not a person is watching, and when the second system is out for maintenance the workflow holds and resumes rather than dying. The operations lead can answer any question about any decision from the log without having to ask the team to reconstruct what happened, which is the audit trail she used to build by hand every quarter.",
+        ],
+      },
+    ],
+    outcomes: [
+      "The workflow survives real input. Malformed documents, upstream outages, and the request that fits no category all have first-class handling, logged and reviewable, rather than causing a silent failure.",
+      "The judgement rule is owned by operations, not engineering. The team edits the rule directly and the system picks it up, so the workflow outlives the initial build.",
+      "The queue keeps moving without a person watching. Routine cases route themselves; the exceptions, where human judgement is actually needed, are the only ones operators see.",
+    ],
+    metrics: [],
+    qa: [
+      {
+        question: "Why do most internal AI workflows fail to reach production?",
+        answer:
+          "Because the pilot proves the model can do the interesting 20 percent and nobody builds the 80 percent the workflow needs to survive a real day: input validation, retries, fallbacks, permissions, observability, escalation, and rollback. The workflow ships as a demo, breaks the first week it sees real input, and gets quietly turned off.",
+      },
+      {
+        question: "How do you build an AI workflow that survives production?",
+        answer:
+          "Scope from failure. Define what the system must never do, how it behaves when inputs are wrong or upstream systems are down, and what correct means, measurably. Then build input validation, retries, fallbacks, evaluations on every item, escalation for the request that fits no category, and a log the operations team can query.",
+      },
+      {
+        question: "Who should own the business logic of an AI workflow?",
+        answer:
+          "The team who runs the process, not the engineering team who built the system. The judgement rule should be configuration the operations team edits directly, so the workflow outlives the original build and no change requires an engineering cycle.",
+      },
+      {
+        question: "What is the difference between an AI proof of concept and an AI workflow in production?",
+        answer:
+          "A proof of concept runs once on clean input with a person watching. A production workflow runs continuously on unpredictable input, handles upstream failures gracefully, logs every decision, escalates the ambiguous cases, and is reversible when it is wrong. The gap between the two is the engineering that separates a demo from a system.",
+      },
+      {
+        question: "How is a custom AI workflow different from an off-the-shelf tool?",
+        answer:
+          "An off-the-shelf tool solves the general case with a general judgement rule. A custom workflow encodes the specific judgement rule the operations team actually uses, integrates with the systems they already run, and gives them the ownership and audit trail an outside tool cannot. It is the right choice when the process is load-bearing and the judgement is proprietary.",
+      },
+    ],
+  },
+  // ---------------- Article: AEO vs SEO vs GEO ----------------
+  {
+    slug: "aeo-vs-seo-vs-geo",
+    kind: "article",
+    title: "AEO vs SEO vs GEO: what actually differs, in plain English",
+    excerpt:
+      "SEO is being findable, AEO is being quotable, GEO is being cited by generative answers. All three matter, and none of them replaces the others. Here is what changes about how you write when the reader is a machine.",
+    topic:
+      "AEO vs SEO, GEO vs SEO, generative engine optimization, answer engine optimization, AI search optimization, how to rank on ChatGPT, how to rank on Perplexity, AI Overviews SEO, AEO checklist, GEO strategy, AI search visibility",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-09-02",
+    readingMinutes: 9,
+    diagram: "three-endpoints",
+    sections: [
+      {
+        heading: "The three practices, in one sentence each",
+        paragraphs: [
+          "SEO is the practice of writing and structuring content so a search engine ranks it in a list of results for the query a person typed. AEO, answer engine optimization, is the practice of writing that same content so an answer engine can lift a self-contained sentence out of it and quote it as the answer. GEO, generative engine optimization, is the practice of writing so a generative search surface (Google's AI Overviews, Perplexity, ChatGPT search) selects the page as a source and cites it inside a generated answer.",
+          "They are not the same problem. SEO fights for a click. AEO fights to be the quoted paragraph. GEO fights to be one of the three or four sources a language model actually pulls from when it composes an answer. A page can win one and lose the others, which is why teams that treat this as a single practice keep drifting away from the traffic that used to arrive.",
+        ],
+      },
+      {
+        heading: "What each practice actually asks of a page",
+        paragraphs: [
+          "SEO asks for the classic checklist: the query intent is answered, the page is technically sound, the topic is covered with real depth, and other sites link to it. Ranking is a function of relevance, authority, and structure, and the tie-breakers move around, but the shape has not changed in years.",
+          "AEO asks for one additional thing: the answer has to exist inside the page as a self-contained sentence a machine can lift without paraphrasing. FAQ blocks with clean question-and-answer pairs work because they hand the machine exactly the right shape. Long paragraphs that only imply an answer often get ignored, even when they rank well.",
+          "GEO asks for a third thing on top: the page has to be selected as a source by a language model composing an answer. Selection favours pages that are specific, verifiable, well-cited, and not obviously written to game the system. It also favours pages the model has already seen: coverage from other trusted sites, mentions in domain-specific corpora, presence in llms.txt-style manifests. This is closer to public-relations logic than to link-building.",
+        ],
+      },
+      {
+        heading: "The single-page checklist for all three",
+        paragraphs: [
+          "Most content teams do not want three separate content strategies; they want a single page that does the job of all three. That page has a specific shape.",
+        ],
+        list: [
+          "One question per page, answered in the first paragraph in a single self-contained sentence.",
+          "Structured FAQ block at the end, phrased as buyers actually type, with each answer a paragraph that stands alone.",
+          "Explicit definitions of the jargon on the page, written to be quoted (this is what a glossary is for).",
+          "Verifiable specifics: numbers with sources, direct quotes with attribution, dates on claims that decay.",
+          "FAQPage and Article JSON-LD schema on every post; BreadcrumbList so the hierarchy is machine-readable.",
+          "A canonical URL and a stable slug; do not move pages that already earn citations.",
+          "An llms.txt file at the root that inventories the site's canonical URLs for language-model crawlers.",
+          "Internal links that point from money pages to the source page, so authority flows to the pages you want cited.",
+        ],
+      },
+      {
+        heading: "What actually changed in the shift from SEO to GEO",
+        paragraphs: [
+          "The old game had one destination: a person clicking through to your page. The new game has two: a person clicking through, and a language model reading your page to compose an answer someone else reads. The traffic reads differently in both directions, and the second one does not always leave a footprint in analytics.",
+          "That is why brand mentions and citations in AI answers have started to matter as much as clicks. A citation in an answer engine is not a link visit; it is a distribution channel that puts your name in front of a buyer who never lands on your site. Measure both, or you will optimize away the second and not notice.",
+        ],
+      },
+      {
+        heading: "What Stallwart does for this",
+        paragraphs: [
+          "Every page on this site is engineered for all three. Articles carry FAQ blocks and Article schema; the glossary is written to be quoted; llms.txt is generated from the same data as the site so it never drifts; canonical URLs never move. The blog is a single namespace, not split across `/blog` and `/case-studies`, because splitting ranking signal across two identical namespaces is a self-inflicted GEO problem.",
+          "The point is not that this list is exhaustive. It is that the shift to generative answers is a shape change, not a tactic swap, and the pages built for it look different from pages built for ten blue links five years ago.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "SEO is being findable, AEO is being quotable, GEO is being cited by generative answers. They are three problems, not one.",
+      "A single page can serve all three if it leads with a self-contained answer, carries an FAQ block, uses FAQPage and Article schema, and cites verifiable specifics.",
+      "Citations in AI answer engines are a distribution channel that does not always show up as a click; measure them alongside traffic.",
+      "The canonical URL and a stable slug matter more in the GEO era, not less; moving cited pages is now a self-inflicted wound.",
+    ],
+    qa: [
+      {
+        question: "What is the difference between SEO, AEO, and GEO?",
+        answer:
+          "SEO ranks a page in a list of search results. AEO structures the page so an answer engine can lift a self-contained sentence and quote it as the answer. GEO makes the page one of the sources a generative search surface (AI Overviews, Perplexity, ChatGPT search) cites inside a generated answer. All three matter and a page can win one while losing the others.",
+      },
+      {
+        question: "What is Generative Engine Optimization (GEO)?",
+        answer:
+          "GEO is the practice of writing content so language-model-based search surfaces select it as a source when composing an answer. Selection favours pages that are specific, verifiable, well-cited, and already visible in the trusted corpora the model draws from.",
+      },
+      {
+        question: "How do you get cited by ChatGPT, Perplexity, or AI Overviews?",
+        answer:
+          "Publish content that is specific, verifiable, and structurally clean: one question per page, answered up front in a self-contained sentence, with an FAQ block, Article and FAQPage JSON-LD, stable canonical URLs, and coverage from other trusted sites. Generative engines lean on structure and authority, not clever phrasing.",
+      },
+      {
+        question: "Do FAQ schemas and llms.txt still matter for AI search?",
+        answer:
+          "Yes. FAQ blocks with FAQPage JSON-LD hand answer engines the exact shape they lift as a quoted answer, and llms.txt gives language-model crawlers a canonical inventory of the site. Neither is optional if the site is written to be quoted rather than only ranked.",
+      },
+      {
+        question: "Is SEO dead now that AI answers questions directly?",
+        answer:
+          "No, but its endpoint changed. SEO used to end at a click; it now also ends at being one of the sources a generative answer cites. Pages built only for the click miss the second endpoint, and that is where the visibility loss shows up.",
+      },
+    ],
+  },
+  // ---------------- Article: GEO checklist ----------------
+  {
+    slug: "geo-checklist-get-cited-by-ai-answers",
+    kind: "article",
+    title:
+      "GEO checklist: how to get your page cited by ChatGPT, Perplexity, and AI Overviews",
+    excerpt:
+      "A practical, page-level checklist for generative engine optimization. What to put on the page, in the head, in the schema, and in the site infrastructure so a language model picks it as a source when it composes an answer.",
+    topic:
+      "GEO checklist, generative engine optimization, get cited by AI, AI answer sources, how to rank on ChatGPT, Perplexity SEO, AI Overviews optimization, llms.txt, FAQPage schema, structured data for AI, LLM-friendly content, brand mentions in AI",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-09-01",
+    readingMinutes: 8,
+    diagram: "geo-checklist",
+    sections: [
+      {
+        heading: "What generative engines are actually picking",
+        paragraphs: [
+          "A generative answer engine composes its response from a small set of sources it selects out of the corpus it can reach. The selection is not a leaderboard; it is closer to a research assistant grabbing the two or three pages that best answer this specific question with the least ambiguity. That means the pages that win are not always the pages that rank first in classical search. They are the pages that are specific, verifiable, and structurally easy to quote.",
+          "Everything on the checklist below flows from that. If a page can hand a machine a clean, self-contained answer with a source attached, it is more useful to the answer engine than a longer, better-ranked page that only implies the answer inside three paragraphs of prose.",
+        ],
+      },
+      {
+        heading: "On-page: what the reader (and the model) sees",
+        paragraphs: [
+          "The body of the page carries most of the weight. These are the moves that reliably help.",
+        ],
+        list: [
+          "Lead with the answer. First paragraph contains a single self-contained sentence that answers the question the page is about.",
+          "One question per page. Do not bury three unrelated answers in one URL; each deserves its own home.",
+          "FAQ block at the end, phrased the way buyers type, with each answer a standalone paragraph.",
+          "Cite the specifics: numbers with sources, standards with the exact name, dates on claims that decay.",
+          "Define the jargon on the page instead of assuming the reader arrived with it.",
+          "Use clean headings that describe what each section actually answers.",
+          "Publish plain-language variants of anything technical, so a summary can quote them cleanly.",
+        ],
+      },
+      {
+        heading: "In the head: what the crawler sees",
+        paragraphs: [
+          "Structured data is the seatbelt for GEO. It does not decide whether you are picked, but its absence often decides whether you are not.",
+        ],
+        list: [
+          "Article and FAQPage JSON-LD on every post. Answer engines lift FAQPage answers verbatim.",
+          "BreadcrumbList so the hierarchy is machine-readable.",
+          "Organization schema on the site root, with a stable name and canonical URL.",
+          "Canonical URL on every page; never move a page that already earns citations.",
+          "Open Graph tags for accurate previews when the page is quoted in chat surfaces.",
+        ],
+      },
+      {
+        heading: "Site infrastructure: what the model's crawler expects",
+        paragraphs: [
+          "A well-run site makes it easier for a language model to include you. Two files do most of the work.",
+        ],
+        list: [
+          "A live sitemap.xml that lists every canonical URL, generated from the same data as the site so it never drifts.",
+          "An llms.txt at the root that inventories what the site is, what it offers, and the URLs of its canonical content.",
+          "A robots.txt that permits the crawlers you want to be cited by; blocking them silently is the most common own-goal.",
+          "Stable, semantic URLs. /blog/how-to-x beats /post?id=1287; do not change either once cited.",
+          "Internal links from money pages to the source page, so authority concentrates on the pages you want quoted.",
+        ],
+      },
+      {
+        heading: "Off-page: coverage the model already trusts",
+        paragraphs: [
+          "The GEO shift makes brand mentions and citations elsewhere disproportionately valuable, because language models were pre-trained on the trusted corpora those mentions live in. Get named on the sites and podcasts your target reader treats as authoritative, and the model will pick your page over similar ones without those references.",
+          "This does not replace on-page work. It is what compounds it. A specific, verifiable, well-structured page with three trusted mentions elsewhere gets cited far more often than an equivalent page nobody has heard of.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Lead every page with a single self-contained answer; buried answers do not get quoted.",
+      "FAQPage and Article JSON-LD are the seatbelts of GEO; their absence often decides you out.",
+      "sitemap.xml, llms.txt, and stable canonical URLs are the site-infrastructure moves that matter most.",
+      "Brand mentions on trusted sites compound the on-page work; a specific page with a few trusted references gets cited over an equivalent page without them.",
+    ],
+    qa: [
+      {
+        question: "How do you get cited by AI answer engines?",
+        answer:
+          "Lead with a self-contained answer, structure the page with FAQPage and Article schema, publish a sitemap and an llms.txt at the root, keep canonical URLs stable, and earn coverage from trusted sites in your space. Generative engines lean on specificity, verifiability, and structural cleanliness.",
+      },
+      {
+        question: "Does llms.txt actually matter?",
+        answer:
+          "It matters as a canonical inventory for language-model crawlers, the way sitemap.xml matters for search-engine crawlers. Absence rarely disqualifies a site, but presence makes it easier for models to reach the right URLs and reduces the noise around what your site is.",
+      },
+      {
+        question: "What schema should every article carry for AI search?",
+        answer:
+          "Article for the piece itself, FAQPage for any Q&A block, and BreadcrumbList for the hierarchy. Organization schema belongs on the site root. All should carry stable IDs and match what appears on the page.",
+      },
+      {
+        question: "How important are brand mentions for GEO?",
+        answer:
+          "Very. Language models leaned on trusted corpora during training and continue to weight them in retrieval, so a page from a site that gets mentioned by other trusted sources is disproportionately more likely to be cited. On-page structure gets you eligible; off-page mentions get you selected.",
+      },
+      {
+        question: "Do I need to write differently for AI answer engines?",
+        answer:
+          "Slightly. Lead every page with a self-contained answer, keep one question per URL, and cite specifics with sources. The rest of the writing rules do not change. What changes is that a machine is reading, and it is grading you on whether it could lift a clean sentence and stand behind the source.",
+      },
+    ],
+  },
+  // ---------------- Article: AI SEO in 2026 ----------------
+  {
+    slug: "ai-seo-what-changed-in-2026",
+    kind: "article",
+    title: "AI SEO in 2026: what changed, what still works, and what to stop doing",
+    excerpt:
+      "Generative search did not kill SEO; it changed the endpoint. Traffic that used to land as a click now sometimes lands as a mention in a generated answer. Here is what to keep doing, what to add, and what to stop.",
+    topic:
+      "AI SEO, AI SEO 2026, SEO for AI search, ChatGPT SEO, Perplexity SEO, AI Overviews SEO, generative search optimization, AI content strategy, LLM SEO, AI visibility, AEO, GEO, SEO changes 2026",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-08-31",
+    readingMinutes: 8,
+    diagram: "two-endpoints",
+    sections: [
+      {
+        heading: "The endpoint changed, not the game",
+        paragraphs: [
+          "For a long time SEO had one endpoint: a person clicked through to your page. Generative search added a second one. Some queries never leave the answer surface at all; the reader gets a composed response and moves on, and if your page was one of the sources, your brand was in front of them without a click ever landing. Traffic did not stop; it split into a channel you measure and a channel you do not.",
+          "That is the whole shift, and everything worth doing in AI SEO flows from it. The pages that work now are the ones that earn a click when the reader wants to go deep and earn a mention when the reader just wants a fast answer. They are different jobs on the same page, and most sites are still doing one and not the other.",
+        ],
+      },
+      {
+        heading: "What still works",
+        paragraphs: [
+          "The fundamentals did not move. High-intent queries still convert best. Deep, specific pages still beat broad, thin ones. Authoritative external coverage still compounds everything. Technically sound sites still rank; broken ones still do not. Anyone selling you a total reset for the AI era is charging for a rewrite you probably did not need.",
+        ],
+        list: [
+          "Answering the query the reader actually typed, not the topic the SEO tool suggested.",
+          "Original writing with a point of view. Rehashed listicles were losing ground already; AI accelerated it.",
+          "Internal links that concentrate authority on the pages you want to be found for.",
+          "Fast, accessible, mobile-first pages. Core Web Vitals still rank; they just no longer decide.",
+          "Coverage from trusted sites in the same space. Backlinks matter, brand mentions matter more.",
+        ],
+      },
+      {
+        heading: "What to add",
+        paragraphs: [
+          "The new work is not another SEO gimmick. It is engineering the page so a machine can quote it and citing sources cleanly enough that the machine trusts it. The specifics come out of the AEO and GEO playbooks: lead with a self-contained answer, publish an FAQ block with FAQPage schema, cite numbers and standards by name, keep canonical URLs stable.",
+        ],
+        list: [
+          "Lead every page with a single self-contained answer to the question the page is about.",
+          "FAQPage and Article JSON-LD schema on every post.",
+          "An llms.txt at the root, inventoried from the same data as the site so it never drifts.",
+          "Plain-language variants of anything technical, so a summary can quote them cleanly.",
+          "Measurement that captures citations and mentions in AI answers, not only clicks.",
+        ],
+      },
+      {
+        heading: "What to stop",
+        paragraphs: [
+          "Some habits that used to be neutral or mildly helpful are now actively damaging in a world where a language model is reading and composing.",
+        ],
+        list: [
+          "Publishing thin content on adjacent long-tail keywords. Language models collapse them into one answer and the padding stops helping.",
+          "Splitting the same content across parallel URL namespaces (`/blog/x` and `/insights/x`). Ranking signal splits; citations become inconsistent.",
+          "Moving cited URLs to freshen them. A moved URL is a broken citation somewhere else.",
+          "Aggressive keyword stuffing. Answer engines read for meaning, and they punish pages that read as spam even when older ranking models ignored it.",
+          "Blocking AI crawlers by default in robots.txt. That is a decision to opt out of the second endpoint; make it deliberately, not by copy-paste.",
+        ],
+      },
+      {
+        heading: "How to measure the new endpoint",
+        paragraphs: [
+          "The traffic that never becomes a click is real but harder to see. A workable stack: a light branded-search monitor to see if your name is trending in the wake of a topic, a periodic manual check across the major answer engines for the queries you sell against, and a review of referral traffic from AI surfaces where they do send clicks. None of it is a perfect metric. All of it is better than measuring only what analytics has always shown.",
+          "The point is not to obsess about attribution. The point is to notice, early, when you are being cited more or less often, and to have some idea why. That signal changes what you write next, which is the whole loop.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Generative search added a second endpoint: a mention inside a composed answer. Traffic split; it did not stop.",
+      "Fundamentals still hold: high-intent queries, deep pages, authoritative coverage, technically sound sites.",
+      "Add: self-contained answers up front, FAQPage and Article schema, an llms.txt at the root, measurement that captures citations.",
+      "Stop: thin adjacent-keyword pages, split URL namespaces, moving cited URLs, keyword stuffing, and blocking AI crawlers by copy-paste.",
+    ],
+    qa: [
+      {
+        question: "Did AI kill SEO?",
+        answer:
+          "No. It added a second endpoint. Traffic that used to always end at a click now sometimes ends at a citation in a generated answer. Pages built for both endpoints do fine; pages built only for the click miss the second half.",
+      },
+      {
+        question: "What still works in SEO in 2026?",
+        answer:
+          "The fundamentals: answering the query the reader actually typed, deep and specific pages, coverage from trusted sites, sound technical hygiene, and internal links that concentrate authority. None of that moved with the shift to AI search.",
+      },
+      {
+        question: "What should I stop doing for SEO in the AI era?",
+        answer:
+          "Stop publishing thin adjacent-keyword pages, splitting content across parallel URL namespaces, moving cited URLs to freshen them, keyword stuffing, and blocking AI crawlers by default. Each of those actively hurts a site whose second endpoint is a language model composing an answer.",
+      },
+      {
+        question: "How do you measure AI SEO visibility?",
+        answer:
+          "Combine a branded-search monitor, periodic manual queries across the major answer engines for the questions you sell against, and referral analytics from AI surfaces that do send clicks. None of these is perfect; together they show whether citations and mentions are growing over time.",
+      },
+      {
+        question: "Should I block AI crawlers in robots.txt?",
+        answer:
+          "Only as a deliberate choice, not by default. Blocking AI crawlers is a decision to opt out of the second endpoint (citation inside a generated answer), which for most B2B sites is a visibility loss they did not intend.",
+      },
+    ],
+  },
+  // ---------------- Case study: passed first AI governance audit ----------------
+  {
+    slug: "passed-first-ai-governance-audit",
+    kind: "case-study",
+    title:
+      "How a SaaS platform passed its first AI-in-scope audit without a scramble",
+    excerpt:
+      "The AI features were finally in scope for SOC 2 and the enterprise procurement questionnaire kept getting longer. Here is what changed when the evidence became a byproduct of the systems running, not a document assembled the week before.",
+    topic:
+      "AI governance audit, SOC 2 with AI, AI in SOC 2 scope, ISO 42001 audit, EU AI Act compliance, AI audit readiness, AI compliance for SaaS, enterprise AI procurement, AI governance framework, AI risk assessment, AI vendor questionnaire, AI compliance evidence",
+    offering: "sillage",
+    industry: "Enterprise SaaS",
+    persona:
+      "Head of security, head of compliance, or engineering lead at a SaaS company shipping AI features",
+    publishedAt: "2026-08-26",
+    readingMinutes: 8,
+    diagram: "governance-layers",
+    sections: [
+      {
+        heading: "Where the work was breaking",
+        paragraphs: [
+          "The security team had passed SOC 2 twice on the same playbook: a spreadsheet inventory, a folder of policies, and a two-week scramble with screenshots before each audit window. The renewal year was different. Two AI features had shipped, the auditor had signalled they were in scope, an enterprise customer had sent a forty-question AI-specific questionnaire, and the board had asked whether the company was ready for ISO/IEC 42001 next year. The playbook that had worked twice was about to stop working.",
+          "The specific gap was evidence. The team could describe what the AI features did, in general, in a policy document. They could not, on demand, tell an auditor what a specific model version had been running on a specific date, what data it had seen, what decisions it had influenced, who had approved the change, or what stopped it from doing something it should not. The absence of that evidence, not the presence of AI, was the finding waiting to happen.",
+          "That is the specific bind teams end up in. Governance done at the policy layer alone reads as governance to an auditor who has not seen much AI, and reads as theatre to an auditor who has. Once AI is in scope, the auditor is going to ask for the evidence trail, and the only defensible answer is one that already exists.",
+        ],
+      },
+      {
+        heading: "What the system does instead",
+        paragraphs: [
+          "Sillage was pointed at the two AI features and stood up the governance layer as a byproduct of running them, not a project alongside them. A live inventory of every model in use updates as systems ship, so there is no gap between what the team believes is running and what is actually running. Each system carries a plain-language written basis for how it decides and what it is not permitted to decide, kept current in the same repo as the code.",
+          "Every high-stakes decision routes to a human by design rather than by luck. Runtime controls enforce policy at the moment of the decision, so a violation is prevented rather than caught after. Inputs, outputs, approvals, and overrides are logged continuously, retained, and queryable. Any automated action is reversible, and every system and every control has a named owner.",
+          "The auditor's questions become queries against evidence that already exists. What version was running on this date. What was the accuracy on the evaluation set that quarter. Which decisions were human-reviewed and which were fully automated. How was override used and by whom. The answers are produced in minutes because the record is a byproduct of the system, not a document reconstructed after the request.",
+        ],
+      },
+      {
+        heading: "Why this survives the questionnaire too",
+        paragraphs: [
+          "The enterprise procurement questionnaire and the auditor are asking for the same underlying thing in different vocabularies: an evidence trail that already exists, per system, in a form that can be produced on demand. When the governance layer is real, the same evidence answers both audiences, and the same answers hold up when the next auditor arrives with a slightly different vocabulary (ISO/IEC 42001 today, the EU AI Act's higher-risk obligations tomorrow).",
+          "That is the whole return on investment on getting governance into the system layer rather than the policy layer. A control that produces evidence as a byproduct is answered once and holds for years. A control that lives in a policy document has to be re-evidenced every audit cycle, and the effort scales linearly with the number of AI features shipped.",
+        ],
+      },
+      {
+        heading: "What changed for the team",
+        paragraphs: [
+          "The audit was answered from the log, not from a screenshot inbox. The enterprise questionnaire that used to consume a security engineer for a week was answered in hours because most of the questions were already covered by evidence the system was generating anyway. Legal stopped drafting bespoke language per customer because the same governance narrative now covered the same questions across customers.",
+          "The board question about ISO/IEC 42001 stopped being a project to start and became a scope conversation about what to certify against. Nothing new had to be built; the underlying evidence was already the shape that certification asks for. That is the outcome of putting governance in the system layer rather than the policy layer, and it is the specific reason Sillage exists.",
+        ],
+      },
+    ],
+    outcomes: [
+      "The audit answered itself. Model inventory, decision basis, approvals, and overrides were produced from the log in minutes rather than reconstructed from screenshots and memory across two weeks.",
+      "The enterprise AI questionnaire stopped consuming a week per customer. The same evidence trail answered SOC 2, procurement, and forward-looking ISO/IEC 42001 and EU AI Act questions from one source.",
+      "Governance stopped being a policy layer and became a system layer. Runtime controls prevent violations at the moment of the decision, not after, and every automated action is reversible.",
+    ],
+    metrics: [],
+    qa: [
+      {
+        question: "How do you prepare for an AI-in-scope SOC 2 audit?",
+        answer:
+          "By making the evidence trail a byproduct of the AI systems running, not a document assembled the week of the audit. A live model inventory, a written basis for how each system decides, human oversight for high-stakes decisions, runtime policy enforcement, continuous logging of inputs, outputs, approvals, and overrides, and rollback for every automated action are what an experienced auditor asks for once AI is in scope.",
+      },
+      {
+        question: "What does ISO/IEC 42001 require for an AI management system?",
+        answer:
+          "A governed, repeatable way of deciding what AI you deploy, how you assess its risks, who is accountable, and how you review it over time. It rewards evidence that already exists rather than a memo written before the review, which is the same underlying requirement as the AI-in-scope portions of SOC 2 and the higher-risk provisions of the EU AI Act.",
+      },
+      {
+        question: "How should we answer enterprise AI vendor questionnaires?",
+        answer:
+          "From the same evidence trail the auditor asks for, not from bespoke narrative language written per customer. Once the governance layer generates evidence as a byproduct of the AI systems running, the answers to the procurement questionnaire come out of the same source in a fraction of the time, and stay consistent across customers.",
+      },
+      {
+        question: "Does AI governance need to be a project or can it be a byproduct?",
+        answer:
+          "A byproduct is the only kind that survives an audit. Governance assembled the week of a review is a snapshot, not a control, and an experienced auditor can tell the difference. The evidence trail has to be generated continuously by the systems in production so it already exists when a regulator, customer, or board asks.",
+      },
+      {
+        question: "How much AI compliance work is needed before the EU AI Act applies?",
+        answer:
+          "That depends on the use case, because the EU AI Act is risk-tiered. Limited and minimal-risk uses carry light transparency duties; higher-risk uses require documentation, risk management, human oversight, logging, and traceability. The practical move is to classify each AI use early and map it to the obligations that tier actually triggers, so the compliance work is scoped to what applies.",
+      },
+    ],
+  },
 ];
 
 // Reading time is computed from the actual body, not hand-typed, so it stays
