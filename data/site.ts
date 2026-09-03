@@ -90,7 +90,8 @@ export const site = {
       "Reliable, honest, and scalable. In that order, and without exception.",
     // Competence anchor. Kept factual and modest; expand only with verifiable
     // detail the founder approves.
-    credential: `A software engineer with roughly ${founderYearsWord} years building production systems, and building with AI since well before it was the default.`,
+    credential:
+      "A software engineer with 5 years building production systems, and building with AI since well before it was the default.",
   },
 
   /**

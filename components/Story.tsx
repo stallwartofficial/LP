@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { site, founderYearsWord } from "@/data/site";
+import Link from "next/link";
+import { site } from "@/data/site";
 
 // The company's story, as two fixed columns.
 //
@@ -25,57 +26,96 @@ export function Story() {
           </div>
 
           <h1 className="font-display mt-5 text-display-lg font-light">
-            Reliable, honest, scalable.
+            He couldn&apos;t buy the standard.
             <br />
-            <span className="text-gold-sheen italic">In that order.</span>
+            <span className="text-gold-sheen italic">So he built it.</span>
           </h1>
 
           <p className="mt-5 text-[length:var(--text-step-1)] text-[var(--fg)]/75">
-            {site.positioning}
+            The industry sells the demo. Someone has to answer for the rest.
+            This is that answer.
           </p>
         </div>
 
         {/* --- Prose: last on mobile, bottom-left on desktop. --- */}
         <div className="order-3 space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85 lg:col-start-1 lg:row-start-2">
             <p className="[&::first-letter]:font-display [&::first-letter]:mr-2 [&::first-letter]:float-left [&::first-letter]:text-[3.75rem] [&::first-letter]:font-light [&::first-letter]:leading-[0.82] [&::first-letter]:text-[var(--accent-text)]">
-              {site.founder.name} builds quietly, and then he stands behind what
-              he built. {founderYearsWord.charAt(0).toUpperCase() +
-                founderYearsWord.slice(1)}{" "}
-              years into putting AI into production systems, he has made peace
-              with the unglamorous truth of the work: the demo is the easy part.
-              What matters is the eighty percent nobody applauds, the part that
-              has to be correct at 2am, when the person who wrote it is asleep.
+              {site.founder.fullName} does not talk much on video calls. He
+              listens, takes his notes, and ships. Five years in, the pattern
+              is a career.
             </p>
 
             <p>
-              He was building with AI before the market took it seriously, when
-              most treated it as an experimental layer rather than
-              infrastructure. His background is in SaaS, where downtime, drift, or
-              an unaccountable model is not an inconvenience but a customer
-              relationship at risk. One platform he built in those years is still
-              in production today, quietly organizing the documentation of teams
-              who will never meet him. It did not ship fast. It shipped correct,
-              and it stayed correct, long after the people who built it moved on.
+              He built like two people at once. A designer with an eye for
+              form. A security engineer with the assumption that everything
+              breaks. He started shipping at a small startup, where he moved
+              an app from tenth to second in its store ranking in a week and
+              lifted downloads ten percent on the way. Then a role at scale,
+              inside the kind of engineering organization whose internal
+              tools decide whether thousands of people can do their jobs.
+              Then a studio, where he led a frontend team and set the
+              quality bar for every ticket that left the door. Then a
+              stretch inside a product used across Fortune 500 companies, on
+              the load-bearing parts most engineers would rather skip.
             </p>
 
             <p>
-              {site.company} is the standard he wanted and could not buy. The AI
-              industry, he will tell you plainly, has a confidence problem, not a
-              capability problem: systems get sold on how convincingly they
-              perform in a controlled demo, and the gap between that and
-              real-world reliability becomes the customer&apos;s problem the
-              moment the invoice clears. He built {site.company} to close that
-              gap, engineering AI systems that report their own uncertainty
-              instead of asserting through it, and that are built to be audited,
-              not just believed.
+              He was integrating AI into the load-bearing parts of a live
+              product while the industry was still arguing about what AI
+              even was. Not the visible layer. Infrastructure. Migrations that ran themselves. Quiet
+              automations that shipped, held, and never asked for attention.
+              Somewhere in there, the thesis formed: the AI industry has a
+              confidence problem, not a capability problem. Software gets
+              sold on how well it performs in a controlled demo, and the gap
+              between that and real life becomes the customer&apos;s problem
+              the moment the invoice clears. He watched enough teams inherit
+              that gap to stop waiting for someone else to fix it.
+            </p>
+
+            {/* Pull quote — lifted from the aside signature so the sharpest
+                line on the page sits inside the story flow. */}
+            <blockquote className="my-8 border-l-2 border-[var(--accent)] pl-6 font-display text-[length:var(--text-step-2)] font-light italic leading-snug text-[var(--fg)]">
+              &ldquo;I build to one standard: reliable, honest, scalable, in
+              that order. If a system needs me to keep it running, I have
+              not finished it.&rdquo;
+            </blockquote>
+
+            <p>
+              So he built it. The dream he had carried since college became
+              the job. {site.company} is what he wanted to be able to hire.
+              Systems that report what they do not know. That keep a record
+              of what they did. That hold under weight, not because anyone
+              is watching, but because they were built to. He grew up
+              watching Ratan Tata build with patience and without theatre,
+              and {site.company} is being built in that lineage: small by
+              design, careful, one honest ship at a time.
             </p>
 
             <p>
-              The result is a standard, not a slogan: systems reliable enough to
-              run without supervision, honest enough to earn trust rather than
-              claim it, and engineered from first principles so they hold at
-              scale, not just in the room where they were pitched.
+              Building {site.company} feels the same. Start from what
+              would go wrong, not from what would look good. Ship the
+              smallest honest version and put it in front of real use. Hand
+              the team the keys, not a dependency. When {site.company}{" "}
+              leaves, nothing goes with it. The first eleven engagements
+              span regulated industries, professional services, creative
+              practices, and B2B software. Zero unsatisfied customers, to
+              date. That is the whole point.
             </p>
+
+            <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:items-baseline sm:gap-8">
+              <Link
+                href="/offer"
+                className="link-draw text-[length:var(--text-step-1)] font-medium text-[var(--accent-text)]"
+              >
+                See what he builds →
+              </Link>
+              <Link
+                href="/principles"
+                className="link-draw text-[length:var(--text-step-0)] font-medium text-[var(--fg)]/80"
+              >
+                See how he builds →
+              </Link>
+            </div>
           </div>
 
         {/* --- Portrait: second on mobile, sticky right column on desktop. --- */}
@@ -128,13 +168,9 @@ export function Story() {
               </figcaption>
             </figure>
 
-            {/* A first-person line, directly below the photo, that pairs with
-                the signature: the founder speaking in his own voice. */}
-            <blockquote className="mt-5 border-t border-[var(--hairline)] pt-5 font-display text-[length:var(--text-step-1)] font-light italic leading-snug text-[var(--fg)]/85">
-              &ldquo;I build to one standard: reliable, honest, scalable, in that
-              order. If a system needs me to keep it running, I have not finished
-              it.&rdquo;
-            </blockquote>
+            {/* The signed quote used to live here too; it now sits inside
+                the article body as a pull quote, so this slot is intentionally
+                left to the signature above and the LinkedIn touch below. */}
 
             {/* A warm, verifiable touch: reach the founder personally. */}
             <a
