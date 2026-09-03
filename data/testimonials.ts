@@ -113,7 +113,7 @@ export const testimonials: Testimonial[] = [
     company: "Medfins International LLP",
     highlight: "Nobody made it about them",
     quote:
-      "I've paid a lot of people to sound smart on calls with me. Stallwart just asked questions. Real ones. The kind I'd been quietly avoiding. And then they sat there while I worked through them. Nothing about them, no next deck, no next call. I got off that call and knew what to do. That was the whole thing.",
+      "I've paid a lot of people to sound smart on calls with me. Stallwart just asked questions. Real ones, the kind I'd been quietly avoiding, and then they sat there while I worked through them. No pitch, no next deck. I got off the call and knew what to do.",
     group: "thinking",
   },
   // ---- Brand voice, closer ----

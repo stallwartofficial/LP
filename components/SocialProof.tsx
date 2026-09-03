@@ -14,18 +14,21 @@ const ROW_TWO: Testimonial[] = testimonials.slice(6);
 // Mobile order (single swipe row) is curated separately from the desktop
 // marquee: Ken opens (US CEO / ownership), then Pradeep (range + AI), then
 // Jeevitha (brand voice), then the rest by impact.
+// Ken opens (US CEO, ownership). Arunkumar sits mid-list so a swipe never
+// dead-ends on his quiet closer. Jeevitha closes because her line is punchy
+// and clearly reads as a finale.
 const MOBILE_ORDER = [
   "Ken Morford",
   "Pradeep",
-  "Jeevitha",
   "Sukanthen",
+  "Arunkumar",
   "Rashmi",
   "Dharshan",
   "Kaviarasu",
   "Ambrose Dass",
   "Aditya",
   "Uma",
-  "Arunkumar",
+  "Jeevitha",
 ];
 const byName = new Map(testimonials.map((t) => [t.name, t]));
 const MOBILE_ROW: Testimonial[] = MOBILE_ORDER
