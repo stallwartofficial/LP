@@ -28,9 +28,24 @@ export function StoryTeaser() {
     >
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 lg:grid-cols-[17rem_minmax(0,34rem)] lg:items-center lg:justify-center lg:gap-14">
-          {/* Mobile order: eyebrow -> photo -> quote+prose. Desktop: photo
-              spans both rows in col 1; eyebrow sits above the text in col 2. */}
-          <p className="eyebrow lg:col-start-2 lg:row-start-1">The origin</p>
+          {/* Mobile order: eyebrow -> quote -> photo -> prose. Desktop: photo
+              spans both rows in col 1; eyebrow + quote sit above the prose in
+              col 2. The quote is the section's headline (id target), so it
+              lives directly under the eyebrow. */}
+          <div className="lg:col-start-2 lg:row-start-1">
+            <p className="eyebrow">The origin</p>
+            <blockquote
+              id="story-teaser-heading"
+              className="font-display mt-4 text-display-sm font-light"
+            >
+              <span aria-hidden="true" className="mr-1 text-[var(--accent)]/50">
+                &ldquo;
+              </span>
+              The AI industry has a{" "}
+              <span className="text-gold-sheen italic">confidence</span> problem,
+              not a capability problem.
+            </blockquote>
+          </div>
 
           {/* ---------------- The taped photograph ---------------- */}
           <div className="pinboard rounded-2xl border border-[var(--hairline)] p-8 sm:p-10 lg:col-start-1 lg:row-span-2 lg:row-start-1">
@@ -62,19 +77,7 @@ export function StoryTeaser() {
 
           {/* ---------------- The origin, in his words ---------------- */}
           <div className="lg:col-start-2 lg:row-start-2">
-            <blockquote
-              id="story-teaser-heading"
-              className="font-display mt-4 text-display-sm font-light"
-            >
-              <span aria-hidden="true" className="mr-1 text-[var(--accent)]/50">
-                &ldquo;
-              </span>
-              The AI industry has a{" "}
-              <span className="text-gold-sheen italic">confidence</span> problem,
-              not a capability problem.
-            </blockquote>
-
-            <p className="mt-8 text-[var(--fg)]/75">
+            <p className="text-[var(--fg)]/75">
               {site.founder.name} founded {site.company} on a direct
               observation: systems get sold on how convincingly they perform in
               a controlled demo, and the gap between that and real-world
