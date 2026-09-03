@@ -84,7 +84,7 @@ function Row({
   // Content doubled for a seamless -50% loop.
   const doubled = [...items, ...items];
   return (
-    <div className="[overflow-x:clip] py-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+    <div className="marquee-host [overflow-x:clip] py-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
       <div
         // w-max: the flex row's box must match its content width, not the
         // clipped parent's width. Without it, the `-50%` in the marquee
@@ -164,8 +164,8 @@ export function SocialProof() {
             (~185 px/s). ROW_ONE has 6 cards, ROW_TWO has 5, so equal
             durations would make row 1 look faster; the ratio matches
             their content widths. */}
-        <Row items={ROW_ONE} duration={26} />
-        <Row items={ROW_TWO} reverse duration={22} />
+        <Row items={ROW_ONE} duration={36} />
+        <Row items={ROW_TWO} reverse duration={30} />
       </div>
 
       {/* Accessible fallback: real content, not the visual duplicates. */}

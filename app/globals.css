@@ -406,7 +406,8 @@ p {
 
 /* Pause the marquee on hover so a reader can actually read it. */
 .marquee-host:hover .animate-marquee,
-.marquee-host:hover .animate-marquee-slow {
+.marquee-host:hover .animate-marquee-slow,
+.marquee-host:hover .animate-marquee-right {
   animation-play-state: paused;
 }
 
