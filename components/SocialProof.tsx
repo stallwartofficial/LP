@@ -86,7 +86,12 @@ function Row({
   return (
     <div className="[overflow-x:clip] py-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
       <div
-        className={`${reverse ? "animate-marquee-right" : "animate-marquee"} flex shrink-0 items-stretch`}
+        // w-max: the flex row's box must match its content width, not the
+        // clipped parent's width. Without it, the `-50%` in the marquee
+        // keyframe is computed against the viewport (~1120px) instead of
+        // the doubled-row width (~4900px), and the animation wraps after
+        // only ~560px — exactly the "restart mid-flow" glitch.
+        className={`${reverse ? "animate-marquee-right" : "animate-marquee"} flex w-max shrink-0 items-stretch`}
         style={{ animationDuration: `${duration}s` }}
         aria-hidden="true"
       >
