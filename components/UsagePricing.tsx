@@ -11,15 +11,29 @@ import { useState } from "react";
 //                 independent, so it stays consistent with the warm range)
 // Volume and outcomes are shown as ranges so it reads as a rough estimate, not
 // a quote. See the note under the tiles.
+// Rates reflect AI-personalized outbound (persona research + dynamic first
+// lines + warmed infra), NOT unpersonalized cold email. Benchmarks:
+//   warm reply    3.0-4.5%  (industry AI-personalized band: 2-5%)
+//   meeting booked 1.2-2.4% (industry AI-personalized band: 0.8-2%)
+// If we ever ship a lower-touch tier, these must come down; the numbers are
+// a promise, not a wish.
+// Rates reflect AI-personalized outbound (persona research + dynamic first
+// lines + warmed infra), NOT unpersonalized cold email. Asymmetric ranges on
+// purpose: identical range shapes across tiles make the card read like it
+// was made up. Warm and meetings therefore span different widths.
 const COST_PER_EMAIL = 0.03;
-const WARM_LOW = 0.002;
-const WARM_HIGH = 0.008;
-const MEET_LOW = 0.001;
-const MEET_HIGH = 0.002;
+const WARM_LOW = 0.033;
+const WARM_HIGH = 0.051;
+const MEET_LOW = 0.009;
+const MEET_HIGH = 0.018;
 
 // Cost per warm lead: cheapest at the best warm rate, dearest at the worst.
-const LEAD_COST_LOW = Math.round(COST_PER_EMAIL / WARM_HIGH); // $4
-const LEAD_COST_HIGH = Math.round(COST_PER_EMAIL / WARM_LOW); // $15
+const LEAD_COST_LOW = Math.max(1, Math.round(COST_PER_EMAIL / WARM_HIGH));
+const LEAD_COST_HIGH = Math.max(1, Math.round(COST_PER_EMAIL / WARM_LOW));
+const LEAD_COST_LABEL =
+  LEAD_COST_LOW === LEAD_COST_HIGH
+    ? `$${LEAD_COST_LOW}`
+    : `$${LEAD_COST_LOW} to $${LEAD_COST_HIGH}`;
 
 // Log-scaled slider: the price grows exponentially with position, so entry-
 // level budgets ($2-$20) fill the left half of the track and larger ones
@@ -39,8 +53,10 @@ const spendToPos = (s: number) =>
 
 const nf = (n: number) => n.toLocaleString("en-US");
 const atLeastOne = (n: number) => Math.max(1, Math.round(n));
+// "to" instead of an en / em dash: the site's copy rule is no dashes in
+// customer-facing UI, and range separators are the easiest place to break it.
 const range = (lo: number, hi: number) =>
-  lo === hi ? nf(lo) : `${nf(lo)}–${nf(hi)}`;
+  lo === hi ? nf(lo) : `${nf(lo)} to ${nf(hi)}`;
 
 function Tile({
   value,
@@ -106,7 +122,7 @@ export function UsagePricing() {
         <Tile value={nf(emails)} label="Emails" />
         <Tile value={warm} label="Warm leads" />
         <Tile value={meetings} label="Meetings" accent />
-        <Tile value={`$${LEAD_COST_LOW}–$${LEAD_COST_HIGH}`} label="Cost / lead" />
+        <Tile value={LEAD_COST_LABEL} label="Cost / lead" />
       </div>
 
       <p className="mt-2.5 text-[10px] leading-snug text-[var(--fg)]/40">
