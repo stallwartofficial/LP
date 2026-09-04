@@ -52,7 +52,7 @@ export function StoryTeaser() {
             <figure className="photo-taped bg-[var(--bg-raised)] p-3">
               <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
                 <Image
-                  src="/images/founder-v2.jpg"
+                  src="/images/arun-saravanan-founder-stallwart.jpg"
                   alt={`${site.founder.fullName}, ${site.founder.role} of ${site.company}`}
                   fill
                   sizes="(min-width: 1024px) 18rem, (min-width: 640px) 60vw, 90vw"

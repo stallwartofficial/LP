@@ -83,12 +83,12 @@ export function Contact() {
 
         {/* ---- Detail: below the form on mobile, bottom-left on desktop. ---- */}
         <div className="order-3 lg:col-start-1 lg:row-start-2">
-          <p className="eyebrow">What to expect from the demo</p>
+          <p className="eyebrow">What to expect</p>
           <ul className="mt-5 space-y-4">
             {[
-              "A live walkthrough of the platform, including automated setup and management.",
-              "Personalized, affordable pricing based on your team size and needs.",
-              "A real conversation about your workflow, not a scripted product tour.",
+              "One reply from a real person, not a drip sequence.",
+              "A conversation about the actual problem, not a canned pitch.",
+              "A scoped, honest recommendation, including if off-the-shelf already solves it.",
               "Someone who can answer technical questions on the spot, not route them.",
             ].map((point) => (
               <li key={point} className="flex gap-3">

@@ -152,13 +152,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const offering = getOffering(slug);
   if (!offering) return {};
+  // SEO title/description target the searched category (seoTitle/seoDescription);
+  // the visible H1 on the page stays offering.name. Fall back to name/summary
+  // for any offering that has not set the SEO fields.
+  const metaTitle = offering.seoTitle ?? offering.name;
+  const metaDescription = offering.seoDescription ?? offering.summary;
   return {
-    title: offering.name,
-    description: offering.summary,
+    title: metaTitle,
+    description: metaDescription,
     alternates: { canonical: `/offer/${offering.slug}` },
     openGraph: {
-      title: `${offering.name}, by ${site.company}`,
-      description: offering.summary,
+      title: `${metaTitle} | ${site.company}`,
+      description: metaDescription,
     },
   };
 }

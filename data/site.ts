@@ -191,6 +191,17 @@ export const site = {
     email: "", // TODO(owner): set the confirmed official inbox; email UI stays hidden while this is empty
     address: "Address on file, contact us for details", // placeholder
   },
+  /**
+   * Where the company is based and who it serves. Country + region only, no
+   * street: NDA-safe and privacy-preserving. Feeds Organization schema's
+   * `address` (PostalAddress) and `areaServed`. This describes the company,
+   * not any one offering.
+   */
+  location: {
+    country: "India",
+    region: "Tamil Nadu",
+    areaServed: ["United States", "United Kingdom", "India", "Worldwide"],
+  },
   cta: {
     primary: "Book a call",
   },

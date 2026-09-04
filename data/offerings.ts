@@ -31,6 +31,13 @@ export type Offering = {
   tagline: string;
   /** Short paragraph for the portfolio card. */
   summary: string;
+  /** SEO <title> for the detail page (the visible H1 stays `name`). Targets the
+   *  searched category, not the internal product name. The `%s | Stallwart`
+   *  template appends the brand, so this omits it. */
+  seoTitle?: string;
+  /** SEO meta description for the detail page. Kept under ~160 chars so Google
+   *  does not truncate it. */
+  seoDescription?: string;
   /** Longer positioning for the detail page. */
   description: string;
   /** The problem this offering exists to remove. Sharpens the pitch. */
@@ -109,6 +116,9 @@ export const offerings: Offering[] = [
       "Stop adapting your business to software. Build the system around it.",
     summary:
       "For problems no product solves. Whatever the system is, a SaaS platform, a product, or an internal tool, we build it with AI to the standard the best teams hold, and hand over code you own outright.",
+    seoTitle: "Custom AI Development & Software Engineering",
+    seoDescription:
+      "Custom AI development for problems no product solves. Production-grade SaaS, products, and internal tools, then we hand over code you own outright.",
     description:
       "Custom software and intelligent AI systems, engineered around how your business actually works, and built for what comes next. We design and build custom software, AI systems, and intelligent infrastructure for businesses that have outgrown generic solutions. From SaaS platforms and customer-facing products to AI agents, automation, and internal systems, we turn complex workflows and ambitious ideas into technology that works in the real world. Built from first principles. Engineered to scale. Designed around your data, workflows, and goals.",
     problem:
@@ -272,9 +282,12 @@ export const offerings: Offering[] = [
         "The end goal is always real conversations and real opportunities.",
       ],
     },
-    tagline: "The AI GTM engine that runs outbound end to end",
+    tagline: "The AI SDR and GTM engine that runs outbound end to end",
     summary:
       "Give it a company and a website. It researches the account, finds the angle, builds the target list, writes and sends the outreach in your voice, follows up, scores the replies, and books the meeting. Outbound that runs from first contact to a calendar invite without a rep driving each step.",
+    seoTitle: "Extrovert AI: AI SDR & Outbound GTM Engine",
+    seoDescription:
+      "AI SDR and outbound automation that books meetings from $10/mo. Extrovert AI researches accounts, writes in your voice, follows up, and books qualified meetings.",
     description:
       "Outbound is not one job. It is research, targeting, writing, sending, chasing, reading replies, and scheduling, and most teams run that chain by hand across a stack of disconnected tools. Extrovert AI is a single system that runs the whole motion. You give it a target company and its website. It researches the business and its market, decides who is worth contacting and the specific reason to reach out, drafts the outreach grounded in that research and in your team's voice, sends it, follows up on the cadence each account deserves, scores the responses on real intent, and books the meeting straight onto your calendar. Your reps step in for the conversation, not the busywork. It can run fully autonomously or hold every message for approval, and you move between the two as you build trust in it.",
     problem:
@@ -416,6 +429,9 @@ export const offerings: Offering[] = [
     tagline: "The AI governance platform for teams who will be audited",
     summary:
       "A governance function for organizations putting AI into real decisions. Inventory what is running, document how it decides, and hold evidence ready before anyone asks for it.",
+    seoTitle: "Sillage: AI Governance & Compliance Platform",
+    seoDescription:
+      "AI governance platform to inventory every AI system, document how it decides, and hold audit evidence ready before SOC 2, ISO 42001, or the EU AI Act.",
     description:
       "Sillage is the governance layer most organizations skipped: models reached production faster than the ability to account for them. It stands up a live register of every AI system in use, a written basis for how each one decides, runtime controls on the decisions they may make, and a continuously assembled evidence trail. It is built to map cleanly onto the frameworks an audit will invoke, including SOC 2 and ISO/IEC 42001, so readiness is a standing state rather than a scramble.",
     problem:

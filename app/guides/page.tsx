@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { blogPosts } from "@/data/blog";
-import { breadcrumbSchema, pageMeta } from "@/lib/seo";
+import { site } from "@/data/site";
+import { breadcrumbSchema, itemListSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Guides",
@@ -24,6 +25,15 @@ export default function GuidesPage() {
           { name: "Home", path: "/" },
           { name: "Guides", path: "/guides" },
         ])}
+      />
+      <JsonLd
+        schema={itemListSchema(
+          "Stallwart Guides",
+          guides.map((g) => ({
+            name: g.title,
+            url: `${site.domain}/blog/${g.slug}`,
+          })),
+        )}
       />
       <main className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-32 lg:pt-40">
         <div className="mx-auto max-w-6xl">

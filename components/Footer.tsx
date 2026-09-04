@@ -15,8 +15,8 @@ export function Footer() {
             {/* Brand sign-off: the emblem over the wordmark. Reuses the 19KB
                 navbar mark, so no extra asset weight. */}
             <Image
-              src="/images/logo-lion.png"
-              alt=""
+              src="/images/stallwart-lion-mark.png"
+              alt="Stallwart lion mark"
               width={218}
               height={256}
               sizes="44px"

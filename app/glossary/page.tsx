@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbSchema, pageMeta } from "@/lib/seo";
+import { site } from "@/data/site";
+import { breadcrumbSchema, definedTermSetSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Glossary",
@@ -134,6 +135,13 @@ export default function GlossaryPage() {
           { name: "Home", path: "/" },
           { name: "Glossary", path: "/glossary" },
         ])}
+      />
+      <JsonLd
+        schema={definedTermSetSchema(
+          "Stallwart AI Glossary",
+          `${site.domain}/glossary`,
+          terms,
+        )}
       />
       <main className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-32 lg:pt-40">
         <div className="mx-auto max-w-4xl">

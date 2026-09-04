@@ -76,9 +76,9 @@ const cinzel = Cinzel({
 // with the actionable positioning ("AI systems and custom software"), then
 // pairs the trust promise, then the brand.
 const homeTitle =
-  "AI systems and custom software, engineered for autonomy, governance, and reliability | Stallwart";
+  "Production-Grade AI Systems & Custom Software | Stallwart";
 const homeDescription =
-  "Stallwart builds production-grade AI systems and custom software for the work that can't be solved off the shelf. Engineered for autonomy, governance, and reliability.";
+  "Stallwart builds production-grade AI systems and custom software for work that can't be solved off the shelf, engineered for autonomy, governance, and reliability.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),

@@ -132,8 +132,8 @@ export function Navbar() {
           aria-label={`${site.company}, home`}
         >
           <Image
-            src="/images/logo-lion.png"
-            alt=""
+            src="/images/stallwart-lion-mark.png"
+            alt="Stallwart lion mark"
             width={218}
             height={256}
             sizes="36px"
@@ -307,8 +307,8 @@ export function Navbar() {
             aria-label={`${site.company}, home`}
           >
             <Image
-              src="/images/logo-lion.png"
-              alt=""
+              src="/images/stallwart-lion-mark.png"
+              alt="Stallwart lion mark"
               width={218}
               height={256}
               sizes="36px"

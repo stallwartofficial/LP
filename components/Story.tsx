@@ -98,8 +98,8 @@ export function Story() {
               the team the keys, not a dependency. When {site.company}{" "}
               leaves, nothing goes with it. The first eleven engagements
               span regulated industries, professional services, creative
-              practices, and B2B software. Zero unsatisfied customers, to
-              date. That is the whole point.
+              practices, and B2B software. Every client still
+              referenceable. That is the whole point.
             </p>
 
             <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:items-baseline sm:gap-8">
@@ -124,7 +124,7 @@ export function Story() {
             <figure className="photo-taped bg-[var(--bg-raised)] p-2.5">
               <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
                 <Image
-                  src="/images/founder-v2.jpg"
+                  src="/images/arun-saravanan-founder-stallwart.jpg"
                   alt={`${site.founder.fullName}, ${site.founder.role} of ${site.company}`}
                   fill
                   sizes="(min-width: 1024px) 24rem, 80vw"
@@ -154,8 +154,8 @@ export function Story() {
                     aria-hidden="true"
                     className="block h-[76px] w-[112px] bg-[var(--fg)]/85"
                     style={{
-                      maskImage: "url(/images/arun-signature.png)",
-                      WebkitMaskImage: "url(/images/arun-signature.png)",
+                      maskImage: "url(/images/arun-saravanan-signature.png)",
+                      WebkitMaskImage: "url(/images/arun-saravanan-signature.png)",
                       maskRepeat: "no-repeat",
                       WebkitMaskRepeat: "no-repeat",
                       maskSize: "contain",

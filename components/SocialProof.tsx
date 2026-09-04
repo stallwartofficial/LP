@@ -144,7 +144,7 @@ export function SocialProof() {
               aria-hidden="true"
               className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"
             />
-            0% unsatisfied customers · to date
+            11 engagements · every client still referenceable
           </p>
         </div>
       </div>

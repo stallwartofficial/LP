@@ -103,8 +103,16 @@ export function organizationSchema() {
       "AI systems engineering",
       "Sales pipeline automation",
       "AI governance and compliance",
-      "AI video production",
     ],
+    areaServed: site.location.areaServed.map((name) => ({
+      "@type": "Place",
+      name,
+    })),
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: site.location.country,
+      addressRegion: site.location.region,
+    },
     makesOffer: offerings
       .filter((o) => o.status === "available")
       .map((o) => ({
@@ -248,5 +256,48 @@ export function articleSchema(opts: {
       url: site.domain,
     },
     isPartOf: { "@type": "WebSite", name: site.company, url: site.domain },
+  };
+}
+
+/**
+ * A glossary as a DefinedTermSet: every term is a DefinedTerm that points back
+ * to the set. Lets answer engines quote a definition and know which glossary it
+ * belongs to, rather than treating each term as free-floating text.
+ */
+export function definedTermSetSchema(
+  name: string,
+  url: string,
+  terms: { term: string; def: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    name,
+    url,
+    hasDefinedTerm: terms.map((t) => ({
+      "@type": "DefinedTerm",
+      name: t.term,
+      description: t.def,
+      inDefinedTermSet: url,
+    })),
+  };
+}
+
+/**
+ * A plain list of named links as an ItemList. Used for index pages that point
+ * to other pages (the guides index), where the content is a set of links, not a
+ * stepwise procedure. Deliberately not HowTo: these are entry points, not steps.
+ */
+export function itemListSchema(name: string, items: { name: string; url: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      url: item.url,
+    })),
   };
 }
