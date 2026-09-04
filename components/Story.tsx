@@ -87,8 +87,8 @@ export function Story() {
               of what they did. That hold under weight, not because anyone
               is watching, but because they were built to. He grew up
               watching Ratan Tata build with patience and without theatre,
-              and {site.company} is being built in that lineage: small by
-              design, careful, one honest ship at a time.
+              and {site.company} is being built in that lineage: a small team
+              by design, careful, one honest ship at a time.
             </p>
 
             <p>

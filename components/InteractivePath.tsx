@@ -99,11 +99,18 @@ export function InteractivePath({ steps }: { steps: PathStep[] }) {
       style={{ aspectRatio: `${W} / ${H}` }}
     >
       <svg
-        aria-hidden="true"
+        role="img"
+        aria-label={`Flow diagram: ${steps.map((s) => s.num).join(" to ")}`}
         viewBox={`0 0 ${W} ${H}`}
         preserveAspectRatio="none"
         className="absolute inset-0 h-full w-full"
       >
+        <title>{`Flow: ${steps.map((s) => s.num).join(" to ")}`}</title>
+        <desc>
+          {steps
+            .map((s) => `${s.num}, ${s.title}: ${s.body}`)
+            .join(". ")}
+        </desc>
         <defs>
           <linearGradient id="path-grad" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.25" />

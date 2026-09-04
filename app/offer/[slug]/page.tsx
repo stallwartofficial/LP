@@ -176,11 +176,16 @@ export default async function OfferingPage({ params }: Props) {
   if (!offering) notFound();
 
   const inDevelopment = offering.status === "in-development";
-  // Related reading, so every offering page links into the content built to
-  // rank for its query cluster.
+  // Proof first: surface this offering's case studies (anonymized, NDA-safe)
+  // ahead of articles, so the offer page shows evidence of shipped work rather
+  // than only linking into the content built to rank. Case studies sort first.
   const related = blogPosts
     .filter((p) => p.offering === offering.slug)
+    .sort((a, b) =>
+      a.kind === b.kind ? 0 : a.kind === "case-study" ? -1 : 1
+    )
     .slice(0, 3);
+  const hasCaseStudy = related.some((p) => p.kind === "case-study");
 
   return (
     <>
@@ -641,7 +646,7 @@ export default async function OfferingPage({ params }: Props) {
           className="section-y rule-t px-[var(--space-gutter)]"
         >
           <div className="mx-auto max-w-6xl">
-            <p className="eyebrow">Further reading</p>
+            <p className="eyebrow">{hasCaseStudy ? "Proof" : "Further reading"}</p>
             <h2
               id="related"
               className="font-display mt-3 text-display-sm font-light"

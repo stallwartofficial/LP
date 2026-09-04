@@ -91,6 +91,12 @@ export function organizationSchema() {
     name: site.company,
     alternateName: `${site.company} AI`,
     url: site.domain,
+    // The lion mark, registered as the entity's logo/image so Google and AI
+    // answer engines attach it to "Stallwart" as the brand image, not just as
+    // a favicon. This turns the mark from a header PNG into the entity image
+    // that can appear in a knowledge panel or an AI-composed answer.
+    logo: `${site.domain}/images/stallwart-lion-mark.png`,
+    image: `${site.domain}/images/stallwart-lion-mark.png`,
     description: site.description,
     slogan: site.tagline,
     ...(site.contact.email ? { email: site.contact.email } : {}),
