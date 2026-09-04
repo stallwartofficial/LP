@@ -33,7 +33,7 @@ export const testimonials: Testimonial[] = [
     company: "Morford Digital Marketing & Consulting",
     highlight: "'Done' was a starting point",
     quote:
-      "I've hired plenty of people to build websites. Stallwart is the first team that treated 'done' as a starting point. Every issue I raised after launch was fixed the next week, no pushback.",
+      "I've hired plenty of people to build websites. Stallwart is the first team that treated 'done' as a starting point. Every issue I raised after launch was fixed the next week, no pushback, and I own the whole thing outright.",
     group: "standing",
   },
   // ---- Range signal: multi-project + AI work, for technical buyers ----
@@ -51,9 +51,9 @@ export const testimonials: Testimonial[] = [
     name: "Dharshan",
     role: "Founder",
     company: "Advensify",
-    highlight: "Sharper site, ten times the work",
+    highlight: "Built lean, and built to last",
     quote:
-      "They challenged every page and every section on the list. What we shipped is leaner than I would have built and works ten times harder. That editorial eye is rare in a build partner.",
+      "They challenged every page like engineers, not decorators. What we shipped is leaner than I would have built, faster, and I own all of it. Nothing about it needs them to keep it running.",
     group: "building",
   },
   // ---- Narrative arc: frustration -> conviction ----
@@ -91,9 +91,9 @@ export const testimonials: Testimonial[] = [
     name: "Ambrose Dass",
     role: "Founder & Principal Architect",
     company: "AMDA Architects",
-    highlight: "The site steps back so the work stands up",
+    highlight: "Restraint, and it runs itself",
     quote:
-      "Most agencies would have pushed us toward something showy. Stallwart did the opposite: they stripped the interface back until the projects had the room to carry the page. Clients now open the site and start talking about the buildings, not the buttons.",
+      "Most agencies would have pushed something showy and left me depending on them to change it. Stallwart stripped the interface back until the projects carried the page, handed me something fast that I own outright, and walked away. Clients open it and talk about the buildings, not the buttons.",
     group: "building",
   },
   // ---- Warm, plan-shaping ----
@@ -121,9 +121,9 @@ export const testimonials: Testimonial[] = [
     name: "Jeevitha",
     role: "Founder",
     company: "House Of Nirangal",
-    highlight: "The feed finally sounds like us",
+    highlight: "A system, not a content calendar",
     quote:
-      "We used to post whatever was on the calendar. Stallwart made us start with the brand, what Nirangal actually stands for, and only then figure out the content. Now the feed sounds like us. It didn't before.",
+      "We used to post whatever was on the calendar. Stallwart built us a system that starts from what Nirangal stands for and produces the content from there. It runs the same way whether or not I'm watching. The feed finally sounds like us, and it keeps sounding like us.",
     group: "building",
   },
 ];

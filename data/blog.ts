@@ -1531,6 +1531,607 @@ const rawBlogPosts: BlogPost[] = [
       },
     ],
   },
+  // ---- Pillar: AI SDR pricing (commercial intent) ----
+  {
+    slug: "how-much-does-an-ai-sdr-cost",
+    kind: "article",
+    title: "How much does an AI SDR cost? A plain pricing breakdown",
+    excerpt:
+      "What an AI SDR actually costs in 2026: pricing models, cost per lead, hidden fees, and how pay-as-you-go compares to seat-based tools.",
+    topic:
+      "ai sdr cost, ai sdr pricing, cost per lead, ai sales tools pricing, ai outbound cost, pay as you go ai sdr, how much does an ai sdr cost",
+    offering: "extrovert-ai",
+    publishedAt: "2026-09-08",
+    readingMinutes: 9,
+    diagram: "outbound-research",
+    sections: [
+      {
+        heading: "The short answer",
+        paragraphs: [
+          "An AI SDR in 2026 costs anywhere from roughly $10 per month on pay-as-you-go usage to $1,500 or more per month on seat-based annual contracts, and the number that actually matters is not the sticker price but the cost per booked meeting once you add data, email infrastructure, and setup time. Most vendors do not publish pricing, which is itself a signal: when a price is quoted only after a sales call, it usually means the price flexes with how much they think you will pay.",
+          "This guide breaks the cost into the parts nobody itemizes for you: the platform fee, the data and enrichment layer, the email sending infrastructure, and the human hours it still takes to run the thing. Then it shows what a genuinely usage-based model looks like, using Extrovert AI's published figures as a worked example.",
+        ],
+      },
+      {
+        heading: "The four pricing models you will actually encounter",
+        paragraphs: [
+          "AI SDR pricing clusters into four shapes. Knowing which one a vendor uses tells you more about your real cost than any single number they quote.",
+          "The trap in most of these is that the headline price covers the software and nothing else. Data, sending domains, and warm-up often arrive as separate line items or as a partner you are quietly required to buy from.",
+        ],
+        list: [
+          "Seat-based SaaS: a fixed monthly fee per user or per mailbox, usually billed annually. Predictable, but you pay the same whether you send 50 emails or 5,000, and unused capacity is money gone.",
+          "Credit or contact-based: you buy a pool of contacts or actions per month. Simple until you run out mid-month, at which point overage pricing quietly punishes the months your outbound is working hardest.",
+          "Managed service or per-meeting: an agency-style retainer, or a fee per booked meeting. Meetings sound aligned with your interest, but the incentive is volume of meetings, not quality, and you inherit their definition of a meeting.",
+          "Pay-as-you-go usage: you pay for what the system actually sends and enriches, with no seat minimum. The month you pause, you pay almost nothing. This is the rarest model and the one that most closely tracks value delivered.",
+        ],
+      },
+      {
+        heading: "The costs that never make it onto the pricing page",
+        paragraphs: [
+          "The platform fee is usually the smallest part of running outbound. The line items below routinely add more to the monthly total than the software itself, and a vendor that bundles them honestly is doing you a favor even when the bundled number looks larger.",
+        ],
+        list: [
+          "Data and enrichment: verified contact data, intent signals, and email verification. Often a separate subscription in the hundreds per month.",
+          "Sending infrastructure: secondary domains, mailboxes, and multi-week warm-up before a single cold email can safely go out. Skipping this is how sender reputation dies.",
+          "Setup and onboarding: implementation fees, or the two to six weeks of your own team's time spent configuring sequences, ICP filters, and CRM sync.",
+          "Deliverability and monitoring: inbox placement tools, bounce management, and someone watching spam rates so the whole program does not silently stop landing.",
+          "The human in the loop: even an autonomous AI SDR needs review of positioning, reply handling, and meeting qualification. Budget for the hours, not zero.",
+        ],
+      },
+      {
+        heading: "Cost per lead is the number to negotiate on",
+        paragraphs: [
+          "Sticker price answers the wrong question. The question a buyer should ask is: for every dollar in, how many qualified conversations come out? That reframes a $1,500 per month tool and a $10 per month tool onto the same axis, because a cheap tool that produces nothing is infinitely expensive per lead.",
+          "To compute it honestly, add every line item from the section above into a fully loaded monthly cost, then divide by the warm leads or meetings the program actually produced that month. Do this on trailing real numbers, not the vendor's projection. A tool that looks expensive per seat can be cheap per lead, and the reverse is just as common.",
+        ],
+      },
+      {
+        heading: "A worked example: usage-based pricing at the low end",
+        paragraphs: [
+          "Extrovert AI is built as pay-as-you-go: pricing starts at $10 per month with no seat minimum, and the internal modeling targets a cost of roughly $1 per lead. On a representative month, that budget maps to around 333 emails sent, an estimated 11 to 17 warm leads, and 3 to 6 booked meetings.",
+          "Those figures are modeled estimates for planning, not guarantees. Real results move with your list quality, your offer, and your follow-up. The point of the example is the shape, not the certainty: a model where a paused month costs almost nothing, and where the per-lead figure is stated up front rather than revealed after a contract, is structurally different from a seat-based annual commitment. Use it as a reference line when a vendor will not put a number on the page.",
+        ],
+      },
+      {
+        heading: "How to price-check any AI SDR vendor",
+        paragraphs: [
+          "Before you sign anything, run the vendor's quote through a short checklist. It surfaces the difference between a $10 all-in number and a $10 number that becomes $1,200 once the required add-ons appear.",
+        ],
+        list: [
+          "Ask what is included versus billed separately: data, domains, warm-up, and support.",
+          "Ask for the fully loaded cost per booked meeting on their existing customers, not per seat.",
+          "Ask what a paused or low-volume month costs. Fixed contracts charge you for silence.",
+          "Ask for the contract length and the exit terms. Month-to-month usage pricing carries far less risk than an annual seat commitment.",
+          "Ask who owns the sending domains and the data if you leave.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "AI SDR pricing ranges from about $10 per month usage-based to $1,500 or more per month seat-based, but cost per booked meeting is the only comparison that matters.",
+      "The platform fee is usually the smallest cost: data, sending domains, warm-up, and human review often add more than the software itself.",
+      "Pay-as-you-go pricing tracks value more closely than seats, because a paused month costs almost nothing instead of a fixed fee for silence.",
+      "Extrovert AI models roughly $1 per lead from a $10 per month starting point (about 333 emails, 11 to 17 warm leads, 3 to 6 meetings), stated as planning estimates, not guarantees.",
+    ],
+    qa: [
+      {
+        question: "How much does an AI SDR cost per month?",
+        answer:
+          "It ranges widely: usage-based tools can start around $10 per month with no seat minimum, while seat-based platforms commonly run $1,000 to $1,500 or more per seat per month on annual contracts. The all-in cost depends heavily on data, sending infrastructure, and setup, which are often billed separately from the platform fee.",
+      },
+      {
+        question: "What is a good cost per lead for AI outbound?",
+        answer:
+          "It depends on deal size and industry, but the useful discipline is to compute your fully loaded monthly spend divided by warm leads produced, using real trailing numbers rather than projections. As a reference point, Extrovert AI models a cost of roughly $1 per lead, stated as a planning estimate rather than a guarantee.",
+      },
+      {
+        question: "Why don't AI SDR companies publish their pricing?",
+        answer:
+          "Most use sales-led pricing that flexes with company size and perceived budget, so a public number would limit their room to negotiate upward. It can also hide that the platform fee is only part of the real cost once data, domains, and warm-up are added. A vendor that publishes a plain price is usually more confident the number holds up.",
+      },
+      {
+        question: "Is an AI SDR cheaper than hiring a human SDR?",
+        answer:
+          "On direct cost, almost always. A loaded human SDR runs well into six figures per year with ramp time before they produce, while an AI SDR can start at usage-based pricing and run from day one. The honest caveat is that they are not identical in what they do, which is a fit question, not just a cost question.",
+      },
+      {
+        question: "What hidden costs should I watch for with an AI SDR?",
+        answer:
+          "Verified contact data and enrichment, secondary sending domains and mailbox warm-up, implementation or onboarding fees, deliverability monitoring, and the human hours to review positioning and handle replies. Ask every vendor which of these is included and which is billed separately before comparing sticker prices.",
+      },
+    ],
+  },
+  // ---- Pillar: AI SDR vs human SDR (comparison intent) ----
+  {
+    slug: "ai-sdr-vs-human-sdr-when-each-wins",
+    kind: "article",
+    title: "AI SDR vs human SDR: when each one actually wins",
+    excerpt:
+      "An honest comparison of AI SDRs and human SDRs: ramp time, cost, complex deals, and the specific situations where each clearly beats the other.",
+    topic:
+      "ai sdr vs human sdr, ai sdr comparison, replace sdr with ai, ai vs human sales development, when to use ai sdr, human sdr cost",
+    offering: "extrovert-ai",
+    publishedAt: "2026-09-09",
+    readingMinutes: 10,
+    diagram: "before-after",
+    sections: [
+      {
+        heading: "The short answer",
+        paragraphs: [
+          "An AI SDR wins on cost, speed to start, and consistency at the top of the funnel, while a human SDR wins on complex discovery, relationship nuance, and reading a room that does not fit a script. The honest answer is not that one replaces the other: it is that they fail in different places, and most teams get the best result by running the AI for volume and coverage and reserving human time for the conversations that actually need judgment.",
+          "This is a comparison, not a hit piece. Below is where each one genuinely wins, where each one breaks, and how to decide based on your motion rather than on which side of the argument a vendor is selling.",
+        ],
+      },
+      {
+        heading: "Where the human SDR clearly wins",
+        paragraphs: [
+          "A good human SDR does things an AI still cannot. They pick up hesitation in a prospect's voice, reframe on the fly when the first angle lands wrong, and navigate a multi-stakeholder deal where the real objection is political and never stated out loud.",
+          "If your motion depends on any of the following, a human is not a nice-to-have, they are the mechanism.",
+        ],
+        list: [
+          "High-consideration deals with long, consultative discovery and many stakeholders.",
+          "Relationship-led selling where trust is built over months and referrals matter more than reach.",
+          "Ambiguous or new markets where the message is not yet figured out and every call teaches you something.",
+          "Situations that need real-time judgment: negotiating access, reading intent, handling an objection no script anticipated.",
+        ],
+      },
+      {
+        heading: "Where the AI SDR clearly wins",
+        paragraphs: [
+          "An AI SDR does not ramp, does not need a base salary, and does not have a bad week. It runs the repetitive, high-volume top of the funnel with a consistency a human cannot physically match, and it starts on day one instead of month four.",
+          "If your bottleneck is coverage rather than nuance, the AI is the better instrument for these jobs.",
+        ],
+        list: [
+          "Broad, repeatable outbound to a well-defined ICP where the message is already validated.",
+          "Consistent research and personalization at a volume no single rep can sustain by hand.",
+          "Always-on coverage across time zones and follow-up cadences that humans quietly let slip.",
+          "Testing offers and segments cheaply before you commit a human team to a motion.",
+          "Founder-led or lean teams that need pipeline now and cannot justify a full SDR hire yet.",
+        ],
+      },
+      {
+        heading: "The ramp and cost gap nobody puts side by side",
+        paragraphs: [
+          "The comparison people skip is timing. A human SDR typically takes four to six months to reach full productivity: hiring, onboarding, learning the product, and building enough reps to sound credible. During that ramp you are paying full cost for partial output, and if they leave inside a year, which is common in the role, you restart the clock and eat the cost again.",
+          "A loaded human SDR, once you add salary, tooling, management, and benefits, lands well into six figures per year. An AI SDR starts producing on day one and, on usage-based pricing, can begin at a fraction of a single month of that loaded cost. The honest framing is not that the AI is better, it is that the AI removes the ramp risk and the fixed commitment, which changes what you can afford to try.",
+        ],
+      },
+      {
+        heading: "The hybrid model most teams actually land on",
+        paragraphs: [
+          "In practice the winning setup is rarely all-AI or all-human. The AI runs top-of-funnel volume: research, first touch, follow-up, and booking. Humans take the handoff at the moment judgment starts to matter, which is usually the qualified conversation and everything downstream of it.",
+          "This split lets a small team cover a market that would otherwise need several SDRs, while keeping human attention on the deals where nuance decides the outcome. It also de-risks hiring: you learn what a good conversation in your market looks like from AI-generated volume before you commit headcount to scaling it.",
+        ],
+      },
+      {
+        heading: "How to decide for your team",
+        paragraphs: [
+          "Skip the ideology and answer a few concrete questions about your own motion. They point to AI, to human, or to the hybrid faster than any vendor pitch.",
+        ],
+        list: [
+          "Is your message validated, or still being figured out? Validated favors AI, unfigured favors human.",
+          "Is your bottleneck coverage or nuance? Coverage favors AI, nuance favors human.",
+          "How complex is the deal? Simple and repeatable favors AI, consultative and multi-stakeholder favors human.",
+          "What is your budget and timeline? Need pipeline now with limited budget favors AI or hybrid.",
+          "Can you afford a four to six month ramp before output? If not, AI covers the gap while you hire.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "AI SDRs win on cost, day-one speed, and consistent high-volume coverage; human SDRs win on complex discovery, relationship nuance, and real-time judgment.",
+      "A human SDR typically takes four to six months to ramp and costs six figures loaded, while an AI SDR produces from day one with no ramp risk.",
+      "It is a fit decision, not a replacement decision: the two fail in different places, so match the tool to your motion.",
+      "Most teams land on a hybrid: AI runs top-of-funnel volume, humans take over where judgment decides the deal.",
+    ],
+    qa: [
+      {
+        question: "Can an AI SDR replace a human SDR?",
+        answer:
+          "For repeatable, high-volume top-of-funnel work with a validated message, an AI SDR can do the job a human was doing and start on day one. For complex, consultative, multi-stakeholder deals it cannot replace the judgment a good human brings. Most teams keep both and split the work rather than fully replacing one with the other.",
+      },
+      {
+        question: "Is an AI SDR better than a human SDR?",
+        answer:
+          "Neither is universally better; they win in different situations. AI is better for cost, speed to start, and consistent volume. Humans are better for nuanced discovery, relationship building, and reading situations a script cannot anticipate. The right question is which fits your specific sales motion, not which is better in the abstract.",
+      },
+      {
+        question: "How long does a human SDR take to ramp compared to an AI SDR?",
+        answer:
+          "A human SDR typically takes four to six months to reach full productivity after hiring and onboarding, and you pay full cost during that ramp. An AI SDR runs from day one with no ramp period, which is why it is often used to cover pipeline while you hire and train human reps.",
+      },
+      {
+        question: "When should I hire a human SDR instead of using AI?",
+        answer:
+          "When your deals are high-consideration and consultative, when relationships and referrals drive revenue, when your market or message is still being figured out, or when success depends on real-time judgment in the conversation. In those cases the human is doing the core work, not just adding volume.",
+      },
+      {
+        question: "What is the best way to combine AI and human SDRs?",
+        answer:
+          "Let the AI handle top-of-funnel research, first touch, follow-up, and booking, then hand off to a human at the qualified conversation where nuance starts to decide the outcome. This lets a small team cover a large market and keeps human attention on the deals where it changes the result.",
+      },
+    ],
+  },
+  // ---- Pillar: build vs buy AI (decision intent) ----
+  {
+    slug: "build-vs-buy-ai-custom-development-vs-off-the-shelf",
+    kind: "article",
+    title: "Build vs buy AI: when custom development beats an off-the-shelf tool",
+    excerpt:
+      "An honest framework for deciding when to build custom AI and when an off-the-shelf tool wins. Four criteria, no hype, and when we tell you to buy.",
+    topic:
+      "build vs buy ai, custom ai development vs off-the-shelf, when to build custom ai, ai vendor vs custom, buy or build ai software",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-09-06",
+    readingMinutes: 9,
+    diagram: "ai-in-product",
+    sections: [
+      {
+        heading: "The short answer",
+        paragraphs: [
+          "Buy off-the-shelf AI when the problem is common, the data is standard, and being roughly as good as your competitors is fine. Build custom AI when the thing the model has to get right is your proprietary judgement, when it has to reach deep into systems a vendor cannot see, or when owning the data and the code is the point.",
+          "That is the whole decision in one line. Most of what follows is how to tell which side of it you are actually on, because the honest answer for a lot of teams is buy, and paying to build something a cheap per-seat tool already does is the most expensive mistake in this category.",
+          "We say no when off-the-shelf already solves it. That is not a sales line. A build we talk you out of is a build that would have gone to production, underperformed a tool you could have bought, and taught you to distrust the whole category. We would rather you come back for the next problem that genuinely needs a custom system.",
+        ],
+      },
+      {
+        heading: "The four criteria that decide it",
+        paragraphs: [
+          "There are four questions worth asking before anyone writes code or signs a vendor contract. Score your problem against all four before you decide. One strong yes can justify building. Four weak yeses usually means buy.",
+        ],
+        list: [
+          "Proprietary judgement. Does the decision the AI makes depend on how your firm specifically weighs things, rules learned from your own history, edge cases only your team knows? If the value is in your judgement, that judgement has to be encoded in something you built. If the task is summarise this, transcribe that, draft a first pass, a vendor already does it well.",
+          "Integration depth. Does the AI need to read from and write to your internal systems, and the messy joins between them? Off-the-shelf tools integrate at the edges through whatever connectors the vendor shipped. Custom systems reach all the way in. If the useful version has to touch five internal systems in a specific order, a vendor connector will not get you there.",
+          "Ownership needs. Do you need to own the model behaviour, the prompts, the pipeline, and the code outright? With a tool, the vendor owns the roadmap: they can change the model under you, raise the price, or get acquired. If this capability sits on your critical path for years, renting it from someone whose incentives are not yours is a standing risk.",
+          "Data sensitivity. Can this data leave your environment at all? For regulated data or customer records under contract, the question stops being about features. Some data cannot go into someone else's tool regardless of how good it is. That alone can force a build, or a self-hosted custom deployment.",
+        ],
+      },
+      {
+        heading: "When buying is the right call (and we will tell you so)",
+        paragraphs: [
+          "Buy when the capability is a commodity. Speech to text, generic document summarisation, meeting notes, first-draft copy, standard chatbot deflection on a public knowledge base. These are solved, competitively priced, and improving faster than any single team can match. Building your own is buying a worse version at a higher cost.",
+          "Buy when you are still learning the problem. If you cannot yet describe exactly what good looks like, a cheap off-the-shelf tool is the fastest way to find out. Use it, watch where it fails you, and let those failures become the spec for a custom build later, if one is even warranted by then.",
+          "Buy when speed matters more than fit. If you need something in production next week and eighty percent right is genuinely fine, a tool you can turn on today beats a system that is perfect in three months. The pattern underneath all three: buy the commodity, build the part that is load-bearing and specific to you.",
+        ],
+      },
+      {
+        heading: "When building is the right call",
+        paragraphs: [
+          "Build when the AI has to be right about something only your business knows. This is the load-bearing-80% thesis in practice. A tool gets you the generic eighty percent of a workflow. The remaining twenty percent, the part that reflects your judgement, your data, and your edge cases, is usually the part the whole workflow depends on. That twenty percent is what carries the weight, and it is exactly the part a vendor cannot build because they do not have it.",
+          "Build when integration is the product. If the value is not the model but the way it is wired into your systems, the orchestration, the retries, the guardrails, the handoffs to humans, that wiring is the thing worth owning, and it is custom by definition.",
+          "Build when the alternative is five tools stapled together. Teams often reach for a build not to replace one tool but to collapse a fragile stack of six of them, each with its own integration, billing, and failure mode, into one system they control. And build when you have proven demand and per-seat or per-call pricing that was fine at pilot scale has become the most expensive line item at production scale.",
+        ],
+      },
+      {
+        heading: "How to actually run the decision",
+        paragraphs: [
+          "Do not decide in a meeting from first principles. Decide from a short, cheap test against reality.",
+          "First, try to buy. Genuinely. Put the leading off-the-shelf tool against your real data and workflow for a week. Most build-vs-buy debates end here: either the tool is fine, or it fails in a specific, nameable way that becomes the spec for a custom build.",
+          "Second, if it fails, name why using the four criteria. Was it judgement, integration, ownership, or data? A build justified by a clear failure against one of those is worth costing. A build justified by we could probably do better is not. Third, cost the build against the multi-year cost of the tool, not against zero. The comparison is build-and-own versus rent-forever, including the risk the rented thing changes under you.",
+          "This is where our paid discovery sprint fits. It exists to answer build-vs-buy honestly, on a fixed price, before anyone commits to a full build. Sometimes its output is a one-page recommendation to buy a specific tool and not hire us for the build. That is a good outcome, and cheaper than finding out six months into the wrong choice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Buy the commodity, build the load-bearing twenty percent that reflects your own judgement, data, and integrations.",
+      "Score the problem against four criteria: proprietary judgement, integration depth, ownership needs, and data sensitivity.",
+      "The honest default is often buy. Building a worse version of a tool you could license is the most expensive mistake in this category.",
+      "Cost a build against the multi-year cost of renting the tool, not against zero, and include the risk a vendor changes the product under you.",
+    ],
+    qa: [
+      {
+        question: "Should I build or buy AI for my business?",
+        answer:
+          "Buy when the capability is common, the data is standard, and roughly-as-good-as-competitors is fine. Build when the AI must encode your proprietary judgement, integrate deep into your internal systems, be owned outright, or handle data that cannot leave your environment. When in doubt, try to buy first: a one-week test against real data usually settles it.",
+      },
+      {
+        question: "When is custom AI development worth it over an off-the-shelf tool?",
+        answer:
+          "When the part that carries the weight is specific to you. Off-the-shelf tools handle the generic eighty percent of a workflow well. Custom AI is worth it when the remaining twenty percent, the part that depends on your judgement, data, and integrations, is what the whole workflow rests on, because that is the part a vendor structurally cannot build for you.",
+      },
+      {
+        question: "Is it cheaper to buy AI software or build my own?",
+        answer:
+          "For commodity capabilities, buying is almost always cheaper and better. Building becomes cheaper when per-seat or per-call pricing scales badly at production volume, when you are collapsing several fragile tools into one system, or when owning the asset removes a standing vendor risk. Compare build-and-own against rent-forever, not against zero.",
+      },
+      {
+        question: "Will you tell me if I do not need to build anything?",
+        answer:
+          "Yes. We say no when off-the-shelf already solves it. Sometimes the output of a paid discovery sprint is a one-page recommendation to buy a specific tool and not hire us for the build. That is a normal outcome and far cheaper than discovering the wrong choice six months in.",
+      },
+      {
+        question: "What if I am not sure exactly what I need yet?",
+        answer:
+          "Then buy a cheap tool and use it. If you cannot yet describe what good looks like, an off-the-shelf tool is the fastest way to learn where the real requirements are. Its failures become the spec for a custom build later, if a build turns out to be warranted at all. Do not build to discover the problem.",
+      },
+    ],
+  },
+  // ---- Pillar: custom AI cost / fixed-price-per-phase ----
+  {
+    slug: "what-custom-ai-development-costs-fixed-price-per-phase",
+    kind: "article",
+    title: "What custom AI development costs, and why fixed price per phase beats hourly",
+    excerpt:
+      "A plain-English breakdown of what custom AI costs, the phases you pay for, and why fixed price per phase protects you where hourly billing does not.",
+    topic:
+      "custom ai development cost, ai development pricing, fixed price vs hourly software, ai proof of concept to production cost, how much does custom ai cost",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-09-07",
+    readingMinutes: 10,
+    diagram: "pilot-production",
+    sections: [
+      {
+        heading: "The short answer",
+        paragraphs: [
+          "Custom AI is priced by phase, not by the finished thing, because nobody can honestly quote a fixed price for a whole build before discovery has scoped it. The credible model is a paid discovery sprint that produces a real specification, followed by a fixed price per build phase that you approve one at a time, with the code and IP handed to you to own outright at the end.",
+          "What it costs depends on how much of the work is genuinely custom versus commodity, how deep the integrations go, and how hard the reliability bar is. But how you are billed matters as much as the number. Fixed price per phase and hourly are not two ways to reach the same total. They put the risk of the unknown on different people.",
+        ],
+      },
+      {
+        heading: "Why hourly billing works against you",
+        paragraphs: [
+          "Hourly billing sounds fair and behaves badly. The problem is not dishonest vendors. It is that hourly puts every unknown on your side of the table.",
+          "Under hourly, the vendor is paid more when the work takes longer. There is no built-in pressure to be efficient, to scope tightly, or to say a feature is not worth the time. The meter runs through their learning curve, their rework, and their exploration, and you pay for all of it without ever having agreed to a total.",
+          "Worse, hourly gives you a number you cannot plan around. You approve a project without knowing whether it lands at the low estimate or triple it, and AI work has more genuine unknowns than typical software, so the spread is wide. The deepest problem is incentive alignment: hourly rewards activity, you want outcomes, and over a long build the gap between them is where budgets die.",
+        ],
+      },
+      {
+        heading: "Why fixed price per phase is different",
+        paragraphs: [
+          "Fixed price per phase flips who carries the risk of the unknown. We commit to a price for a defined phase with a defined outcome. If it takes us longer than expected, that is our problem, not your invoice. The party doing the estimating carries the estimation risk.",
+          "Per phase, rather than one fixed price for everything, is what makes fixed pricing honest. A single upfront quote for an entire AI build is either padded heavily to cover the unknowns, or it is a number that will not survive contact with reality. Breaking the work into phases means each phase is small enough to price accurately, and you decide at each boundary whether to continue.",
+          "It also gives you real exit points. After discovery, you can stop. After the proof of concept, you can stop. After each production phase, you can stop. You are never locked into paying for work you have lost confidence in. And because we are not paid by the hour, we have no reason to build the feature that is not worth building; we will tell you when something is not worth the phase it would cost.",
+        ],
+      },
+      {
+        heading: "The phases you actually pay for",
+        paragraphs: [
+          "Here is the shape of a real engagement, from proof of concept to production, and what each phase is buying you. Every phase after discovery is fixed-priced and separately approved. You are never committing to the whole path at the start; you are committing to the next phase, having seen the result of the last one.",
+        ],
+        list: [
+          "Paid discovery sprint. A short, fixed-price engagement that produces a real specification, a build-vs-buy recommendation, an architecture, and a fixed-price plan for the phases that follow. It is paid because it is real work, and because paid discovery filters for serious clients. Sometimes its output is a recommendation not to build.",
+          "Proof of concept. A narrow build that proves the hardest, riskiest part works on your real data, before anyone spends production money. Fixed price, clear pass or fail criteria agreed up front. Its job is to kill bad ideas cheaply and green-light good ones with evidence.",
+          "Production build, in phases. The system built properly: reliable, integrated, monitored, and handed over. Split into phases so each is accurately priceable and separately approvable. This is the bulk of the cost, and where the load-bearing twenty percent specific to your business gets built to a standard you can run on.",
+          "Handover and ownership. You receive the code and the IP outright. No per-seat licence to us, no dependency on us to keep it running, no lock-in. You can maintain it yourself, hire anyone to, or keep working with us because you want to, not because you are trapped.",
+        ],
+      },
+      {
+        heading: "What moves the number up or down",
+        paragraphs: [
+          "Two custom AI projects can differ in cost by a large multiple, and the drivers are predictable. The biggest lever is how much of the work is genuinely custom. If half of what you want is commodity capability, the honest move is to buy that half off-the-shelf and only build the part that has to be custom.",
+          "The second lever is integration depth. A model that stands alone is cheap. A system that reads and writes across several of your internal systems, in the right order, with the right guardrails, is where the real engineering, and the real cost, lives. The third is the reliability bar: something that assists a human who checks its work is far cheaper to build than something that acts autonomously on the critical path, because the second needs far more testing, monitoring, and failure handling. Deciding that bar honestly up front is one of the main jobs of the discovery sprint.",
+        ],
+      },
+      {
+        heading: "How to budget for it sensibly",
+        paragraphs: [
+          "Start with the discovery sprint, not with a request for a total. A vendor who quotes a firm all-in price for a custom AI build before discovery is either padding heavily or guessing. The right first spend is the small, fixed one that turns your idea into a specification and a real per-phase plan.",
+          "Then treat each phase as its own decision. Approve discovery, see the plan, approve the proof of concept, see the evidence, approve the first production phase. This staged commitment is the single best protection your budget has, because you are always spending against something you have already seen work. And insist on owning the output: a build you pay for and then keep paying to use is not a fixed cost, it is a subscription with a large deposit.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Custom AI is priced per phase, not as one upfront total, because only a paid discovery sprint can scope the work honestly enough to fix a price on it.",
+      "Fixed price per phase puts the risk of the unknown on the vendor who estimates. Hourly puts it on you and pays more when work runs long.",
+      "You approve one phase at a time, with real exit points after discovery, after the proof of concept, and after each production phase.",
+      "You own the code and IP outright at handover, with no lock-in, which turns AI spend into an asset rather than an open-ended rent.",
+    ],
+    qa: [
+      {
+        question: "How much does custom AI development cost?",
+        answer:
+          "It varies widely with how much of the work is genuinely custom versus commodity, how deep the integrations run, and how high the reliability bar is. Because of that spread, credible pricing is per phase rather than one upfront total. The right first step is a small, fixed-price discovery sprint that produces a real specification and a fixed price for each phase that follows.",
+      },
+      {
+        question: "Why is fixed price per phase better than hourly for AI projects?",
+        answer:
+          "Hourly bills more when the work runs long, so the risk of every unknown sits with you and there is no built-in pressure to be efficient. Fixed price per phase commits to a price and an outcome per phase, so the estimation risk sits with the vendor. It also gives you clean exit points and removes the incentive to build features that are not worth their cost.",
+      },
+      {
+        question: "What is a paid discovery sprint and why is it paid?",
+        answer:
+          "It is a short, fixed-price engagement that turns your idea into a real specification, an architecture, a build-vs-buy recommendation, and a fixed-price plan for the following phases. It is paid because it is real engineering work, and because paying for it filters for serious buyers. Sometimes its honest output is a recommendation not to build at all.",
+      },
+      {
+        question: "Do I own the code and IP for a custom AI system?",
+        answer:
+          "Yes. At handover you receive the code and the IP outright, with no per-seat licence back to the vendor and no lock-in. You can run it yourself, hire anyone to maintain it, or keep working with the original team by choice rather than dependency. Owning the output is what makes the spend an asset instead of an ongoing rent.",
+      },
+      {
+        question: "What does it cost to take an AI proof of concept to production?",
+        answer:
+          "Expect distinct phases: discovery, a narrow proof of concept that tests the riskiest part on real data with pass-or-fail criteria, then a production build split into separately approved fixed-price phases, then handover. The proof of concept exists to kill bad ideas cheaply before production money is spent, and each later phase is approved only after you have seen the previous one work.",
+      },
+    ],
+  },
+  // ---- Pillar: ISO 42001 readiness ----
+  {
+    slug: "iso-42001-readiness-checklist-ai-management-system",
+    kind: "article",
+    title: "ISO/IEC 42001 readiness checklist: what an AI management system requires",
+    excerpt:
+      "A plain-language readiness guide to ISO/IEC 42001: what an AI management system is, the evidence an auditor expects, and how to have it ready before the audit.",
+    topic:
+      "ISO 42001, ISO/IEC 42001, AI management system, AIMS, ISO 42001 certification readiness, ISO 42001 checklist, AI governance framework, ISO 42001 audit preparation",
+    offering: "sillage",
+    publishedAt: "2026-09-05",
+    readingMinutes: 11,
+    diagram: "governance-layers",
+    sections: [
+      {
+        heading: "The one-line answer",
+        paragraphs: [
+          "ISO/IEC 42001 certifies that you run a working AI management system: a defined set of policies, roles, risk assessments, controls, and records that govern how your organization builds, buys, and operates AI, kept current and evidenced over time. Readiness means you can show that system running, not that you wrote a policy the week before the audit.",
+          "A quick vocabulary note, because the terms get mixed up. ISO/IEC 42001 is the management-system standard. An AIMS (AI management system) is the thing you actually operate. A certification body, an accredited third party, is what issues the certificate after a two-stage audit. Stallwart is none of those: we do not certify anyone and hold no certificate to grant. What we do is build the inventory, documentation, controls, and evidence trail the auditor asks to see. This guide explains what that auditor is looking for.",
+        ],
+      },
+      {
+        heading: "What ISO/IEC 42001 actually is",
+        paragraphs: [
+          "42001 is built on the same high-level structure as ISO 27001 and 9001, so if your team has been through an ISO audit before, the shape is familiar: context, leadership, planning, support, operation, performance evaluation, improvement, plus a set of controls in an annex you justify including or excluding. The subject matter is what is new. Instead of information security or quality, the object of management is the AI systems themselves and the risks they carry to people, not only to the business.",
+          "The clauses that carry the most weight in practice are the AI risk assessment and treatment, the AI system impact assessment (the effect on individuals and groups, not just on the organization), and the operational controls over the AI lifecycle. The reference controls list what you might adopt, and you are required to have a defensible reason for each one you leave out, recorded in a Statement of Applicability.",
+          "The standard is deliberately technology-neutral and process-heavy. It does not tell you which model to use or set an accuracy threshold. It asks whether you know what AI you run, why you made the decisions you made, who is accountable, how you catch problems, and whether you can prove all of that with records. Treat the following as practical preparation, not legal or certification advice; your certification body's interpretation is what governs your specific audit.",
+        ],
+      },
+      {
+        heading: "The readiness checklist: what to have ready",
+        paragraphs: [
+          "An auditor works from evidence, so readiness is best understood as a list of artifacts that exist, are current, and are owned. Each item below maps to the standard's clauses and controls, and each is something that should be a byproduct of the system running rather than a document assembled for the occasion.",
+        ],
+        list: [
+          "AI policy and objectives: a signed AI policy, measurable objectives, and evidence that leadership reviews them, not a template nobody has read.",
+          "Live model and system inventory: a current register of every AI system and material model in use, including third-party and embedded ones, with owner, purpose, data sources, and lifecycle stage. A stale spreadsheet fails here; a register the system keeps current passes.",
+          "AI risk assessments and treatment plans: documented risk assessments per system, the treatment decisions, and the residual risk someone accepted by name.",
+          "AI system impact assessments: the effect of each higher-stakes system on individuals and groups, with the reasoning recorded.",
+          "Statement of Applicability: every reference control marked in or out, each with a justification.",
+          "Roles and competence records: who is accountable for what across the AI lifecycle, and evidence those people are competent to hold the role.",
+          "Operational controls with a written basis: for consequential systems, the recorded reasoning behind design and deployment decisions, plus human oversight, runtime controls, and a rollback path you have actually tested.",
+          "A continuous evidence trail: logs, approvals, monitoring output, and change records that show the controls operating over time, not a snapshot from audit week.",
+          "Internal audit and management review records: proof you check your own system and that leadership acts on what the checks find.",
+          "Supplier and third-party AI governance: due-diligence and contractual evidence for the AI you buy or embed.",
+        ],
+      },
+      {
+        heading: "Where teams are actually short",
+        paragraphs: [
+          "The policy layer is rarely the problem. Most teams can write an AI policy in an afternoon. The gap shows up one layer down, in the evidence that the policy is lived.",
+          "The most common shortfall is the inventory. Organizations underestimate how much AI they run once you count vendor features, embedded models, and things a team stood up without telling anyone. If the register is not continuously maintained, it is wrong by the time the auditor opens it, and a wrong inventory undermines every risk assessment built on top of it.",
+          "The second common gap is the written basis for decisions. Teams make reasonable choices about a model, a threshold, or a human-in-the-loop step, then cannot reconstruct why months later. The third is the evidence trail. Controls may genuinely operate, but if nothing records them operating, the auditor cannot distinguish a working control from an aspiration. Readiness is largely the work of closing these three gaps before someone external looks.",
+        ],
+      },
+      {
+        heading: "Governance as a byproduct, not a scramble",
+        paragraphs: [
+          "The expensive way to approach 42001 is to treat the audit as a deadline and assemble a binder against it. The binder is stale the day after it is signed, and you repeat the scramble at every surveillance audit.",
+          "The durable approach is to make the evidence a byproduct of the system running. When the model inventory updates itself as systems change, when consequential decisions capture their own written basis, when runtime controls and human oversight leave records as they operate, and when rollback is a tested path rather than a promise, readiness stops being an event. The audit becomes a read of a state you are already in.",
+          "That is the posture Stallwart builds toward: the inventory, the documentation, the controls, and the continuous evidence trail an AIMS needs, produced by the system itself. We do not issue your certificate. We make sure that when the certification body arrives, the answer to every evidence request already exists.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "ISO/IEC 42001 certifies a working AI management system: policies, risk and impact assessments, controls, roles, and records kept current and evidenced over time.",
+      "Readiness is a set of artifacts that exist, are current, and are owned, chief among them a live AI system and model inventory.",
+      "The usual gaps are not the policy but the inventory, the written basis for decisions, and the evidence that controls actually operate.",
+      "The certificate is issued by an accredited certification body, not a consultant or platform; Stallwart produces the evidence trail the audit asks for, not the certificate.",
+    ],
+    qa: [
+      {
+        question: "What is an AI management system under ISO 42001?",
+        answer:
+          "It is the set of policies, roles, risk and impact assessments, operational controls, and records your organization uses to govern how it builds, buys, and runs AI. ISO/IEC 42001 certifies that this system exists and operates, not that any single model is safe.",
+      },
+      {
+        question: "How long does it take to get ready for an ISO 42001 audit?",
+        answer:
+          "It depends on how much AI you run and how much evidence already exists. Teams with a current inventory and recorded decisions move quickly; teams starting from an unknown AI footprint spend most of their time building the inventory and the evidence trail first. The policy layer is the fast part.",
+      },
+      {
+        question: "Does Stallwart certify us for ISO 42001?",
+        answer:
+          "No. Certification is issued only by an accredited certification body after a two-stage audit. Stallwart does not certify anyone and holds no certificate to grant. We build the live inventory, documentation, controls, and continuous evidence trail the auditor asks to see.",
+      },
+      {
+        question: "What evidence does an ISO 42001 auditor ask for?",
+        answer:
+          "A current AI system and model inventory, risk and impact assessments with named risk acceptance, a Statement of Applicability, role and competence records, operational controls with a written basis, logs and approvals showing controls operating over time, and internal audit and management-review records.",
+      },
+      {
+        question: "How is ISO 42001 different from the EU AI Act?",
+        answer:
+          "ISO/IEC 42001 is a voluntary, certifiable management-system standard about how you govern AI internally. The EU AI Act is binding law that imposes obligations by risk tier on AI placed on or used in the EU market. A 42001-conformant AIMS can help you meet AI Act duties, but the two are separate and one does not automatically satisfy the other.",
+      },
+    ],
+  },
+  // ---- Pillar: EU AI Act by risk tier ----
+  {
+    slug: "eu-ai-act-compliance-obligations-by-risk-tier",
+    kind: "article",
+    title: "EU AI Act compliance: what your AI system has to do, by risk tier",
+    excerpt:
+      "The EU AI Act is risk-tiered. This guide helps you classify your AI use and maps the transparency, documentation, oversight, and logging duties that follow.",
+    topic:
+      "EU AI Act, EU AI Act compliance, AI Act risk tiers, high-risk AI system, limited risk AI, AI Act transparency obligations, AI Act documentation, prohibited AI practices",
+    offering: "sillage",
+    publishedAt: "2026-09-04",
+    readingMinutes: 12,
+    diagram: "governance-layers",
+    sections: [
+      {
+        heading: "The one-line answer",
+        paragraphs: [
+          "The EU AI Act assigns each AI use to a risk tier, and your obligations follow the tier: most business uses land in limited or minimal risk with light or no transparency duties, while high-risk uses carry documentation, human oversight, logging, and quality-management obligations. Your first compliance task is classification, because the tier decides everything after it.",
+          "This is practical guidance, not legal advice. The Act's definitions and timelines are detailed and its guidance is still maturing, so treat what follows as a map for classifying your own systems and scoping the work, and confirm specifics with counsel for your situation.",
+        ],
+      },
+      {
+        heading: "The four tiers, plainly",
+        paragraphs: [
+          "The Act sorts AI into four buckets by the risk it poses, plus a separate track for general-purpose AI models. Getting your systems into the right bucket is the whole game, because the duties are wildly different across them.",
+        ],
+        list: [
+          "Unacceptable risk: a short list of prohibited practices, such as social scoring by public authorities and certain manipulative or exploitative uses. These are banned outright, not permitted-with-controls.",
+          "High risk: AI used as a safety component of regulated products, or in listed sensitive areas such as employment, education, essential services, credit, and certain biometric and critical-infrastructure uses. This tier carries the heavy obligations.",
+          "Limited risk: systems that interact with people or generate content, such as chatbots and synthetic media. The duty here is mainly transparency: tell people they are dealing with AI or that content is AI-generated.",
+          "Minimal risk: everything else, the large majority of business AI, such as spam filters and recommendation features. No specific obligations beyond the law that already applies to you.",
+          "General-purpose AI models: a parallel track with its own transparency and documentation duties for model providers, and additional obligations where a model carries systemic risk.",
+        ],
+      },
+      {
+        heading: "How to classify your own use",
+        paragraphs: [
+          "Classification is not a one-time judgment call; it is a per-system determination you should be able to defend in writing. Start from the use, not the technology. The same model can be minimal risk in one product and high risk in another, because the tier is about what the system does and to whom.",
+          "Work through it in order. First, is the use on the prohibited list? If so, stop; you do not deploy it. Second, is it a safety component of a regulated product, or does it fall in one of the listed high-risk areas such as hiring, credit, or access to essential services? If yes, plan for the high-risk obligations. Third, does it interact with people or generate content? If yes, you owe the transparency duties even if nothing else applies. If none of these fit, it is likely minimal risk, and you record why.",
+          "The recurring mistake is classifying by vibe rather than by use. A resume-screening feature is not low risk because it feels like a small convenience; screening for employment is a listed high-risk area. Write the classification and its reasoning down for each system. That written basis is both good practice and the thing a regulator or customer will ask you to produce.",
+        ],
+      },
+      {
+        heading: "What high-risk actually requires",
+        paragraphs: [
+          "If a system lands in the high-risk tier, the obligations are concrete and they are mostly about evidence and control rather than about the model's accuracy in the abstract. In broad strokes, a provider of a high-risk system is expected to operate a risk-management process across the lifecycle, apply data-governance practices to training and input data, maintain technical documentation, keep automatic logs of the system's operation, ensure meaningful human oversight, and hit thresholds for accuracy, robustness, and security. Deployers, the organizations using the system, carry their own duties, including using it per instructions and maintaining oversight.",
+          "Read that list again and notice what it is: an inventory of what your AI is and does, a written basis for the decisions behind it, runtime controls including human oversight, logs that record operation continuously, and a path to intervene or roll back when something goes wrong. These are operational capabilities, not documents you can backfill convincingly after the fact.",
+          "Two duties deserve emphasis because teams underestimate them. Logging is not optional telemetry; the system must record its operation in a way that supports traceability. And human oversight must be real, meaning a person who can understand the output, override it, and stop the system, not a nominal reviewer who rubber-stamps. Building these in from the start is far cheaper than retrofitting them under a deadline.",
+        ],
+      },
+      {
+        heading: "Making the obligations a byproduct of the system",
+        paragraphs: [
+          "The AI Act rewards the same posture that ISO 42001 does: governance that falls out of the system running, rather than a scramble before a review. For a high-risk system, that means the model inventory is live rather than a spreadsheet, the reasoning behind consequential decisions is captured as decisions are made, human oversight and runtime controls leave records as they operate, logs accumulate continuously, and rollback is a tested path. When those are in place, producing your technical documentation or answering a deployer's due-diligence question is a read of state you already hold.",
+          "This is where Stallwart works. We do not interpret the law for you and we do not certify or attest that you comply; conformity for high-risk systems runs through the Act's own assessment routes, and legal judgment belongs with your counsel. What we build is the substrate the obligations rest on: the live inventory, the written basis for decisions, the runtime controls and human oversight, and the continuous evidence trail. When the transparency notice, the documentation, or the log export is asked for, it already exists.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "The EU AI Act is risk-tiered; classify each use first, because the tier determines every obligation that follows.",
+      "Most business AI is limited or minimal risk with light transparency duties or none; the heavy obligations attach to the high-risk tier.",
+      "High-risk duties are operational: risk management, data governance, documentation, continuous logging, meaningful human oversight, and a tested rollback path.",
+      "Stallwart does not interpret the law or attest compliance; it builds the inventory, written basis, controls, and evidence trail the obligations rest on.",
+    ],
+    qa: [
+      {
+        question: "Is my AI system high risk under the EU AI Act?",
+        answer:
+          "It is high risk if it is a safety component of a regulated product or falls in a listed sensitive area such as employment, credit, education, essential services, or certain biometric and critical-infrastructure uses. Classify by what the system does and to whom, not by the technology, and write the reasoning down per system.",
+      },
+      {
+        question: "What are the obligations for a limited-risk AI system?",
+        answer:
+          "Mainly transparency. If your system interacts with people or generates content, you generally must make clear that people are dealing with AI or that content is AI-generated. There are no high-risk-style documentation or oversight duties, but the disclosure duty still applies.",
+      },
+      {
+        question: "What does a high-risk system have to do?",
+        answer:
+          "In broad terms: run a lifecycle risk-management process, apply data governance, keep technical documentation, maintain automatic operation logs, ensure meaningful human oversight, and meet accuracy, robustness, and security thresholds. Deployers who use the system carry their own oversight and usage duties.",
+      },
+      {
+        question: "Does the EU AI Act apply to companies outside the EU?",
+        answer:
+          "It can. The Act reaches AI placed on the EU market or whose output is used in the EU, so providers and deployers outside the EU can fall within scope. Whether it applies to you is a legal question to confirm with counsel; this guide helps you scope the work, not decide jurisdiction.",
+      },
+      {
+        question: "Does Stallwart make us compliant with the EU AI Act?",
+        answer:
+          "No. Stallwart does not interpret the law, certify, or attest compliance, and conformity for high-risk systems runs through the Act's own routes with your counsel. We build the live inventory, written basis for decisions, runtime controls, human oversight, and continuous evidence trail the obligations rest on, so the documentation and logs an assessment asks for already exist.",
+      },
+    ],
+  },
 ];
 
 // Reading time is computed from the actual body, not hand-typed, so it stays
