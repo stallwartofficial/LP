@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { site } from "@/data/site";
-import { offerings } from "@/data/offerings";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -11,39 +10,122 @@ const fieldClass =
   "mt-2 w-full rounded-xl border border-[var(--hairline-strong)] bg-transparent px-4 py-3 outline-none transition-colors placeholder:text-[var(--placeholder-fg)] focus:border-[var(--accent)]";
 const labelClass = "block text-sm font-medium text-[var(--fg)]/85";
 
-// Contact page. On desktop it is two columns: the argument on the left (a form
-// alone gives a reader no reason to fill it in), the form on the right. On
-// mobile the form comes first so the primary action is immediate, with the
-// argument and a direct-contact line beneath it.
+const INTERESTS = [
+  "AI Agents & Automation",
+  "AI + SaaS Products",
+  "AI Infrastructure & RAG",
+  "Custom AI Systems",
+  "Not sure yet",
+];
+
+// Three short steps convert better than one long form: each screen asks for one
+// coherent group, so the reader is never staring at a wall of fields.
+const STEPS = [
+  { id: "you", title: "You", required: ["name", "email"] as const },
+  { id: "company", title: "Company", required: ["company"] as const },
+  { id: "problem", title: "The problem", required: [] as const },
+] as const;
+
+type FormShape = {
+  name: string;
+  email: string;
+  company: string;
+  teamSize: string;
+  interest: string;
+  message: string;
+};
+
+const EMPTY: FormShape = {
+  name: "",
+  email: "",
+  company: "",
+  teamSize: "",
+  interest: "",
+  message: "",
+};
+
+// Placeholder avatars. Inline SVG so nothing external loads (CSP-safe) and
+// nothing shows broken. To use real photos later, drop six square images at
+// /public/images/avatars/ and swap the <AvatarCluster> circles for <img>.
+const AVATAR_BG = ["#3a2f22", "#4a3b28", "#5a4630", "#2e2a24", "#463a2a", "#544029"];
+
+function AvatarCluster() {
+  return (
+    <div className="flex items-center -space-x-3">
+      {AVATAR_BG.map((bg, i) => (
+        <span
+          key={i}
+          className="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full ring-2 ring-[var(--bg)]"
+          style={{ background: bg }}
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 40 40" className="h-full w-full">
+            <circle cx="20" cy="15" r="7" fill="rgba(245,241,232,0.55)" />
+            <path d="M6 38c0-8 6.3-13 14-13s14 5 14 13" fill="rgba(245,241,232,0.55)" />
+          </svg>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+// Contact page. Left column carries the argument, what-to-expect, and the proof
+// (so none of it hangs unseen); right column holds the multi-step form.
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState<FormShape>(EMPTY);
+  const [touched, setTouched] = useState(false);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  const set = (k: keyof FormShape, v: string) =>
+    setData((d) => ({ ...d, [k]: v }));
+
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+  const stepValid = STEPS[step].required.every((k) =>
+    k === "email" ? emailOk : data[k].trim().length > 0
+  );
+
+  const isLast = step === STEPS.length - 1;
+
+  async function submit() {
     setStatus("loading");
     setError(null);
-
-    const formData = new FormData(e.currentTarget);
-
     try {
       const res = await fetch("/api/demo-request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: JSON.stringify(data),
       });
-
-      // Surface the server's own message so a validation failure explains
-      // itself rather than showing a generic error.
       if (!res.ok) {
         const body = await res.json().catch(() => null);
         throw new Error(body?.error ?? "Request failed");
       }
-
       setStatus("success");
+      // Conversion event for GA4 (the tag defines window.gtag). Fires only on a
+      // real successful submit, so it measures booked-call intent, not visits.
+      (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag?.(
+        "event",
+        "generate_lead",
+        { method: "contact_form", interest: data.interest || "unspecified" }
+      );
     } catch (err) {
       setError(err instanceof Error ? err.message : null);
       setStatus("error");
+    }
+  }
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!stepValid) {
+      setTouched(true);
+      return;
+    }
+    if (isLast) {
+      submit();
+    } else {
+      setTouched(false);
+      setStep((s) => s + 1);
     }
   }
 
@@ -53,281 +135,200 @@ export function Contact() {
       aria-labelledby="contact-heading"
       className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-36 lg:pt-44"
     >
-      {/* Heading -> form -> detail on mobile, so the title frames the page, the
-          form is the immediate action, and the supporting detail follows. On
-          desktop the heading and detail share the left column while the form
-          holds a sticky right column spanning both rows. */}
-      <div className="mx-auto grid max-w-6xl items-start gap-x-20 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]">
-        {/* ---- Heading: first on mobile, top-left on desktop. ---- */}
+      <div className="mx-auto grid max-w-6xl items-start gap-x-20 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)]">
+        {/* ---------------- Left: argument + proof + expectations ---------------- */}
         <div className="order-1 lg:col-start-1 lg:row-start-1">
           <div className="flex items-center gap-3">
             <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)]" />
             <p className="eyebrow">Get in touch</p>
           </div>
 
-          <h1
-            id="contact-heading"
-            className="font-display mt-6 text-display-lg font-light"
-          >
+          <h1 id="contact-heading" className="font-display mt-6 text-display-lg font-light leading-[1.03]">
             Tell us what keeps
             <br />
             <span className="text-gold-sheen italic">falling through.</span>
           </h1>
 
-          <p className="mt-7 max-w-xl text-[length:var(--text-step-1)] text-[var(--fg)]/75">
-            Bring us the process that only works because someone remembers it.
-            We&apos;ll show you which part a system can take over, and say so
-            plainly if the answer is none of it.
+          <p className="mt-6 max-w-xl text-[length:var(--text-step-1)] text-[var(--fg)]/75">
+            Have something in your business you think AI could fix? Tell us about it.
+            We&apos;ll tell you straight if we can build it, what it would take, and
+            whether it&apos;s even worth doing.
           </p>
-        </div>
 
-        {/* ---- Detail: below the form on mobile, bottom-left on desktop. ---- */}
-        <div className="order-3 lg:col-start-1 lg:row-start-2">
-          <p className="eyebrow">What to expect</p>
-          <ul className="mt-5 space-y-4">
-            {[
-              "One reply from a real person, not a drip sequence.",
-              "A conversation about the actual problem, not a canned pitch.",
-              "A scoped, honest recommendation, including if off-the-shelf already solves it.",
-              "Someone who can answer technical questions on the spot, not route them.",
-            ].map((point) => (
-              <li key={point} className="flex gap-3">
-                <span
-                  aria-hidden="true"
-                  className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent-text)]"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" className="h-full w-full">
-                    <path
-                      d="M5 13l4 4L19 7"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <span className="text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/75">
-                  {point}
-                </span>
-              </li>
-            ))}
-          </ul>
+          {/* Proof: avatars + a real, standable number. */}
+          <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-4">
+            <AvatarCluster />
+            <div>
+              <p className="font-display text-[length:var(--text-step-2)] leading-none">
+                50+ <span className="text-[var(--fg)]/70">businesses served</span>
+              </p>
+              <p className="mt-1 text-sm text-[var(--fg)]/65">
+                Founder-led. Every engagement referenceable.
+              </p>
+            </div>
+          </div>
+
+          {/* What to expect */}
+          <div className="mt-10">
+            <p className="eyebrow">What to expect</p>
+            <ul className="mt-5 space-y-4">
+              {[
+                "One reply from a real person, not a drip sequence.",
+                "A conversation about the actual problem, not a canned pitch.",
+                "A scoped, honest recommendation, including if off-the-shelf already solves it.",
+                "Someone who can answer technical questions on the spot, not route them.",
+              ].map((point) => (
+                <li key={point} className="flex gap-3">
+                  <span aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent-text)]">
+                    <svg viewBox="0 0 24 24" fill="none" className="h-full w-full">
+                      <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <span className="text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/75">
+                    {point}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {site.contact.email && (
             <div className="rule-t mt-10 hidden pt-8 lg:block">
               <p className="eyebrow">Direct</p>
-              <ul className="mt-4 space-y-2 text-sm">
-                <li>
-                  <a
-                    href={`mailto:${site.contact.email}`}
-                    className="link-draw text-[var(--fg)]/75 hover:text-[var(--fg)]"
-                  >
-                    {site.contact.email}
-                  </a>
-                </li>
-              </ul>
+              <a
+                href={`mailto:${site.contact.email}`}
+                className="link-draw mt-4 inline-block text-sm text-[var(--fg)]/75 hover:text-[var(--fg)]"
+              >
+                {site.contact.email}
+              </a>
             </div>
           )}
         </div>
 
-        {/* ---- The form: second on mobile, sticky right column on desktop. ---- */}
-        <div className="order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-32 lg:self-start">
+        {/* ---------------- Right: the multi-step form ---------------- */}
+        <div className="order-2 lg:col-start-2 lg:row-start-1 lg:sticky lg:top-32 lg:self-start">
           {status === "success" ? (
-            <div
-              role="status"
-              className="rounded-2xl border border-[var(--accent)]/40 bg-[var(--surface)] p-8"
-            >
-              <span
-                aria-hidden="true"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--color-ink)]"
-              >
+            <div role="status" className="rounded-2xl border border-[var(--accent)]/40 bg-[var(--surface)] p-8">
+              <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--color-ink)]">
                 ✓
               </span>
-              <p className="font-display mt-5 text-[length:var(--text-step-2)]">
-                Got it.
-              </p>
+              <p className="font-display mt-5 text-[length:var(--text-step-2)]">Got it.</p>
               <p className="mt-3 text-[var(--fg)]/70">
                 We&apos;ll be in touch shortly to find a time.
-                {site.contact.email && (
-                  <>
-                    {" "}
-                    If it&apos;s urgent, reply straight to{" "}
-                    <a
-                      href={`mailto:${site.contact.email}`}
-                      className="link-draw text-[var(--accent-text)]"
-                    >
-                      {site.contact.email}
-                    </a>
-                    .
-                  </>
-                )}
               </p>
-              <Link
-                href="/offer"
-                className="link-draw mt-6 inline-block text-sm font-medium text-[var(--accent-text)]"
-              >
+              <Link href="/offer" className="link-draw mt-6 inline-block text-sm font-medium text-[var(--accent-text)]">
                 Meanwhile, see what we build →
               </Link>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 sm:p-8"
-            >
-              <div className="space-y-5">
-                <div>
-                  <label htmlFor="name" className={labelClass}>
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    autoComplete="name"
-                    placeholder="Jordan Mehta"
-                    className={`field ${fieldClass}`}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className={labelClass}>
-                    Work email
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    placeholder="jordan@company.com"
-                    className={`field ${fieldClass}`}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="company" className={labelClass}>
-                    Company
-                  </label>
-                  <input
-                    id="company"
-                    name="company"
-                    type="text"
-                    required
-                    autoComplete="organization"
-                    placeholder="Company name"
-                    className={`field ${fieldClass}`}
-                  />
-                </div>
-
-                {/* teamSize was already in the data model and the webhook
-                    payload but had no field to collect it. */}
-                <div>
-                  <label htmlFor="teamSize" className={labelClass}>
-                    Team size
-                  </label>
-                  <select
-                    id="teamSize"
-                    name="teamSize"
-                    defaultValue=""
-                    className={`field ${fieldClass}`}
-                  >
-                    <option value="">Select…</option>
-                    <option value="1-10">1-10</option>
-                    <option value="11-50">11-50</option>
-                    <option value="51-200">51-200</option>
-                    <option value="200+">200+</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="interest" className={labelClass}>
-                    What are you interested in?
-                  </label>
-                  <select
-                    id="interest"
-                    name="interest"
-                    defaultValue=""
-                    className={`field ${fieldClass}`}
-                  >
-                    <option value="">Select…</option>
-                    {offerings.map((o) => (
-                      <option key={o.slug} value={o.name}>
-                        {o.name}
-                        {o.status === "in-development" ? " (in development)" : ""}
-                      </option>
-                    ))}
-                    <option value="Not sure yet">Not sure yet</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className={labelClass}>
-                    What keeps falling through?{" "}
-                    <span className="font-normal text-[var(--fg)]/75">
-                      (optional)
+            <form onSubmit={handleSubmit} className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 sm:p-8">
+              {/* Progress */}
+              <div className="mb-7 flex items-center gap-3">
+                {STEPS.map((s, i) => (
+                  <div key={s.id} className="flex flex-1 flex-col gap-2">
+                    <span
+                      className={`h-1 rounded-full transition-colors duration-300 ${
+                        i <= step ? "bg-[var(--accent)]" : "bg-[var(--hairline-strong)]"
+                      }`}
+                    />
+                    <span
+                      className={`font-mono text-[10px] uppercase tracking-[0.14em] transition-colors ${
+                        i === step ? "text-[var(--accent-text)]" : "text-[var(--fg)]/45"
+                      }`}
+                    >
+                      {String(i + 1).padStart(2, "0")} {s.title}
                     </span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    placeholder="The process that only works because someone remembers it…"
-                    className={`field ${fieldClass}`}
-                  />
-                </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-5">
+                {step === 0 && (
+                  <>
+                    <div>
+                      <label htmlFor="name" className={labelClass}>Name</label>
+                      <input id="name" type="text" autoComplete="name" placeholder="Jordan Mehta" value={data.name} onChange={(e) => set("name", e.target.value)} className={`field ${fieldClass}`} />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className={labelClass}>Work email</label>
+                      <input id="email" type="email" autoComplete="email" placeholder="jordan@company.com" value={data.email} onChange={(e) => set("email", e.target.value)} className={`field ${fieldClass}`} />
+                      {touched && data.email.length > 0 && !emailOk && (
+                        <p className="mt-2 text-xs text-red-500">Enter a valid email address.</p>
+                      )}
+                    </div>
+                  </>
+                )}
+
+                {step === 1 && (
+                  <>
+                    <div>
+                      <label htmlFor="company" className={labelClass}>Company</label>
+                      <input id="company" type="text" autoComplete="organization" placeholder="Company name" value={data.company} onChange={(e) => set("company", e.target.value)} className={`field ${fieldClass}`} />
+                    </div>
+                    <div>
+                      <label htmlFor="teamSize" className={labelClass}>Team size <span className="font-normal text-[var(--fg)]/60">(optional)</span></label>
+                      <select id="teamSize" value={data.teamSize} onChange={(e) => set("teamSize", e.target.value)} className={`field ${fieldClass}`}>
+                        <option value="">Select…</option>
+                        <option value="1-10">1-10</option>
+                        <option value="11-50">11-50</option>
+                        <option value="51-200">51-200</option>
+                        <option value="200+">200+</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="interest" className={labelClass}>What are you interested in? <span className="font-normal text-[var(--fg)]/60">(optional)</span></label>
+                      <select id="interest" value={data.interest} onChange={(e) => set("interest", e.target.value)} className={`field ${fieldClass}`}>
+                        <option value="">Select…</option>
+                        {INTERESTS.map((label) => (
+                          <option key={label} value={label}>{label}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </>
+                )}
+
+                {step === 2 && (
+                  <div>
+                    <label htmlFor="message" className={labelClass}>What keeps falling through? <span className="font-normal text-[var(--fg)]/60">(optional)</span></label>
+                    <textarea id="message" rows={6} placeholder="The process that only works because someone remembers it…" value={data.message} onChange={(e) => set("message", e.target.value)} className={`field ${fieldClass}`} />
+                    <p className="mt-3 text-sm text-[var(--fg)]/60">
+                      Reviewing for {data.name || "you"}{data.company ? ` at ${data.company}` : ""}. One reply from a person, no drip sequence.
+                    </p>
+                  </div>
+                )}
               </div>
 
               {status === "error" && (
-                <p
-                  role="alert"
-                  className="mt-5 rounded-xl border border-red-500/40 bg-red-500/5 p-3 text-sm text-red-600 dark:text-red-400"
-                >
+                <p role="alert" className="mt-5 rounded-xl border border-red-500/40 bg-red-500/5 p-3 text-sm text-red-600 dark:text-red-400">
                   {error ?? "Something went wrong."}
-                  {site.contact.email && (
-                    <> You can also email {site.contact.email}.</>
-                  )}
                 </p>
               )}
 
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="group relative mt-7 w-full overflow-hidden rounded-full bg-[var(--fg)] px-7 py-4 text-sm font-medium text-[var(--bg)] disabled:opacity-60"
-              >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-disabled:translate-x-[-100%]"
-                />
-                <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
-                  {status === "loading" ? "Sending…" : site.cta.primary}
-                </span>
-              </button>
-
-              <p className="mt-4 text-center text-xs text-[var(--fg)]/75">
-                No newsletter, no drip sequence. One reply from a person.
-              </p>
+              {/* Controls */}
+              <div className="mt-7 flex items-center gap-3">
+                {step > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => { setTouched(false); setStep((s) => s - 1); }}
+                    className="rounded-full border border-[var(--hairline-strong)] px-5 py-3.5 text-sm font-medium text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
+                  >
+                    Back
+                  </button>
+                )}
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="group relative flex-1 overflow-hidden rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)] disabled:opacity-60"
+                >
+                  <span aria-hidden="true" className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0" />
+                  <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
+                    {status === "loading" ? "Sending…" : isLast ? site.cta.primary : "Continue"}
+                  </span>
+                </button>
+              </div>
             </form>
           )}
         </div>
-
-        {/* Direct-contact line, mobile only. The desktop layout carries its
-            own copy of this inside the argument column. */}
-        {site.contact.email && (
-          <div className="order-4 border-t border-[var(--hairline)] pt-6 lg:hidden">
-            <p className="eyebrow">Direct</p>
-            <ul className="mt-3 space-y-1.5 text-sm">
-              <li>
-                <a
-                  href={`mailto:${site.contact.email}`}
-                  className="link-draw text-[var(--fg)]/85"
-                >
-                  {site.contact.email}
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
       </div>
     </section>
   );

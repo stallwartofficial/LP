@@ -27,14 +27,14 @@ export const site = {
   // PUNCTUATION RULE: no em dashes anywhere on this site, including page
   // titles. Use a comma, a colon, a full stop, or a middot.
   company: "Stallwart",
-  tagline: "From first principles to production",
+  tagline: "An AI-first engineering company",
 
   /** What the company is, in one line. No em dash: this feeds the tab title. */
-  companyDescriptor: "AI and Software Engineering",
+  companyDescriptor: "AI-first engineering",
 
   /** Expanded positioning line, used under the wordmark and in the footer. */
   positioning:
-    "We build systems with AI that are reliable, honest, and built to scale.",
+    "We build anything AI around your business, engineered to run in production.",
 
   domain: "https://www.stallwart.in", // canonical host, drives every canonical URL
 
@@ -44,20 +44,22 @@ export const site = {
    * contradicts the h1 splits the ranking signal for the same query.
    */
   description:
-    "Stallwart builds AI systems engineered to run unattended, audited, and trusted, from first principles to production and built for reliability, security, and scale.",
+    "Stallwart is an AI-first engineering company that builds production-grade AI systems: AI agents, AI and SaaS products, AI infrastructure and RAG, and custom AI systems, engineered to run in production and yours to own.",
 
   hero: {
     /** Hero-only tagline. Kept separate from the shared `tagline` above so the
         footer, ContactBanner and OG images keep the company standard. */
-    tagline: "From first principles to production",
+    tagline: "An AI-first engineering company",
+    /** Rotating scope list for the hero flip-board. */
+    flipWords: ["AI agents", "RAG bots", "dashboards", "SaaS products", "automation", "AI infra"],
     /** Split on the pipe: one line per clause. */
-    headline: "AI systems engineered to run|unattended, audited, and trusted.",
+    headline: "AI products, agents, and systems,|built around your business.",
     /**
      * The one word set in gold. The headline is split around it, so changing
      * either string keeps the emphasis in the right place. Must appear in
      * `headline` verbatim or the headline simply renders unemphasised.
      */
-    headlineEmphasis: "trusted",
+    headlineEmphasis: "your business",
     /**
      * Two paragraphs rather than one wall: the first states what the company
      * is, the second states how it works. Original copy carried an em dash
@@ -65,11 +67,11 @@ export const site = {
      * punctuation rule above.
      */
     subhead: [
-      "Production-grade AI systems and custom software for the work that can't be solved off the shelf.",
-      "Engineered for autonomy, governance, and reliability.",
+      "You have the problem, we build the AI that solves it.",
+      "Custom AI, SaaS, and automation, engineered to run in production, not just demo.",
     ],
     primaryCta: { label: "Book a call", href: "/contact" },
-    secondaryCta: { label: "See What We Build", href: "/offer" },
+    secondaryCta: { label: "See Our Work", href: "/offer" },
     scrollCue: "How we build",
   },
 
@@ -188,8 +190,8 @@ export const site = {
 
 
   contact: {
-    email: "", // TODO(owner): set the confirmed official inbox; email UI stays hidden while this is empty
-    address: "Address on file, contact us for details", // placeholder
+    email: "", // no public inbox for now; email UI stays hidden while empty
+    address: "India",
   },
   /**
    * Where the company is based and who it serves. Country + region only, no

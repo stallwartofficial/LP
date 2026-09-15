@@ -105,11 +105,6 @@ export function organizationSchema() {
       return profiles.length ? { sameAs: profiles } : {};
     })(),
     founder: { "@type": "Person", name: site.founder.fullName },
-    knowsAbout: [
-      "AI systems engineering",
-      "Sales pipeline automation",
-      "AI governance and compliance",
-    ],
     areaServed: site.location.areaServed.map((name) => ({
       "@type": "Place",
       name,
@@ -119,17 +114,14 @@ export function organizationSchema() {
       addressCountry: site.location.country,
       addressRegion: site.location.region,
     },
-    makesOffer: offerings
-      .filter((o) => o.status === "available")
-      .map((o) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "SoftwareApplication",
-          name: o.name,
-          description: o.summary,
-          url: `${site.domain}/offer/${o.slug}`,
-        },
-      })),
+    knowsAbout: [
+      "Artificial Intelligence",
+      "AI Agents",
+      "Retrieval-Augmented Generation",
+      "AI Infrastructure",
+      "SaaS Product Engineering",
+      "Automation",
+    ],
   };
 }
 
@@ -243,6 +235,7 @@ export function articleSchema(opts: {
   headline: string;
   description: string;
   datePublished: string;
+  dateModified?: string;
   path: string;
   about?: string;
   type?: "Article" | "BlogPosting";
@@ -253,15 +246,55 @@ export function articleSchema(opts: {
     headline: opts.headline,
     description: opts.description,
     datePublished: opts.datePublished,
+    // Freshness signal: engines weight recency. Defaults to published date when
+    // a post has not been revised.
+    dateModified: opts.dateModified ?? opts.datePublished,
     about: opts.about,
     url: `${site.domain}${opts.path}`,
-    author: { "@type": "Organization", name: site.company },
+    // Author is the founder (E-E-A-T), with the company as publisher.
+    author: {
+      "@type": "Person",
+      name: site.founder.fullName,
+      jobTitle: site.founder.role,
+    },
     publisher: {
       "@type": "Organization",
       name: site.company,
       url: site.domain,
     },
     isPartOf: { "@type": "WebSite", name: site.company, url: site.domain },
+  };
+}
+
+/**
+ * The four capabilities as Service entities, so answer engines can associate
+ * Stallwart with "who builds AI agents / RAG / AI SaaS / custom AI". Product-
+ * free by design: these are services the company provides, not named products.
+ */
+export function serviceSchema() {
+  const services = [
+    ["AI Agents & Automation", "Software that runs a process end to end, unattended."],
+    ["AI + SaaS Products", "Full AI and SaaS products, built, shipped, and owned by the client."],
+    ["AI Infrastructure & RAG", "Retrieval, model selection, and evaluation that make AI reliable."],
+    ["Custom AI Systems", "Bespoke AI systems engineered to fit the business."],
+  ];
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${site.company}, what we build`,
+    itemListElement: services.map(([name, description], i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Service",
+        name,
+        description,
+        serviceType: name,
+        provider: { "@type": "Organization", name: site.company, url: site.domain },
+        areaServed: site.location.areaServed,
+        url: `${site.domain}/offer`,
+      },
+    })),
   };
 }
 

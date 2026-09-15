@@ -448,7 +448,7 @@ p {
 /* The signature band — fixed to the bottom of the viewport, sitting behind
    the page-stack. */
 .fs-fixed {
-  --fs-height: clamp(200px, 32vw, 480px);
+  --fs-height: clamp(90px, 13vw, 230px);
   position: fixed;
   left: 0;
   right: 0;
@@ -461,7 +461,7 @@ p {
   overflow: hidden;
   pointer-events: auto;
 }
-:root { --fs-height: clamp(200px, 32vw, 480px); }
+:root { --fs-height: clamp(90px, 13vw, 230px); }
 
 .fs-plate {
   --sx: 50%;
@@ -1153,3 +1153,13 @@ textarea { field-sizing: content; }
     }
   }
 }
+
+@keyframes flipUp{from{opacity:0;transform:translateY(0.5em)}to{opacity:1;transform:translateY(0)}}
+
+
+/* Terminal (What we build) */
+.term-caret{display:inline-block;width:0.55ch;height:1.05em;margin-left:1px;background:var(--accent);transform:translateY(0.16em);animation:termBlink 1.05s steps(1) infinite}
+@keyframes termBlink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+.term-line{opacity:0;transform:translateY(4px);transition:opacity .35s var(--ease-out-expo),transform .35s var(--ease-out-expo)}
+.term-line.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.term-caret{animation:none}.term-line{opacity:1;transform:none;transition:none}}

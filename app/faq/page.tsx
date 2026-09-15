@@ -14,22 +14,22 @@ const faqs = [
   {
     question: "What does Stallwart do?",
     answer:
-      "Stallwart builds AI systems and custom software that take operational work off a team permanently. The portfolio spans custom AI engineering, an outbound go-to-market product, and AI governance, each engineered to run on its own rather than to be operated by hand.",
+      "Stallwart is an AI-first engineering company. We build anything AI around your business: AI agents and automation, AI + SaaS products, AI infrastructure and RAG, and fully custom AI systems, each engineered to run in production rather than to be operated by hand.",
   },
   {
-    question: "Is Stallwart a product company or a services company?",
+    question: "What kinds of things can you build?",
     answer:
-      "Both, deliberately. Extrovert AI is a product you run. Custom Systems and AI, and Sillage, are engineered to operate as a function inside your business. What they share is the same standard: the system carries the work, not the customer.",
+      "If it involves AI, we build it. Agents that run a process end to end, automation that removes repetitive work, RAG systems and dashboards that turn scattered data into answers, AI features inside your product, and the infrastructure underneath. You bring the problem, we build the system that solves it.",
   },
   {
     question: "Who does Stallwart build for?",
     answer:
-      "B2B organizations, from small teams that need more output without new headcount up to enterprises that need consistency and auditability across large operations.",
+      "Businesses of any kind, technical or not, from small teams that need more output without new headcount up to enterprises that need consistency and auditability across large operations. You do not need to know how AI works. You need to know the problem.",
   },
   {
     question: "What does it cost?",
     answer:
-      "It depends on the offering. Custom builds are fixed price per phase, quoted after a paid discovery sprint. Extrovert AI is pay-as-you-go, priced to your outbound volume. Sillage is in development with design-partner pricing. There is no public rate card because pricing is scoped to the situation, not forced into a template.",
+      "It depends on the scope. Custom builds are fixed price per phase, quoted after a paid discovery sprint. There is no public rate card because pricing is scoped to the situation, not forced into a template.",
   },
   {
     question: "What do we own at the end?",
@@ -47,19 +47,9 @@ const faqs = [
       "With a call and, for custom work, a paid discovery sprint. We map how the work actually happens, identify where a system can take it over, and scope from there. We do not propose automation before understanding the workflow it has to survive.",
   },
   {
-    question: "What is Extrovert AI?",
-    answer:
-      "Stallwart's AI go-to-market engine, one offering in the portfolio, not the whole company. You give it a target company and website and it runs outbound end to end: researching the account, writing and sending outreach in your voice, following up, scoring replies, and booking the meeting.",
-  },
-  {
-    question: "What is Sillage?",
-    answer:
-      "An AI governance platform, in development, for teams who will be audited. It stands up a live register of every AI system in use, a written basis for how each decides, runtime controls, and a continuously assembled evidence trail that maps onto SOC 2 and ISO/IEC 42001.",
-  },
-  {
     question: "How can we partner with Stallwart?",
     answer:
-      "Four ways: a Solutions partner brings Stallwart products to their own customers; a White-label partner sells Stallwart-built products under their own brand; a Delivery partner brings the opportunity while Stallwart provides the engineering; and a Referral partner introduces businesses and shares in the resulting opportunity.",
+      "Four ways: a Solutions partner brings Stallwart's work to their own customers; a White-label partner sells Stallwart-built systems under their own brand; a Delivery partner brings the opportunity while Stallwart provides the engineering; and a Referral partner introduces businesses and shares in the resulting opportunity.",
   },
 ];
 

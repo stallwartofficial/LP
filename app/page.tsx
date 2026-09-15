@@ -1,44 +1,37 @@
 import { Hero } from "@/components/Hero";
-import { OfferingsTeaser } from "@/components/OfferingsTeaser";
+import { ProblemSolution } from "@/components/ProblemSolution";
+import { WhatWeBuild } from "@/components/WhatWeBuild";
 import { StoryTeaser } from "@/components/StoryTeaser";
 import { Architecture } from "@/components/Architecture";
-import { InsightsTeaser } from "@/components/InsightsTeaser";
 import { SocialProof } from "@/components/SocialProof";
 import { Commitments } from "@/components/TrustLayer";
 import { ContactBanner } from "@/components/ContactBanner";
 import { JsonLd } from "@/components/JsonLd";
-import { offeringListSchema, webSiteSchema } from "@/lib/seo";
+import { webSiteSchema } from "@/lib/seo";
 
-// The company front door.
+// The company front door, restructured for conversion + clarity.
 //
-// ORDER answers a buyer's questions in the order they are actually asked:
-//
-//   1  Hero            who you are, with the schematic that backs the claim
-//   2  LogoScroll      the trust bar, where a trust bar belongs
-//   3  OfferingsTeaser what can I buy, four compact cards
-//   4  StoryTeaser     why you exist, once they know what you sell
-//   6  Architecture    the one engine underneath all four systems
-//   7  InsightsTeaser  proof
-//   8  SocialProof     accounts by role and sector
-//   9  Commitments     the terms: cost, duration, ownership
-//  10  ContactBanner   the ask
-//
-// REMOVED in this pass: the "BUILT BEYOND" marquee band, which was decoration
-// between two sections that did not need separating; the standalone production
-// properties strip, whose four figures repeated claims made in full sentences
-// elsewhere; and the "Four steps" engagement block, which described process
-// nobody asked about. The terms worth keeping from it now open Commitments.
+//   1  Hero             who we are + the flip-board scope, in 5 seconds
+//   2  ProblemSolution  the "that's my problem" comprehension moment
+//   3  WhatWeBuild      the bento: anything AI, to production
+//   4  Architecture     the engine underneath, plain + interactive
+//   5  InsightsTeaser   case studies, proof it ships
+//   6  Commitments      the terms: ownership, fixed price, no lock-in
+//   7  SocialProof      testimonials, real names
+//   8  StoryTeaser      the founder, human trust
+//   9  AskAI            verify us with any AI (rare GEO signal)
+//  10  ContactBanner    the close, Apple-style
 export default function Home() {
   return (
     <>
-      <JsonLd schema={[webSiteSchema(), offeringListSchema()]} />
+      <JsonLd schema={[webSiteSchema()]} />
       <Hero />
-      <OfferingsTeaser />
+      <ProblemSolution />
+      <WhatWeBuild />
       <Architecture />
       <Commitments />
-      <InsightsTeaser />
-      <StoryTeaser />
       <SocialProof />
+      <StoryTeaser />
       <ContactBanner />
     </>
   );

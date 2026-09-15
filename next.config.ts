@@ -62,9 +62,14 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // Products (Extrovert AI, Sillage) were removed from the site during the
+      // AI-first repositioning; they now appear only in the footer family line.
+      // Their old detail URLs fold into the capability overview.
+      { source: "/offer/extrovert-ai", destination: "/offer", permanent: true },
+      { source: "/offer/sillage", destination: "/offer", permanent: true },
       {
         source: "/offer/ai-compliance-and-governance",
-        destination: "/offer/sillage",
+        destination: "/offer",
         permanent: true,
       },
       {

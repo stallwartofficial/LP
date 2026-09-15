@@ -1,17 +1,15 @@
 import { site } from "@/data/site";
-import { offerings } from "@/data/offerings";
 
-// "One engine" as a single diagram.
+// The engineering core, as one diagram.
 //
-// WHAT CHANGED. The four layers used to sit below the diagram as a separate row
-// of cards, where they read as four unexplained words. They are now inside the
-// engine block itself, which is the only place they mean anything: the systems
-// sit on top, the layers are the strata they run through, and the layer a system
-// depends on is stated on the system.
-//
-// Engineering line work only: hairlines, small nodes, monospace labels. Server
-// component, no JavaScript. The single traveling signal is CSS that stops under
-// reduced motion.
+// WHAT CHANGED. This used to map data/offerings (Extrovert, Sillage) as the
+// "systems" sitting on top of the engine, which pulled the products onto the
+// home page. Removed entirely. The section is now purely the four shared layers
+// every build moves through: Decide -> Route -> Enforce -> Run, shown as a
+// left-to-right pipeline with one CSS signal tracing it (stops under reduced
+// motion). Server component, no JavaScript.
+const FLOW = ["Decide", "Route", "Enforce", "Run"] as const;
+
 export function Architecture() {
   const { architecture } = site;
 
@@ -22,141 +20,57 @@ export function Architecture() {
     >
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
-          <p className="eyebrow">Architecture</p>
+          <p className="eyebrow">One engineering standard</p>
           <h2
             id="architecture-heading"
             className="font-display mt-3 text-display-sm font-light"
           >
-            Inside{" "}
-            <span className="text-gold-sheen italic">the engine.</span>
+            Every build runs on{" "}
+            <span className="text-gold-sheen italic">the same engine.</span>
           </h2>
           <p className="mt-4 text-[var(--fg)]/75">{architecture.lead}</p>
         </div>
 
-        <div className="mt-12 rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5 sm:p-8">
-          {/* ---------- Systems, sitting on top of the engine ---------- */}
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--fg)]/70">
-            Systems
-          </p>
+        {/* The engine block, with the four layers inside it. */}
+        <div className="mt-12 rounded-2xl border border-[var(--accent)]/40 bg-[var(--surface)] p-5 sm:p-8">
+          <div className="flex flex-wrap items-baseline justify-between gap-3">
+            <p className="font-display text-[length:var(--text-step-2)]">
+              {site.company} engineering core
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
+              Every build, every engagement
+            </p>
+          </div>
 
-          <ul className="mt-4 grid gap-3 sm:grid-cols-3">
-            {offerings.map((offering) => (
-              <li
-                key={offering.slug}
-                className="group rounded-lg border border-[var(--hairline)] bg-[var(--surface)] p-4 transition-all duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--card-glow)]"
-              >
-                <span className="flex items-center gap-2">
-                  <span
-                    aria-hidden="true"
-                    className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                      offering.status === "available"
-                        ? "bg-[var(--accent)]"
-                        : "border border-[var(--fg)]/40"
-                    }`}
-                  />
-                  <span className="font-display text-[length:var(--text-step-1)] leading-tight transition-colors duration-300 group-hover:text-[var(--accent-text)]">
-                    {offering.name}
-                  </span>
-                </span>
+          {/* Signal rail: a single hairline with the traveling dot on it. */}
+          <div aria-hidden="true" className="relative mt-8 hidden h-px bg-[var(--hairline-strong)] lg:block">
+            <span className="trace-x absolute top-1/2 h-[7px] w-[7px] -translate-y-1/2 rounded-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]" />
+          </div>
 
-                {/* The four shared engineering layers as a uniform gold meter.
-                    Every build moves through the same four, which is the whole
-                    claim of this section, so the dashes read as one consistent
-                    set rather than a per-system on/off that muddied the point. */}
-                <span className="mt-2.5 flex flex-wrap gap-1">
-                  {architecture.layers.map((layer) => (
-                    <span
-                      key={layer.name}
-                      title={layer.name}
-                      className="h-1 w-5 rounded-full bg-[var(--accent)]"
-                      aria-hidden="true"
-                    />
-                  ))}
-                  <span className="sr-only">
-                    Runs through{" "}
-                    {architecture.layers.map((l) => l.name).join(", ")}.
+          <ol className="mt-6 grid gap-px overflow-hidden rounded-xl bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-4">
+            {architecture.layers.map((layer, i) => (
+              <li key={layer.name} className="group relative bg-[var(--bg)] p-5 transition-colors duration-300 hover:bg-[var(--surface)]">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="font-mono text-[10px] tracking-[0.16em] text-[var(--accent-text)]">
+                    {String(i + 1).padStart(2, "0")} · {FLOW[i]}
                   </span>
-                </span>
+                </div>
+
+                <h3 className="font-display mt-3 text-[length:var(--text-step-1)]">
+                  {layer.name}
+                </h3>
+                <p className="mt-2 text-xs leading-snug text-[var(--fg)]/85">
+                  {layer.plain}
+                </p>
+                <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--fg)]/70">
+                  {layer.role}
+                </p>
+                <p className="mt-3 text-xs leading-relaxed text-[var(--fg)]/75">
+                  {layer.detail}
+                </p>
               </li>
             ))}
-          </ul>
-
-          {/* ---------- Converging connectors ----------
-              Hidden on mobile: the systems stack in one column there, so a
-              diagram that converges three side-by-side systems would not line up
-              with anything. It returns at sm, where the systems sit in a row. */}
-          <div aria-hidden="true" className="relative hidden h-14 sm:block">
-            {/* One drop per system, derived so adding an offering cannot
-                desynchronise the diagram from the portfolio. */}
-            <div className="absolute inset-x-0 top-0 flex justify-around">
-              {offerings.map((offering) => (
-                <span
-                  key={offering.slug}
-                  className="block h-6 w-px bg-[var(--hairline-strong)]"
-                />
-              ))}
-            </div>
-            {/* Collector, inset to the first and last drop. */}
-            <div
-              className="absolute top-6 h-px bg-[var(--hairline-strong)]"
-              style={{
-                left: `${100 / offerings.length / 2}%`,
-                right: `${100 / offerings.length / 2}%`,
-              }}
-            />
-            {/* Single spine into the engine, with the signal tracing down it. */}
-            <div className="absolute left-1/2 top-6 h-8 w-px -translate-x-1/2 bg-[var(--hairline-strong)]">
-              <span className="trace-y absolute left-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]" />
-            </div>
-          </div>
-
-          {/* ---------- The engine, with its layers inside it ---------- */}
-          <div className="mt-8 rounded-xl border border-[var(--accent)]/50 bg-[var(--bg)] p-5 sm:mt-0 sm:p-6">
-            <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <p className="font-display text-[length:var(--text-step-2)]">
-                {site.company} engineering core
-              </p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
-                Every build, every engagement
-              </p>
-            </div>
-
-            <ol className="mt-6 grid grid-cols-2 gap-px bg-[var(--hairline)] lg:grid-cols-4">
-              {architecture.layers.map((layer, i) => (
-                <li key={layer.name} className="relative bg-[var(--bg)] p-4">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <span className="font-mono text-[10px] tracking-[0.16em] text-[var(--accent-text)]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    {i < architecture.layers.length - 1 && (
-                      <span
-                        aria-hidden="true"
-                        className="hidden text-sm text-[var(--fg)]/30 lg:inline"
-                      >
-                        →
-                      </span>
-                    )}
-                  </div>
-
-                  <h3 className="font-display mt-3 text-[length:var(--text-step-1)]">
-                    {layer.name}
-                  </h3>
-                  {/* Plain gloss first for the non-specialist, then the mono
-                      role label and the engineering detail for the technical
-                      reader. Layered, not dumbed down. */}
-                  <p className="mt-2 text-xs leading-snug text-[var(--fg)]/85">
-                    {layer.plain}
-                  </p>
-                  <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--fg)]/70">
-                    {layer.role}
-                  </p>
-                  <p className="mt-3 text-xs leading-relaxed text-[var(--fg)]/75">
-                    {layer.detail}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
+          </ol>
         </div>
       </div>
     </section>

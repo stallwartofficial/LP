@@ -33,12 +33,12 @@ export function LogoScroll({ inHero = false }: { inHero?: boolean } = {}) {
         <div className="flex min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <div
             aria-hidden="true"
-            className="animate-marquee flex shrink-0 items-center gap-12"
+            className="animate-marquee flex w-max shrink-0 items-center"
           >
             {marks.map((mark, i) => (
               <span
                 key={`${mark}-${i}`}
-                className="font-display whitespace-nowrap text-sm tracking-[0.2em] text-[var(--fg)]/72"
+                className="font-display whitespace-nowrap pr-12 text-sm tracking-[0.2em] text-[var(--fg)]/72"
               >
                 {mark}
               </span>

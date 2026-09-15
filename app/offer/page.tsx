@@ -1,32 +1,35 @@
 import type { Metadata } from "next";
-import { Offerings } from "@/components/Offerings";
+import { WhatWeBuild } from "@/components/WhatWeBuild";
+import { Architecture } from "@/components/Architecture";
 import { Commitments } from "@/components/TrustLayer";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbSchema, offeringListSchema, pageMeta } from "@/lib/seo";
+import { breadcrumbSchema, serviceSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "AI Systems, Custom Software & AI Governance",
+  title: "What We Build: AI Agents, SaaS, Infrastructure & Custom AI",
   description:
-    "Stallwart is a custom AI engineering firm. Three offerings on one engineering standard: bespoke builds, Extrovert AI, and Sillage for AI governance.",
+    "Stallwart is an AI-first engineering company. We build anything AI: agents, AI + SaaS products, RAG and AI infrastructure, and custom AI systems, engineered to production on one standard.",
   path: "/offer",
 });
 
-// The portfolio overview. Offering-specific depth (features, integrations,
-// product FAQs) lives at /offer/[slug], not here.
+// Capability overview. No products: the four things we build, the engine they
+// run on, how we work, and the FAQ. Reuses the home-page bento and engine so the
+// story stays identical across the site.
 export default function OfferPage() {
   return (
     <div>
       <JsonLd
         schema={[
-          offeringListSchema(),
+          serviceSchema(),
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "What We Offer", path: "/offer" },
+            { name: "What We Build", path: "/offer" },
           ]),
         ]}
       />
-      <Offerings />
+      <WhatWeBuild />
+      <Architecture />
       <Commitments />
       <Faq heading="How we work" />
     </div>

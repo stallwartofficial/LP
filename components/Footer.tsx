@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/data/site";
-import { offerings } from "@/data/offerings";
 import { AskAI } from "./AskAI";
 
 // Editorial footer: the wordmark at display scale, then real columns. Also a
@@ -89,18 +88,18 @@ export function Footer() {
           <div>
             <h2 className="eyebrow">What we build</h2>
             <ul className="mt-5 space-y-3">
-              {offerings.map((offering) => (
-                <li key={offering.slug}>
+              {[
+                { label: "AI Agents & Automation", href: "/offer" },
+                { label: "AI + SaaS Products", href: "/offer" },
+                { label: "AI Infrastructure & RAG", href: "/offer" },
+                { label: "Custom AI Systems", href: "/offer" },
+              ].map((link, i) => (
+                <li key={i}>
                   <Link
-                    href={`/offer/${offering.slug}`}
+                    href={link.href}
                     className="link-draw text-sm text-[var(--fg)]/70 hover:text-[var(--fg)]"
                   >
-                    {offering.name}
-                    {offering.status === "in-development" && (
-                      <span className="ml-1.5 text-xs text-[var(--fg)]/75">
-                        (soon)
-                      </span>
-                    )}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -146,9 +145,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="rule-t mt-14 flex flex-col gap-3 pt-6 text-xs text-[var(--fg)]/75 sm:flex-row sm:items-center sm:justify-between">
-          {/* Three zones with room to breathe: plain copyright, one personality
-              line (the localhost wink), then the legal links. Year auto-updates. */}
+        {/* The only place Extrovert AI and Sillage appear on the site. */}
+        <p className="rule-t mt-14 pt-6 text-xs text-[var(--fg)]/60">
+          Part of the Stallwart family, Extrovert AI and Sillage.
+        </p>
+
+        <div className="mt-3 flex flex-col gap-3 pt-2 text-xs text-[var(--fg)]/75 sm:flex-row sm:items-center sm:justify-between">
+          {/* Plain copyright, then the legal links. Year auto-updates. */}
           <p className="shrink-0">
             © {new Date().getFullYear()} {site.company}. All rights reserved.
           </p>

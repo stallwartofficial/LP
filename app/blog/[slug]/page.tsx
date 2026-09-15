@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts, getBlogPost } from "@/data/blog";
-import { getOffering } from "@/data/offerings";
 import { site } from "@/data/site";
 import { JsonLd } from "@/components/JsonLd";
 import { MarkPostRead } from "@/components/BlogReadState";
@@ -41,7 +40,6 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const isCaseStudy = post.kind === "case-study";
-  const offering = getOffering(post.offering);
 
   return (
     <>
@@ -90,14 +88,6 @@ export default async function BlogPostPage({ params }: Props) {
               <span className="text-xs text-[var(--fg)]/72">
                 {post.industry}
               </span>
-            )}
-            {offering && (
-              <Link
-                href={`/offer/${offering.slug}`}
-                className="link-draw text-xs text-[var(--accent-text)]"
-              >
-                {offering.name}
-              </Link>
             )}
           </div>
 
@@ -257,12 +247,20 @@ export default async function BlogPostPage({ params }: Props) {
               Bring us the version of it happening in your business and we will
               tell you which part a system can take over.
             </p>
-            <Link
-              href="/contact"
-              className="btn-wipe mt-7 inline-block rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)]"
-            >
-              {site.cta.primary}
-            </Link>
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link
+                href="/contact"
+                className="btn-wipe inline-block rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)]"
+              >
+                {site.cta.primary}
+              </Link>
+              <Link
+                href="/offer"
+                className="link-draw text-sm font-medium text-[var(--accent-text)]"
+              >
+                See what we build →
+              </Link>
+            </div>
           </div>
         </div>
       </article>
