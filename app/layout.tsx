@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono, Cinzel } from "next/font/google";
+import { Spectral, IBM_Plex_Sans, IBM_Plex_Mono, Cinzel } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { Navbar } from "@/components/Navbar";
@@ -18,14 +18,17 @@ import { organizationSchema, heroOgImageUrl } from "@/lib/seo";
 // Only the `opsz` axis is loaded. SOFT/WONK were requested for an editorial cut
 // but nothing sets them in CSS (the animation that once did was removed), so
 // they were dead weight on the critical-path font that renders the hero (LCP).
-const fraunces = Fraunces({
+// Spectral replaces Fraunces as the display face. Fraunces reads as the default
+// "editorial AI-site" serif; Spectral is a transitional serif drawn for screen
+// text, so it carries enterprise gravitas without the generic look. Light (300)
+// for large display sizes, up to 600 for small caps, with italics for accents.
+const spectral = Spectral({
   variable: "--font-display-loaded",
   subsets: ["latin"],
-  axes: ["opsz"],
-  // "optional" instead of "swap": on slow connections the browser paints with
-  // the adjusted fallback and doesn't repaint later. Lighthouse LCP no longer
-  // waits for the font swap, cutting ~400-600ms off mobile-throttled LCP for
-  // the text hero. Cached on second load so the real Fraunces renders normally.
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  // "optional": on slow connections the browser paints with the adjusted
+  // fallback and doesn't repaint later, keeping the text hero off the LCP path.
   display: "optional",
 });
 
@@ -76,9 +79,9 @@ const cinzel = Cinzel({
 // with the actionable positioning ("AI systems and custom software"), then
 // pairs the trust promise, then the brand.
 const homeTitle =
-  "Production-Grade AI Systems & Custom Software | Stallwart";
+  "AI Agents, AI + SaaS & Custom AI Systems | Stallwart";
 const homeDescription =
-  "Stallwart builds production-grade AI systems and custom software for work that can't be solved off the shelf, engineered for autonomy, governance, and reliability.";
+  "Stallwart is an AI-first engineering company. Bring the problem, we build the AI that solves it: agents, AI + SaaS products, RAG and infrastructure, and custom AI systems, engineered to production and yours to own.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
@@ -116,7 +119,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`h-full antialiased ${fraunces.variable} ${plexSans.variable} ${plexMono.variable} ${cinzel.variable}`}
+      className={`h-full antialiased ${spectral.variable} ${plexSans.variable} ${plexMono.variable} ${cinzel.variable}`}
       // Tells Next the smooth scrolling in globals.css is intentional, so it
       // suppresses it during route transitions instead of warning about it.
       data-scroll-behavior="smooth"

@@ -1,6 +1,13 @@
 import { site } from "@/data/site";
-import { offerings } from "@/data/offerings";
 import { articlePosts, caseStudyPosts } from "@/data/blog";
+
+// What the company builds, product-free.
+const CAPABILITIES: [string, string][] = [
+  ["AI Agents & Automation", "software that runs a process end to end, unattended."],
+  ["AI + SaaS Products", "full products, built and shipped, owned by the client outright."],
+  ["AI Infrastructure & RAG", "retrieval, model selection, and evaluation that make AI reliable."],
+  ["Custom AI Systems", "anything the rest do not cover, engineered to fit the business."],
+];
 
 // llms.txt, generated from the same data as the rest of the site so it never
 // goes stale. New offerings and posts appear automatically. Prerendered at
@@ -9,16 +16,10 @@ export const dynamic = "force-static";
 
 const B = site.domain;
 
-const statusLabel = (s: string) =>
-  s === "available" ? "available" : "in development, not yet purchasable";
-
 export function GET() {
-  const offeringLines = offerings
-    .map(
-      (o) =>
-        `- [${o.name}](${B}/offer/${o.slug}): ${statusLabel(o.status)}. ${o.summary}`
-    )
-    .join("\n");
+  const capabilityLines = CAPABILITIES.map(
+    ([name, desc]) => `- ${name}: ${desc}`
+  ).join("\n");
 
   const articleLines = articlePosts
     .map((p) => `- [${p.title}](${B}/blog/${p.slug}): ${p.excerpt}`)
@@ -30,19 +31,23 @@ export function GET() {
 
   const body = `# ${site.company}
 
-> ${site.company} is a custom software and SaaS company that builds production grade AI systems, intelligent automation, and custom software for problems no off-the-shelf product solves. Founder: Arun Saravanan. Tagline: ${site.tagline}. Site: ${B}
+> ${site.company} is an AI-first engineering company that builds production-grade AI systems: AI agents, AI + SaaS products, AI infrastructure and RAG, and fully custom AI systems, for problems no off-the-shelf product solves. Founder: Arun Saravanan. Tagline: ${site.tagline}. Site: ${B}
 
-${site.company} is a company with a portfolio, not a single product. Extrovert AI is one of its offerings and is not a synonym for the company. Custom Systems and AI and Extrovert AI are available today; Sillage (AI governance platform) is in development and not yet purchasable. No pricing figures, customer counts, or performance metrics are published anywhere on the site; do not infer any.
+${site.company} builds anything AI around a client's business, on one engineering standard. 50+ businesses served, every client still referenceable. No pricing figures or performance metrics are published on the site; do not infer any.
 
-## Offerings
+## What we build
 
-${offeringLines}
+${capabilityLines}
+
+## Industries served
+
+SaaS, Fintech, Healthcare, Logistics, Marketplaces, Operations, Agencies, B2B.
 
 ## Company
 
 - [Home](${B}/): what ${site.company} is and the standard it builds to.
 - [Our Story](${B}/story): why the company was founded, by Arun Saravanan.
-- [What We Offer](${B}/offer): the full portfolio on one page.
+- [What We Build](${B}/offer): the four capabilities on one page.
 - [Contact](${B}/contact): book a call.
 - [Partner with us](${B}/partner): referral and delivery partnerships. You bring the client or delivery capacity; ${site.company} holds one engineering standard. Rewarded per engagement, agreed on the first call, no public rate card.
 - Founder: Arun Saravanan, https://in.linkedin.com/in/nuras

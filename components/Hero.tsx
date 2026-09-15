@@ -3,6 +3,7 @@ import { site } from "@/data/site";
 import { LogoScroll } from "./LogoScroll";
 import { RevealOnLoad } from "./Reveal";
 import { HeroField } from "./HeroField";
+import { FlipWords } from "./FlipWords";
 
 // The company hero.
 //
@@ -17,8 +18,8 @@ import { HeroField } from "./HeroField";
 // face, already loaded) for an editorial accent against the sans body. No new
 // fonts, so no performance cost. Phrases not present are simply skipped.
 const EMPHASISE = [
-  "the work that can't be solved off the shelf",
-  "first principles to production",
+  "we build the AI that solves it",
+  "engineered to run in production",
 ];
 
 function emphasise(text: string): React.ReactNode[] {
@@ -92,8 +93,16 @@ export function Hero() {
           {renderLine(lineTwo, "font-medium")}
         </h1>
 
+        {/* Flip-board scope line: the one motion moment in the hero. */}
+        <RevealOnLoad index={1}>
+          <p className="mt-5 flex items-baseline justify-center gap-2 font-display text-[length:var(--text-step-3)] text-[var(--fg)]/80">
+            <span>We build</span>
+            <FlipWords words={[...site.hero.flipWords]} />
+          </p>
+        </RevealOnLoad>
+
         <RevealOnLoad index={2}>
-          <div className="mt-7 max-w-5xl space-y-2 text-[clamp(1.05rem,0.95rem+0.55vw,1.24rem)] leading-relaxed text-[var(--fg)]/75">
+          <div className="font-display mt-7 max-w-5xl space-y-2 text-[clamp(1.15rem,1rem+0.7vw,1.5rem)] font-light leading-relaxed text-[var(--fg)]/80">
             {site.hero.subhead.map((para, i) => (
               <p
                 key={para}
@@ -114,8 +123,20 @@ export function Hero() {
           className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
           <Link
+            href={site.hero.primaryCta.href}
+            className="group relative inline-flex items-center overflow-hidden rounded-full bg-[var(--fg)] px-8 py-4 text-sm font-medium text-[var(--bg)]"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
+            />
+            <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
+              {site.hero.primaryCta.label}
+            </span>
+          </Link>
+          <Link
             href={site.hero.secondaryCta.href}
-            className="btn-wipe inline-flex items-center rounded-full bg-[var(--fg)] px-8 py-4 text-sm font-medium text-[var(--bg)]"
+            className="btn-wipe inline-flex items-center rounded-full border border-[var(--hairline-strong)] px-8 py-4 text-sm font-medium text-[var(--fg)]"
           >
             {site.hero.secondaryCta.label}
           </Link>

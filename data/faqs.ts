@@ -15,22 +15,22 @@ export const faqs: Faq[] = [
   {
     question: "What does Stallwart do?",
     answer:
-      "Stallwart builds AI systems that take operational work off a team permanently. The portfolio spans custom AI engineering, sales infrastructure, and AI governance, each offering engineered to run on its own rather than to be operated by hand.",
+      "Stallwart is an AI-first engineering company. We build anything AI around your business: AI agents and automation, AI + SaaS products, AI infrastructure and RAG, and fully custom AI systems, each engineered to run in production rather than to be operated by hand.",
   },
   {
-    question: "Is Stallwart a product company or a services company?",
+    question: "What kinds of things can you build?",
     answer:
-      "Both, deliberately. Extrovert AI is a product you run. Custom Systems and AI and Sillage are engineered to operate as a function inside your business. What they share is the same standard: the system carries the work, not the customer.",
+      "If it involves AI, we build it. Agents that run a process end to end, automation that removes repetitive work, RAG systems and dashboards that turn scattered data into answers, AI features inside your product, and the infrastructure underneath. You bring the problem, we build the system that solves it.",
   },
   {
     question: "Who does Stallwart build for?",
     answer:
-      "B2B organizations, from small teams that need more output without new headcount up to enterprises that need consistency across large operations.",
+      "Businesses of any kind, technical or not, from small teams that need more output without new headcount up to enterprises that need consistency across large operations. You do not need to know how AI works. You need to know the problem.",
   },
   {
-    question: "What is Extrovert AI?",
+    question: "Do we own what you build?",
     answer:
-      "Extrovert AI is Stallwart's AI go-to-market engine, one offering in the portfolio, not the whole company. You give it a target company and website and it runs outbound end to end: researching the account, writing and sending outreach in your voice, following up, scoring the replies, and booking the meeting.",
+      "Yes. When we build a product or system for you, you own it outright: the code, the architecture, and the ability to run and change it. No lock-in.",
   },
   {
     question: "How do engagements start?",

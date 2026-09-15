@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { blogPosts } from "@/data/blog";
-import { getOffering } from "@/data/offerings";
 
 // Home page insights block. Replaces the old standalone case studies section:
 // case studies are posts now, so the home page surfaces the three most recent
@@ -81,7 +80,7 @@ export function InsightsTeaser() {
               </p>
 
               <span className="rule-t mt-6 flex items-center justify-between pt-4 text-xs text-[var(--fg)]/75">
-                <span>{getOffering(post.offering)?.name ?? post.offering}</span>
+                <span>Case study</span>
                 <span className="flex items-center gap-3">
                   {post.readingMinutes} min
                   <span

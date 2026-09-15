@@ -25,17 +25,16 @@ export function ContactBanner() {
           id="contact-banner-heading"
           className="font-display mt-6 text-display-lg font-light"
         >
-          Tell us what keeps
+          Bring the problem.
           <br />
           <span className="italic text-[var(--color-gold-bright)]">
-            falling through.
+            We build the AI.
           </span>
         </h2>
 
         <p className="mx-auto mt-7 max-w-xl text-[length:var(--text-step-1)] text-[var(--color-cream)]/70">
-          Bring us the process that only works because someone remembers it.
-          We&apos;ll show you which part a system can take over, and say so
-          plainly if the answer is none of it.
+          One call. A straight answer on whether we can build it, what it takes,
+          and if it is worth doing. No pitch.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">

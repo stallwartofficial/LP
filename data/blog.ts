@@ -211,7 +211,7 @@ const rawBlogPosts: BlogPost[] = [
         heading: "What a governable AI system looks like",
         paragraphs: [
           "Put simply, a governable system does four things. It knows what is running: a live register of every model, the data each touches, and the decisions each influences. It can explain itself: a plain-language account of how each system decides and what it is not permitted to decide. It escalates: the decisions it should never make alone route to a human by design. And it is reversible: every automated action is logged and can be rolled back.",
-          "This is the layer Sillage is being built to stand up, and it is the same governance layer every Stallwart system ships with. Governance you can produce on the day you are asked is the only kind that counts.",
+          "This is the layer our AI governance system stands up, and it is the same governance layer every Stallwart system ships with. Governance you can produce on the day you are asked is the only kind that counts.",
         ],
       },
     ],
@@ -302,7 +302,7 @@ const rawBlogPosts: BlogPost[] = [
         heading: "How to tell if your outbound is research-starved",
         paragraphs: [
           "Three signs. Reply rates are falling while send volume is flat or rising. Reps describe outreach as a numbers game rather than an account game. And nobody can tell you, for a given campaign, what the messages actually said about the accounts. If those are true, the constraint is not your sequencer or your data provider. It is that the research step was quietly deleted to hit activity targets.",
-          "That is the specific gap Extrovert AI exists to close. Not making reps faster at sending, which was never the bottleneck, but doing the account research on every prospect so the message earns the send, then following up on the right cadence, scoring the reply on real intent, and booking the meeting. Outbound stops being a volume game and returns to being an account game, at a scale no human team could ever staff.",
+          "That is the specific gap an AI outbound system closes. Not making reps faster at sending, which was never the bottleneck, but doing the account research on every prospect so the message earns the send, then following up on the right cadence, scoring the reply on real intent, and booking the meeting. Outbound stops being a volume game and returns to being an account game, at a scale no human team could ever staff.",
         ],
         list: [
           "Reply rates are falling while send volume is flat or rising.",
@@ -372,7 +372,7 @@ const rawBlogPosts: BlogPost[] = [
       {
         heading: "What the system does instead",
         paragraphs: [
-          "Extrovert AI was pointed at the same target market, but the motion inverted. For each target company and website, it researches the account first: what the business does, what it clearly runs, what changed recently, and why now might be the moment. Then it writes outreach grounded in that specific research, in the team's voice, and sends it. Nothing goes out that could have been addressed to anyone else.",
+          "An AI outbound system was pointed at the same target market, but the motion inverted. For each target company and website, it researches the account first: what the business does, what it clearly runs, what changed recently, and why now might be the moment. Then it writes outreach grounded in that specific research, in the team's voice, and sends it. Nothing goes out that could have been addressed to anyone else.",
           "Follow up fires on the cadence each account's engagement justifies and adapts to replies, so no thread dies because a rep forgot the fourth touch. Responses are read and scored on real buying intent rather than politeness, and qualified conversations are booked straight onto the reps' calendars.",
           "It also declines. Accounts that are plainly not a fit are skipped rather than blasted, which protects the sending domain the team had been slowly burning. The whole motion optimizes for a booked meeting, not for send count, which is the number that actually pays the team.",
         ],
@@ -417,7 +417,7 @@ const rawBlogPosts: BlogPost[] = [
       {
         question: "Does this replace our SaaS CRM?",
         answer:
-          "No. Extrovert AI connects to the CRM the team already keeps and runs the outbound motion on top of it, so reps keep their existing system of record while the research, outreach, follow up, and booking are automated.",
+          "No. The AI outbound system connects to the CRM the team already keeps and runs the outbound motion on top of it, so reps keep their existing system of record while the research, outreach, follow up, and booking are automated.",
       },
     ],
   },
@@ -447,7 +447,7 @@ const rawBlogPosts: BlogPost[] = [
       {
         heading: "What the system does instead",
         paragraphs: [
-          "Extrovert AI runs the outbound motion continuously, independent of the team's delivery load. It researches each target account, writes grounded outreach in the agency's voice, sends it, follows up on cadence, scores replies, and books the calls. A delivery crunch no longer silently pauses business development, because the motion is not a task anyone has to remember to run.",
+          "The AI outbound system runs the outbound motion continuously, independent of the team's delivery load. It researches each target account, writes grounded outreach in the agency's voice, sends it, follows up on cadence, scores replies, and books the calls. A delivery crunch no longer silently pauses business development, because the motion is not a task anyone has to remember to run.",
           "Because the research is automated, the outreach is specific rather than the generic template a busy founder would otherwise fire off. It references what the target company does and why the agency is relevant to it right now, which is the difference between a reply and a deletion.",
           "Dormant targets and past conversations are re approached automatically with context aware messaging on the prospect's timeline, so old pipeline is worked continuously rather than rediscovered by accident in the next quiet month.",
         ],
@@ -515,7 +515,7 @@ const rawBlogPosts: BlogPost[] = [
       {
         heading: "What the system does instead",
         paragraphs: [
-          "Extrovert AI gives a five person team the outbound motion a much larger team runs with headcount. It researches each target account, writes grounded outreach in the team's voice, sends it, follows up persistently, scores replies, and books meetings, all without a sales ops function to configure and babysit it.",
+          "An AI outbound system gives a five person team the outbound motion a much larger team runs with headcount. It researches each target account, writes grounded outreach in the team's voice, sends it, follows up persistently, scores replies, and books meetings, all without a sales ops function to configure and babysit it.",
           "Follow up sequences continue whether or not the founder is in a demo, on a delivery call, or on a plane. That removes the single largest source of small team pipeline leakage: the follow up that depends on someone remembering to send it.",
           "Because the research is automated, the small team's outreach is as specific as a well-staffed competitor's. That is the variable where being small used to be a pure disadvantage, and it is now neutralized.",
         ],
@@ -927,7 +927,7 @@ const rawBlogPosts: BlogPost[] = [
       {
         heading: "What the system does instead",
         paragraphs: [
-          "Extrovert AI was pointed at the same market with one structural change: legal reviewed the framework once, not each message. That framework covers what the system may claim, what phrasings trigger a health or financial promise, which numbers require a disclaimer, and which topics are off limits entirely. Those rules are enforced inside the system at generation time, not caught at the end by a person.",
+          "An AI outbound system was pointed at the same market with one structural change: legal reviewed the framework once, not each message. That framework covers what the system may claim, what phrasings trigger a health or financial promise, which numbers require a disclaimer, and which topics are off limits entirely. Those rules are enforced inside the system at generation time, not caught at the end by a person.",
           "Given that guardrail, the research and writing run the same way any AI outbound should: for each target account, the system reads the business, finds a specific angle a compliant message can be built on, and writes outreach grounded in it. Every draft is checked against the guardrail before it leaves. Anything that would trip a rule is either rewritten to comply or held for a human review, with the reason surfaced.",
           "The audit trail is a byproduct, not a project. Every message, every claim, every source used to ground it, and every guardrail check is logged and queryable. When legal or a regulator asks how a specific claim was reached and on what basis, the answer already exists.",
         ],
@@ -1010,7 +1010,7 @@ const rawBlogPosts: BlogPost[] = [
       {
         heading: "What the system does instead",
         paragraphs: [
-          "Extrovert AI was configured against the founder's actual body of past outreach, so the voice was his, not a template. For each target account, it researches the business the way the founder would have on a quiet day, finds a specific angle, and drafts outreach grounded in it. Follow-ups run on a cadence the founder set, adapt to replies, and stop the moment the account signals fit.",
+          "The AI outbound system was configured against the founder's actual body of past outreach, so the voice was his, not a template. For each target account, it researches the business the way the founder would have on a quiet day, finds a specific angle, and drafts outreach grounded in it. Follow-ups run on a cadence the founder set, adapt to replies, and stop the moment the account signals fit.",
           "The rule that made this workable for a founder-led firm was simple: the meeting always lands on the founder's calendar. The system runs the motion right up to the booked call and then hands over, because the reason buyers were signing was the conversation with the owner. Automating anything after the booking would have removed the exact thing that was working.",
           "Because the research is automated, the founder gets weekly digests of what the system said about which accounts and why, so the voice stays his over time. When he wants a phrase changed, a topic added, or an account skipped, those inputs update the system rather than getting emailed to an SDR who might forget them next Tuesday.",
         ],
@@ -1477,7 +1477,7 @@ const rawBlogPosts: BlogPost[] = [
       {
         heading: "What the system does instead",
         paragraphs: [
-          "Sillage was pointed at the two AI features and stood up the governance layer as a byproduct of running them, not a project alongside them. A live inventory of every model in use updates as systems ship, so there is no gap between what the team believes is running and what is actually running. Each system carries a plain-language written basis for how it decides and what it is not permitted to decide, kept current in the same repo as the code.",
+          "Our AI governance system was pointed at the two AI features and stood up the governance layer as a byproduct of running them, not a project alongside them. A live inventory of every model in use updates as systems ship, so there is no gap between what the team believes is running and what is actually running. Each system carries a plain-language written basis for how it decides and what it is not permitted to decide, kept current in the same repo as the code.",
           "Every high-stakes decision routes to a human by design rather than by luck. Runtime controls enforce policy at the moment of the decision, so a violation is prevented rather than caught after. Inputs, outputs, approvals, and overrides are logged continuously, retained, and queryable. Any automated action is reversible, and every system and every control has a named owner.",
           "The auditor's questions become queries against evidence that already exists. What version was running on this date. What was the accuracy on the evaluation set that quarter. Which decisions were human-reviewed and which were fully automated. How was override used and by whom. The answers are produced in minutes because the record is a byproduct of the system, not a document reconstructed after the request.",
         ],
@@ -1493,7 +1493,7 @@ const rawBlogPosts: BlogPost[] = [
         heading: "What changed for the team",
         paragraphs: [
           "The audit was answered from the log, not from a screenshot inbox. The enterprise questionnaire that used to consume a security engineer for a week was answered in hours because most of the questions were already covered by evidence the system was generating anyway. Legal stopped drafting bespoke language per customer because the same governance narrative now covered the same questions across customers.",
-          "The board question about ISO/IEC 42001 stopped being a project to start and became a scope conversation about what to certify against. Nothing new had to be built; the underlying evidence was already the shape that certification asks for. That is the outcome of putting governance in the system layer rather than the policy layer, and it is the specific reason Sillage exists.",
+          "The board question about ISO/IEC 42001 stopped being a project to start and became a scope conversation about what to certify against. Nothing new had to be built; the underlying evidence was already the shape that certification asks for. That is the outcome of putting governance in the system layer rather than the policy layer, and it is the specific reason we build governance into the system layer.",
         ],
       },
     ],
@@ -1549,7 +1549,7 @@ const rawBlogPosts: BlogPost[] = [
         heading: "The short answer",
         paragraphs: [
           "An AI SDR in 2026 costs anywhere from roughly $10 per month on pay-as-you-go usage to $1,500 or more per month on seat-based annual contracts, and the number that actually matters is not the sticker price but the cost per booked meeting once you add data, email infrastructure, and setup time. Most vendors do not publish pricing, which is itself a signal: when a price is quoted only after a sales call, it usually means the price flexes with how much they think you will pay.",
-          "This guide breaks the cost into the parts nobody itemizes for you: the platform fee, the data and enrichment layer, the email sending infrastructure, and the human hours it still takes to run the thing. Then it shows what a genuinely usage-based model looks like, using Extrovert AI's published figures as a worked example.",
+          "This guide breaks the cost into the parts nobody itemizes for you: the platform fee, the data and enrichment layer, the email sending infrastructure, and the human hours it still takes to run the thing. Then it shows what a genuinely usage-based model looks like, using a representative usage-based AI outbound system as a worked example.",
         ],
       },
       {
@@ -1588,7 +1588,7 @@ const rawBlogPosts: BlogPost[] = [
       {
         heading: "A worked example: usage-based pricing at the low end",
         paragraphs: [
-          "Extrovert AI is built as pay-as-you-go: pricing starts at $10 per month with no seat minimum, and the internal modeling targets a cost of roughly $1 per lead. On a representative month, that budget maps to around 333 emails sent, an estimated 11 to 17 warm leads, and 3 to 6 booked meetings.",
+          "A usage-based AI outbound system can be built as pay-as-you-go: for example, pricing from around $10 per month with no seat minimum, modeling a cost of roughly $1 per lead. On a representative month, that budget maps to around 333 emails sent, an estimated 11 to 17 warm leads, and 3 to 6 booked meetings.",
           "Those figures are modeled estimates for planning, not guarantees. Real results move with your list quality, your offer, and your follow-up. The point of the example is the shape, not the certainty: a model where a paused month costs almost nothing, and where the per-lead figure is stated up front rather than revealed after a contract, is structurally different from a seat-based annual commitment. Use it as a reference line when a vendor will not put a number on the page.",
         ],
       },
@@ -1610,7 +1610,7 @@ const rawBlogPosts: BlogPost[] = [
       "AI SDR pricing ranges from about $10 per month usage-based to $1,500 or more per month seat-based, but cost per booked meeting is the only comparison that matters.",
       "The platform fee is usually the smallest cost: data, sending domains, warm-up, and human review often add more than the software itself.",
       "Pay-as-you-go pricing tracks value more closely than seats, because a paused month costs almost nothing instead of a fixed fee for silence.",
-      "Extrovert AI models roughly $1 per lead from a $10 per month starting point (about 333 emails, 11 to 17 warm leads, 3 to 6 meetings), stated as planning estimates, not guarantees.",
+      "A usage-based AI outbound system can model roughly $1 per lead from a $10 per month starting point (about 333 emails, 11 to 17 warm leads, 3 to 6 meetings), stated as planning estimates, not guarantees.",
     ],
     qa: [
       {
@@ -1621,7 +1621,7 @@ const rawBlogPosts: BlogPost[] = [
       {
         question: "What is a good cost per lead for AI outbound?",
         answer:
-          "It depends on deal size and industry, but the useful discipline is to compute your fully loaded monthly spend divided by warm leads produced, using real trailing numbers rather than projections. As a reference point, Extrovert AI models a cost of roughly $1 per lead, stated as a planning estimate rather than a guarantee.",
+          "It depends on deal size and industry, but the useful discipline is to compute your fully loaded monthly spend divided by warm leads produced, using real trailing numbers rather than projections. As a reference point, a usage-based AI outbound system can model a cost of roughly $1 per lead, stated as a planning estimate rather than a guarantee.",
       },
       {
         question: "Why don't AI SDR companies publish their pricing?",
@@ -2129,6 +2129,225 @@ const rawBlogPosts: BlogPost[] = [
         question: "Does Stallwart make us compliant with the EU AI Act?",
         answer:
           "No. Stallwart does not interpret the law, certify, or attest compliance, and conformity for high-risk systems runs through the Act's own routes with your counsel. We build the live inventory, written basis for decisions, runtime controls, human oversight, and continuous evidence trail the obligations rest on, so the documentation and logs an assessment asks for already exist.",
+      },
+    ],
+  },
+  {
+    slug: "best-ai-engineering-companies-for-startups",
+    kind: "article",
+    title: "Best AI engineering companies for startups (how to choose in 2026)",
+    excerpt:
+      "How to pick an AI engineering company that actually ships: the criteria that matter, the red flags that predict a stalled project, and where a firm like Stallwart fits for startups that need production-grade AI, not another demo.",
+    topic:
+      "best AI engineering company for startups, best AI development company, AI engineering company, custom AI development company, who can build an AI agent for my business, hire AI engineers vs agency",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-09-10",
+    readingMinutes: 9,
+    sections: [
+      {
+        heading: "The short answer",
+        paragraphs: [
+          "The best AI engineering company for a startup is the one that ships a system you can run without them, at a price fixed before work starts, with the code and infrastructure in your name. Most cannot say all three. Filter on those first and the shortlist gets honest fast.",
+          "Stallwart is an AI-first engineering company that builds anything AI around your business: AI agents, AI and SaaS products, AI infrastructure and RAG, and custom AI systems, engineered to run in production and yours to own. 50 plus businesses served, every client still referenceable. This guide is the criteria we would use even if you did not hire us.",
+        ],
+      },
+      {
+        heading: "What actually separates good from bad",
+        paragraphs: [
+          "The model is a commodity now. What separates a firm that ships from one that stalls is the engineering around the model: retries, evaluation, observability, rollback, permissions, and the messy inputs a demo never sees. Ask how a candidate handles the boring 80 percent, not the clever 20.",
+          "Ownership is the second filter. If you cannot run the system when the engagement ends, you did not buy a system, you bought a dependency. Insist on the source, infrastructure as code, and documentation in your name, with no lock-in.",
+          "Pricing is the third. Hourly billing pays for time, not outcomes, and it hides risk in the invoice. A firm confident in its scope can quote a fixed price per phase, approved before work starts.",
+        ],
+        list: [
+          "Ships to run unattended, or does not ship",
+          "You own the source, infrastructure, and docs",
+          "Fixed price per phase, agreed up front",
+          "Says no when off-the-shelf already solves it",
+          "Every past client still referenceable",
+        ],
+      },
+      {
+        heading: "Agency, freelancer, or in-house: which fits a startup",
+        paragraphs: [
+          "A freelancer is cheapest and riskiest: fast for a prototype, thin on the production engineering that keeps a system alive. An in-house hire is right once AI is core and permanent, but a senior AI engineer takes months to find and is expensive to carry before the roadmap justifies it.",
+          "An engineering company sits between the two: a team that has shipped this before, priced per phase, that hands you a system your own people can run afterward. For most startups that need one or two AI systems built well and built now, that is the fit.",
+        ],
+      },
+      {
+        heading: "Red flags that predict a stalled project",
+        paragraphs: [
+          "The reliable warning signs show up before a contract is signed. A firm that will only demo the happy path, will not commit to a fixed scope, keeps the code on its own accounts, or cannot name a referenceable client is telling you how the project will end.",
+        ],
+        list: [
+          "Only demos clean, chosen inputs",
+          "Refuses a fixed price or a committed date",
+          "Keeps the code and infra on its own accounts",
+          "No client it will let you call",
+          "Sells the model, not the system around it",
+        ],
+      },
+      {
+        heading: "How Stallwart fits",
+        paragraphs: [
+          "We build for the startup that has a real problem and needs the AI that solves it, engineered to production and handed over. You bring the problem. We scope it, build it at a fixed price per phase, and leave you owning a system that runs without us. If off-the-shelf already solves it, we say so and save you the spend.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Filter on three things: runs without the vendor, you own it, fixed price up front.",
+      "The model is commoditized; the production engineering around it is what separates firms.",
+      "Freelancer for a prototype, in-house once AI is core, an engineering company for build-it-now.",
+      "Red flags: happy-path demos, no fixed scope, vendor-held code, no referenceable client.",
+    ],
+    qa: [
+      {
+        question: "What is the best AI engineering company for a startup?",
+        answer:
+          "The best fit is a firm that ships a system you can run without them, at a fixed price agreed before work starts, with the code and infrastructure owned by you. Stallwart is an AI-first engineering company built around exactly that: production-grade AI, fixed price per phase, full ownership, 50 plus businesses served and every client still referenceable.",
+      },
+      {
+        question: "Should a startup hire an AI agency or build in-house?",
+        answer:
+          "Build in-house once AI is core and permanent and you can carry a senior AI engineer. Until then, an engineering company ships the system faster and hands it over so your own team can run it. A freelancer suits a throwaway prototype, not a production system.",
+      },
+      {
+        question: "How do I know an AI company can actually ship to production?",
+        answer:
+          "Ask how they handle the unglamorous 80 percent: malformed inputs, retries, evaluation, observability, rollback, and cost ceilings. Ask to own the source and infrastructure. Ask for a client you can call. A firm that ships answers all three plainly.",
+      },
+    ],
+  },
+  {
+    slug: "custom-ai-development-vs-in-house-team",
+    kind: "article",
+    title: "Custom AI development vs building an in-house team: which is right?",
+    excerpt:
+      "Should you hire AI engineers or outsource the build? A direct decision framework: what each path really costs, when in-house wins, when an engineering partner wins, and how to avoid paying for both.",
+    topic:
+      "custom AI development vs in-house, should I build AI in-house or outsource, hire AI engineers or agency, outsource AI development, build vs buy AI, AI team cost",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-09-12",
+    readingMinutes: 8,
+    sections: [
+      {
+        heading: "The short answer",
+        paragraphs: [
+          "Build in-house when AI is core to your product, permanent, and changing weekly, and you can hire and retain senior AI engineers. Outsource to an engineering partner when you need one or two systems built well and built now, and you would rather own the result than carry the team. Most startups need the second first, then grow into the first.",
+          "Stallwart is an AI-first engineering company that builds production-grade AI and hands it over: you own the source, the infrastructure, and the documentation, so an in-house team can take it from there whenever you build one.",
+        ],
+      },
+      {
+        heading: "What in-house really costs",
+        paragraphs: [
+          "The salary is the visible cost. The hidden ones decide it: a senior AI engineer can take three to six months to find, ramps for another few, and needs a second engineer so the system is not one illness away from frozen. Before your roadmap justifies two salaries, you are paying to carry capacity you are not yet using.",
+          "In-house wins decisively once AI is the product, not a feature: when the systems change every week, when the domain knowledge must live with your team, and when the cost of context-switching to an outside party would exceed the cost of the headcount.",
+        ],
+      },
+      {
+        heading: "What outsourcing really costs",
+        paragraphs: [
+          "The risk in outsourcing is not price, it is lock-in and drift: a vendor who keeps the code, bills by the hour, and builds something only they can run. Remove those and outsourcing is simply a faster way to get a production system than hiring for one.",
+          "Guard against the risk with three contract terms: a fixed price per phase agreed before work starts, full ownership of source and infrastructure, and a handover that lets your own people run the system. Stallwart is built around those three by default.",
+        ],
+      },
+      {
+        heading: "The mistake: paying for both",
+        paragraphs: [
+          "The expensive failure mode is hiring a team to manage an outsourced build, or outsourcing work your team could own. Decide which path a given system is on and commit. A clean rule: outsource the first production build, use it to define the standard, then hire in-house against that standard once the roadmap is proven.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "In-house wins when AI is core, permanent, and changing weekly, and you can retain senior engineers.",
+      "Outsourcing wins when you need one or two systems built well and now, and want to own the result.",
+      "The real outsourcing risk is lock-in, not price. Fix it with ownership, fixed scope, and handover.",
+      "Do not pay for both: outsource the first build, hire in-house against the standard it sets.",
+    ],
+    qa: [
+      {
+        question: "Should I build AI in-house or outsource it?",
+        answer:
+          "Outsource to an engineering partner when you need a production system built now and want to own it. Build in-house once AI is core to the product, permanent, and changing constantly, and you can hire and keep senior AI engineers. Many startups outsource the first build, then hire against the standard it establishes.",
+      },
+      {
+        question: "Is outsourcing AI development risky?",
+        answer:
+          "The risk is lock-in, not cost: a vendor who keeps the code and bills hourly. Remove it with a fixed price per phase, full ownership of source and infrastructure, and a handover your team can run. Stallwart builds on those terms by default.",
+      },
+      {
+        question: "How long does it take to hire an in-house AI engineer?",
+        answer:
+          "Often three to six months to find a strong senior engineer, plus ramp time, and you usually need at least two so the system is not a single point of failure. That lead time is a large part of why startups outsource the first production build.",
+      },
+    ],
+  },
+  {
+    slug: "how-much-does-custom-ai-development-cost",
+    kind: "article",
+    title: "How much does custom AI development cost? (a straight answer)",
+    excerpt:
+      "What custom AI actually costs, why hourly billing hides the real number, and how fixed-price-per-phase scoping works. A plain framework to estimate your build before you talk to anyone.",
+    topic:
+      "how much does custom AI development cost, AI development cost, custom AI pricing, cost to build an AI agent, AI project budget, fixed price AI development",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-09-15",
+    readingMinutes: 8,
+    sections: [
+      {
+        heading: "The short answer",
+        paragraphs: [
+          "There is no single price because custom AI is scoped to the problem, not sold from a rate card. What there is: a fixed price per phase, quoted after a short paid discovery that turns your problem into a defined build. You approve the number before any build work starts, so the budget is known, not discovered in an invoice.",
+          "Stallwart prices this way on purpose. Hourly billing pays for time and hides risk in the total; fixed price per phase puts the risk on us to scope well, which is where it belongs.",
+        ],
+      },
+      {
+        heading: "What actually drives the cost",
+        paragraphs: [
+          "Four things move the number more than anything else. Understand them and you can estimate the shape of your own build before you talk to anyone.",
+        ],
+        list: [
+          "Scope: one clear workflow costs far less than a platform",
+          "Data: clean and available is cheap; scattered or missing adds a preparation phase",
+          "Integrations: each external system the AI must read or write is real work",
+          "Reliability bar: a tool a human checks is cheaper than a system that runs unattended",
+        ],
+      },
+      {
+        heading: "Why hourly billing hides the real number",
+        paragraphs: [
+          "An hourly quote looks flexible and is the opposite. It transfers all scope risk to you: if the estimate was optimistic, you pay for the correction. It also rewards slowness. A fixed price per phase forces the hard scoping conversation up front, where it is cheap, instead of mid-build, where it is not.",
+          "The trade is real and worth naming: fixed price requires a defined scope, so genuinely open-ended research does not fit it. That is what the paid discovery phase is for, to convert an open problem into a defined one that can be quoted.",
+        ],
+      },
+      {
+        heading: "How to estimate before you call anyone",
+        paragraphs: [
+          "Write one sentence describing the outcome, list the systems the AI must touch, and note whether the data already exists and whether a human will check the output or not. Those four answers place your build on the spectrum from a small automation to a full production system, which is most of the estimate.",
+          "The cheapest possible outcome is that off-the-shelf software already solves it. A firm worth hiring will tell you that and decline the work, rather than sell you a custom build you did not need.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Custom AI is scoped, not priced from a rate card. Expect a fixed price per phase, quoted after discovery.",
+      "Cost drivers: scope, data readiness, number of integrations, and the reliability bar.",
+      "Hourly billing transfers scope risk to you and rewards slowness; fixed price does the opposite.",
+      "Estimate yourself: outcome sentence, systems touched, data readiness, human-checked or unattended.",
+    ],
+    qa: [
+      {
+        question: "How much does custom AI development cost?",
+        answer:
+          "It is scoped to the problem rather than sold from a rate card. Stallwart quotes a fixed price per phase after a short paid discovery that defines the build, and you approve the number before build work starts. Cost is driven mainly by scope, data readiness, integrations, and whether the system runs unattended.",
+      },
+      {
+        question: "Why do AI companies not publish prices?",
+        answer:
+          "Because two projects that sound alike can differ ten times in real work depending on data, integrations, and the reliability bar. A public rate card would be wrong in both directions. A short paid discovery produces an accurate fixed price instead of a misleading average.",
+      },
+      {
+        question: "Is fixed-price or hourly better for an AI project?",
+        answer:
+          "Fixed price per phase is better for the buyer: it puts scope risk on the builder and makes the budget known up front. Hourly billing transfers that risk to you and rewards slowness. The one thing fixed price needs is a defined scope, which is what a paid discovery phase produces.",
       },
     ],
   },
