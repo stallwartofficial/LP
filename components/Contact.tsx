@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { site } from "@/data/site";
 import { submitLead } from "@/app/contact/actions";
+import { ProofBadge } from "@/components/ProofBadge";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -45,30 +46,6 @@ const EMPTY: FormShape = {
   message: "",
 };
 
-// Placeholder avatars. Inline SVG so nothing external loads (CSP-safe) and
-// nothing shows broken. To use real photos later, drop six square images at
-// /public/images/avatars/ and swap the <AvatarCluster> circles for <img>.
-const AVATAR_BG = ["#3a2f22", "#4a3b28", "#5a4630", "#2e2a24", "#463a2a", "#544029"];
-
-function AvatarCluster() {
-  return (
-    <div className="flex items-center -space-x-3">
-      {AVATAR_BG.map((bg, i) => (
-        <span
-          key={i}
-          className="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full ring-2 ring-[var(--bg)]"
-          style={{ background: bg }}
-          aria-hidden="true"
-        >
-          <svg viewBox="0 0 40 40" className="h-full w-full">
-            <circle cx="20" cy="15" r="7" fill="rgba(245,241,232,0.55)" />
-            <path d="M6 38c0-8 6.3-13 14-13s14 5 14 13" fill="rgba(245,241,232,0.55)" />
-          </svg>
-        </span>
-      ))}
-    </div>
-  );
-}
 
 // Contact page. Left column carries the argument, what-to-expect, and the proof
 // (so none of it hangs unseen); right column holds the multi-step form.
@@ -174,17 +151,9 @@ export function Contact() {
             whether it&apos;s even worth doing.
           </p>
 
-          {/* Proof: avatars + a real, standable number. */}
-          <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-4">
-            <AvatarCluster />
-            <div>
-              <p className="font-display text-[length:var(--text-step-2)] leading-none">
-                50+ <span className="text-[var(--fg)]/70">businesses served</span>
-              </p>
-              <p className="mt-1 text-sm text-[var(--fg)]/65">
-                Founder-led, and built to run in production.
-              </p>
-            </div>
+          {/* Proof: shared badge (same on the homepage). */}
+          <div className="mt-8 rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6">
+            <ProofBadge />
           </div>
         </div>
 

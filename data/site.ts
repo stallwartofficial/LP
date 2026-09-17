@@ -70,7 +70,7 @@ export const site = {
       "You have the problem, we build the AI that solves it.",
       "Custom AI, SaaS, and automation, built for production, not a demo.",
     ],
-    primaryCta: { label: "Book a call", href: "/contact" },
+    primaryCta: { label: "Build with us", href: "/contact" },
     secondaryCta: { label: "See Our Work", href: "/offer" },
     scrollCue: "How we build",
   },
@@ -93,7 +93,7 @@ export const site = {
     // Competence anchor. Kept factual and modest; expand only with verifiable
     // detail the founder approves.
     credential:
-      "A software engineer with 5 years building production systems, and building with AI since well before it was the default.",
+      "A software engineer with 5+ years building production systems, and building with AI since well before it was the default.",
   },
 
   /**
@@ -205,7 +205,7 @@ export const site = {
     areaServed: ["United States", "United Kingdom", "India", "Worldwide"],
   },
   cta: {
-    primary: "Book a call",
+    primary: "Build with us",
   },
   social: {
     // Empty until real accounts exist. Both consumers (footer icons and the
@@ -224,5 +224,5 @@ export const navLinks = [
   { label: "Our Story", href: "/story" },
   { label: "What We Offer", href: "/offer" },
   { label: "Blog", href: "/blog" },
-  { label: "Partner", href: "/partner" },
+  { label: "Partner with us", href: "/partner" },
 ] as const;

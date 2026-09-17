@@ -41,7 +41,7 @@ export function Story() {
         <div className="order-3 space-y-6 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/85 lg:col-start-1 lg:row-start-2">
             <p className="[&::first-letter]:font-display [&::first-letter]:mr-2 [&::first-letter]:float-left [&::first-letter]:text-[3.75rem] [&::first-letter]:font-light [&::first-letter]:leading-[0.82] [&::first-letter]:text-[var(--accent-text)]">
               {site.founder.fullName} does not talk much on video calls. He
-              listens, takes his notes, and ships. Five years in, the pattern
+              listens, takes his notes, and ships. Five-plus years in, the pattern
               is a career.
             </p>
 

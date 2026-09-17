@@ -24,10 +24,7 @@ export function Footer() {
             <p className="mt-3 text-display-sm font-medium uppercase tracking-[0.14em] leading-none font-[family-name:var(--font-wordmark)]">
               {site.company}
             </p>
-            <p className="mt-3 max-w-xs text-[var(--fg)]/72">
-              {site.companyDescriptor}.
-            </p>
-            <p className="mt-4 text-sm font-medium text-[var(--accent-text)]">
+            <p className="mt-3 text-sm font-medium text-[var(--accent-text)]">
               {site.hero.tagline}
             </p>
 
@@ -50,7 +47,7 @@ export function Footer() {
                 { label: "Our Story", href: "/story" },
                 { label: "Principles", href: "/principles" },
                 { label: "Careers", href: "/careers" },
-                { label: "Partner", href: "/partner" },
+                { label: "Partner with us", href: "/partner" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link

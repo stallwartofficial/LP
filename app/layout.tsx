@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Spectral, IBM_Plex_Sans, IBM_Plex_Mono, Cinzel } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
@@ -127,14 +128,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <JsonLd schema={organizationSchema()} />
-        {/* Applies the theme before first paint so there is no flash. Dark is
-            the default: the site is dark unless the visitor explicitly chose
-            light. Must stay inline and blocking. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'){document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();`,
-          }}
-        />
       </head>
       {/* suppressHydrationWarning on <body>: browser extensions (Grammarly,
           password managers, translators) inject attributes such as
@@ -147,6 +140,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         className="min-h-full text-[var(--fg)]"
         suppressHydrationWarning
       >
+        {/* Applies the theme before hydration so there is no flash. Dark is the
+            default unless the visitor explicitly chose light. Uses next/script
+            beforeInteractive (raw <script> in a component is not executed). */}
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(function(){try{var t=localStorage.getItem('theme');if(t!=='light'){document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();`}
+        </Script>
         {/* Nav and footer live here, not per-page: a new route cannot ship
             without them, and there is one import instead of sixteen.
             The .page-stack wrapper carries a solid bg + higher z-index so it

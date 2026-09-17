@@ -33,8 +33,8 @@ export function ContactBanner() {
         </h2>
 
         <p className="mx-auto mt-7 max-w-xl text-[length:var(--text-step-1)] text-[var(--color-cream)]/70">
-          One call. A straight answer on whether we can build it, what it takes,
-          and if it is worth doing. No pitch.
+          One call to talk it through: the problem you&apos;re facing, and what
+          we&apos;d build to solve it, together.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
