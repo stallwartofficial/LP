@@ -7,7 +7,7 @@ import { type PartnerModel } from "@/components/PartnerEcosystem";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Partner with Stallwart",
+  title: "Partner with us",
   description:
     "Join the Stallwart partner ecosystem. Solutions, white-label, delivery, and referral partnerships to build, sell, and scale intelligent AI systems and custom software together.",
   path: "/partner",

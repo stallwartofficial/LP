@@ -96,10 +96,14 @@ export function Story() {
               would go wrong, not from what would look good. Ship the
               smallest honest version and put it in front of real use. Hand
               the team the keys, not a dependency. When {site.company}{" "}
-              leaves, nothing goes with it. The first eleven engagements
-              span regulated industries, professional services, creative
-              practices, and B2B software. Every client still
-              referenceable. That is the whole point.
+              leaves, nothing goes with it. The work so far spans regulated
+              industries, professional services, creative practices, and B2B
+              software, and clients keep coming back. That is the whole point.
+            </p>
+
+            <p>
+              He gives back, too. He has mentored 50+ students into
+              engineering, and he still makes time for it today.
             </p>
 
             <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:items-baseline sm:gap-8">
@@ -107,13 +111,13 @@ export function Story() {
                 href="/offer"
                 className="link-draw text-[length:var(--text-step-1)] font-medium text-[var(--accent-text)]"
               >
-                See what he builds →
+                See what he builds
               </Link>
               <Link
                 href="/principles"
                 className="link-draw text-[length:var(--text-step-0)] font-medium text-[var(--fg)]/80"
               >
-                See how he builds →
+                See how he builds
               </Link>
             </div>
           </div>

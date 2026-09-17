@@ -93,7 +93,7 @@ export const site = {
     // Competence anchor. Kept factual and modest; expand only with verifiable
     // detail the founder approves.
     credential:
-      "A software engineer with 5+ years building production systems, and building with AI since well before it was the default.",
+      "A software engineer with 5+ years building production systems, building with AI since well before it was the default.",
   },
 
   /**

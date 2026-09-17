@@ -17,7 +17,7 @@ const PRINCIPLES = [
 ];
 
 export const metadata: Metadata = pageMeta({
-  title: "About Stallwart: Our Story & How We Operate",
+  title: "Our Story",
   description:
     "Why Stallwart exists, who builds it, and the principles behind every system: reliable, honest, scalable. The origin, how we operate, and the one engineering standard.",
   path: "/story",

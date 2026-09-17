@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, serviceSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "What We Build: AI Agents, SaaS, Infrastructure & Custom AI",
+  title: "What We Build",
   description:
     "Stallwart is an AI-first engineering company. We build anything AI: agents, AI + SaaS products, RAG and AI infrastructure, and custom AI systems, engineered to production on one standard.",
   path: "/offer",

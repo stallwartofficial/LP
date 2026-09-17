@@ -142,12 +142,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* The only place Extrovert AI and Sillage appear on the site. */}
-        <p className="rule-t mt-14 pt-6 text-xs text-[var(--fg)]/60">
-          Part of the Stallwart family, Extrovert AI and Sillage.
-        </p>
-
-        <div className="mt-3 flex flex-col gap-3 pt-2 text-xs text-[var(--fg)]/75 sm:flex-row sm:items-center sm:justify-between">
+        <div className="rule-t mt-14 flex flex-col gap-3 pt-6 text-xs text-[var(--fg)]/75 sm:flex-row sm:items-center sm:justify-between">
           {/* Plain copyright, then the legal links. Year auto-updates. */}
           <p className="shrink-0">
             © {new Date().getFullYear()} {site.company}. All rights reserved.
