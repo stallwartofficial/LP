@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/server";
+import { notifySubmission } from "@/lib/notify";
 
 // Partner application intake. The Partner form posts here; we validate, apply the
 // same cheap CSRF/origin guard as the demo-request route, then insert into
@@ -96,6 +97,27 @@ export async function POST(request: Request) {
       { status: 502 }
     );
   }
+
+  // Notify the team (email + WhatsApp) + acknowledge the partner. Best-effort.
+  await notifySubmission({
+    kind: "partner request",
+    subject: `New partner request: ${organization}`,
+    rows: [
+      ["Name", name],
+      ["Email", email],
+      ["Organization", organization],
+      ["Role", role || "-"],
+      ["Website", website || "-"],
+      ["Partnership type", partnershipType || "-"],
+      ["Message", message || "-"],
+    ],
+    whatsapp: `New Stallwart partner request: ${name} (${organization}) ${email}.`,
+    ack: {
+      to: email,
+      name,
+      body: "Thanks for your interest in partnering with Stallwart. We will review and get back to you shortly.",
+    },
+  });
 
   return NextResponse.json({ success: true });
 }

@@ -10,7 +10,14 @@ import { useState } from "react";
 // Supabase client (anon key). RLS allows anon INSERT only, so the key is safe to
 // ship; created_at and status ('new') are set by the table defaults.
 
-type Field = "name" | "email" | "built";
+type Field = "name" | "email" | "built" | "linkedin" | "github" | "portfolio" | "resume";
+
+const RESUME_MAX_BYTES = 5 * 1024 * 1024; // 5 MB
+const RESUME_TYPES = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
 
 export function CareersForm() {
   const [form, setForm] = useState({
@@ -18,8 +25,10 @@ export function CareersForm() {
     email: "",
     linkedin: "",
     github: "",
+    portfolio: "",
     built: "",
   });
+  const [resume, setResume] = useState<File | null>(null);
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -35,8 +44,30 @@ export function CareersForm() {
       next.email = "An email we can actually reach you at.";
     if (form.built.trim().length < 20)
       next.built = "A couple of sentences is plenty. Tell us the real thing.";
+    if (form.linkedin.trim() && !form.linkedin.toLowerCase().includes("linkedin.com"))
+      next.linkedin = "That's not a linkedin.com link.";
+    if (form.github.trim() && !form.github.toLowerCase().includes("github.com"))
+      next.github = "That's not a github.com link.";
+    if (form.portfolio.trim() && !/^https?:\/\/|\./.test(form.portfolio.trim()))
+      next.portfolio = "Paste a full link (with a dot in it).";
+    if (resume) {
+      if (!RESUME_TYPES.includes(resume.type)) next.resume = "PDF or Word doc only.";
+      else if (resume.size > RESUME_MAX_BYTES) next.resume = "Keep it under 5 MB.";
+    }
     setErrors(next);
     return Object.keys(next).length === 0;
+  }
+
+  function fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = String(reader.result);
+        resolve(result.slice(result.indexOf(",") + 1)); // strip data: prefix
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -48,22 +79,31 @@ export function CareersForm() {
     setSubmitting(true);
     setSubmitError(null);
     try {
-      // Load the Supabase client on demand so supabase-js stays out of the
-      // page's initial JS bundle.
-      const { supabaseBrowser } = await import("@/lib/supabase/client");
-      const { error } = await supabaseBrowser()
-        .from("career_applications")
-        .insert({
-          name: form.name.trim(),
-          email: form.email.trim(),
-          linkedin_url: form.linkedin.trim() || null,
-          github_url: form.github.trim() || null,
-          project_description: form.built.trim(),
-        });
-      if (error) throw error;
-      setSent(true);
+      // Server Action: inserts server-side and notifies the team (email +
+      // WhatsApp). Keeps the anon key and supabase-js out of the browser bundle.
+      const { submitCareer } = await import("@/app/careers/actions");
+      const resumePayload = resume
+        ? {
+            filename: resume.name,
+            type: resume.type,
+            contentBase64: await fileToBase64(resume),
+          }
+        : undefined;
+      const res = await submitCareer({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        linkedin: form.linkedin.trim(),
+        github: form.github.trim(),
+        portfolio: form.portfolio.trim(),
+        built: form.built.trim(),
+        resume: resumePayload,
+      });
+      if ("error" in res) {
+        setSubmitError(res.error);
+      } else {
+        setSent(true);
+      }
     } catch (err) {
-      // Log the real error for debugging; never surface DB internals to the user.
       console.error("Career application submit failed:", err);
       setSubmitError(
         "Something went wrong sending your application. Please try again in a moment."
@@ -100,7 +140,8 @@ export function CareersForm() {
         <button
           type="button"
           onClick={() => {
-            setForm({ name: "", email: "", linkedin: "", github: "", built: "" });
+            setForm({ name: "", email: "", linkedin: "", github: "", portfolio: "", built: "" });
+            setResume(null);
             setErrors({});
             setSubmitError(null);
             setSent(false);
@@ -141,12 +182,13 @@ export function CareersForm() {
           autoComplete="email"
         />
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-3">
           <Text
             label="LinkedIn"
             optional
             value={form.linkedin}
             onChange={set("linkedin")}
+            error={errors.linkedin}
             placeholder="linkedin.com/in/…"
           />
           <Text
@@ -154,28 +196,72 @@ export function CareersForm() {
             optional
             value={form.github}
             onChange={set("github")}
+            error={errors.github}
             placeholder="github.com/…"
+          />
+          <Text
+            label="Portfolio"
+            optional
+            value={form.portfolio}
+            onChange={set("portfolio")}
+            error={errors.portfolio}
+            placeholder="your-work.com"
           />
         </div>
 
-        {/* The field that actually matters. */}
+        {/* The field that actually matters: big on purpose. */}
         <div>
           <label className="block">
             <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--fg)]/72">
               Something you built, shipped, or are proud of
             </span>
+            <span className="mt-1 block text-xs text-[var(--fg)]/50">
+              Take your time here, this is the part we actually read. What was it,
+              what was hard, and what did you do about it? It doesn&apos;t have to
+              be code.
+            </span>
             <textarea
               value={form.built}
               onChange={(e) => set("built")(e.target.value)}
-              rows={4}
-              placeholder="What was it, and why are you proud of it? It doesn't have to be code. In your own words."
-              className={`mt-2 w-full resize-y rounded-2xl border bg-[var(--bg)] px-4 py-3 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)] outline-none transition-colors placeholder:text-[var(--placeholder-fg)] focus:border-[var(--accent)] ${
+              rows={8}
+              placeholder="In your own words. A few real paragraphs beat a résumé bullet."
+              className={`mt-2 min-h-[240px] w-full resize-y rounded-2xl border bg-[var(--bg)] px-4 py-3 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)] outline-none transition-colors placeholder:text-[var(--placeholder-fg)] focus:border-[var(--accent)] ${
                 errors.built ? "border-red-500/60" : "border-[var(--hairline-strong)]"
               }`}
             />
           </label>
           {errors.built && (
             <p className="mt-1.5 text-xs text-red-500/90">{errors.built}</p>
+          )}
+        </div>
+
+        {/* Resume / any attachment */}
+        <div>
+          <label className="block">
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--fg)]/72">
+              Resume
+              <span className="normal-case tracking-normal text-[var(--fg)]/40">
+                {" "}
+                (optional, or a portfolio, a case study, a napkin sketch, whatever makes your case)
+              </span>
+            </span>
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              onChange={(e) => {
+                setResume(e.target.files?.[0] ?? null);
+                setErrors((x) => ({ ...x, resume: undefined }));
+              }}
+              className={`mt-2 w-full rounded-2xl border bg-[var(--bg)] px-4 py-3 text-sm text-[var(--fg)]/80 outline-none transition-colors file:mr-4 file:rounded-full file:border-0 file:bg-[var(--accent)] file:px-4 file:py-1.5 file:text-xs file:font-medium file:text-[var(--color-ink)] hover:file:brightness-110 focus:border-[var(--accent)] ${
+                errors.resume ? "border-red-500/60" : "border-[var(--hairline-strong)]"
+              }`}
+            />
+          </label>
+          <p className="mt-1.5 text-xs text-[var(--fg)]/45">
+            PDF or Word, up to 5 MB.
+          </p>
+          {errors.resume && (
+            <p className="mt-1 text-xs text-red-500/90">{errors.resume}</p>
           )}
         </div>
       </div>
@@ -197,8 +283,8 @@ export function CareersForm() {
         {submitting ? "Sending…" : "Apply now"}
       </button>
       <p className="mt-3 text-center text-xs leading-relaxed text-[var(--fg)]/72">
-        We read every one. You&apos;ll hear back from a person, not an
-        autoresponder.
+        We read every application, every journey. You&apos;ll hear back from us,
+        always.
       </p>
     </form>
   );

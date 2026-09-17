@@ -68,7 +68,7 @@ export const site = {
      */
     subhead: [
       "You have the problem, we build the AI that solves it.",
-      "Custom AI, SaaS, and automation, engineered to run in production, not just demo.",
+      "Custom AI, SaaS, and automation, built for production, not a demo.",
     ],
     primaryCta: { label: "Book a call", href: "/contact" },
     secondaryCta: { label: "See Our Work", href: "/offer" },

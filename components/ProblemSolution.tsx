@@ -18,7 +18,7 @@ const PAIRS = [
   {
     n: "03",
     pain: "Your data is everywhere. The answers are nowhere.",
-    build: "We build the RAG system or dashboard that turns it into decisions.",
+    build: "We build the RAG system, AI that answers straight from your own data, or the dashboard that turns it into decisions.",
   },
   {
     n: "04",

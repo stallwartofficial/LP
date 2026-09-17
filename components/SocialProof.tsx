@@ -162,7 +162,7 @@ export function SocialProof() {
             </p>
             <p className="mt-1.5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent-text)]">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-              Every client still referenceable
+              Built to run in production
             </p>
           </div>
         </div>

@@ -78,11 +78,10 @@ export function StoryTeaser() {
           {/* ---------------- The origin, in his words ---------------- */}
           <div className="lg:col-start-2 lg:row-start-2">
             <p className="text-[var(--fg)]/75">
-              {site.founder.name} founded {site.company} on a direct
-              observation: systems get sold on how convincingly they perform in
-              a controlled demo, and the gap between that and real-world
-              reliability becomes someone else&apos;s problem the moment the
-              invoice clears.
+              {site.founder.name} founded {site.company} on one observation. AI
+              gets sold on how well it looks in a demo. Then it goes live, breaks
+              in ways the demo never showed, and that becomes the customer&apos;s
+              problem, not the seller&apos;s.
             </p>
 
             <p className="mt-4 text-[var(--fg)]/75">
