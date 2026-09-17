@@ -131,6 +131,8 @@ export const testimonials: Testimonial[] = [
 // Sectors we build for. Naming fictional companies under "our customers" reads
 // as fabricated proof; naming the kinds of teams we serve is honest and still
 // fills the trust bar.
+// Enough sectors that a single copy is wider than the viewport, so the doubled
+// marquee loops seamlessly (too few words leaves a gap before it repeats).
 export const logoMarks = [
   "SaaS",
   "Fintech",
@@ -140,4 +142,14 @@ export const logoMarks = [
   "Operations",
   "Agencies",
   "B2B",
+  "B2C",
+  "E-commerce",
+  "EdTech",
+  "Real Estate",
+  "Insurance",
+  "Manufacturing",
+  "Retail",
+  "Startups",
+  "Enterprise",
+  "Professional Services",
 ];

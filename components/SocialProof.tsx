@@ -1,4 +1,5 @@
 import { testimonials, type Testimonial } from "@/data/testimonials";
+import { ProofBadge } from "@/components/ProofBadge";
 
 // Testimonials as two full-bleed marquee rows moving in opposite directions.
 // Rows are disjoint (row 1 = first 6, row 2 = last 5), so the same testimonial
@@ -139,32 +140,7 @@ export function SocialProof() {
               From some of the people we&apos;ve built for.
             </p>
           </div>
-          {/* Avatar-cluster badge: faces on top, the guarantee below. */}
-          <div className="shrink-0">
-            <div className="flex items-center -space-x-3">
-              {["#3a2f22", "#4a3b28", "#5a4630", "#2e2a24", "#463a2a", "#544029"].map((bg, i) => (
-                <span
-                  key={i}
-                  aria-hidden="true"
-                  className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full ring-2 ring-[var(--bg)]"
-                  style={{ background: bg }}
-                >
-                  <svg viewBox="0 0 40 40" className="h-full w-full">
-                    <circle cx="20" cy="15" r="7" fill="rgba(245,241,232,0.55)" />
-                    <path d="M6 38c0-8 6.3-13 14-13s14 5 14 13" fill="rgba(245,241,232,0.55)" />
-                  </svg>
-                </span>
-              ))}
-            </div>
-            <p className="mt-2.5 flex items-baseline gap-2 leading-none">
-              <span className="text-[length:var(--text-step-3)] font-semibold tracking-tight text-[var(--fg)]">50+</span>
-              <span className="text-sm text-[var(--fg)]/70">businesses served</span>
-            </p>
-            <p className="mt-1.5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent-text)]">
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-              Built to run in production
-            </p>
-          </div>
+          <ProofBadge className="shrink-0" />
         </div>
       </div>
 

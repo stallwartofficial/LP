@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { site } from "@/data/site";
 
 // GEO ("ask an AI about us") launcher. Deep-links a visitor into the major
@@ -13,16 +16,20 @@ import { site } from "@/data/site";
 // NOTE: these `?q=` deep-link parameters are unofficial and can change without
 // notice. If an engine stops pre-filling, check its current query parameter.
 // Gemini has no reliable pre-fill param, so Google's AI Mode (udm=50) stands in.
-// Organic buyer queries, one per engine, where Stallwart's content should
-// surface as the natural answer. Not "tell me about Stallwart": the point is to
-// test (and win) the real questions a buyer types.
+// Self-contained, personalized prompt. It embeds Stallwart's core so the engine
+// has context without browsing, then asks the engine to tailor the answer to the
+// visitor using what it already knows about them from past chats. Copied to the
+// clipboard on click (works in every engine, Gemini included) and prefilled via
+// ?q where the engine supports it.
 const enc = (s: string) => encodeURIComponent(s);
+const PROMPT =
+  "Research Stallwart (https://www.stallwart.in/) and explain what they do, what kinds of AI systems and agents they build, and the business problems they can help companies solve. Based on their work and positioning, how would I benefit most from working with them?";
 const PROMPTS = {
-  chatgpt: "Which AI engineering companies build production-grade AI systems and custom AI agents for startups?",
-  claude: "What companies build custom AI systems and AI agents that run in production, not just demos?",
-  perplexity: "Best AI development companies for startups that need custom AI built to production",
-  gemini: "AI engineering companies in India that build custom AI systems and agents at a fixed price",
-  google: "Best AI engineering company to build production-grade custom AI systems and agents",
+  chatgpt: PROMPT,
+  claude: PROMPT,
+  perplexity: PROMPT,
+  gemini: PROMPT,
+  google: PROMPT,
 };
 
 const ENGINES = [
@@ -63,12 +70,28 @@ const ENGINES = [
 ] as const;
 
 export function AskAI() {
+  const [copied, setCopied] = useState(false);
+
+  // Copy the prompt on click so it works in every engine (Gemini's URL does not
+  // prefill). The link still opens the engine, prefilled where supported; the
+  // visitor pastes if it did not. Best-effort: never blocks the navigation.
+  const onEngineClick = () => {
+    try {
+      navigator.clipboard?.writeText(PROMPT);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2500);
+    } catch {
+      /* clipboard unavailable, the link still opens */
+    }
+  };
+
   return (
     <div className="mt-8">
       <p className="eyebrow">Ask AI about us</p>
       <p className="mt-2 max-w-xs text-sm text-[var(--fg)]/72">
-        Don&apos;t take our word for it. See how the models describe{" "}
-        {site.company}.
+        {copied
+          ? "Prompt copied. Paste it into the chat that just opened."
+          : `Don't take our word for it. Ask your own AI how ${site.company} fits your business.`}
       </p>
       <ul className="-mx-2.5 mt-2 flex flex-wrap items-center">
         {ENGINES.map((engine) => (
@@ -77,6 +100,7 @@ export function AskAI() {
               href={engine.href}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={onEngineClick}
               aria-label={`Ask ${engine.name} about ${site.company}`}
               title={`Ask ${engine.name} about ${site.company}`}
               className={`group relative inline-flex h-11 w-11 items-center justify-center text-[var(--fg)]/72 transition-colors ${
