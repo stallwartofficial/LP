@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { site } from "@/data/site";
+import { submitLead } from "@/app/contact/actions";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -77,6 +78,24 @@ export function Contact() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormShape>(EMPTY);
   const [touched, setTouched] = useState(false);
+  const [utm, setUtm] = useState<Record<string, string>>({});
+  const [pagePath, setPagePath] = useState("");
+
+  // Capture UTM attribution from the URL once, client-side (avoids the
+  // useSearchParams Suspense requirement). Only utm_* keys are kept.
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const found: Record<string, string> = {};
+      params.forEach((v, k) => {
+        if (k.toLowerCase().startsWith("utm_")) found[k] = v;
+      });
+      setUtm(found);
+      setPagePath(window.location.pathname + window.location.search);
+    } catch {
+      /* no-op */
+    }
+  }, []);
 
   const set = (k: keyof FormShape, v: string) =>
     setData((d) => ({ ...d, [k]: v }));
@@ -92,25 +111,25 @@ export function Contact() {
     setStatus("loading");
     setError(null);
     try {
-      const res = await fetch("/api/demo-request", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) {
-        const body = await res.json().catch(() => null);
-        throw new Error(body?.error ?? "Request failed");
+      // On success the action calls redirect() to /contact/thank-you, so it does
+      // not return; a returned value means a validation error to surface.
+      const res = await submitLead({ ...data, utm, page: pagePath });
+      if (res?.error) {
+        setError(res.error);
+        setStatus("error");
       }
-      setStatus("success");
-      // Conversion event for GA4 (the tag defines window.gtag). Fires only on a
-      // real successful submit, so it measures booked-call intent, not visits.
-      (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag?.(
-        "event",
-        "generate_lead",
-        { method: "contact_form", interest: data.interest || "unspecified" }
-      );
     } catch (err) {
-      setError(err instanceof Error ? err.message : null);
+      // Let Next handle its own redirect control-flow signal; surface anything
+      // else as a normal error.
+      if (
+        err &&
+        typeof err === "object" &&
+        "digest" in err &&
+        String((err as { digest?: string }).digest).startsWith("NEXT_REDIRECT")
+      ) {
+        throw err;
+      }
+      setError("Something went wrong. Please try again.");
       setStatus("error");
     }
   }
@@ -163,13 +182,18 @@ export function Contact() {
                 50+ <span className="text-[var(--fg)]/70">businesses served</span>
               </p>
               <p className="mt-1 text-sm text-[var(--fg)]/65">
-                Founder-led. Every engagement referenceable.
+                Founder-led, and built to run in production.
               </p>
             </div>
           </div>
+        </div>
 
+        {/* What to expect + direct: on mobile this sits BELOW the form (heading +
+            proof, then the form, then this); on desktop it is the left column,
+            row 2, under the heading. */}
+        <div className="order-3 lg:col-start-1 lg:row-start-2">
           {/* What to expect */}
-          <div className="mt-10">
+          <div className="lg:mt-0">
             <p className="eyebrow">What to expect</p>
             <ul className="mt-5 space-y-4">
               {[
@@ -206,7 +230,7 @@ export function Contact() {
         </div>
 
         {/* ---------------- Right: the multi-step form ---------------- */}
-        <div className="order-2 lg:col-start-2 lg:row-start-1 lg:sticky lg:top-32 lg:self-start">
+        <div className="order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-32 lg:self-start">
           {status === "success" ? (
             <div role="status" className="rounded-2xl border border-[var(--accent)]/40 bg-[var(--surface)] p-8">
               <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--color-ink)]">

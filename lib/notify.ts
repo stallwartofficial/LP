@@ -1,0 +1,118 @@
+// Shared notification pipeline for every form (contact, careers, partner).
+// Email via Resend REST (no SDK dep), WhatsApp via CallMeBot (a plain HTTPS
+// GET). Every function is best-effort and reads its config from env at call
+// time, so an unset key skips that channel instead of throwing. Nothing here is
+// a secret in the repo.
+//
+// Env used:
+//   RESEND_API_KEY        Resend API key
+//   LEAD_FROM_EMAIL       verified-domain sender, e.g. "Stallwart <noreply@stallwart.in>"
+//   LEAD_NOTIFY_EMAILS    comma-separated team recipients
+//   CALLMEBOT_RECIPIENTS  comma-separated "phone:apikey" pairs (one per person)
+
+type Row = [label: string, value: string];
+
+export type Attachment = { filename: string; content: string }; // content = base64
+
+export async function notifySubmission(opts: {
+  kind: string; // "lead" | "career application" | "partner request"
+  subject: string; // notification email subject
+  rows: Row[]; // details for the team email
+  whatsapp: string; // short WhatsApp line
+  ack?: { to: string; name: string; body: string }; // optional acknowledgment to the submitter
+  attachments?: Attachment[]; // e.g. a resume, attached to the team email
+}) {
+  await Promise.allSettled([
+    sendTeamEmail(opts.subject, opts.rows, opts.attachments),
+    opts.ack ? sendAck(opts.ack.to, opts.ack.name, opts.ack.body) : Promise.resolve(),
+    sendWhatsApp(opts.whatsapp),
+  ]);
+}
+
+async function resendSend(payload: {
+  from: string;
+  to: string[];
+  subject: string;
+  html: string;
+  reply_to?: string;
+  attachments?: Attachment[];
+}) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key || payload.to.length === 0) return;
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) console.error("[notify] resend:", res.status, await res.text());
+  } catch (e) {
+    console.error("[notify] resend threw:", e);
+  }
+}
+
+async function sendTeamEmail(subject: string, rows: Row[], attachments?: Attachment[]) {
+  const from = process.env.LEAD_FROM_EMAIL;
+  const to = (process.env.LEAD_NOTIFY_EMAILS || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (!from || to.length === 0) return;
+  const body = rows
+    .map(
+      ([l, v]) =>
+        `<tr><td style="padding:4px 12px 4px 0;color:#666;vertical-align:top">${esc(l)}</td><td style="padding:4px 0">${esc(v)}</td></tr>`
+    )
+    .join("");
+  await resendSend({
+    from,
+    to,
+    subject,
+    attachments,
+    html: `<div style="font-family:system-ui,sans-serif;max-width:560px;color:#111"><h2 style="margin:0 0 12px">${esc(subject)}</h2><table style="border-collapse:collapse;font-size:14px">${body}</table></div>`,
+  });
+}
+
+async function sendAck(to: string, name: string, body: string) {
+  const from = process.env.LEAD_FROM_EMAIL;
+  if (!from) return;
+  await resendSend({
+    from,
+    to: [to],
+    subject: "We got your message, Stallwart",
+    html: `<div style="font-family:system-ui,sans-serif;max-width:520px;color:#111"><p>Hi ${esc(name)},</p><p>${esc(body)}</p><p>Talk soon,<br/>Stallwart</p></div>`,
+  });
+}
+
+// CallMeBot: one apikey per recipient phone. Configure as "phone:apikey" pairs.
+async function sendWhatsApp(text: string) {
+  const recipients = (process.env.CALLMEBOT_RECIPIENTS || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  await Promise.allSettled(
+    recipients.map(async (pair) => {
+      const idx = pair.lastIndexOf(":");
+      if (idx < 1) return;
+      const phone = pair.slice(0, idx);
+      const apikey = pair.slice(idx + 1);
+      const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(
+        phone
+      )}&text=${encodeURIComponent(text)}&apikey=${encodeURIComponent(apikey)}`;
+      try {
+        const res = await fetch(url);
+        if (!res.ok) console.error("[notify] callmebot:", res.status);
+      } catch (e) {
+        console.error("[notify] callmebot threw:", e);
+      }
+    })
+  );
+}
+
+function esc(s: string) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}

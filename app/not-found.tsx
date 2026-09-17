@@ -1,8 +1,17 @@
 import Link from "next/link";
-import { navLinks } from "@/data/site";
+import { site } from "@/data/site";
+import { NotFoundSearch } from "@/components/NotFoundSearch";
 
-// Branded 404, no dead ends: every 404 offers the full nav as an exit.
-// Navbar/Footer come from the root layout, so this only owns the content.
+// Branded 404, no dead ends: a primary CTA, a working search, and the main
+// destinations as exits. Navbar/Footer come from the root layout. Responsive:
+// stacks cleanly at phone width, search field goes full-width.
+const EXITS = [
+  { label: "What We Build", href: "/offer" },
+  { label: "Case studies", href: "/blog" },
+  { label: "About", href: "/story" },
+  { label: "Careers", href: "/careers" },
+];
+
 export default function NotFound() {
   return (
     <section className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-40 lg:pt-52">
@@ -18,21 +27,39 @@ export default function NotFound() {
           This one fell through.
         </h1>
         <p className="mt-5 max-w-lg text-[length:var(--text-step-1)] text-[var(--fg)]/70">
-          Which is ironic, given what we do about that. The page you asked for
-          doesn&apos;t exist, here&apos;s everywhere that does.
+          The page you asked for does not exist. Search for what you need, book a
+          call, or jump to one of the main pages below.
         </p>
 
+        {/* Primary action + search */}
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          <Link
+            href="/contact"
+            className="group relative inline-flex items-center overflow-hidden rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)]"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
+            />
+            <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
+              {site.cta.primary}
+            </span>
+          </Link>
+          <Link href="/" className="link-draw text-sm font-medium text-[var(--accent-text)]">
+            Back home →
+          </Link>
+        </div>
+
+        <NotFoundSearch />
+
         <ul className="mt-12">
-          {navLinks.map((link, i) => (
+          {EXITS.map((link, i) => (
             <li key={link.href} className="rule-t last:rule-b">
               <Link
                 href={link.href}
                 className="group flex items-baseline gap-5 py-5 transition-[padding] duration-500 hover:pl-3"
               >
-                <span
-                  aria-hidden="true"
-                  className="text-xs text-[var(--accent-text)]"
-                >
+                <span aria-hidden="true" className="text-xs text-[var(--accent-text)]">
                   0{i + 1}
                 </span>
                 <span className="font-display text-[length:var(--text-step-2)] font-light">

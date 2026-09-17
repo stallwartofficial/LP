@@ -797,10 +797,12 @@ html:not(.dark) blockquote {
      line instead of wrapping mid-clause. Each clause is its own block in the
      markup; `pretty` fills each line before wrapping (unlike `balance`, which
      can split a clause that would otherwise fit). */
-  font-size: clamp(2.4rem, 1.6rem + 2.9vw, 3.55rem);
+  /* Viewport-scaled so the longest clause ("AI products, agents, and
+     systems,") always fits one line: paired with white-space:nowrap on each
+     clause in Hero, the headline holds exactly two lines at every width. */
+  font-size: clamp(1.05rem, 5.6vw, 3.4rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
-  text-wrap: pretty;
 }
 
 /* ==========================================================================

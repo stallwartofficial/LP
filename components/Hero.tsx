@@ -19,7 +19,7 @@ import { FlipWords } from "./FlipWords";
 // fonts, so no performance cost. Phrases not present are simply skipped.
 const EMPHASISE = [
   "we build the AI that solves it",
-  "engineered to run in production",
+  "built for production",
 ];
 
 function emphasise(text: string): React.ReactNode[] {
@@ -56,7 +56,7 @@ export function Hero() {
   const [lineOne = "", lineTwo = ""] = headline.split("|");
 
   const renderLine = (line: string, weight: string) => {
-    const cls = `block ${weight}`;
+    const cls = `block whitespace-nowrap ${weight}`;
     const at = line.indexOf(headlineEmphasis);
     if (at === -1) return <span className={cls}>{line}</span>;
     return (
@@ -108,7 +108,7 @@ export function Hero() {
                 key={para}
                 className={
                   i === site.hero.subhead.length - 1
-                    ? "font-semibold text-[var(--fg)]/90"
+                    ? "hidden font-semibold text-[var(--fg)]/90 sm:block"
                     : undefined
                 }
               >
