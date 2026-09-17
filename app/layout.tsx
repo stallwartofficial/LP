@@ -79,8 +79,7 @@ const cinzel = Cinzel({
 // previews, and X cards say the same thing the visitor sees. The title leads
 // with the actionable positioning ("AI systems and custom software"), then
 // pairs the trust promise, then the brand.
-const homeTitle =
-  "AI Agents, AI + SaaS & Custom AI Systems | Stallwart";
+const homeTitle = "Stallwart | AI-First Engineering Company";
 const homeDescription =
   "Stallwart is an AI-first engineering company. Bring the problem, we build the AI that solves it: agents, AI + SaaS products, RAG and infrastructure, and custom AI systems, engineered to production and yours to own.";
 

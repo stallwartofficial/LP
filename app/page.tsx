@@ -2,7 +2,6 @@ import { Hero } from "@/components/Hero";
 import { ProblemSolution } from "@/components/ProblemSolution";
 import { WhatWeBuild } from "@/components/WhatWeBuild";
 import { StoryTeaser } from "@/components/StoryTeaser";
-import { Architecture } from "@/components/Architecture";
 import { SocialProof } from "@/components/SocialProof";
 import { Commitments } from "@/components/TrustLayer";
 import { ContactBanner } from "@/components/ContactBanner";
@@ -28,7 +27,6 @@ export default function Home() {
       <Hero />
       <ProblemSolution />
       <WhatWeBuild />
-      <Architecture />
       <Commitments />
       <SocialProof />
       <StoryTeaser />

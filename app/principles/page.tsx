@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { PrinciplesLedger } from "@/components/PrinciplesLedger";
+import { Architecture } from "@/components/Architecture";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -161,6 +162,9 @@ export default function PrinciplesPage() {
           </div>
         </div>
       </main>
+
+      {/* The engineering standard the principles translate into. */}
+      <Architecture />
     </>
   );
 }
