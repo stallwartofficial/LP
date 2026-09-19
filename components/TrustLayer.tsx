@@ -42,8 +42,8 @@ const tiles: Tile[] = [
   {
     area: "enc",
     kicker: "Security",
-    title: commitments[1].title,
-    line: "TLS 1.2 or higher in transit, AES-256 at rest. Keys stay server side.",
+    title: "Secure by default",
+    line: "What we build is encrypted in transit and at rest, with keys on your side. Security is built in, not bolted on.",
   },
   {
     area: "data",
@@ -54,8 +54,8 @@ const tiles: Tile[] = [
   {
     area: "reg",
     kicker: "Region",
-    title: commitments[3].title,
-    line: "Your data stays resident in the region you choose.",
+    title: "Built for your rules",
+    line: "Data stays in the region you choose, so it fits the rules you answer to.",
   },
   {
     area: "ovr",
@@ -68,7 +68,7 @@ const tiles: Tile[] = [
     kicker: "Candour",
     title: "no",
     accent: true,
-    line: "We say no when off-the-shelf already solves it, or the spend cannot be justified.",
+    line: "We would rather lose the work than sell you something you do not need. If something simpler already does the job, we tell you, and you keep your money.",
   },
 ];
 
@@ -94,9 +94,6 @@ export function Commitments() {
               over control.
             </p>
           </div>
-          <p className="font-mono shrink-0 text-[10px] uppercase tracking-[0.14em] text-[var(--fg)]/72">
-            Full detail on request
-          </p>
         </div>
 
         <div className="op-bento mt-8 flex flex-wrap gap-3 lg:grid">
@@ -107,6 +104,8 @@ export function Commitments() {
                 key={tile.area}
                 style={{ gridArea: tile.area }}
                 className={`card-lift flex min-w-0 flex-col rounded-2xl border p-4 transition-colors duration-300 lg:basis-auto lg:p-5 ${
+                  isFeature ? "lg:self-stretch" : ""
+                } ${
                   isFeature || tile.accent
                     ? "basis-full"
                     : "basis-[calc(50%-0.375rem)]"

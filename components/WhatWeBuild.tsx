@@ -1,10 +1,10 @@
+import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { TerminalBuild } from "@/components/TerminalBuild";
 
-// "What we build": the statement headline, then the four capabilities delivered
-// as the output of a terminal query. On-brand for an AI engineering company and
-// alive, without becoming a card grid. The terminal text is crawlable and the
-// motion is a reduced-motion-safe enhancement (see TerminalBuild).
+// Homepage hook for "what we build": the statement headline + the terminal, then
+// a CTA into the full What We Build page. The full capability catalog and
+// industry positioning live on /offer, not here.
 export function WhatWeBuild() {
   return (
     <section className="section-y rule-t px-[var(--space-gutter)]" id="what-we-build">
@@ -20,6 +20,12 @@ export function WhatWeBuild() {
               Four things, one standard. Whatever your business needs from AI, it is
               one of these, engineered to production, not a demo.
             </p>
+            <Link
+              href="/offer"
+              className="link-draw mt-6 inline-block text-sm font-medium text-[var(--accent-text)]"
+            >
+              See everything we build
+            </Link>
           </Reveal>
 
           <Reveal>
