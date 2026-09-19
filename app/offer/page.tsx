@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { WhatWeBuild } from "@/components/WhatWeBuild";
+import { ServiceCatalog } from "@/components/ServiceCatalog";
+import { IndustryExplorer } from "@/components/IndustryExplorer";
+import { Process } from "@/components/Process";
+import { TechStack } from "@/components/TechStack";
 import { Architecture } from "@/components/Architecture";
-import { Commitments } from "@/components/TrustLayer";
+import { Engagement } from "@/components/Engagement";
 import { Faq } from "@/components/Faq";
+import { ContactBanner } from "@/components/ContactBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, serviceSchema, pageMeta } from "@/lib/seo";
 
@@ -28,10 +32,14 @@ export default function OfferPage() {
           ]),
         ]}
       />
-      <WhatWeBuild />
+      <ServiceCatalog />
+      <IndustryExplorer />
+      <Process />
+      <TechStack />
       <Architecture />
-      <Commitments />
-      <Faq heading="How we work" />
+      <Engagement />
+      <Faq heading="Questions, answered" />
+      <ContactBanner />
     </div>
   );
 }

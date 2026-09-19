@@ -69,9 +69,9 @@ export function TerminalBuild() {
     >
       {/* Title bar */}
       <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-        <span className="h-3 w-3 rounded-full bg-white/15" />
-        <span className="h-3 w-3 rounded-full bg-white/15" />
-        <span className="h-3 w-3 rounded-full bg-[var(--accent)]" />
+        <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+        <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+        <span className="h-3 w-3 rounded-full bg-[#28c840]" />
         <span className="ml-3 font-mono text-[11px] tracking-[0.14em] text-white/40">
           stallwart @ core
         </span>
@@ -112,8 +112,8 @@ export function TerminalBuild() {
           <span className="text-[var(--accent)]">✓</span>
           <span className="text-[var(--accent-text)]">
             whatever your business needs from AI. one standard, to production.
+            <span className="term-caret" aria-hidden="true" />
           </span>
-          <span className="term-caret" aria-hidden="true" />
         </p>
       </div>
     </div>
