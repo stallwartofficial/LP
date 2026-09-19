@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { site } from "@/data/site";
 import { submitLead } from "@/app/contact/actions";
+import { PhoneField } from "@/components/PhoneField";
 import { ProofBadge } from "@/components/ProofBadge";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -23,7 +24,7 @@ const INTERESTS = [
 // Three short steps convert better than one long form: each screen asks for one
 // coherent group, so the reader is never staring at a wall of fields.
 const STEPS = [
-  { id: "you", title: "You", required: ["name", "email"] as const },
+  { id: "you", title: "You", required: ["name", "email", "phone"] as const },
   { id: "company", title: "Company", required: ["company"] as const },
   { id: "problem", title: "The problem", required: [] as const },
 ] as const;
@@ -31,6 +32,7 @@ const STEPS = [
 type FormShape = {
   name: string;
   email: string;
+  phone: string;
   company: string;
   teamSize: string;
   interest: string;
@@ -40,6 +42,7 @@ type FormShape = {
 const EMPTY: FormShape = {
   name: "",
   email: "",
+  phone: "",
   company: "",
   teamSize: "",
   interest: "",
@@ -119,8 +122,9 @@ export function Contact() {
     setData((d) => ({ ...d, [k]: v }));
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+  const phoneOk = /^[+()\d][\d\s()-]{6,}$/.test(data.phone.trim());
   const stepValid = STEPS[step].required.every((k) =>
-    k === "email" ? emailOk : data[k].trim().length > 0
+    k === "email" ? emailOk : k === "phone" ? phoneOk : data[k].trim().length > 0
   );
 
   const isLast = step === STEPS.length - 1;
@@ -131,6 +135,13 @@ export function Contact() {
     try {
       // On success the action calls redirect() to /contact/thank-you, so it does
       // not return; a returned value means a validation error to surface.
+      // Stash name + topic for the thank-you page (avoids PII in the URL).
+      try {
+        sessionStorage.setItem("ty_name", data.name.trim());
+        sessionStorage.setItem("ty_topic", (data.interest || data.message).trim());
+      } catch {
+        // ignore
+      }
       const res = await submitLead({ ...data, hp, sid, utm, page: pagePath });
       if (res?.error) {
         setError(res.error);
@@ -251,7 +262,7 @@ export function Contact() {
                 We&apos;ll be in touch shortly to find a time.
               </p>
               <Link href="/offer" className="link-draw mt-6 inline-block text-sm font-medium text-[var(--accent-text)]">
-                Meanwhile, see what we build →
+                Meanwhile, see what we build
               </Link>
             </div>
           ) : (
@@ -299,6 +310,19 @@ export function Contact() {
                       <input id="email" type="email" autoComplete="email" placeholder="jordan@company.com" value={data.email} onChange={(e) => set("email", e.target.value)} className={`field ${fieldClass}`} />
                       {touched && data.email.length > 0 && !emailOk && (
                         <p className="mt-2 text-xs text-red-500">Enter a valid email address.</p>
+                      )}
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className={labelClass}>Phone</label>
+                      <div className="mt-2">
+                        <PhoneField
+                          value={data.phone}
+                          onChange={(v) => set("phone", v)}
+                          invalid={touched && data.phone.length > 0 && !phoneOk}
+                        />
+                      </div>
+                      {touched && data.phone.length > 0 && !phoneOk && (
+                        <p className="mt-2 text-xs text-red-500">Enter a valid phone number.</p>
                       )}
                     </div>
                   </>

@@ -4,6 +4,7 @@ import { LogoScroll } from "./LogoScroll";
 import { RevealOnLoad } from "./Reveal";
 import { HeroField } from "./HeroField";
 import { FlipWords } from "./FlipWords";
+import { TerminalBuild } from "./TerminalBuild";
 
 // The company hero.
 //
@@ -18,7 +19,7 @@ import { FlipWords } from "./FlipWords";
 // face, already loaded) for an editorial accent against the sans body. No new
 // fonts, so no performance cost. Phrases not present are simply skipped.
 const EMPHASISE = [
-  "we build the AI that solves it",
+  "we build the system that solves it",
   "built for production",
 ];
 
@@ -56,7 +57,7 @@ export function Hero() {
   const [lineOne = "", lineTwo = ""] = headline.split("|");
 
   const renderLine = (line: string, weight: string) => {
-    const cls = `block whitespace-nowrap ${weight}`;
+    const cls = `block ${weight}`;
     const at = line.indexOf(headlineEmphasis);
     if (at === -1) return <span className={cls}>{line}</span>;
     return (
@@ -70,76 +71,70 @@ export function Hero() {
 
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden px-[var(--space-gutter)] pb-8 pt-24 lg:pt-28">
-      {/* Centered amber glow, radial-masked dot grid, and corner crosshairs. */}
+      {/* Amber glow, radial-masked dot grid, and corner crosshairs. */}
       <HeroField />
 
-      {/* ------------------------- The claim, centred ------------------------- */}
-      <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center text-center">
-        <RevealOnLoad index={0} y={8}>
-          <div className="flex items-center justify-center gap-3">
-            <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)] sm:w-12" />
-            <p className="font-display text-[length:var(--text-step-1)] italic tracking-wide text-[var(--accent-text)]">
-              {site.hero.tagline}
-            </p>
-            <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)] sm:w-12" />
-          </div>
-        </RevealOnLoad>
-
-        {/* H1 is the LCP element on the home page: render it in the initial
-            HTML with no reveal animation so it paints immediately. Wrapping it
-            in RevealOnLoad delayed LCP by ~500ms on mobile-throttled. */}
-        <h1 className="font-display text-hero mt-6">
-          {renderLine(lineOne, "font-light")}
-          {renderLine(lineTwo, "font-medium")}
-        </h1>
-
-        {/* Flip-board scope line: the one motion moment in the hero. */}
-        <RevealOnLoad index={1}>
-          <p className="mt-5 flex items-baseline justify-center gap-2 font-display text-[length:var(--text-step-3)] text-[var(--fg)]/80">
-            <span>We build</span>
-            <FlipWords words={[...site.hero.flipWords]} />
-          </p>
-        </RevealOnLoad>
-
-        <RevealOnLoad index={2}>
-          <div className="font-display mt-7 max-w-5xl space-y-2 text-[clamp(1.15rem,1rem+0.7vw,1.5rem)] font-light leading-relaxed text-[var(--fg)]/80">
-            {site.hero.subhead.map((para, i) => (
-              <p
-                key={para}
-                className={
-                  i === site.hero.subhead.length - 1
-                    ? "hidden font-semibold text-[var(--fg)]/90 sm:block"
-                    : undefined
-                }
-              >
-                {emphasise(para)}
+      {/* Split hero: the claim on the left, a live build artifact on the right. */}
+      <div className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+        {/* ---------------------------- Left: claim ---------------------------- */}
+        <div className="text-center lg:text-left">
+          <RevealOnLoad index={0} y={8}>
+            <div className="flex items-center justify-center gap-3 lg:justify-start">
+              <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)] sm:w-12" />
+              <p className="font-display text-[length:var(--text-step-1)] italic tracking-wide text-[var(--accent-text)]">
+                {site.hero.tagline}
               </p>
-            ))}
-          </div>
-        </RevealOnLoad>
+            </div>
+          </RevealOnLoad>
 
-        <RevealOnLoad
-          index={3}
-          className="mt-8 flex flex-wrap items-center justify-center gap-3"
-        >
-          <Link
-            href={site.hero.primaryCta.href}
-            className="group relative inline-flex items-center overflow-hidden rounded-full bg-[var(--fg)] px-8 py-4 text-sm font-medium text-[var(--bg)]"
+          {/* H1 is the LCP element: no reveal wrapper so it paints immediately. */}
+          <h1 className="font-display mt-6 text-[clamp(2rem,1.1rem+3.4vw,3.6rem)] leading-[1.05]">
+            {renderLine(lineOne, "font-light")}
+            {renderLine(lineTwo, "font-medium")}
+          </h1>
+
+          {/* Flip-board scope line: the one motion moment in the copy. */}
+          <RevealOnLoad index={1}>
+            <p className="mt-5 flex items-baseline justify-center gap-2 font-display text-[length:var(--text-step-2)] text-[var(--fg)]/80 lg:justify-start">
+              <span>We build</span>
+              <FlipWords words={[...site.hero.flipWords]} />
+            </p>
+          </RevealOnLoad>
+
+          <RevealOnLoad index={2}>
+            <p className="mx-auto mt-6 max-w-xl font-display text-[length:var(--text-step-1)] font-light leading-relaxed text-[var(--fg)]/80 lg:mx-0">
+              {emphasise(site.hero.subhead[0])}
+            </p>
+          </RevealOnLoad>
+
+          <RevealOnLoad
+            index={3}
+            className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
           >
-            <span
-              aria-hidden="true"
-              className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
-            />
-            <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
-              {site.hero.primaryCta.label}
-            </span>
-          </Link>
-          <Link
-            href={site.hero.secondaryCta.href}
-            className="btn-wipe inline-flex items-center rounded-full border border-[var(--hairline-strong)] px-8 py-4 text-sm font-medium text-[var(--fg)]"
-          >
-            {site.hero.secondaryCta.label}
-          </Link>
+            <Link
+              href={site.hero.primaryCta.href}
+              className="group relative inline-flex items-center overflow-hidden rounded-full bg-[var(--fg)] px-8 py-4 text-sm font-medium text-[var(--bg)]"
+            >
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 -translate-x-full bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
+              />
+              <span className="relative transition-colors group-hover:text-[var(--color-ink)]">
+                {site.hero.primaryCta.label}
+              </span>
+            </Link>
+            <Link
+              href={site.hero.secondaryCta.href}
+              className="btn-wipe inline-flex items-center rounded-full border border-[var(--hairline-strong)] px-8 py-4 text-sm font-medium text-[var(--fg)]"
+            >
+              {site.hero.secondaryCta.label}
+            </Link>
+          </RevealOnLoad>
+        </div>
+
+        {/* ------------------------ Right: build artifact ---------------------- */}
+        <RevealOnLoad index={2} className="w-full">
+          <TerminalBuild />
         </RevealOnLoad>
       </div>
 

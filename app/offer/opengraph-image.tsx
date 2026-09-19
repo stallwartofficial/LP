@@ -8,6 +8,6 @@ export const alt = "Stallwart, what we build";
 export default function Image() {
   return renderOgCard({
     eyebrow: "What we build",
-    title: "Bring the problem.|We build the AI that solves it.",
+    title: "Bring the problem.|We build the system that solves it.",
   });
 }

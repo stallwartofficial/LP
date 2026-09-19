@@ -11,6 +11,7 @@ type Body = {
   sid?: string;
   name?: string;
   email?: string;
+  phone?: string;
   company?: string;
   teamSize?: string;
   interest?: string;
@@ -55,6 +56,7 @@ export async function POST(request: Request) {
           sid,
           name: s(body.name) || null,
           email: s(body.email) || null,
+          phone: s(body.phone) || null,
           company: s(body.company) || null,
           team_size: s(body.teamSize) || null,
           interest: s(body.interest) || null,

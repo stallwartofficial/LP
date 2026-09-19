@@ -27,16 +27,38 @@ export function StoryTeaser() {
       className="section-y rule-t px-[var(--space-gutter)]"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-12 lg:grid-cols-[17rem_minmax(0,34rem)] lg:items-center lg:justify-center lg:gap-14">
-          {/* Mobile order: eyebrow -> quote -> photo -> prose. Desktop: photo
-              spans both rows in col 1; eyebrow + quote sit above the prose in
-              col 2. The quote is the section's headline (id target), so it
-              lives directly under the eyebrow. */}
-          <div className="lg:col-start-2 lg:row-start-1">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+          {/* ---------------- The taped photograph, scaled up ---------------- */}
+          <div className="pinboard rounded-2xl border border-[var(--hairline)] p-6 sm:p-10">
+            <figure className="photo-taped mx-auto max-w-[17rem] bg-[var(--bg-raised)] p-3.5">
+              <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
+                <Image
+                  src="/images/arun-saravanan-founder-stallwart.jpg"
+                  alt={`${site.founder.fullName}, ${site.founder.role} of ${site.company}`}
+                  fill
+                  sizes="(min-width: 1024px) 40rem, (min-width: 640px) 70vw, 90vw"
+                  loading="lazy"
+                  className="object-cover object-top"
+                />
+              </div>
+
+              <figcaption className="mt-4 px-1 pb-1">
+                <span className="font-display block text-[length:var(--text-step-2)] italic">
+                  {site.founder.fullName}
+                </span>
+                <span className="font-mono mt-1 block text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
+                  {site.founder.role}
+                </span>
+              </figcaption>
+            </figure>
+          </div>
+
+          {/* ---------------- Eyebrow, pull-quote, tight bio ---------------- */}
+          <div>
             <p className="eyebrow">The origin</p>
             <blockquote
               id="story-teaser-heading"
-              className="font-display mt-4 text-display-sm font-light"
+              className="font-display mt-5 font-light leading-[1.1] text-[clamp(1.8rem,1.1rem+2.4vw,3rem)]"
             >
               <span aria-hidden="true" className="mr-1 text-[var(--accent)]/50">
                 &ldquo;
@@ -45,60 +67,22 @@ export function StoryTeaser() {
               <span className="text-gold-sheen italic">confidence</span> problem,
               not a capability problem.
             </blockquote>
-          </div>
 
-          {/* ---------------- The taped photograph ---------------- */}
-          <div className="pinboard rounded-2xl border border-[var(--hairline)] p-8 sm:p-10 lg:col-start-1 lg:row-span-2 lg:row-start-1">
-            <figure className="photo-taped bg-[var(--bg-raised)] p-3">
-              <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
-                <Image
-                  src="/images/arun-saravanan-founder-stallwart.jpg"
-                  alt={`${site.founder.fullName}, ${site.founder.role} of ${site.company}`}
-                  fill
-                  sizes="(min-width: 1024px) 18rem, (min-width: 640px) 60vw, 90vw"
-                  // Lazy: the origin block sits well below the fold on mobile,
-                  // so eager loading put this 137KB asset on the critical path
-                  // and hurt LCP / Speed Index for no visible benefit.
-                  loading="lazy"
-                  className="object-cover object-top"
-                />
-              </div>
-
-              <figcaption className="mt-3 px-1 pb-1">
-                <span className="font-display block text-[length:var(--text-step-1)] italic">
-                  {site.founder.fullName}
-                </span>
-                <span className="font-mono mt-0.5 block text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/70">
-                  {site.founder.role}
-                </span>
-              </figcaption>
-            </figure>
-          </div>
-
-          {/* ---------------- The origin, in his words ---------------- */}
-          <div className="lg:col-start-2 lg:row-start-2">
-            <p className="text-[var(--fg)]/75">
-              {site.founder.name} founded {site.company} on one observation. AI
-              gets sold on how well it looks in a demo. Then it goes live, breaks
-              in ways the demo never showed, and that becomes the customer&apos;s
-              problem, not the seller&apos;s.
+            <p className="mt-7 max-w-xl text-[length:var(--text-step-1)] text-[var(--fg)]/80">
+              {site.founder.name} founded {site.company} to close the gap between a
+              demo and production, engineering systems built to be audited, not
+              just believed.
             </p>
 
-            <p className="mt-4 text-[var(--fg)]/75">
-              He built {site.company} to close that gap, engineering AI systems
-              that report their own uncertainty instead of asserting through it,
-              and that are built to be audited, not just believed.
-            </p>
-
-            <p className="mt-4 text-sm text-[var(--fg)]/72">
+            <p className="mt-4 max-w-xl text-sm text-[var(--fg)]/65">
               {site.founder.credential}
             </p>
 
             <Link
               href="/story"
-              className="link-draw mt-7 inline-block text-sm font-medium text-[var(--accent-text)]"
+              className="link-draw mt-8 inline-block text-sm font-medium text-[var(--accent-text)]"
             >
-              Read the full story →
+              Read the full story
             </Link>
           </div>
         </div>

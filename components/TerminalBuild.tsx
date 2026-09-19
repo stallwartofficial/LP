@@ -10,10 +10,10 @@ import { useEffect, useRef, useState } from "react";
 const COMMAND = "stallwart build --anything";
 
 const OUTPUT = [
-  { name: "AI Agents & Automation", line: "software that runs the process, so a person does not have to." },
-  { name: "AI + SaaS Products", line: "a full product, built, shipped, and owned by you outright." },
-  { name: "AI Infrastructure & RAG", line: "the retrieval, models, and evals that make AI reliable." },
-  { name: "Custom AI Systems", line: "anything the rest do not cover, engineered to fit." },
+  { name: "AI Agents & Automation", line: "software that does your repetitive work on its own, around the clock." },
+  { name: "AI + SaaS Products", line: "a complete app or platform, built and fully owned by you." },
+  { name: "AI Infrastructure & RAG", line: "AI that answers from your own data, accurately and reliably." },
+  { name: "Custom AI Systems", line: "anything the others do not cover, built to fit your problem." },
 ];
 
 export function TerminalBuild() {
@@ -111,7 +111,7 @@ export function TerminalBuild() {
         >
           <span className="text-[var(--accent)]">✓</span>
           <span className="text-[var(--accent-text)]">
-            whatever your business needs from AI. one standard, to production.
+            whatever your business needs from AI, built to production on one standard.
             <span className="term-caret" aria-hidden="true" />
           </span>
         </p>

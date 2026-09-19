@@ -20,12 +20,14 @@ export async function notifySubmission(opts: {
   subject: string; // notification email subject
   rows: Row[]; // details for the team email
   whatsapp: string; // short WhatsApp line
-  ack?: { to: string; name: string; body: string }; // optional acknowledgment to the submitter
+  // Optional acknowledgment to the submitter. Pass `html`/`subject` for a full
+  // custom template, or just `body` for the default wrapper.
+  ack?: { to: string; name: string; body?: string; subject?: string; html?: string };
   attachments?: Attachment[]; // e.g. a resume, attached to the team email
 }) {
   await Promise.allSettled([
     sendTeamEmail(opts.subject, opts.rows, opts.attachments),
-    opts.ack ? sendAck(opts.ack.to, opts.ack.name, opts.ack.body) : Promise.resolve(),
+    opts.ack ? sendAck(opts.ack) : Promise.resolve(),
     sendWhatsApp(opts.whatsapp),
     sendPush(opts.subject, opts.whatsapp),
   ]);
@@ -75,14 +77,16 @@ async function sendTeamEmail(subject: string, rows: Row[], attachments?: Attachm
   });
 }
 
-async function sendAck(to: string, name: string, body: string) {
+async function sendAck(ack: { to: string; name: string; body?: string; subject?: string; html?: string }) {
   const from = process.env.LEAD_FROM_EMAIL;
   if (!from) return;
   await resendSend({
     from,
-    to: [to],
-    subject: "We got your message, Stallwart",
-    html: `<div style="font-family:system-ui,sans-serif;max-width:520px;color:#111"><p>Hi ${esc(name)},</p><p>${esc(body)}</p><p>Talk soon,<br/>Stallwart</p></div>`,
+    to: [ack.to],
+    subject: ack.subject ?? "We got your message, Stallwart",
+    html:
+      ack.html ??
+      `<div style="font-family:system-ui,sans-serif;max-width:520px;color:#111"><p>Hi ${esc(ack.name)},</p><p>${esc(ack.body ?? "")}</p><p>Talk soon,<br/>Stallwart</p></div>`,
   });
 }
 

@@ -30,6 +30,26 @@ const principles = [
   },
 ];
 
+// Open roles live here. Add an entry (or flip `open`) and the section + the
+// "N seats open" line update themselves.
+const roles = [
+  {
+    slug: "interns",
+    title: "Interns",
+    meta: "Engineering and Business · Internship",
+    open: true,
+  },
+];
+
+const openRoles = roles.filter((r) => r.open);
+
+function seatsLine(n: number): string {
+  if (n === 0) return "No roles open right now, but we always read a strong application.";
+  const word = n === 1 ? "One seat" : `${n} seats`;
+  const fits = n === 1 ? "it fits" : "one fits";
+  return `${word} open right now. If ${fits}, it's worth a real application.`;
+}
+
 const process = [
   { n: "1", t: "A first conversation", meta: "30 min", d: "We get to know each other and check for real fit. No trick questions." },
   { n: "2", t: "A real problem", meta: "your pace", d: "A small, practical exercise close to the actual work. Never free labor." },
@@ -69,36 +89,36 @@ export default function CareersPage() {
                 href="/story"
                 className="link-draw text-sm font-medium text-[var(--accent-text)]"
               >
-                Read the founder&apos;s story →
+                Read the founder&apos;s story
               </Link>
             </div>
           </section>
 
-          {/* ------------------- We hire people who build --------------------- */}
-          <section className="mt-24">
-            <h2 className="font-display max-w-2xl text-display font-light">
-              We hire people who{" "}
-              <span className="text-gold-sheen italic">build.</span>
-            </h2>
-            <p className="mt-5 max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/70">
-              People who take ownership, think independently, move quickly, and
-              care about the quality of what they put into the world. Four things
-              matter more than a résumé here.
+          {/* ----------------------------- Open roles ------------------------- */}
+          <section id="roles" className="mt-16 scroll-mt-28">
+            <h2 className="font-display text-display-sm font-light">Open roles</h2>
+            <p className="mt-4 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
+              {seatsLine(openRoles.length)}
             </p>
-            {/* 2x2, divided by hairlines: reads as designed, not a bullet list. */}
-            <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-[var(--hairline)] bg-[var(--hairline)]">
-              {principles.map((p, i) => (
-                <div key={p.h} className="bg-[var(--bg)] p-7 sm:p-9">
-                  <span className="font-display text-[length:var(--text-step-4)] font-light text-[var(--accent-text)]/70">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-display mt-4 text-[length:var(--text-step-2)] leading-snug">
-                    {p.h}
-                  </h3>
-                  <p className="mt-3 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/70">
-                    {p.p}
-                  </p>
-                </div>
+            <div className="mt-8 space-y-4">
+              {openRoles.map((r) => (
+                <Link
+                  key={r.slug}
+                  href={`/careers/${r.slug}`}
+                  className="group flex items-center justify-between gap-6 rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-colors hover:border-[var(--accent)] sm:p-7"
+                >
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <span className="font-display text-[length:var(--text-step-2)] leading-tight">
+                        {r.title}
+                      </span>
+                      <span className="rounded-full border border-[var(--accent)]/50 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                        Open
+                      </span>
+                    </div>
+                    <p className="mt-1.5 text-sm text-[var(--fg)]/72">{r.meta}</p>
+                  </div>
+                </Link>
               ))}
             </div>
           </section>
@@ -136,46 +156,35 @@ export default function CareersPage() {
             </ol>
           </section>
 
-          {/* ----------------------------- Open roles ------------------------- */}
-          <section id="roles" className="mt-24 scroll-mt-28">
-            <h2 className="font-display text-display-sm font-light">Open roles</h2>
-            <p className="mt-4 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
-              One seat open right now. If it fits, it&apos;s worth a real
-              application.
+          {/* ------------------- We hire people who build --------------------- */}
+          <section className="mt-24">
+            <h2 className="font-display max-w-2xl text-display font-light">
+              We hire people who{" "}
+              <span className="text-gold-sheen italic">build.</span>
+            </h2>
+            <p className="mt-5 max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/70">
+              People who take ownership, think independently, move quickly, and
+              care about the quality of what they put into the world. Four things
+              matter more than a résumé here.
             </p>
-            <Link
-              href="/careers/interns"
-              className="group mt-8 flex items-center justify-between gap-6 rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 transition-colors hover:border-[var(--accent)] sm:p-7"
-            >
-              <div>
-                <div className="flex items-center gap-3">
-                  <span className="font-display text-[length:var(--text-step-2)] leading-tight">
-                    Interns
+            {/* 2x2, divided by hairlines: reads as designed, not a bullet list. */}
+            <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-[var(--hairline)] bg-[var(--hairline)]">
+              {principles.map((p, i) => (
+                <div key={p.h} className="bg-[var(--bg)] p-7 sm:p-9">
+                  <span className="font-display text-[length:var(--text-step-4)] font-light text-[var(--accent-text)]/70">
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="rounded-full border border-[var(--accent)]/50 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-text)]">
-                    Open
-                  </span>
+                  <h3 className="font-display mt-4 text-[length:var(--text-step-2)] leading-snug">
+                    {p.h}
+                  </h3>
+                  <p className="mt-3 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/70">
+                    {p.p}
+                  </p>
                 </div>
-                <p className="mt-1.5 text-sm text-[var(--fg)]/72">
-                  Engineering and Business · Internship
-                </p>
-              </div>
-              <span
-                aria-hidden="true"
-                className="shrink-0 text-[var(--accent-text)] transition-transform duration-300 group-hover:translate-x-1"
-              >
-                <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-                  <path
-                    d="M5 12h14M13 6l6 6-6 6"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </Link>
+              ))}
+            </div>
           </section>
+
         </div>
       </main>
     </>
