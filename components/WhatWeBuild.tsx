@@ -29,7 +29,7 @@ export function WhatWeBuild() {
               </Link>
               <Link
                 href="/offer#industries"
-                className="group inline-flex items-center gap-2.5 rounded-full border border-[var(--accent)]/40 bg-[color-mix(in_oklab,var(--accent)_8%,transparent)] px-4 py-2 text-sm font-medium text-[var(--accent-text)] transition-colors duration-300 hover:border-[var(--accent)]/70"
+                className="group inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-[var(--accent)]/40 bg-[color-mix(in_oklab,var(--accent)_8%,transparent)] px-3.5 py-2 text-[11px] font-medium text-[var(--accent-text)] transition-colors duration-300 hover:border-[var(--accent)]/70 sm:px-4 sm:text-sm"
               >
                 <span aria-hidden="true" className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-60 motion-reduce:hidden" />

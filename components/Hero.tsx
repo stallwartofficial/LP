@@ -102,12 +102,9 @@ export function Hero() {
           </RevealOnLoad>
 
           <RevealOnLoad index={2}>
-            <div className="mt-6 space-y-2">
+            <div className="mt-6">
               <p className="mx-auto max-w-xl font-display text-[length:var(--text-step-1)] font-light leading-relaxed text-[var(--fg)]/80 lg:mx-0">
                 {emphasise(site.hero.subhead[0])}
-              </p>
-              <p className="mx-auto max-w-xl font-display text-[length:var(--text-step-1)] font-light leading-relaxed text-[var(--fg)]/80 lg:mx-0">
-                Not sure how AI fits your business? We&apos;ll show you.
               </p>
             </div>
           </RevealOnLoad>
@@ -141,7 +138,7 @@ export function Hero() {
           <RevealOnLoad index={4} className="mt-6 flex justify-center lg:justify-start">
             <Link
               href="/offer#industries"
-              className="group inline-flex items-center gap-2.5 rounded-full border border-[var(--accent)]/40 bg-[color-mix(in_oklab,var(--accent)_8%,transparent)] px-4 py-2 text-sm font-medium text-[var(--accent-text)] transition-colors duration-300 hover:border-[var(--accent)]/70"
+              className="group inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-[var(--accent)]/40 bg-[color-mix(in_oklab,var(--accent)_8%,transparent)] px-3.5 py-2 text-[11px] font-medium text-[var(--accent-text)] transition-colors duration-300 hover:border-[var(--accent)]/70 sm:px-4 sm:text-sm"
             >
               <span aria-hidden="true" className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-60 motion-reduce:hidden" />
