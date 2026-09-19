@@ -29,6 +29,7 @@ export function CareersForm() {
     built: "",
   });
   const [resume, setResume] = useState<File | null>(null);
+  const [hp, setHp] = useState(""); // honeypot; stays empty for real users
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -97,6 +98,7 @@ export function CareersForm() {
         portfolio: form.portfolio.trim(),
         built: form.built.trim(),
         resume: resumePayload,
+        hp,
       });
       if ("error" in res) {
         setSubmitError(res.error);
@@ -160,6 +162,17 @@ export function CareersForm() {
       noValidate
       className="rounded-3xl border border-[var(--hairline)] bg-[var(--surface)] p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.5)] sm:p-8"
     >
+      {/* Honeypot: hidden from humans, tempting to bots. */}
+      <input
+        type="text"
+        name="hp"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={hp}
+        onChange={(e) => setHp(e.target.value)}
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+      />
       <p className="eyebrow">Apply now</p>
       <p className="mt-2 text-sm text-[var(--fg)]/72">
         Two minutes, and a real person reads it.

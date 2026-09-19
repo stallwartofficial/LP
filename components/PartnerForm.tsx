@@ -71,6 +71,15 @@ export function PartnerForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate={false}>
+      {/* Honeypot: hidden from humans, tempting to bots. */}
+      <input
+        type="text"
+        name="hp"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+      />
       {/* Two-column grid: paired fields per row; the message spans both. */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
