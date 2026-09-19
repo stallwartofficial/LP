@@ -142,9 +142,9 @@ export function ServiceCatalog() {
                 </h3>
                 <p className="mt-2 text-[length:var(--text-step-1)] text-[var(--fg)]/85">{p.lead}</p>
 
-                <ul className="mt-4 flex flex-wrap justify-center gap-2 sm:justify-start">
+                <ul className="mt-4 flex flex-wrap gap-2">
                   {p.services.map((s) => (
-                    <li key={s} className="rounded-full border border-[var(--hairline)] px-3 py-1.5 text-xs text-[var(--fg)]/75 transition-colors duration-300 hover:border-[var(--accent)]/50 hover:text-[var(--fg)]">
+                    <li key={s} className="grow rounded-full border border-[var(--hairline)] px-3 py-1.5 text-center text-xs text-[var(--fg)]/75 transition-colors duration-300 hover:border-[var(--accent)]/50 hover:text-[var(--fg)] sm:grow-0 sm:text-left">
                       {s}
                     </li>
                   ))}

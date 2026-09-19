@@ -100,7 +100,7 @@ export function Commitments() {
                 className={`card-lift flex min-w-0 flex-col rounded-2xl border p-4 transition-colors duration-300 lg:basis-auto lg:p-5 ${
                   isFeature ? "lg:self-stretch" : ""
                 } ${
-                  isFeature || tile.accent
+                  isFeature
                     ? "basis-full"
                     : "basis-[calc(50%-0.375rem)]"
                 } ${

@@ -307,9 +307,18 @@ export function IndustryExplorer() {
               </p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--fg)]/70">{ind.detail}</p>
 
-              <ul className="mt-4 flex flex-wrap gap-2">
+              <ul className="mt-4 space-y-2">
+                {ind.outcomes.map((o) => (
+                  <li key={o} className="flex items-start gap-2.5 text-sm text-[var(--fg)]/85">
+                    <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]" />
+                    {o}
+                  </li>
+                ))}
+              </ul>
+
+              <ul className="mt-5 flex flex-wrap gap-2">
                 {ind.tags.map((t) => (
-                  <li key={t} className="rounded-full border border-[var(--hairline)] px-3 py-1.5 text-xs text-[var(--fg)]/75">
+                  <li key={t} className="grow rounded-full border border-[var(--hairline)] px-3 py-1.5 text-center text-xs text-[var(--fg)]/75">
                     {t}
                   </li>
                 ))}

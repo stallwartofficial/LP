@@ -73,6 +73,7 @@ export function Navbar() {
     }`;
 
   return (
+    <>
     <header
       className={`pointer-events-none fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${
         scrolled
@@ -174,8 +175,11 @@ export function Navbar() {
           </div>
         </div>
       </nav>
+      </header>
 
-      {/* Mobile sheet: every group expanded into sections. */}
+      {/* Mobile sheet: every group expanded into sections. Kept OUTSIDE the
+          header, because the header's scrolled-state backdrop-blur creates a
+          containing block that would clip this fixed overlay to the bar. */}
       <div
         id="mobile-nav"
         hidden={!menuOpen}
@@ -238,6 +242,6 @@ export function Navbar() {
           {site.cta.primary}
         </Link>
       </div>
-    </header>
+    </>
   );
 }
