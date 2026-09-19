@@ -13,6 +13,8 @@ export const leadSchema = z.object({
   utm: z.record(z.string(), z.string()).optional().default({}),
   // The path the lead submitted from, for context in the notification.
   page: z.string().max(500).optional().default(""),
+  // Client draft id, used to delete the matching partial draft on full submit.
+  sid: z.string().max(64).optional().default(""),
 });
 
 export type LeadInput = z.infer<typeof leadSchema>;

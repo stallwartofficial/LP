@@ -12,6 +12,11 @@ import { notifySubmission } from "@/lib/notify";
 export async function submitLead(
   raw: unknown
 ): Promise<{ error: string } | void> {
+  // Honeypot: bots fill the hidden "hp" field; humans never see it. Silently
+  // accept (redirect as if sent) without persisting or notifying.
+  const hp = (raw as { hp?: unknown } | null)?.hp;
+  if (typeof hp === "string" && hp.trim()) redirect("/contact/thank-you");
+
   const parsed = leadSchema.safeParse(raw);
   if (!parsed.success) return { error: "Please check the form and try again." };
   const lead = parsed.data;
@@ -29,6 +34,8 @@ export async function submitLead(
       source_page: lead.page || null,
     });
     if (error) console.error("[lead] inquiries insert:", error.code ?? error.message);
+    // Completed: remove the partial draft so lead_drafts holds only abandoned ones.
+    if (lead.sid) await supabaseAdmin().from("lead_drafts").delete().eq("sid", lead.sid);
   } catch {
     console.error("[lead] supabase client error");
   }

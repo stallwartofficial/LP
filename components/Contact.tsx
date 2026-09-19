@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { site } from "@/data/site";
 import { submitLead } from "@/app/contact/actions";
@@ -57,6 +57,47 @@ export function Contact() {
   const [touched, setTouched] = useState(false);
   const [utm, setUtm] = useState<Record<string, string>>({});
   const [pagePath, setPagePath] = useState("");
+  const [hp, setHp] = useState(""); // honeypot; stays empty for real users
+  const [sid, setSid] = useState(""); // client draft id for partial capture
+
+  // A stable draft id per visit, generated on the client only.
+  useEffect(() => {
+    setSid(
+      typeof crypto !== "undefined" && crypto.randomUUID
+        ? crypto.randomUUID()
+        : String(Date.now()) + Math.random().toString(36).slice(2)
+    );
+  }, []);
+
+  // Save whatever they have entered, surviving tab-close via sendBeacon. Skips
+  // if nothing identifying is filled or the honeypot is set (bot).
+  const saveDraft = useCallback(() => {
+    if (!sid || hp) return;
+    if (!data.name && !data.email && !data.company && !data.message) return;
+    try {
+      const body = JSON.stringify({ sid, ...data, utm, page: pagePath });
+      navigator.sendBeacon?.("/api/lead-draft", new Blob([body], { type: "application/json" }));
+    } catch {
+      // best-effort
+    }
+  }, [sid, hp, data, utm, pagePath]);
+
+  // Capture on step change and when the tab is hidden or the page is left.
+  useEffect(() => {
+    saveDraft();
+  }, [step, saveDraft]);
+
+  useEffect(() => {
+    const onHide = () => {
+      if (document.visibilityState === "hidden") saveDraft();
+    };
+    document.addEventListener("visibilitychange", onHide);
+    window.addEventListener("pagehide", saveDraft);
+    return () => {
+      document.removeEventListener("visibilitychange", onHide);
+      window.removeEventListener("pagehide", saveDraft);
+    };
+  }, [saveDraft]);
 
   // Capture UTM attribution from the URL once, client-side (avoids the
   // useSearchParams Suspense requirement). Only utm_* keys are kept.
@@ -90,7 +131,7 @@ export function Contact() {
     try {
       // On success the action calls redirect() to /contact/thank-you, so it does
       // not return; a returned value means a validation error to surface.
-      const res = await submitLead({ ...data, utm, page: pagePath });
+      const res = await submitLead({ ...data, hp, sid, utm, page: pagePath });
       if (res?.error) {
         setError(res.error);
         setStatus("error");
@@ -215,6 +256,17 @@ export function Contact() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 sm:p-8">
+              {/* Honeypot: hidden from humans, tempting to bots. */}
+              <input
+                type="text"
+                name="hp"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={hp}
+                onChange={(e) => setHp(e.target.value)}
+                style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+              />
               {/* Progress */}
               <div className="mb-7 flex items-center gap-3">
                 {STEPS.map((s, i) => (

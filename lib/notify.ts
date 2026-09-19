@@ -9,6 +9,7 @@
 //   LEAD_FROM_EMAIL       verified-domain sender, e.g. "Stallwart <noreply@stallwart.in>"
 //   LEAD_NOTIFY_EMAILS    comma-separated team recipients
 //   CALLMEBOT_RECIPIENTS  comma-separated "phone:apikey" pairs (one per person)
+//   NTFY_TOPIC            ntfy.sh topic to push to (no spaces), e.g. "Stallwart-leads"
 
 type Row = [label: string, value: string];
 
@@ -26,6 +27,7 @@ export async function notifySubmission(opts: {
     sendTeamEmail(opts.subject, opts.rows, opts.attachments),
     opts.ack ? sendAck(opts.ack.to, opts.ack.name, opts.ack.body) : Promise.resolve(),
     sendWhatsApp(opts.whatsapp),
+    sendPush(opts.subject, opts.whatsapp),
   ]);
 }
 
@@ -107,6 +109,23 @@ async function sendWhatsApp(text: string) {
       }
     })
   );
+}
+
+// ntfy.sh push: a plain POST to the topic URL. Best-effort; skips if unset.
+// Title/tag headers must be ASCII, so the body carries the detail.
+async function sendPush(title: string, body: string) {
+  const topic = (process.env.NTFY_TOPIC || "").trim();
+  if (!topic) return;
+  try {
+    const res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
+      method: "POST",
+      headers: { Title: title, Priority: "high", Tags: "rotating_light" },
+      body,
+    });
+    if (!res.ok) console.error("[notify] ntfy:", res.status);
+  } catch (e) {
+    console.error("[notify] ntfy threw:", e);
+  }
 }
 
 function esc(s: string) {

@@ -48,6 +48,10 @@ const careerSchema = z.object({
 export async function submitCareer(
   raw: unknown
 ): Promise<{ ok: true } | { error: string }> {
+  // Honeypot: silently accept spam (hidden "hp" field filled) without storing.
+  const hp = (raw as { hp?: unknown } | null)?.hp;
+  if (typeof hp === "string" && hp.trim()) return { ok: true };
+
   const parsed = careerSchema.safeParse(raw);
   if (!parsed.success) {
     return { error: parsed.error.issues[0]?.message ?? "Please check the form and try again." };

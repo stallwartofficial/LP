@@ -14,6 +14,7 @@ type PartnerBody = {
   website?: string;
   partnerType?: string; // form field is "partnerType"
   message?: string;
+  hp?: string; // honeypot
 };
 
 const MAX_FIELD = 2000;
@@ -42,6 +43,9 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
+
+  // Honeypot: silently accept spam (hidden "hp" field filled) without storing.
+  if (clean(body.hp)) return NextResponse.json({ ok: true });
 
   const name = clean(body.name);
   const email = clean(body.email);
