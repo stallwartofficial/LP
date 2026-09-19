@@ -67,7 +67,7 @@ export const site = {
      * punctuation rule above.
      */
     subhead: [
-      "You have the problem, we build the AI that solves it.",
+      "Bring the problem, we build the system that solves it.",
       "Custom AI, SaaS, and automation, built for production, not a demo.",
     ],
     primaryCta: { label: "Build with us", href: "/contact" },

@@ -1174,6 +1174,12 @@ textarea { field-sizing: content; }
 .spotlight:hover::before{opacity:1}
 @media (prefers-reduced-motion: reduce){.spotlight::before{display:none}}
 
+/* Animated beams: a short bright dash travels each connector path (pathLength
+   normalised to 100), converging on the core. Base path stays faint beneath. */
+@keyframes beam-travel{from{stroke-dashoffset:112}to{stroke-dashoffset:12}}
+.beam{stroke-dasharray:12 100;animation:beam-travel 2.6s linear infinite}
+@media (prefers-reduced-motion: reduce){.beam{animation:none;stroke-dashoffset:60}}
+
 /* Glassmorphism card for the offer bento: a translucent, blurred surface over a
    soft accent glow, with a faint top-edge highlight so it reads as glass. */
 .glass{position:relative;background:color-mix(in oklab, var(--surface) 55%, transparent);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border:1px solid color-mix(in oklab, var(--fg) 10%, transparent);box-shadow:inset 0 1px 0 color-mix(in oklab, var(--fg) 8%, transparent)}

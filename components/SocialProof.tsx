@@ -126,15 +126,9 @@ export function SocialProof() {
             <p className="eyebrow">In their words</p>
             <h2
               id="social-proof-heading"
-              className="group font-display mt-3 w-fit text-display-sm font-light"
+              className="font-display mt-3 text-display-sm font-light"
             >
-              <span className="relative inline-block">
-                The customers speak.
-                <span
-                  aria-hidden="true"
-                  className="absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-[var(--accent)] transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-x-100 motion-reduce:transition-none"
-                />
-              </span>
+              The customers speak.
             </h2>
             <p className="mt-3 text-[length:var(--text-step-1)] text-[var(--fg)]/70">
               From some of the people we&apos;ve built for.

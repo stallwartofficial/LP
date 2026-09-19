@@ -28,13 +28,12 @@ export function ContactBanner() {
           Bring the problem.
           <br />
           <span className="italic text-[var(--color-gold-bright)]">
-            We build the AI.
+            We build the system.
           </span>
         </h2>
 
         <p className="mx-auto mt-7 max-w-xl text-[length:var(--text-step-1)] text-[var(--color-cream)]/70">
-          One call to talk it through: the problem you&apos;re facing, and what
-          we&apos;d build to solve it, together.
+          Bring the idea. One conversation, and we start building.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">

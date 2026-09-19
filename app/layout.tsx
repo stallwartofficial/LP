@@ -81,7 +81,7 @@ const cinzel = Cinzel({
 // pairs the trust promise, then the brand.
 const homeTitle = "Stallwart | AI-First Engineering Company";
 const homeDescription =
-  "Stallwart is an AI-first engineering company. Bring the problem, we build the AI that solves it: agents, AI + SaaS products, RAG and infrastructure, and custom AI systems, engineered to production and yours to own.";
+  "Stallwart is an AI-first engineering company. Bring the problem, we build the system that solves it: agents, AI + SaaS products, RAG and infrastructure, and custom AI systems, engineered to production and yours to own.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),

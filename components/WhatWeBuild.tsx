@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { TerminalBuild } from "@/components/TerminalBuild";
+import { AnimatedBeams } from "@/components/AnimatedBeams";
 
 // Homepage hook for "what we build": the statement headline + the terminal, then
 // a CTA into the full What We Build page. The full capability catalog and
@@ -14,11 +14,11 @@ export function WhatWeBuild() {
             <p className="eyebrow">What we build</p>
             <h2 className="font-display mt-3 font-light leading-[1.05]" style={{ fontSize: "var(--text-step-6)" }}>
               Bring the problem.<br />
-              <span className="text-gold-sheen italic">We build the AI that solves it.</span>
+              <span className="text-gold-sheen italic">We build the system that solves it.</span>
             </h2>
             <p className="mt-5 max-w-[46ch] text-[length:var(--text-step-1)] text-[var(--fg)]/72">
-              Four things, one standard. Whatever your business needs from AI, it is
-              one of these, engineered to production, not a demo.
+              Four things, one standard. Whatever you need built, it is one of these,
+              taken all the way to production, not a demo.
             </p>
             <Link
               href="/offer"
@@ -29,7 +29,7 @@ export function WhatWeBuild() {
           </Reveal>
 
           <Reveal>
-            <TerminalBuild />
+            <AnimatedBeams />
           </Reveal>
         </div>
       </div>
