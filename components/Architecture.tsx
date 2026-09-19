@@ -62,9 +62,6 @@ export function Architecture() {
                 <p className="mt-2 text-xs leading-snug text-[var(--fg)]/85">
                   {layer.plain}
                 </p>
-                <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--fg)]/70">
-                  {layer.role}
-                </p>
                 <p className="mt-3 text-xs leading-relaxed text-[var(--fg)]/75">
                   {layer.detail}
                 </p>

@@ -62,7 +62,7 @@ function Check() {
 export function Process() {
   return (
     <section aria-labelledby="process-heading" className="section-y rule-t px-[var(--space-gutter)]">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-[100rem]">
         <Reveal>
           <p className="eyebrow">How we work</p>
           <h2 id="process-heading" className="font-display mt-3 text-display-sm font-light">
@@ -77,7 +77,7 @@ export function Process() {
         <div className="relative mt-12">
           {/* dashed connector behind the icon nodes (desktop) */}
           <div aria-hidden="true" className="absolute left-0 right-0 top-6 hidden border-t border-dashed border-[var(--hairline-strong)] lg:block" />
-          <ol className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6">
+          <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-6">
             {STEPS.map((s) => (
               <Reveal as="li" key={s.n}>
                 <span className="relative grid h-12 w-12 place-items-center rounded-full border border-[var(--accent)]/40 bg-[var(--bg)] text-[var(--accent-text)]">

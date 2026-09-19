@@ -20,12 +20,24 @@ export function WhatWeBuild() {
               Four things, one standard. Whatever you need built, it is one of these,
               taken all the way to production, not a demo.
             </p>
-            <Link
-              href="/offer"
-              className="link-draw mt-6 inline-block text-sm font-medium text-[var(--accent-text)]"
-            >
-              See everything we build
-            </Link>
+            <div className="mt-6 flex flex-col items-start gap-4">
+              <Link
+                href="/offer"
+                className="link-draw inline-block text-sm font-medium text-[var(--accent-text)]"
+              >
+                See everything we build
+              </Link>
+              <Link
+                href="/offer#industries"
+                className="group inline-flex items-center gap-2.5 rounded-full border border-[var(--accent)]/40 bg-[color-mix(in_oklab,var(--accent)_8%,transparent)] px-4 py-2 text-sm font-medium text-[var(--accent-text)] transition-colors duration-300 hover:border-[var(--accent)]/70"
+              >
+                <span aria-hidden="true" className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-60 motion-reduce:hidden" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent)]" />
+                </span>
+                Not sure how AI fits your industry? See it here.
+              </Link>
+            </div>
           </Reveal>
 
           <Reveal>

@@ -102,7 +102,7 @@ export function AnimatedBeams() {
 
       {/* the core */}
       <circle cx="202" cy="160" r="34" fill="color-mix(in oklab, var(--surface) 94%, transparent)" stroke="var(--accent)" strokeWidth="1.5" />
-      <text x="202" y="170" textAnchor="middle" fontSize="26" fontFamily="var(--font-display, serif)" fontStyle="italic" fill="var(--accent-text)">S</text>
+      <image href="/images/stallwart-lion-mark.png" x="180" y="138" width="44" height="44" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }

@@ -102,7 +102,7 @@ export function Story() {
             </p>
 
             <p>
-              He gives back, too. He has mentored 50+ students into
+              He gives back, too. He has mentored 500+ students into
               engineering, and he still makes time for it today.
             </p>
 

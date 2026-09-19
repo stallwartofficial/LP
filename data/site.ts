@@ -190,7 +190,7 @@ export const site = {
 
 
   contact: {
-    email: "", // no public inbox for now; email UI stays hidden while empty
+    email: "contact@stallwart.in", // public inbox; shows in the footer + schema
     address: "India",
   },
   /**
