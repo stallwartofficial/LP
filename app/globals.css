@@ -990,7 +990,7 @@ label[for] {
     grid-template-areas:
       "own own cost time"
       "own own enc  enc"
-      "data reg  ovr  no";
+      "data ovr  no   no";
   }
 }
 
@@ -1179,6 +1179,13 @@ textarea { field-sizing: content; }
 @keyframes beam-travel{from{stroke-dashoffset:112}to{stroke-dashoffset:12}}
 .beam{stroke-dasharray:12 100;animation:beam-travel 2.6s linear infinite}
 @media (prefers-reduced-motion: reduce){.beam{animation:none;stroke-dashoffset:60}}
+
+/* Thank-you tick: the circle pops in, then the check draws itself once. */
+@keyframes tick-pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes tick-draw{to{stroke-dashoffset:0}}
+.tick-pop{animation:tick-pop .5s var(--ease-out-expo) both}
+.tick-draw{stroke-dasharray:26;stroke-dashoffset:26;animation:tick-draw .5s .28s ease-out forwards}
+@media (prefers-reduced-motion: reduce){.tick-pop,.tick-draw{animation:none;stroke-dashoffset:0;opacity:1;transform:none}}
 
 /* Glassmorphism card for the offer bento: a translucent, blurred surface over a
    soft accent glow, with a faint top-edge highlight so it reads as glass. */

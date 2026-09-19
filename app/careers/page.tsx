@@ -45,9 +45,8 @@ const openRoles = roles.filter((r) => r.open);
 
 function seatsLine(n: number): string {
   if (n === 0) return "No roles open right now, but we always read a strong application.";
-  const word = n === 1 ? "One seat" : `${n} seats`;
-  const fits = n === 1 ? "it fits" : "one fits";
-  return `${word} open right now. If ${fits}, it's worth a real application.`;
+  if (n === 1) return "One opportunity, open right now. If this is you, we want the application.";
+  return `${n} openings, open right now. If one is you, we want the application.`;
 }
 
 const process = [
@@ -76,15 +75,10 @@ export default function CareersPage() {
               <span className="text-gold-sheen italic">actually work.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-[length:var(--text-step-2)] leading-relaxed text-[var(--fg)]/85">
-              We hire people who build. We care, and we build a lot.
+              We hire people who can actually build, and build well. Skill comes
+              first here. Everything else is secondary.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-              <a
-                href="#roles"
-                className="btn-wipe inline-flex items-center gap-2 rounded-full bg-[var(--fg)] px-7 py-3.5 text-sm font-medium text-[var(--bg)]"
-              >
-                See open roles
-              </a>
               <Link
                 href="/story"
                 className="link-draw text-sm font-medium text-[var(--accent-text)]"

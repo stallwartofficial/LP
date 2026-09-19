@@ -79,7 +79,7 @@ const PILLARS: Pillar[] = [
     span: "md:col-span-1",
     title: "AI Agents & Automation",
     lead: "Software that does the work for you, on its own.",
-    body: "It reads, decides, and acts across your tools on its own, so the repetitive, all-day work just gets done, around the clock.",
+    body: "Hand off the work that eats your team's day, the follow-ups, the data entry, the checks, and let software run it end to end. It works nights and weekends, never skips a step, and scales the moment you need more. You get your people back for the work that actually needs a human.",
     cta: "Automate my work",
     services: ["Agentic AI Systems", "AI Development", "AI Strategy & Consulting", "AI Center of Excellence", "Workflow Automation", "Voice & Chat Agents", "Copilots & Assistants", "RPA Modernisation", "Multi-Agent Orchestration"],
     visual: AgentsVisual,
@@ -89,7 +89,7 @@ const PILLARS: Pillar[] = [
     span: "md:col-span-2",
     title: "AI + SaaS Products",
     lead: "Full products, built and owned by you.",
-    body: "The whole thing, web, mobile, and platform, with AI at the core. You own the code, data, and roadmap, no lock-in.",
+    body: "Have an idea for an app or platform? We design, build, and ship the whole thing, front to back, with AI where it earns its place. You launch faster than standing up a team, and you own every line of code, your data, and the roadmap. No lock-in, no staying dependent on us to keep moving.",
     cta: "Build my product",
     services: ["SaaS Platforms", "Web Apps", "Mobile Apps", "UX & Product Design", "Custom Software", "Digital Products", "MVP & Prototyping", "Dashboards & Analytics", "API Products"],
     visual: SaasVisual,
@@ -99,7 +99,7 @@ const PILLARS: Pillar[] = [
     span: "md:col-span-2",
     title: "AI Infrastructure & RAG",
     lead: "The engine that makes AI reliable.",
-    body: "The plumbing that lets AI answer from your own data instead of guessing, built to stay fast, accurate, and yours.",
+    body: "Generic AI guesses. We build the layer that makes it answer from your own documents, data, and rules, so replies are accurate, current, and easy to trace. It stays fast as you grow, keeps your data yours, and turns 'the AI made something up' into a problem you no longer have.",
     cta: "Make my AI reliable",
     services: ["Enterprise Search & RAG", "AI Infrastructure", "Data Engineering", "API & Integrations", "Vector Databases", "Model Fine-tuning", "MLOps & Monitoring", "Data Pipelines", "Cloud & DevOps"],
     visual: InfraVisual,
@@ -109,7 +109,7 @@ const PILLARS: Pillar[] = [
     span: "md:col-span-1",
     title: "Custom AI Systems",
     lead: "Anything the rest do not cover, engineered to fit.",
-    body: "When your problem does not fit a template, we build it from scratch to fit exactly. One team, one standard, whatever the software needs to be.",
+    body: "Got a problem that does not fit any template? Describe it and we build it from scratch, shaped to exactly how you work, not to what some product happened to ship. One senior team, one standard, whatever the software needs to be, taken to production and yours to keep.",
     cta: "Scope my system",
     services: ["Generative AI & LLM Apps", "Enterprise Platforms", "QA Automation & Testing", "Computer Vision", "Predictive Models", "Recommendation Systems", "Document Intelligence", "Legacy AI Integration", "OCR & Data Extraction"],
     visual: CustomVisual,
@@ -132,9 +132,10 @@ export function ServiceCatalog() {
         </Reveal>
 
         <div className="mt-14 grid gap-4 md:grid-cols-3">
-          {PILLARS.map((p) => (
-            <Reveal key={p.title} className={p.span}>
-              <article className="glass group card-lift flex h-full flex-col overflow-hidden rounded-2xl p-6 lg:p-8">
+          {PILLARS.map((p) => {
+            const isWide = p.span.includes("col-span-2");
+            const content = (
+              <div className={isWide ? "lg:flex-1" : "flex flex-1 flex-col"}>
                 <span className="font-mono text-[11px] tracking-[0.2em] text-[var(--accent-text)]">{p.n}</span>
                 <h3 className="font-display mt-3 text-[length:var(--text-step-3)] font-light leading-tight">
                   {p.title}
@@ -149,7 +150,7 @@ export function ServiceCatalog() {
                   ))}
                 </ul>
 
-                <p className="mt-4 max-w-[52ch] text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/60">
+                <p className="mt-4 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/60">
                   {p.body}
                 </p>
 
@@ -159,13 +160,37 @@ export function ServiceCatalog() {
                 >
                   {p.cta}
                 </Link>
-
-                <div className="mt-auto pt-6 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
-                  <div className="h-[130px] w-full">{p.visual}</div>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+              </div>
+            );
+            const visual = (
+              <div
+                className={
+                  isWide
+                    ? "shrink-0 opacity-80 transition-opacity duration-300 group-hover:opacity-100 lg:w-[38%]"
+                    : "mt-auto pt-6 opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+                }
+              >
+                <div className={isWide ? "h-[200px] w-full" : "h-[130px] w-full"}>{p.visual}</div>
+              </div>
+            );
+            return (
+              <Reveal key={p.title} className={p.span}>
+                <article className="glass group card-lift flex h-full flex-col overflow-hidden rounded-2xl p-6 lg:p-8">
+                  {isWide ? (
+                    <div className="flex h-full flex-col gap-8 lg:flex-row lg:items-center">
+                      {content}
+                      {visual}
+                    </div>
+                  ) : (
+                    <>
+                      {content}
+                      {visual}
+                    </>
+                  )}
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

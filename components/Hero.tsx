@@ -57,7 +57,7 @@ export function Hero() {
   const [lineOne = "", lineTwo = ""] = headline.split("|");
 
   const renderLine = (line: string, weight: string) => {
-    const cls = `block ${weight}`;
+    const cls = `block ${weight} lg:whitespace-nowrap`;
     const at = line.indexOf(headlineEmphasis);
     if (at === -1) return <span className={cls}>{line}</span>;
     return (
@@ -75,7 +75,7 @@ export function Hero() {
       <HeroField />
 
       {/* Split hero: the claim on the left, a live build artifact on the right. */}
-      <div className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+      <div className="mx-auto grid w-full max-w-[108rem] flex-1 items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-20">
         {/* ---------------------------- Left: claim ---------------------------- */}
         <div className="text-center lg:text-left">
           <RevealOnLoad index={0} y={8}>
@@ -102,9 +102,14 @@ export function Hero() {
           </RevealOnLoad>
 
           <RevealOnLoad index={2}>
-            <p className="mx-auto mt-6 max-w-xl font-display text-[length:var(--text-step-1)] font-light leading-relaxed text-[var(--fg)]/80 lg:mx-0">
-              {emphasise(site.hero.subhead[0])}
-            </p>
+            <div className="mt-6 space-y-2">
+              <p className="mx-auto max-w-xl font-display text-[length:var(--text-step-1)] font-light leading-relaxed text-[var(--fg)]/80 lg:mx-0">
+                {emphasise(site.hero.subhead[0])}
+              </p>
+              <p className="mx-auto max-w-xl font-display text-[length:var(--text-step-1)] font-light leading-relaxed text-[var(--fg)]/80 lg:mx-0">
+                Not sure how AI fits your business? We&apos;ll show you.
+              </p>
+            </div>
           </RevealOnLoad>
 
           <RevealOnLoad
@@ -128,6 +133,21 @@ export function Hero() {
               className="btn-wipe inline-flex items-center rounded-full border border-[var(--hairline-strong)] px-8 py-4 text-sm font-medium text-[var(--fg)]"
             >
               {site.hero.secondaryCta.label}
+            </Link>
+          </RevealOnLoad>
+
+          {/* Industry nudge, below the buttons: a live pulse dot as a static
+              invitation to click through to the industry explorer. */}
+          <RevealOnLoad index={4} className="mt-6 flex justify-center lg:justify-start">
+            <Link
+              href="/offer#industries"
+              className="group inline-flex items-center gap-2.5 rounded-full border border-[var(--accent)]/40 bg-[color-mix(in_oklab,var(--accent)_8%,transparent)] px-4 py-2 text-sm font-medium text-[var(--accent-text)] transition-colors duration-300 hover:border-[var(--accent)]/70"
+            >
+              <span aria-hidden="true" className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-60 motion-reduce:hidden" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent)]" />
+              </span>
+              Not sure how AI fits your industry? See it here.
             </Link>
           </RevealOnLoad>
         </div>

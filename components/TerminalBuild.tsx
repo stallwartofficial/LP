@@ -78,7 +78,7 @@ export function TerminalBuild() {
       </div>
 
       {/* Body */}
-      <div className="px-5 py-6 font-mono text-[13px] leading-relaxed text-[#e9e4d6] sm:px-8 sm:py-8 sm:text-sm">
+      <div className="px-6 py-7 font-mono text-[13px] leading-relaxed text-[#e9e4d6] sm:px-10 sm:py-9 sm:text-sm">
         <p>
           <span className="text-[var(--accent-text)]">~/build</span>
           <span className="text-white/40"> $ </span>
@@ -86,7 +86,7 @@ export function TerminalBuild() {
           {!done && <span className="term-caret" aria-hidden="true" />}
         </p>
 
-        <ol className="mt-5 space-y-4">
+        <ol className="mt-5 space-y-5">
           {OUTPUT.map((o, i) => (
             <li
               key={o.name}

@@ -52,12 +52,6 @@ const tiles: Tile[] = [
     line: "Your data is never sold and never trains shared models.",
   },
   {
-    area: "reg",
-    kicker: "Region",
-    title: "Built for your rules",
-    line: "Data stays in the region you choose, so it fits the rules you answer to.",
-  },
-  {
     area: "ovr",
     kicker: "Control",
     title: commitments[2].title,

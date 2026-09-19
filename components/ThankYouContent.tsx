@@ -70,9 +70,11 @@ export function ThankYouContent() {
       <div className="mx-auto max-w-3xl text-center">
         <span
           aria-hidden="true"
-          className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent)] text-lg text-[var(--color-ink)]"
+          className="tick-pop mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--accent)]"
         >
-          ✓
+          <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7" stroke="var(--color-ink)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path className="tick-draw" d="M5 12.5l4.5 4.5L19 7" />
+          </svg>
         </span>
 
         <h1 className="font-display mt-6 text-display-lg font-light leading-[1.05]">
@@ -80,24 +82,18 @@ export function ThankYouContent() {
           {firstName && <span className="text-gold-sheen italic">{firstName}</span>}.
         </h1>
 
-        <p className="mx-auto mt-6 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/80">
-          Your query{topic ? <> about <span className="text-[var(--fg)]">{topic}</span></> : ""} is
-          noted, and someone from our team will get to you shortly.
+        <p className="mx-auto mt-5 max-w-3xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/80">
+          Your details are in. Book a 30-minute call and we will walk through
+          <br className="hidden sm:block" />
+          your problem and exactly how we would solve it, nothing for you to prepare.
         </p>
-        <p className="mx-auto mt-2 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
-          A confirmation is on its way to your inbox.
-        </p>
-        <p className="mx-auto mt-2 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
-          In the meantime, if you would rather talk sooner, grab a time that works for you below.
-        </p>
-
       </div>
 
-      {/* Calendar: fills the width of the page, tall enough to feel primary. */}
-      <div className="mx-auto mt-12 max-w-[100rem]">
+      {/* Calendar: a wide rectangle, the primary action. */}
+      <div className="mx-auto mt-10 max-w-[100rem]">
         {CAL_LINK ? (
           <div className="overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]">
-            <div id="cal-inline" style={{ width: "100%", height: "80vh", minHeight: 620, overflow: "auto" }} />
+            <div id="cal-inline" style={{ width: "100%", height: 640, minHeight: 560, overflow: "auto" }} />
           </div>
         ) : (
           <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-8 text-center">
@@ -109,7 +105,13 @@ export function ThankYouContent() {
         )}
       </div>
 
-      <div className="mx-auto mt-8 flex max-w-[100rem] flex-wrap items-center justify-center gap-x-8 gap-y-3">
+      <div className="mx-auto mt-6 flex max-w-[100rem] flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        <p className="text-sm text-[var(--fg)]/55">
+          Prefer not to book now? A confirmation is on its way and our team will reach out.
+        </p>
+      </div>
+
+      <div className="mx-auto mt-4 flex max-w-[100rem] flex-wrap items-center justify-center gap-x-8 gap-y-3">
         <Link href="/offer" className="link-draw text-sm font-medium text-[var(--accent-text)]">
           See what we build
         </Link>
