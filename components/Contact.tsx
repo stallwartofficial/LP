@@ -192,9 +192,9 @@ export function Contact() {
           </div>
 
           <h1 id="contact-heading" className="font-display mt-6 text-display-lg font-light leading-[1.03]">
-            Tell us what keeps
+            Tell us the problem.
             <br />
-            <span className="text-gold-sheen italic">falling through.</span>
+            <span className="text-gold-sheen italic">We&apos;ll build the fix.</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-[length:var(--text-step-1)] text-[var(--fg)]/75">
