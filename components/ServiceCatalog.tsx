@@ -166,7 +166,7 @@ export function ServiceCatalog() {
               <div
                 className={
                   isWide
-                    ? "shrink-0 opacity-80 transition-opacity duration-300 group-hover:opacity-100 lg:w-[38%]"
+                    ? "shrink-0 opacity-80 transition-opacity duration-300 group-hover:opacity-100 lg:w-[38%] lg:self-center"
                     : "mt-auto pt-6 opacity-80 transition-opacity duration-300 group-hover:opacity-100"
                 }
               >
@@ -177,7 +177,7 @@ export function ServiceCatalog() {
               <Reveal key={p.title} className={p.span}>
                 <article className="glass group card-lift flex h-full flex-col overflow-hidden rounded-2xl p-6 lg:p-8">
                   {isWide ? (
-                    <div className="flex h-full flex-col gap-8 lg:flex-row lg:items-center">
+                    <div className="flex h-full flex-col gap-8 lg:flex-row lg:items-stretch">
                       {content}
                       {visual}
                     </div>
