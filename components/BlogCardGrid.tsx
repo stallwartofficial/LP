@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import type { BlogPost, BlogCategory } from "@/data/blog";
 import { blogCategories } from "@/data/blog";
-import { getOffering } from "@/data/offerings";
 import { BlogDiagram } from "@/components/BlogDiagram";
 
 // Card grid for the blog index. Replaces the ruled editorial list with a
@@ -24,9 +23,309 @@ const fmtDate = (iso: string) =>
     year: "numeric",
   });
 
+// Generative per-post covers. Every card without a bespoke diagram gets a
+// graphic that is UNIQUE to the post (seeded by its slug) but whose shape
+// family is set by the pillar category, so a card still reads as its pillar
+// while no two cards look alike. Deterministic (pure function of the slug) so
+// server and client render identically. Same gold-line idiom as the diagrams.
+const cs = "var(--accent)";
+const cm = "color-mix(in oklab, var(--accent) 55%, transparent)";
+const cf = "color-mix(in oklab, var(--fg) 24%, transparent)";
+const coverSvg = (children: ReactNode) => (
+  <svg viewBox="0 0 240 120" fill="none" className="h-full w-full" aria-hidden="true">
+    {children}
+  </svg>
+);
+
+// FNV-1a hash of the slug, then a small deterministic PRNG (mulberry32).
+function seededRng(slug: string) {
+  let h = 2166136261;
+  for (let i = 0; i < slug.length; i++) {
+    h ^= slug.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  let a = h >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const rint = (r: () => number, lo: number, hi: number) =>
+  lo + Math.floor(r() * (hi - lo + 1));
+
+type Gen = (r: () => number) => ReactNode;
+
+// Agents & Automation: a root node branching to a seeded number of leaves,
+// some of which branch again. Reads as an orchestration tree.
+const genAgents: Gen = (r) => {
+  const leaves = rint(r, 3, 5);
+  const xs = 150 + Math.floor(r() * 30);
+  return (
+    <>
+      {Array.from({ length: leaves }).map((_, i) => {
+        const y = 22 + ((96 - 22) * i) / (leaves - 1) + (r() * 10 - 5);
+        return <path key={i} d={`M60 60C110 60 ${xs - 40} ${y} ${xs} ${y}`} stroke={cf} />;
+      })}
+      {Array.from({ length: leaves }).map((_, i) => {
+        const y = 22 + ((96 - 22) * i) / (leaves - 1) + (r() * 10 - 5);
+        return <rect key={i} x={xs} y={y - 9} width="26" height="18" rx="4" stroke={i === leaves - 1 ? cs : cf} />;
+      })}
+      <circle cx="48" cy="60" r="12" stroke={cs} />
+      <circle cx="48" cy="60" r="3.5" fill={cs} />
+    </>
+  );
+};
+
+// Infrastructure & RAG: a central core with a seeded number of spokes to
+// satellite stores at varied angles and radii.
+const genInfra: Gen = (r) => {
+  const spokes = rint(r, 4, 6);
+  const nodes = Array.from({ length: spokes }).map((_, i) => {
+    const a = (i / spokes) * Math.PI * 2 + r() * 0.5;
+    const rad = 34 + r() * 16;
+    return { x: 120 + Math.cos(a) * rad * 1.5, y: 60 + Math.sin(a) * rad };
+  });
+  return (
+    <>
+      {nodes.map((n, i) => (
+        <path key={`l${i}`} d={`M120 60L${n.x} ${n.y}`} stroke={cf} />
+      ))}
+      {nodes.map((n, i) => (
+        <circle key={`n${i}`} cx={n.x} cy={n.y} r={4 + r() * 2} stroke={i % 3 === 0 ? cs : cf} />
+      ))}
+      <rect x="104" y="48" width="32" height="24" rx="6" stroke={cs} />
+      <circle cx="120" cy="60" r="2.5" fill={cs} />
+    </>
+  );
+};
+
+// Production Engineering: a seeded telemetry signal over a baseline, with
+// checkpoint nodes. Reads as observability / a running system.
+const genProduction: Gen = (r) => {
+  const pts = 7 + rint(r, 0, 2);
+  let d = "";
+  const coords: { x: number; y: number }[] = [];
+  for (let i = 0; i < pts; i++) {
+    const x = 24 + (192 * i) / (pts - 1);
+    const y = 40 + r() * 40;
+    coords.push({ x, y });
+    d += `${i === 0 ? "M" : "L"}${x.toFixed(0)} ${y.toFixed(0)}`;
+  }
+  return (
+    <>
+      <path d="M24 92h192" stroke={cf} />
+      <path d={d} stroke={cs} />
+      {coords.filter((_, i) => i % 2 === 0).map((c, i) => (
+        <circle key={i} cx={c.x} cy={c.y} r="3" fill={cm} />
+      ))}
+    </>
+  );
+};
+
+// Governance & Compliance: a shield holding a seeded stack of audit records,
+// with a check. Reads as evidence / an auditable system.
+const genGovernance: Gen = (r) => {
+  const rows = rint(r, 3, 4);
+  return (
+    <>
+      <path d="M120 22l38 13v24c0 27-18 38-38 47-20-9-38-20-38-47V35l38-13Z" stroke={cf} />
+      {Array.from({ length: rows }).map((_, i) => {
+        const w = 30 + r() * 26;
+        return <rect key={i} x={120 - w / 2} y={44 + i * 12} width={w} height="5" rx="2.5" fill={i === 0 ? cm : cf} />;
+      })}
+      <path d="M108 62l9 9 16-18" stroke={cs} />
+    </>
+  );
+};
+
+// Commercial: a seeded bar series with a trend line over it. Reads as a
+// decision / an economics view.
+const genCommercial: Gen = (r) => {
+  const n = 5 + rint(r, 0, 2);
+  const bars = Array.from({ length: n }).map((_, i) => {
+    const x = 28 + (184 * i) / (n - 1);
+    const h = 14 + r() * 46;
+    return { x, h };
+  });
+  const line = bars.map((b, i) => `${i === 0 ? "M" : "L"}${b.x.toFixed(0)} ${(92 - b.h - 6).toFixed(0)}`).join("");
+  return (
+    <>
+      {bars.map((b, i) => (
+        <rect key={i} x={b.x - 6} y={92 - b.h} width="12" height={b.h} rx="2" stroke={i === n - 1 ? cs : cf} />
+      ))}
+      <path d={line} stroke={cm} />
+    </>
+  );
+};
+
+// Matrix of vectors with a seeded few lit. */
+const genMatrix: Gen = (r) => {
+  const cols = 8;
+  const rows = 5;
+  return (
+    <>
+      {Array.from({ length: cols }).map((_, c) =>
+        Array.from({ length: rows }).map((_, ry) => {
+          const lit = r() > 0.82;
+          return (
+            <circle
+              key={`${c}-${ry}`}
+              cx={30 + c * 26}
+              cy={20 + ry * 20}
+              r={lit ? 3.5 : 2}
+              stroke={lit ? cs : cf}
+              fill={lit ? cm : "none"}
+            />
+          );
+        }),
+      )}
+    </>
+  );
+};
+
+// Offset layered cards climbing up-right. */
+const genLayers: Gen = (r) => {
+  const n = rint(r, 3, 4);
+  return (
+    <>
+      {Array.from({ length: n }).map((_, i) => (
+        <rect
+          key={i}
+          x={60 + i * 26}
+          y={78 - i * 18}
+          width="80"
+          height="40"
+          rx="8"
+          stroke={i === n - 1 ? cs : cf}
+        />
+      ))}
+    </>
+  );
+};
+
+// Concentric orbits with a seeded satellite. */
+const genOrbit: Gen = (r) => {
+  const rings = rint(r, 2, 3);
+  const a = r() * Math.PI * 2;
+  const orbitR = 26 + rings * 8;
+  return (
+    <>
+      {Array.from({ length: rings }).map((_, i) => (
+        <circle key={i} cx="120" cy="60" r={18 + i * 14} stroke={cf} />
+      ))}
+      <circle cx="120" cy="60" r="4" fill={cs} />
+      <circle cx={120 + Math.cos(a) * orbitR} cy={60 + Math.sin(a) * orbitR * 0.7} r="5" stroke={cs} />
+      <circle cx={120 + Math.cos(a + 2) * (orbitR - 14)} cy={60 + Math.sin(a + 2) * (orbitR - 14) * 0.7} r="3.5" stroke={cm} />
+    </>
+  );
+};
+
+// Left-to-right flow of nodes with arrow links. */
+const genFlow: Gen = (r) => {
+  const n = rint(r, 3, 4);
+  const ys = Array.from({ length: n }).map(() => 44 + r() * 32);
+  const xs = Array.from({ length: n }).map((_, i) => 40 + (160 * i) / (n - 1));
+  return (
+    <>
+      {xs.slice(0, -1).map((x, i) => (
+        <path key={i} d={`M${x + 10} ${ys[i]}L${xs[i + 1] - 10} ${ys[i + 1]}`} stroke={cf} />
+      ))}
+      {xs.map((x, i) => (
+        <rect key={`r${i}`} x={x - 12} y={ys[i] - 11} width="24" height="22" rx="5" stroke={i === n - 1 ? cs : cf} />
+      ))}
+    </>
+  );
+};
+
+// Scattered constellation with a connecting spine. */
+const genConstellation: Gen = (r) => {
+  const n = rint(r, 5, 7);
+  const pts = Array.from({ length: n }).map(() => ({ x: 30 + r() * 180, y: 20 + r() * 80 }));
+  return (
+    <>
+      {pts.slice(0, -1).map((p, i) => (
+        <path key={i} d={`M${p.x.toFixed(0)} ${p.y.toFixed(0)}L${pts[i + 1].x.toFixed(0)} ${pts[i + 1].y.toFixed(0)}`} stroke={cf} />
+      ))}
+      {pts.map((p, i) => (
+        <circle key={`c${i}`} cx={p.x} cy={p.y} r={i % 3 === 0 ? 4 : 2.5} stroke={i % 3 === 0 ? cs : cf} />
+      ))}
+    </>
+  );
+};
+
+// Overlapping sine waves. */
+const genWave: Gen = (r) => {
+  const mk = (amp: number, phase: number, stroke: string) => {
+    let d = "M12 60";
+    for (let x = 12; x <= 228; x += 6) {
+      const y = 60 + Math.sin((x / 30) + phase) * amp;
+      d += `L${x} ${y.toFixed(1)}`;
+    }
+    return <path d={d} stroke={stroke} />;
+  };
+  return (
+    <>
+      {mk(14 + r() * 10, r() * 6, cf)}
+      {mk(22 + r() * 12, r() * 6, cs)}
+    </>
+  );
+};
+
+// Nested concentric rounded rectangles. */
+const genNested: Gen = (r) => {
+  const n = rint(r, 3, 4);
+  const off = 12 + Math.floor(r() * 6);
+  return (
+    <>
+      {Array.from({ length: n }).map((_, i) => (
+        <rect
+          key={i}
+          x={40 + i * off}
+          y={20 + i * (off * 0.7)}
+          width={160 - i * off * 2}
+          height={80 - i * off * 1.4}
+          rx="10"
+          stroke={i === n - 1 ? cs : cf}
+        />
+      ))}
+    </>
+  );
+};
+
+// The full archetype pool. Each post is assigned one by a hash of its slug so
+// covers vary card-to-card, with the internals seeded for extra variation.
+const ARCHETYPES: Gen[] = [
+  genAgents,
+  genInfra,
+  genProduction,
+  genGovernance,
+  genCommercial,
+  genMatrix,
+  genLayers,
+  genOrbit,
+  genFlow,
+  genConstellation,
+  genWave,
+  genNested,
+];
+
+// A second, independent hash so the archetype pick does not correlate with the
+// PRNG stream used for the internals.
+function pickHash(slug: string) {
+  let h = 5381;
+  for (let i = 0; i < slug.length; i++) h = (Math.imul(h, 33) + slug.charCodeAt(i)) | 0;
+  return h >>> 0;
+}
+
+function coverFor(post: BlogPost): ReactNode {
+  const gen = ARCHETYPES[pickHash(post.slug) % ARCHETYPES.length];
+  return coverSvg(gen(seededRng(post.slug)));
+}
+
 function CardTopPanel({ post }: { post: BlogPost }) {
-  const offeringName =
-    getOffering(post.offering)?.name ?? post.offering.replace(/-/g, " ");
+  const cover = coverFor(post);
 
   return (
     // The diagrams are wide and flat (roughly 3:1 to 2.5:1), so aspect-[2/1]
@@ -48,12 +347,16 @@ function CardTopPanel({ post }: { post: BlogPost }) {
           <BlogDiagram name={post.diagram} compact />
         </div>
       ) : (
-        // Posts without a diagram get the offering label as a graphic fallback.
-        <div className="absolute inset-0 flex items-end justify-between p-5">
-          <span className="font-display max-w-[70%] text-[length:var(--text-step-1)] italic leading-tight text-[var(--fg)]/85">
-            {offeringName}
+        // Posts without a bespoke diagram get an on-brand category cover, so
+        // every card carries a graphic. The category label sits at the corner.
+        <>
+          <div className="absolute inset-0 flex items-center justify-center px-6 py-4 opacity-90">
+            {cover}
+          </div>
+          <span className="absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--fg)]/55">
+            {post.category ?? "Commercial"}
           </span>
-        </div>
+        </>
       )}
       <span className="absolute right-4 top-4 rounded-full border border-[var(--hairline-strong)] bg-[var(--bg)]/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent-text)] backdrop-blur">
         {post.kind === "case-study" ? "Case study" : "Article"}
@@ -125,10 +428,8 @@ const SORT_LABELS: Record<SortKey, string> = {
 type Facet = "All" | "Case studies" | BlogCategory;
 
 export function BlogCardGrid({ posts }: { posts: BlogPost[] }) {
-  const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortKey>("newest");
   const [facet, setFacet] = useState<Facet>("All");
-  const q = query.trim().toLowerCase();
 
   // Only offer facets that have at least one post, so the bar never shows an
   // empty category. Order follows the canonical taxonomy.
@@ -145,14 +446,7 @@ export function BlogCardGrid({ posts }: { posts: BlogPost[] }) {
       if (facet === "Case studies") return p.kind === "case-study";
       return p.category === facet;
     });
-    const matched = q
-      ? byFacet.filter((p) =>
-          [p.title, p.excerpt, p.topic, p.industry ?? "", p.persona ?? ""]
-            .join(" ")
-            .toLowerCase()
-            .includes(q)
-        )
-      : byFacet.slice();
+    const matched = byFacet.slice();
     const byDate = (a: BlogPost, b: BlogPost) =>
       b.publishedAt.localeCompare(a.publishedAt);
     switch (sort) {
@@ -172,7 +466,7 @@ export function BlogCardGrid({ posts }: { posts: BlogPost[] }) {
       default:
         return matched.sort(byDate);
     }
-  }, [posts, q, sort, facet]);
+  }, [posts, sort, facet]);
 
   return (
     <div>
@@ -205,26 +499,9 @@ export function BlogCardGrid({ posts }: { posts: BlogPost[] }) {
         })}
       </div>
 
-      <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative w-full max-w-xl">
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search case studies and articles"
-            aria-label="Search blog posts"
-            className="w-full rounded-full border border-[var(--hairline-strong)] bg-[var(--surface)]/60 px-5 py-3 pr-12 text-sm text-[var(--fg)] placeholder:text-[var(--fg)]/45 outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/25"
-          />
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-[var(--accent-text)]"
-          >
-            {q ? filtered.length : "⌕"}
-          </span>
-        </div>
-
+      <div className="mb-10 flex justify-end">
         {/* Sort control. Native <select> so keyboard + screen reader users get
-            the correct interaction for free, styled to match the search pill. */}
+            the correct interaction for free. */}
         <label className="flex shrink-0 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--fg)]/65">
           <span>Order</span>
           <select
@@ -243,8 +520,7 @@ export function BlogCardGrid({ posts }: { posts: BlogPost[] }) {
 
       {filtered.length === 0 ? (
         <p className="text-sm text-[var(--fg)]/65">
-          Nothing matched &quot;{query}&quot;. Try a broader term, or clear the
-          search.
+          Nothing in this category yet.
         </p>
       ) : (
         <ul className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">

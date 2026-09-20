@@ -124,6 +124,28 @@ const MiniPipeline = mini(
     <path d="M25 30h20M55 30h20" stroke={stroke} strokeOpacity="0.6" />
   </>,
 );
+const MiniDashboard = mini(
+  <>
+    <rect x="10" y="12" width="80" height="38" rx="5" stroke={faint} />
+    <path d="M10 24h80" stroke={faint} />
+    <rect x="18" y="30" width="7" height="14" fill={stroke} fillOpacity="0.5" />
+    <rect x="30" y="26" width="7" height="18" fill={stroke} fillOpacity="0.5" />
+    <rect x="42" y="34" width="7" height="10" fill={faint} />
+    <path d="M58 40l8-8 6 5 10-12" stroke={stroke} strokeOpacity="0.7" />
+  </>,
+);
+const MiniMvp = mini(
+  <>
+    <circle cx="50" cy="30" r="16" stroke={stroke} strokeOpacity="0.7" />
+    <path d="M45 22l15 8-15 8z" fill={stroke} fillOpacity="0.6" />
+  </>,
+);
+const MiniMonitor = mini(
+  <>
+    <rect x="10" y="14" width="80" height="34" rx="5" stroke={faint} />
+    <path d="M14 33h13l6-11 8 20 6-13 5 4h29" stroke={stroke} strokeOpacity="0.7" />
+  </>,
+);
 
 const PILLARS: Pillar[] = [
   {
@@ -149,6 +171,8 @@ const PILLARS: Pillar[] = [
       { label: "Web", svg: MiniBrowser },
       { label: "Mobile", svg: MiniMobile },
       { label: "API", svg: MiniApi },
+      { label: "Dashboards", svg: MiniDashboard },
+      { label: "MVP", svg: MiniMvp },
     ],
   },
   {
@@ -164,6 +188,7 @@ const PILLARS: Pillar[] = [
       { label: "Stores", svg: MiniDatabase },
       { label: "Vectors", svg: MiniVectors },
       { label: "Pipelines", svg: MiniPipeline },
+      { label: "Monitoring", svg: MiniMonitor },
     ],
   },
   {
@@ -219,59 +244,74 @@ export function ServiceCatalog() {
                   ))}
                 </ul>
 
-                <p className="mt-4 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/60">
+                <p className="mt-6 text-[length:var(--text-step-0)] leading-relaxed text-[var(--fg)]/60">
                   {p.body}
                 </p>
 
+                {/* Bigger CTA, directly after the paragraph. The underline
+                    draws left-to-right on hover. No arrow. */}
                 <Link
                   href="/contact"
-                  className="link-draw mt-5 inline-block text-sm font-medium text-[var(--accent-text)]"
+                  className="group/cta mt-6 inline-block text-[15px] font-medium text-[var(--accent-text)]"
                 >
-                  {p.cta}
+                  <span className="relative pb-1">
+                    {p.cta}
+                    <span
+                      aria-hidden="true"
+                      className="absolute bottom-0 left-0 h-px w-0 bg-[var(--accent)] transition-[width] duration-500 ease-[var(--ease-out-expo)] group-hover/cta:w-full"
+                    />
+                  </span>
                 </Link>
+              </div>
+            );
 
-                {/* Mini-diagram strip fills the extra height on the wide cards,
-                    pushed to the bottom so the card reads as full. */}
-                {p.strip && (
-                  <div className="mt-auto grid grid-cols-3 gap-3 pt-8">
-                    {p.strip.map((m) => (
-                      <div
-                        key={m.label}
-                        className="flex flex-col items-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--surface)]/40 p-3 transition-colors duration-300 group-hover:border-[var(--accent)]/30"
-                      >
-                        <div className="h-[52px] w-full">{m.svg}</div>
-                        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/50">
-                          {m.label}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+            // Wide right column: the big visual on top, then the mini-diagram
+            // grid filling the height beneath it, so the visual + minis form an
+            // L against the text column and the card reads as full.
+            const rightColumn = p.strip ? (
+              <div className="flex shrink-0 flex-col gap-4 lg:w-[42%]">
+                <div className="h-[170px] w-full opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+                  {p.visual}
+                </div>
+                <div className="grid flex-1 auto-rows-fr grid-cols-2 gap-3">
+                  {p.strip.map((m, i) => (
+                    <div
+                      key={m.label}
+                      className={`mini-tile flex flex-col items-center justify-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--surface)]/40 p-3 transition-[transform,border-color,background-color] duration-300 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-[var(--accent)]/60 hover:bg-[var(--surface)]/70 ${
+                        i === p.strip!.length - 1 && p.strip!.length % 2 === 1
+                          ? "col-span-2"
+                          : ""
+                      }`}
+                    >
+                      <div className="h-[46px] w-full">{m.svg}</div>
+                      <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/50">
+                        {m.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null;
+
+            // Narrow cards keep a single visual pinned to the bottom.
+            const narrowVisual = (
+              <div className="mt-auto pt-6 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+                <div className="h-[130px] w-full">{p.visual}</div>
               </div>
             );
-            const visual = (
-              <div
-                className={
-                  isWide
-                    ? "shrink-0 opacity-80 transition-opacity duration-300 group-hover:opacity-100 lg:w-[38%] lg:self-center"
-                    : "mt-auto pt-6 opacity-80 transition-opacity duration-300 group-hover:opacity-100"
-                }
-              >
-                <div className={isWide ? "h-[200px] w-full" : "h-[130px] w-full"}>{p.visual}</div>
-              </div>
-            );
+
             return (
               <Reveal key={p.title} className={p.span}>
                 <article className="glass group card-lift flex h-full flex-col overflow-hidden rounded-2xl p-6 lg:p-8">
                   {isWide ? (
                     <div className="flex h-full flex-col gap-8 lg:flex-row lg:items-stretch">
                       {content}
-                      {visual}
+                      {rightColumn}
                     </div>
                   ) : (
                     <>
                       {content}
-                      {visual}
+                      {narrowVisual}
                     </>
                   )}
                 </article>
