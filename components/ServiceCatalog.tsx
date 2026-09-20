@@ -17,6 +17,8 @@ type Pillar = {
   cta: string;
   services: string[];
   visual: ReactNode;
+  // Wide cards carry a 3-up strip of mini diagrams to fill the extra height.
+  strip?: { label: string; svg: ReactNode }[];
 };
 
 // --- bespoke gold-line visuals (no images), tuned to each pillar ---
@@ -73,6 +75,56 @@ const CustomVisual = (
   </svg>
 );
 
+// Mini diagrams for the wide cards' bottom strip. Same gold-line idiom, tiny.
+const mini = (children: ReactNode) => (
+  <svg viewBox="0 0 100 60" fill="none" className="viz-mini h-full w-full" aria-hidden="true">
+    {children}
+  </svg>
+);
+const MiniBrowser = mini(
+  <>
+    <rect x="8" y="10" width="84" height="42" rx="6" stroke={faint} />
+    <path d="M8 22h84" stroke={faint} />
+    <circle cx="16" cy="16" r="2" fill={stroke} />
+    <circle cx="23" cy="16" r="2" fill={faint} />
+    <path d="M18 45l11-11 8 6 13-15" stroke={stroke} strokeOpacity="0.7" />
+  </>,
+);
+const MiniMobile = mini(
+  <>
+    <rect x="36" y="8" width="28" height="46" rx="5" stroke={faint} />
+    <path d="M45 12h10" stroke={faint} />
+    <rect x="42" y="20" width="16" height="10" rx="2" stroke={stroke} strokeOpacity="0.6" />
+    <path d="M42 36h16M42 42h11" stroke={faint} />
+  </>,
+);
+const MiniApi = mini(
+  <path d="M40 20 28 30l12 10M60 20l12 10-12 10M53 18l-6 24" stroke={stroke} strokeOpacity="0.7" />,
+);
+const MiniDatabase = mini(
+  <>
+    <ellipse cx="50" cy="16" rx="20" ry="6" stroke={stroke} strokeOpacity="0.7" />
+    <path d="M30 16v12c0 3.3 9 6 20 6s20-2.7 20-6V16M30 28v12c0 3.3 9 6 20 6s20-2.7 20-6V28" stroke={faint} />
+  </>,
+);
+const MiniVectors = mini(
+  <>
+    {[0, 1, 2, 3].map((c) =>
+      [0, 1, 2].map((r) => (
+        <circle key={`${c}-${r}`} cx={26 + c * 16} cy={16 + r * 14} r="2.5" fill={c === 2 && r === 1 ? stroke : faint} />
+      )),
+    )}
+  </>,
+);
+const MiniPipeline = mini(
+  <>
+    <circle cx="20" cy="30" r="5" stroke={stroke} />
+    <circle cx="50" cy="30" r="5" stroke={faint} />
+    <circle cx="80" cy="30" r="5" stroke={faint} />
+    <path d="M25 30h20M55 30h20" stroke={stroke} strokeOpacity="0.6" />
+  </>,
+);
+
 const PILLARS: Pillar[] = [
   {
     n: "01",
@@ -93,6 +145,11 @@ const PILLARS: Pillar[] = [
     cta: "Build my product",
     services: ["SaaS Platforms", "Web Apps", "Mobile Apps", "UX & Product Design", "Custom Software", "Digital Products", "MVP & Prototyping", "Dashboards & Analytics", "API Products"],
     visual: SaasVisual,
+    strip: [
+      { label: "Web", svg: MiniBrowser },
+      { label: "Mobile", svg: MiniMobile },
+      { label: "API", svg: MiniApi },
+    ],
   },
   {
     n: "03",
@@ -103,6 +160,11 @@ const PILLARS: Pillar[] = [
     cta: "Make my AI reliable",
     services: ["Enterprise Search & RAG", "AI Infrastructure", "Data Engineering", "API & Integrations", "Vector Databases", "Model Fine-tuning", "MLOps & Monitoring", "Data Pipelines", "Cloud & DevOps"],
     visual: InfraVisual,
+    strip: [
+      { label: "Stores", svg: MiniDatabase },
+      { label: "Vectors", svg: MiniVectors },
+      { label: "Pipelines", svg: MiniPipeline },
+    ],
   },
   {
     n: "04",
@@ -135,16 +197,23 @@ export function ServiceCatalog() {
           {PILLARS.map((p) => {
             const isWide = p.span.includes("col-span-2");
             const content = (
-              <div className={isWide ? "lg:flex-1" : "flex flex-1 flex-col"}>
+              <div className="flex flex-1 flex-col">
                 <span className="font-mono text-[11px] tracking-[0.2em] text-[var(--accent-text)]">{p.n}</span>
                 <h3 className="font-display mt-3 text-[length:var(--text-step-3)] font-light leading-tight">
                   {p.title}
                 </h3>
                 <p className="mt-2 text-[length:var(--text-step-1)] text-[var(--fg)]/85">{p.lead}</p>
 
+                {/* On wide cards the tags stretch to fill the row width; on
+                    narrow cards they stay compact and left-aligned. */}
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {p.services.map((s) => (
-                    <li key={s} className="grow rounded-full border border-[var(--hairline)] px-3 py-1.5 text-center text-xs text-[var(--fg)]/75 transition-colors duration-300 hover:border-[var(--accent)]/50 hover:text-[var(--fg)] sm:grow-0 sm:text-left">
+                    <li
+                      key={s}
+                      className={`grow rounded-full border border-[var(--hairline)] px-3 py-1.5 text-center text-xs text-[var(--fg)]/75 transition-colors duration-300 hover:border-[var(--accent)]/50 hover:text-[var(--fg)] ${
+                        isWide ? "" : "sm:grow-0 sm:text-left"
+                      }`}
+                    >
                       {s}
                     </li>
                   ))}
@@ -160,6 +229,24 @@ export function ServiceCatalog() {
                 >
                   {p.cta}
                 </Link>
+
+                {/* Mini-diagram strip fills the extra height on the wide cards,
+                    pushed to the bottom so the card reads as full. */}
+                {p.strip && (
+                  <div className="mt-auto grid grid-cols-3 gap-3 pt-8">
+                    {p.strip.map((m) => (
+                      <div
+                        key={m.label}
+                        className="flex flex-col items-center gap-2 rounded-xl border border-[var(--hairline)] bg-[var(--surface)]/40 p-3 transition-colors duration-300 group-hover:border-[var(--accent)]/30"
+                      >
+                        <div className="h-[52px] w-full">{m.svg}</div>
+                        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--fg)]/50">
+                          {m.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             );
             const visual = (
