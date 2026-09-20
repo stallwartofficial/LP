@@ -88,6 +88,8 @@ export const site = {
     name: "Arun",
     fullName: "Arun Saravanan",
     role: "Founder",
+    // Public professional profile, used as a sameAs entity signal in schema.
+    linkedin: "https://in.linkedin.com/in/nuras",
     conviction:
       "Reliable, honest, and scalable. In that order, and without exception.",
     // Competence anchor. Kept factual and modest; expand only with verifiable

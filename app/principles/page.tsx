@@ -6,7 +6,7 @@ import { Architecture } from "@/components/Architecture";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Principles",
+  title: "Engineering Principles",
   description:
     "What Stallwart believes: build from first principles, keep momentum, stay obsessed with the customer, and craft with the team.",
   path: "/principles",

@@ -95,7 +95,7 @@ export function Hero() {
 
           {/* Flip-board scope line: the one motion moment in the copy. */}
           <RevealOnLoad index={1}>
-            <p className="mt-5 flex items-baseline justify-center gap-2 font-display text-[length:var(--text-step-2)] text-[var(--fg)]/80 lg:justify-start">
+            <p className="mt-5 flex items-baseline justify-center gap-2 font-display text-[length:var(--text-step-3)] text-[var(--fg)]/80 lg:justify-start">
               <span>We build</span>
               <FlipWords words={[...site.hero.flipWords]} />
             </p>
@@ -103,7 +103,7 @@ export function Hero() {
 
           <RevealOnLoad index={2}>
             <div className="mt-6">
-              <p className="mx-auto max-w-xl font-display text-[length:var(--text-step-1)] font-light leading-relaxed text-[var(--fg)]/80 lg:mx-0">
+              <p className="mx-auto max-w-2xl font-display text-[length:var(--text-step-2)] font-light leading-relaxed text-[var(--fg)]/80 lg:mx-0">
                 {emphasise(site.hero.subhead[0])}
               </p>
             </div>

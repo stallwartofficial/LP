@@ -5,7 +5,7 @@ import { CareersForm } from "@/components/CareersForm";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Internships",
+  title: "AI Engineering Internships",
   description:
     "A paid-attention internship at Stallwart for engineering-minded and business-minded people who build. Real ownership, real problems, a real say in what ships.",
   path: "/careers/interns",

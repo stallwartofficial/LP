@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { site } from "@/data/site";
-import { offerings, type Offering } from "@/data/offerings";
 import { blogPosts } from "@/data/blog";
+import { industries, industryShort } from "@/data/industries";
 
 // Centralised structured data and canonical URLs.
 //
@@ -54,12 +54,21 @@ export function pageMeta({
   title,
   description,
   path,
+  ogImage,
 }: {
   title: string;
   description: string;
   path: string;
+  /**
+   * Social image control. Omit for the default brand OG image, so every page
+   * shares WITH a picture. Pass `null` on routes that ship their own
+   * opengraph-image file (offer, contact, faq, story), so Next's file
+   * convention supplies the bespoke image instead of this default overriding it.
+   */
+  ogImage?: string | null;
 }): Metadata {
   const ogTitle = `${title} | ${site.company}`;
+  const image = ogImage === undefined ? heroOgImageUrl() : ogImage;
   return {
     title,
     description,
@@ -70,11 +79,13 @@ export function pageMeta({
       url: `${site.domain}${path}`,
       siteName: site.company,
       type: "website",
+      ...(image ? { images: [{ url: image, width: 1200, height: 630, alt: `${site.company}, ${site.tagline}` }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description,
+      ...(image ? { images: [image] } : {}),
     },
   };
 }
@@ -99,12 +110,29 @@ export function organizationSchema() {
     image: `${site.domain}/images/stallwart-lion-mark.png`,
     description: site.description,
     slogan: site.tagline,
+    foundingDate: "2021",
     ...(site.contact.email ? { email: site.contact.email } : {}),
+    ...(site.contact.email
+      ? {
+          contactPoint: {
+            "@type": "ContactPoint",
+            email: site.contact.email,
+            contactType: "sales",
+            availableLanguage: ["English"],
+            areaServed: site.location.areaServed,
+          },
+        }
+      : {}),
     ...(() => {
       const profiles = [site.social.linkedin, site.social.twitter].filter(Boolean);
       return profiles.length ? { sameAs: profiles } : {};
     })(),
-    founder: { "@type": "Person", name: site.founder.fullName },
+    founder: {
+      "@type": "Person",
+      name: site.founder.fullName,
+      jobTitle: site.founder.role,
+      ...(site.founder.linkedin ? { sameAs: [site.founder.linkedin] } : {}),
+    },
     areaServed: site.location.areaServed.map((name) => ({
       "@type": "Place",
       name,
@@ -134,54 +162,6 @@ export function webSiteSchema() {
     url: site.domain,
     description: site.description,
     publisher: { "@type": "Organization", name: site.company },
-  };
-}
-
-/**
- * A single offering on its own detail page.
- *
- * NOTE: deliberately omits `aggregateRating` and `offers.price`. Both are
- * verifiable claims; publishing either pre launch would be fabrication.
- */
-export function offeringSchema(offering: Offering) {
-  const isSoftware = offering.category.startsWith("Product");
-
-  return {
-    "@context": "https://schema.org",
-    "@type": isSoftware ? "SoftwareApplication" : "Service",
-    name: offering.name,
-    description: offering.description,
-    url: `${site.domain}/offer/${offering.slug}`,
-    ...(isSoftware
-      ? { applicationCategory: "BusinessApplication", operatingSystem: "Web" }
-      : { serviceType: offering.category }),
-    provider: {
-      "@type": "Organization",
-      name: site.company,
-      url: site.domain,
-    },
-    audience: {
-      "@type": "BusinessAudience",
-      audienceType: offering.builtFor.map((b) => b.role).join("; "),
-    },
-    ...(offering.capabilities.length > 0 && {
-      featureList: offering.capabilities.map((c) => c.title),
-    }),
-  };
-}
-
-/** The portfolio as a list, so crawlers see the full offering set. */
-export function offeringListSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: `${site.company}, what we offer`,
-    itemListElement: offerings.map((o, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: o.name,
-      url: `${site.domain}/offer/${o.slug}`,
-    })),
   };
 }
 
@@ -256,6 +236,7 @@ export function articleSchema(opts: {
       "@type": "Person",
       name: site.founder.fullName,
       jobTitle: site.founder.role,
+      ...(site.founder.linkedin ? { sameAs: [site.founder.linkedin] } : {}),
     },
     publisher: {
       "@type": "Organization",
@@ -295,6 +276,54 @@ export function serviceSchema() {
         url: `${site.domain}/offer`,
       },
     })),
+  };
+}
+
+/**
+ * The industries Stallwart builds AI for, as an ItemList of Service entities.
+ * Lets answer engines enumerate "who builds AI for banking / healthcare / ..."
+ * and attach each to Stallwart. Mirrors the /offer industry explorer; keep the
+ * names in sync with components/IndustryExplorer.tsx.
+ */
+export function industriesSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${site.company}, AI across industries`,
+    itemListElement: industries.map((ind, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Service",
+        name: `AI for ${ind.name}`,
+        serviceType: `AI for ${ind.name}`,
+        description: `In ${industryShort(ind.name)}, ${site.company} builds AI that ${ind.title}`,
+        provider: { "@type": "Organization", name: site.company, url: site.domain },
+        areaServed: site.location.areaServed,
+        url: `${site.domain}/industries/${ind.slug}`,
+      },
+    })),
+  };
+}
+
+/**
+ * Per-industry schema for the /industries/[slug] pages: a Service graph plus a
+ * matching FAQPage stub built from the industry's outcomes, so answer engines
+ * can quote "what AI does for {industry}".
+ */
+export function industryServiceSchema(slug: string) {
+  const ind = industries.find((i) => i.slug === slug);
+  if (!ind) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `AI for ${ind.name}`,
+    serviceType: `AI for ${ind.name}`,
+    description: `In ${industryShort(ind.name)}, ${site.company} builds AI that ${ind.title} ${ind.detail}`,
+    provider: { "@type": "Organization", name: site.company, url: site.domain },
+    areaServed: site.location.areaServed,
+    url: `${site.domain}/industries/${ind.slug}`,
+    ...(ind.tags.length ? { serviceOutput: ind.tags } : {}),
   };
 }
 

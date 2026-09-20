@@ -8,10 +8,10 @@ import { Engagement } from "@/components/Engagement";
 import { Faq } from "@/components/Faq";
 import { ContactBanner } from "@/components/ContactBanner";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbSchema, serviceSchema, pageMeta } from "@/lib/seo";
+import { breadcrumbSchema, serviceSchema, industriesSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "What We Build",
+  title: "AI Agents, SaaS & Custom AI Systems",
   description:
     "Stallwart is an AI-first engineering company. We build anything AI: agents, AI + SaaS products, RAG and AI infrastructure, and custom AI systems, engineered to production on one standard.",
   path: "/offer",
@@ -26,6 +26,7 @@ export default function OfferPage() {
       <JsonLd
         schema={[
           serviceSchema(),
+          industriesSchema(),
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "What We Build", path: "/offer" },

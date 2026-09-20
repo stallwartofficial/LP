@@ -6,7 +6,7 @@ import { SocialProof } from "@/components/SocialProof";
 import { Commitments } from "@/components/TrustLayer";
 import { ContactBanner } from "@/components/ContactBanner";
 import { JsonLd } from "@/components/JsonLd";
-import { webSiteSchema } from "@/lib/seo";
+import { webSiteSchema, serviceSchema } from "@/lib/seo";
 
 // The company front door, restructured for conversion + clarity.
 //
@@ -23,7 +23,7 @@ import { webSiteSchema } from "@/lib/seo";
 export default function Home() {
   return (
     <>
-      <JsonLd schema={[webSiteSchema()]} />
+      <JsonLd schema={[webSiteSchema(), serviceSchema()]} />
       <Hero />
       <ProblemSolution />
       <WhatWeBuild />
