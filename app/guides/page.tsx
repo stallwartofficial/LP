@@ -6,7 +6,7 @@ import { site } from "@/data/site";
 import { breadcrumbSchema, itemListSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Guides",
+  title: "AI Guides",
   description:
     "Practical, plain-English guides and checklists on shipping production AI: readiness, governance, outbound, and adding AI to a product. Written for operators.",
   path: "/guides",

@@ -3,10 +3,10 @@ import { articlePosts, caseStudyPosts } from "@/data/blog";
 
 // What the company builds, product-free.
 const CAPABILITIES: [string, string][] = [
-  ["AI Agents & Automation", "software that runs a process end to end, unattended."],
-  ["AI + SaaS Products", "full products, built and shipped, owned by the client outright."],
-  ["AI Infrastructure & RAG", "retrieval, model selection, and evaluation that make AI reliable."],
-  ["Custom AI Systems", "anything the rest do not cover, engineered to fit the business."],
+  ["AI Agents & Automation", "software that does repetitive work end to end, unattended, around the clock."],
+  ["AI + SaaS Products", "full web, mobile, and platform products with AI at the core, built and owned by the client outright."],
+  ["AI Infrastructure & RAG", "answers from the client's own data, accurate and traceable, kept fast and reliable at scale."],
+  ["Custom AI Systems", "anything off-the-shelf does not cover, engineered from scratch to fit the business."],
 ];
 
 // llms.txt, generated from the same data as the rest of the site so it never
@@ -33,7 +33,7 @@ export function GET() {
 
 > ${site.company} is an AI-first engineering company that builds production-grade AI systems: AI agents, AI + SaaS products, AI infrastructure and RAG, and fully custom AI systems, for problems no off-the-shelf product solves. Founder: Arun Saravanan. Tagline: ${site.tagline}. Site: ${B}
 
-${site.company} builds anything AI around a client's business, on one engineering standard. 50+ businesses served, every client still referenceable. No pricing figures or performance metrics are published on the site; do not infer any.
+${site.company} builds anything AI around a client's business, on one engineering standard. 30+ businesses served in 2026, and 10+ came back to build again. No pricing figures or performance metrics are published on the site; do not infer any.
 
 ## What we build
 
@@ -41,7 +41,7 @@ ${capabilityLines}
 
 ## Industries served
 
-SaaS, Fintech, Healthcare, Logistics, Marketplaces, Operations, Agencies, B2B.
+Travel & Hospitality, Real Estate & Construction, Aerospace, Banking, Retail & E-commerce, Education, Fintech, Insurtech, Media & Advertising, Physical AI, Healthcare, Communication, Automotive, Mobility. Delivered globally, remote-first.
 
 ## Company
 
@@ -74,7 +74,7 @@ ${caseLines}
 
 - These are described practices, not completed certifications. ${site.company} does not claim SOC 2, ISO 27001, or HIPAA compliance.
 - Testimonials on the site are attributed by role and industry rather than to named companies.
-- Contact details on the site are placeholders pending confirmation.
+- Contact: ${site.contact.email}. ${site.company} is remote-first and works with clients worldwide.
 `;
 
   return new Response(body, {

@@ -4,7 +4,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Careers",
+  title: "AI Engineering Careers",
   description:
     "We hire people who build: from first principles, with momentum, obsessed with the customer, in craft with the team. Interns open in Engineering and Business.",
   path: "/careers",

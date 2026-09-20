@@ -1,101 +1,83 @@
-# Stallwart, Landing Page
+# Stallwart
 
-Marketing site for **Stallwart**, an AI and software engineering company.
-This README documents the stack and conventions only, not the copy.
+Marketing site for **Stallwart**, an AI-first engineering company. Positioning:
+_"Bring the problem, we build the system that solves it."_ We build AI agents and
+automation, AI + SaaS products, AI infrastructure and RAG, and custom AI systems,
+engineered to production and owned by the client.
+
+Live: https://www.stallwart.in
 
 ## Stack
 
-| Layer | Choice | Version |
-| --- | --- | --- |
-| Framework | Next.js, App Router, Turbopack | 16.3.1 |
-| Runtime | React | 19.2.8 |
-| Language | TypeScript, strict | 5.x |
-| Styling | Tailwind CSS, CSS-first config via `@theme` | 4.x |
-| Animation | Native CSS scroll-driven animation, no JS runtime | n/a |
-| Fonts | `next/font/google`, self-hosted at build time | Fraunces (display), IBM Plex Sans (body), IBM Plex Mono (labels) |
-| Hosting target | Vercel | n/a |
+- **Next.js 16** (App Router, Turbopack) · **React 19** · **TypeScript** (strict)
+- **Tailwind CSS 4** (tokens in `app/globals.css`)
+- **Supabase** for lead capture (contact, careers, partner + partial drafts)
+- **Resend** (email) · **ntfy.sh** (push) for lead notifications
+- Analytics: GA4 + Microsoft Clarity, both deferred off the critical path
 
-## Requirements
+> This is **not** the Next.js you may know. Read the relevant guide in
+> `node_modules/next/dist/docs/` before using a Next API. See `AGENTS.md`.
 
-- Node.js 20 or newer
-- npm 10 or newer
-
-## Commands
+## Run
 
 ```bash
-npm install      # install dependencies
-npm run dev      # dev server, http://localhost:3000
-npm run build    # production build
-npm start        # serve the production build
-npm run lint     # eslint
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (also validates static generation)
+npx tsc --noEmit # typecheck
 ```
 
-## Project layout
+## Repository layout
 
 ```
-app/          routes (App Router), route-level metadata, API handlers
-  api/        server route handlers (contact-form intake)
-  offer/      portfolio index and [slug] offering pages
-  blog/       insights index and [slug] posts (case studies live here)
-  privacy/    privacy policy (static)
-  terms/      terms of service (static)
-components/   presentational components, server by default
-data/         all site content as typed modules, the single source of truth
-lib/          seo builders, og image renderer, theme helpers
-public/       static assets, images, llms.txt
+app/            routes (App Router). Each route: page.tsx (+ opengraph-image, etc.)
+  offer/        "What We Build" — the core services page
+  industries/   /industries hub + /industries/[slug] (14 SEO pages, data-driven)
+  contact/      lead form + /contact/thank-you (Cal.com booking)
+  llms.txt/     generated llms.txt route (AI-crawler summary)
+  sitemap.ts robots.ts opengraph-image.tsx   SEO/metadata files
+components/     UI components (server-first; "use client" only where needed)
+data/           SOURCE OF TRUTH content: site.ts, industries.ts, faqs.ts, blog.ts, ...
+lib/            seo.ts (all schema + metadata builders), notify.ts, supabase/, ogCard.tsx
+docs/           engineering + SEO/AEO/GEO documentation
 ```
 
-For the design and decision rationale behind the site (positioning, the hero,
-typography, performance, SEO/AEO), see `ENGINEERING_RATIONALE.md`.
+## Conventions (what each file is expected to do)
 
-## Architecture notes
+- **Content lives in `data/*.ts`, never hardcoded in components.** `data/site.ts`
+  is the company source of truth; `data/industries.ts` drives the explorer, the
+  `/industries` pages, the schema, and the sitemap at once. Change data, the whole
+  site follows.
+- **`lib/seo.ts` owns every JSON-LD graph and `pageMeta()`.** Rendered copy and
+  machine-readable data derive from the same data, so they can never drift.
+- **Every page uses `pageMeta()`** (canonical + OpenGraph + Twitter, with a
+  dynamic brand OG image). Home metadata lives in `app/layout.tsx`.
+- **Voice:** declarative, specific, plain English. No em dashes anywhere. No
+  "leverage / seamless / cutting-edge / solutions". No unverifiable claims,
+  metrics, or customer counts (see `AGENTS.md` / CLAUDE constraints).
+- **Server components by default.** Add `"use client"` only for interactivity.
+- **Design tokens** (gold/ink/cream, spacing, type steps, easings) are CSS vars in
+  `app/globals.css`. Use the tokens, not raw values. Dark is the default theme.
 
-**Server components by default.** Only components that need browser APIs are
-marked `"use client"`: `Navbar`, `ThemeToggle`, and the `Contact` form. All page
-copy stays server-rendered, so it is present in the initial HTML.
+## Design
 
-**Content lives in `data/`.** Copy, offerings, posts, testimonials, trust terms,
-and FAQs are typed modules, never hardcoded in components. Adding an offering to
-`data/offerings.ts` propagates to the portfolio page, its detail route, the
-sitemap, the footer, the contact form, and JSON-LD automatically.
+Editorial, high-contrast, enterprise. Spectral (display serif), IBM Plex Sans
+(body), IBM Plex Mono (labels), Cinzel (wordmark), all via `next/font`. Motion is
+CSS-first (`Reveal`, `.scroll-rise`, marquees, animated beams) and always cancels
+under `prefers-reduced-motion`. Signature elements: the hero build-terminal, the
+Animated Beams core (lion mark), and the industry explorer.
 
-**Styling is token-driven.** `app/globals.css` defines a fluid type scale via
-`clamp()`, light and dark palettes built with `color-mix(in oklab)`, and shared
-easing. Components consume CSS variables rather than literal colours, so both
-themes stay in sync. Text colours use AA-contrast-safe tokens (`--accent-text`);
-the brighter counterparts are for fills and borders only.
+## Lead flow
 
-**Animation is CSS-first, zero JavaScript.** Scroll reveals use native
-`animation-timeline: view()` (running on the compositor); first-paint reveals use
-`@starting-style`. There is no animation library in the bundle. Everything is
-cancelled under `prefers-reduced-motion`, so nothing can be left stuck at
-opacity 0.
+Contact / careers / partner forms → Zod validation → Supabase insert → `notify.ts`
+(Resend email + ntfy push). Contact form also captures **partial drafts**
+(`/api/lead-draft`) so abandoned forms are not lost. A honeypot field drops bots.
+Env keys are documented in `Redesign docs/10-lead-flow.md` and `.env.example`.
 
-**Responsive by reflow, not duplication.** Pages such as Story and Contact are a
-single set of grid children that reorder with CSS `order` on mobile and snap to
-explicit `col-start` / `row-start` / `row-span` placement on desktop. One markup
-serves every breakpoint.
+## SEO / AEO / GEO
 
-**SEO and AEO.** Structured data is centralised in `lib/seo.ts` and derived from
-`data/`, so schema cannot drift from rendered copy. Every route sets a canonical
-URL and has exactly one `h1`. OG images are generated at build time by
-`next/og`. `public/llms.txt` is the AI answer-engine fact sheet.
-
-## Environment
-
-Copy `.env.example` to `.env.local`:
-
-```
-DEMO_WEBHOOK_URL=    # server-side only, destination for contact-form submissions
-```
-
-Server-side only, never prefix with `NEXT_PUBLIC_`. Any generic webhook receiver
-works (Zapier, Make, n8n, or your own CRM intake). If unset, submissions are
-accepted by the UI, delivered nowhere, and a warning is logged server-side.
-
-## Conventions
-
-- No em dashes in any user-facing copy, including page titles.
-- Both themes must be verified for any visual change.
-- WCAG AA contrast is enforced; text tokens are measured, not eyeballed.
-- Content changes go in `data/`, not in component JSX.
+See **[docs/SEO.md](docs/SEO.md)**. In short: dynamic per-page metadata + canonical,
+Organization / WebSite / Service / FAQPage / Breadcrumb / DefinedTermSet /
+per-industry Service schema, `llms.txt` for AI crawlers, an AI-crawler allow-list
+in `robots.ts`, a data-driven sitemap with real `lastmod`, and dynamic OG images
+that update with the site. Positioning is global-remote (no LocalBusiness).

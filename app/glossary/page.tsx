@@ -4,7 +4,7 @@ import { site } from "@/data/site";
 import { breadcrumbSchema, definedTermSetSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Glossary",
+  title: "AI Glossary",
   description:
     "Plain-English definitions of the terms behind production AI and go-to-market: AI SDR, AI governance, SOC 2, ISO 42001, EU AI Act, observability, AEO, and more.",
   path: "/glossary",

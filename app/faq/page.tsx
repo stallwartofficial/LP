@@ -4,7 +4,7 @@ import { Faq } from "@/components/Faq";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "FAQ",
+  title: "AI Development FAQ",
   description:
     "Answers to the common questions about Stallwart: what we do, product vs services, pricing, ownership, security and data, how engagements start, and partnering.",
   path: "/faq",

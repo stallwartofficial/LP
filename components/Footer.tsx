@@ -90,6 +90,7 @@ export function Footer() {
                 { label: "AI + SaaS Products", href: "/offer" },
                 { label: "AI Infrastructure & RAG", href: "/offer" },
                 { label: "Custom AI Systems", href: "/offer" },
+                { label: "AI by Industry", href: "/industries" },
               ].map((link, i) => (
                 <li key={i}>
                   <Link
