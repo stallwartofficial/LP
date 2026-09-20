@@ -198,9 +198,10 @@ export function Contact() {
           </h1>
 
           <p className="mt-6 max-w-xl text-[length:var(--text-step-1)] text-[var(--fg)]/75">
-            Have something in your business you think AI could fix? Tell us about it.
-            We&apos;ll tell you straight if we can build it, what it would take, and
-            whether it&apos;s even worth doing.
+            Describe the problem you want solved. We&apos;ll come back with how we
+            would build the system, what it would take, and how soon you would see
+            it working. A straight, useful answer from an engineer, whether or not
+            you end up working with us.
           </p>
 
           {/* Proof: shared badge (same on the homepage). */}
