@@ -2367,10 +2367,23 @@ function estimateReadingMinutes(post: BlogPost): number {
   return Math.max(1, Math.round(words / 220));
 }
 
-export const blogPosts: BlogPost[] = rawBlogPosts.map((p) => ({
-  ...p,
-  readingMinutes: estimateReadingMinutes(p),
-}));
+// Slugs folded into evergreen URLs via 301 (see next.config.ts, Phase 2).
+// Their content stays in rawBlogPosts (available for merges) but they are
+// excluded from every public surface: a redirecting URL must never appear in
+// the listing, the sitemap, or static params.
+const REDIRECTED = new Set<string>([
+  "what-is-an-ai-sdr",
+  "how-much-does-an-ai-sdr-cost",
+  "ai-gtm-engine-autonomous-outbound",
+  "what-custom-ai-development-costs-fixed-price-per-phase",
+]);
+
+export const blogPosts: BlogPost[] = rawBlogPosts
+  .filter((p) => !REDIRECTED.has(p.slug))
+  .map((p) => ({
+    ...p,
+    readingMinutes: estimateReadingMinutes(p),
+  }));
 
 export function getBlogPost(slug: string) {
   return blogPosts.find((p) => p.slug === slug);

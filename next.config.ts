@@ -62,6 +62,15 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // Phase 1A: force the www canonical. Any request to the apex host
+      // (stallwart.in) 301s to the www host, so search engines consolidate all
+      // signal on one origin instead of splitting it across apex + www.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "stallwart.in" }],
+        destination: "https://www.stallwart.in/:path*",
+        permanent: true,
+      },
       // Products (Extrovert AI, Sillage) were removed from the site during the
       // AI-first repositioning; they now appear only in the footer family line.
       // Their old detail URLs fold into the capability overview.
@@ -86,11 +95,34 @@ const nextConfig: NextConfig = {
         destination: "/blog/saas-outbound-booked-meetings-case-study",
         permanent: true,
       },
-      // Two posts were reslugged when Extrovert AI was repositioned from an
-      // inbound CRM to an outbound GTM engine. Preserve the old inbound URLs.
+      // Phase 1C: this SDR/outbound-era orphan still shows in GSC but is not in
+      // the blog index. It folds into the blog index under the new positioning.
       {
         source: "/blog/speed-to-lead-is-the-whole-funnel",
-        destination: "/blog/outbound-is-a-research-problem",
+        destination: "/blog",
+        permanent: true,
+      },
+      // Phase 2: product-specific / cannibalising SDR + cost posts fold into
+      // their evergreen equivalents. (The SDR post may be reslugged in a later
+      // reframing pass; these will chain through it at that point.)
+      {
+        source: "/blog/what-is-an-ai-sdr",
+        destination: "/blog/ai-sdr-vs-human-sdr-when-each-wins",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-much-does-an-ai-sdr-cost",
+        destination: "/blog/how-much-does-custom-ai-development-cost",
+        permanent: true,
+      },
+      {
+        source: "/blog/ai-gtm-engine-autonomous-outbound",
+        destination: "/blog/ai-sdr-vs-human-sdr-when-each-wins",
+        permanent: true,
+      },
+      {
+        source: "/blog/what-custom-ai-development-costs-fixed-price-per-phase",
+        destination: "/blog/how-much-does-custom-ai-development-cost",
         permanent: true,
       },
       {
@@ -117,8 +149,10 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        // Point straight at /offer, not /offer/sillage, to avoid a redirect
+        // chain (sillage itself redirects to /offer).
         source: "/offer/ai-compliance-office",
-        destination: "/offer/sillage",
+        destination: "/offer",
         permanent: true,
       },
     ];
