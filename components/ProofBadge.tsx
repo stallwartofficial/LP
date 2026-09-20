@@ -1,6 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { CountUp } from "@/components/CountUp";
+
+// Avatars render at ~32-44px. next/image serves an optimized ~88px (2x) file
+// instead of the multi-hundred-KB source photos (one was 3000x3000 / 415 KiB
+// as a plain <img>). `sizes` pins the served width to the display size.
+const AV_PX = 88;
 
 // Shared social-proof badge: overlapping client photos + two count-up stats.
 // One component so the homepage testimonials, the contact page, and anywhere
@@ -32,8 +38,7 @@ export function ProofBadge({
               aria-hidden="true"
               className="inline-block h-8 w-8 overflow-hidden rounded-full ring-2 ring-[var(--bg)]"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
+              <Image src={src} alt="" width={AV_PX} height={AV_PX} sizes="32px" className="h-full w-full object-cover" loading="lazy" />
             </span>
           ))}
         </div>
@@ -60,9 +65,7 @@ export function ProofBadge({
             aria-hidden="true"
             className="inline-block h-11 w-11 overflow-hidden rounded-full ring-2 ring-[var(--bg)]"
           >
-            {/* Plain img: local files, object-cover keeps faces framed. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
+            <Image src={src} alt="" width={AV_PX} height={AV_PX} sizes="44px" className="h-full w-full object-cover" loading="lazy" />
           </span>
         ))}
       </div>

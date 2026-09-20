@@ -72,7 +72,7 @@ export function TerminalBuild() {
         <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
         <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
         <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-        <span className="ml-3 font-mono text-[11px] tracking-[0.14em] text-white/40">
+        <span className="ml-3 font-mono text-[11px] tracking-[0.14em] text-white/60">
           stallwart @ core
         </span>
       </div>
@@ -81,7 +81,7 @@ export function TerminalBuild() {
       <div className="px-6 py-7 font-mono text-[13px] leading-relaxed text-[#e9e4d6] sm:px-10 sm:py-9 sm:text-sm">
         <p>
           <span className="text-[var(--accent-text)]">~/build</span>
-          <span className="text-white/40"> $ </span>
+          <span className="text-white/60"> $ </span>
           <span>{typed}</span>
           {!done && <span className="term-caret" aria-hidden="true" />}
         </p>
@@ -99,7 +99,7 @@ export function TerminalBuild() {
                   {o.name}
                 </span>
               </p>
-              <p className="pl-5 text-white/50">{o.line}</p>
+              <p className="pl-5 text-white/65">{o.line}</p>
             </li>
           ))}
         </ol>

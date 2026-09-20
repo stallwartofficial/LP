@@ -55,10 +55,18 @@ export function IndustryExplorer() {
     el.addEventListener("pointerdown", pause);
     el.addEventListener("touchstart", pause, { passive: true });
 
-    const tick = setInterval(() => {
-      if (paused) return;
+    // Measure the card width ONCE (avoids a forced reflow every tick from
+    // reading offsetWidth after layout). Recompute only on resize.
+    let step = 0;
+    const measure = () => {
       const first = el.firstElementChild as HTMLElement | null;
-      const step = first ? first.offsetWidth + 16 : el.clientWidth;
+      step = first ? first.offsetWidth + 16 : el.clientWidth;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+
+    const tick = setInterval(() => {
+      if (paused || !step) return;
       if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 4) {
         el.scrollTo({ left: 0, behavior: "smooth" });
       } else {
@@ -69,6 +77,7 @@ export function IndustryExplorer() {
     return () => {
       clearInterval(tick);
       clearTimeout(resumeTimer);
+      window.removeEventListener("resize", measure);
       el.removeEventListener("pointerdown", pause);
       el.removeEventListener("touchstart", pause);
     };
