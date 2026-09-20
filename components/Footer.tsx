@@ -66,7 +66,6 @@ export function Footer() {
               {[
                 { label: "Blog", href: "/blog" },
                 { label: "Guides", href: "/guides" },
-                { label: "Glossary", href: "/glossary" },
                 { label: "FAQ", href: "/faq" },
                 { label: "Trust & Security", href: "/trust" },
               ].map((link) => (
