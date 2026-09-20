@@ -13,6 +13,17 @@
 
 export type PostKind = "case-study" | "article";
 
+// Blog taxonomy. Four pillar categories map to the four engineering pillars; a
+// cross-cutting "Commercial" category holds buyer/decision content that is not
+// pillar-specific. Case studies are tagged via `kind`, not a category, so a case
+// study carries BOTH a category and the Case Study tag.
+export type BlogCategory =
+  | "AI Production Engineering"
+  | "AI Agents & Automation"
+  | "AI Governance & Compliance"
+  | "AI Infrastructure & RAG"
+  | "Commercial";
+
 export type QaBlock = {
   question: string;
   answer: string;
@@ -53,6 +64,9 @@ export type BlogPost = {
   metrics?: { label: string; value: string }[];
   /** Declarative Q&A. Rendered on page and emitted as FAQPage schema. */
   qa: QaBlock[];
+  /** Taxonomy category. Assigned via CATEGORY below (kept out of the raw
+   *  objects so the mapping lives in one place), so every live post has one. */
+  category?: BlogCategory;
 };
 
 const rawBlogPosts: BlogPost[] = [
@@ -1147,307 +1161,6 @@ const rawBlogPosts: BlogPost[] = [
       },
     ],
   },
-  // ---------------- Article: AEO vs SEO vs GEO ----------------
-  {
-    slug: "aeo-vs-seo-vs-geo",
-    kind: "article",
-    title: "AEO vs SEO vs GEO: what actually differs, in plain English",
-    excerpt:
-      "SEO is being findable, AEO is being quotable, GEO is being cited by generative answers. All three matter, and none of them replaces the others. Here is what changes about how you write when the reader is a machine.",
-    topic:
-      "AEO vs SEO, GEO vs SEO, generative engine optimization, answer engine optimization, AI search optimization, how to rank on ChatGPT, how to rank on Perplexity, AI Overviews SEO, AEO checklist, GEO strategy, AI search visibility",
-    offering: "custom-ai-engineering",
-    publishedAt: "2026-09-02",
-    readingMinutes: 9,
-    diagram: "three-endpoints",
-    sections: [
-      {
-        heading: "The three practices, in one sentence each",
-        paragraphs: [
-          "SEO is the practice of writing and structuring content so a search engine ranks it in a list of results for the query a person typed. AEO, answer engine optimization, is the practice of writing that same content so an answer engine can lift a self-contained sentence out of it and quote it as the answer. GEO, generative engine optimization, is the practice of writing so a generative search surface (Google's AI Overviews, Perplexity, ChatGPT search) selects the page as a source and cites it inside a generated answer.",
-          "They are not the same problem. SEO fights for a click. AEO fights to be the quoted paragraph. GEO fights to be one of the three or four sources a language model actually pulls from when it composes an answer. A page can win one and lose the others, which is why teams that treat this as a single practice keep drifting away from the traffic that used to arrive.",
-        ],
-      },
-      {
-        heading: "What each practice actually asks of a page",
-        paragraphs: [
-          "SEO asks for the classic checklist: the query intent is answered, the page is technically sound, the topic is covered with real depth, and other sites link to it. Ranking is a function of relevance, authority, and structure, and the tie-breakers move around, but the shape has not changed in years.",
-          "AEO asks for one additional thing: the answer has to exist inside the page as a self-contained sentence a machine can lift without paraphrasing. FAQ blocks with clean question-and-answer pairs work because they hand the machine exactly the right shape. Long paragraphs that only imply an answer often get ignored, even when they rank well.",
-          "GEO asks for a third thing on top: the page has to be selected as a source by a language model composing an answer. Selection favours pages that are specific, verifiable, well-cited, and not obviously written to game the system. It also favours pages the model has already seen: coverage from other trusted sites, mentions in domain-specific corpora, presence in llms.txt-style manifests. This is closer to public-relations logic than to link-building.",
-        ],
-      },
-      {
-        heading: "The single-page checklist for all three",
-        paragraphs: [
-          "Most content teams do not want three separate content strategies; they want a single page that does the job of all three. That page has a specific shape.",
-        ],
-        list: [
-          "One question per page, answered in the first paragraph in a single self-contained sentence.",
-          "Structured FAQ block at the end, phrased as buyers actually type, with each answer a paragraph that stands alone.",
-          "Explicit definitions of the jargon on the page, written to be quoted (this is what a glossary is for).",
-          "Verifiable specifics: numbers with sources, direct quotes with attribution, dates on claims that decay.",
-          "FAQPage and Article JSON-LD schema on every post; BreadcrumbList so the hierarchy is machine-readable.",
-          "A canonical URL and a stable slug; do not move pages that already earn citations.",
-          "An llms.txt file at the root that inventories the site's canonical URLs for language-model crawlers.",
-          "Internal links that point from money pages to the source page, so authority flows to the pages you want cited.",
-        ],
-      },
-      {
-        heading: "What actually changed in the shift from SEO to GEO",
-        paragraphs: [
-          "The old game had one destination: a person clicking through to your page. The new game has two: a person clicking through, and a language model reading your page to compose an answer someone else reads. The traffic reads differently in both directions, and the second one does not always leave a footprint in analytics.",
-          "That is why brand mentions and citations in AI answers have started to matter as much as clicks. A citation in an answer engine is not a link visit; it is a distribution channel that puts your name in front of a buyer who never lands on your site. Measure both, or you will optimize away the second and not notice.",
-        ],
-      },
-      {
-        heading: "What Stallwart does for this",
-        paragraphs: [
-          "Every page on this site is engineered for all three. Articles carry FAQ blocks and Article schema; the glossary is written to be quoted; llms.txt is generated from the same data as the site so it never drifts; canonical URLs never move. The blog is a single namespace, not split across `/blog` and `/case-studies`, because splitting ranking signal across two identical namespaces is a self-inflicted GEO problem.",
-          "The point is not that this list is exhaustive. It is that the shift to generative answers is a shape change, not a tactic swap, and the pages built for it look different from pages built for ten blue links five years ago.",
-        ],
-      },
-    ],
-    keyTakeaways: [
-      "SEO is being findable, AEO is being quotable, GEO is being cited by generative answers. They are three problems, not one.",
-      "A single page can serve all three if it leads with a self-contained answer, carries an FAQ block, uses FAQPage and Article schema, and cites verifiable specifics.",
-      "Citations in AI answer engines are a distribution channel that does not always show up as a click; measure them alongside traffic.",
-      "The canonical URL and a stable slug matter more in the GEO era, not less; moving cited pages is now a self-inflicted wound.",
-    ],
-    qa: [
-      {
-        question: "What is the difference between SEO, AEO, and GEO?",
-        answer:
-          "SEO ranks a page in a list of search results. AEO structures the page so an answer engine can lift a self-contained sentence and quote it as the answer. GEO makes the page one of the sources a generative search surface (AI Overviews, Perplexity, ChatGPT search) cites inside a generated answer. All three matter and a page can win one while losing the others.",
-      },
-      {
-        question: "What is Generative Engine Optimization (GEO)?",
-        answer:
-          "GEO is the practice of writing content so language-model-based search surfaces select it as a source when composing an answer. Selection favours pages that are specific, verifiable, well-cited, and already visible in the trusted corpora the model draws from.",
-      },
-      {
-        question: "How do you get cited by ChatGPT, Perplexity, or AI Overviews?",
-        answer:
-          "Publish content that is specific, verifiable, and structurally clean: one question per page, answered up front in a self-contained sentence, with an FAQ block, Article and FAQPage JSON-LD, stable canonical URLs, and coverage from other trusted sites. Generative engines lean on structure and authority, not clever phrasing.",
-      },
-      {
-        question: "Do FAQ schemas and llms.txt still matter for AI search?",
-        answer:
-          "Yes. FAQ blocks with FAQPage JSON-LD hand answer engines the exact shape they lift as a quoted answer, and llms.txt gives language-model crawlers a canonical inventory of the site. Neither is optional if the site is written to be quoted rather than only ranked.",
-      },
-      {
-        question: "Is SEO dead now that AI answers questions directly?",
-        answer:
-          "No, but its endpoint changed. SEO used to end at a click; it now also ends at being one of the sources a generative answer cites. Pages built only for the click miss the second endpoint, and that is where the visibility loss shows up.",
-      },
-    ],
-  },
-  // ---------------- Article: GEO checklist ----------------
-  {
-    slug: "geo-checklist-get-cited-by-ai-answers",
-    kind: "article",
-    title:
-      "GEO checklist: how to get your page cited by ChatGPT, Perplexity, and AI Overviews",
-    excerpt:
-      "A practical, page-level checklist for generative engine optimization. What to put on the page, in the head, in the schema, and in the site infrastructure so a language model picks it as a source when it composes an answer.",
-    topic:
-      "GEO checklist, generative engine optimization, get cited by AI, AI answer sources, how to rank on ChatGPT, Perplexity SEO, AI Overviews optimization, llms.txt, FAQPage schema, structured data for AI, LLM-friendly content, brand mentions in AI",
-    offering: "custom-ai-engineering",
-    publishedAt: "2026-09-01",
-    readingMinutes: 8,
-    diagram: "geo-checklist",
-    sections: [
-      {
-        heading: "What generative engines are actually picking",
-        paragraphs: [
-          "A generative answer engine composes its response from a small set of sources it selects out of the corpus it can reach. The selection is not a leaderboard; it is closer to a research assistant grabbing the two or three pages that best answer this specific question with the least ambiguity. That means the pages that win are not always the pages that rank first in classical search. They are the pages that are specific, verifiable, and structurally easy to quote.",
-          "Everything on the checklist below flows from that. If a page can hand a machine a clean, self-contained answer with a source attached, it is more useful to the answer engine than a longer, better-ranked page that only implies the answer inside three paragraphs of prose.",
-        ],
-      },
-      {
-        heading: "On-page: what the reader (and the model) sees",
-        paragraphs: [
-          "The body of the page carries most of the weight. These are the moves that reliably help.",
-        ],
-        list: [
-          "Lead with the answer. First paragraph contains a single self-contained sentence that answers the question the page is about.",
-          "One question per page. Do not bury three unrelated answers in one URL; each deserves its own home.",
-          "FAQ block at the end, phrased the way buyers type, with each answer a standalone paragraph.",
-          "Cite the specifics: numbers with sources, standards with the exact name, dates on claims that decay.",
-          "Define the jargon on the page instead of assuming the reader arrived with it.",
-          "Use clean headings that describe what each section actually answers.",
-          "Publish plain-language variants of anything technical, so a summary can quote them cleanly.",
-        ],
-      },
-      {
-        heading: "In the head: what the crawler sees",
-        paragraphs: [
-          "Structured data is the seatbelt for GEO. It does not decide whether you are picked, but its absence often decides whether you are not.",
-        ],
-        list: [
-          "Article and FAQPage JSON-LD on every post. Answer engines lift FAQPage answers verbatim.",
-          "BreadcrumbList so the hierarchy is machine-readable.",
-          "Organization schema on the site root, with a stable name and canonical URL.",
-          "Canonical URL on every page; never move a page that already earns citations.",
-          "Open Graph tags for accurate previews when the page is quoted in chat surfaces.",
-        ],
-      },
-      {
-        heading: "Site infrastructure: what the model's crawler expects",
-        paragraphs: [
-          "A well-run site makes it easier for a language model to include you. Two files do most of the work.",
-        ],
-        list: [
-          "A live sitemap.xml that lists every canonical URL, generated from the same data as the site so it never drifts.",
-          "An llms.txt at the root that inventories what the site is, what it offers, and the URLs of its canonical content.",
-          "A robots.txt that permits the crawlers you want to be cited by; blocking them silently is the most common own-goal.",
-          "Stable, semantic URLs. /blog/how-to-x beats /post?id=1287; do not change either once cited.",
-          "Internal links from money pages to the source page, so authority concentrates on the pages you want quoted.",
-        ],
-      },
-      {
-        heading: "Off-page: coverage the model already trusts",
-        paragraphs: [
-          "The GEO shift makes brand mentions and citations elsewhere disproportionately valuable, because language models were pre-trained on the trusted corpora those mentions live in. Get named on the sites and podcasts your target reader treats as authoritative, and the model will pick your page over similar ones without those references.",
-          "This does not replace on-page work. It is what compounds it. A specific, verifiable, well-structured page with three trusted mentions elsewhere gets cited far more often than an equivalent page nobody has heard of.",
-        ],
-      },
-    ],
-    keyTakeaways: [
-      "Lead every page with a single self-contained answer; buried answers do not get quoted.",
-      "FAQPage and Article JSON-LD are the seatbelts of GEO; their absence often decides you out.",
-      "sitemap.xml, llms.txt, and stable canonical URLs are the site-infrastructure moves that matter most.",
-      "Brand mentions on trusted sites compound the on-page work; a specific page with a few trusted references gets cited over an equivalent page without them.",
-    ],
-    qa: [
-      {
-        question: "How do you get cited by AI answer engines?",
-        answer:
-          "Lead with a self-contained answer, structure the page with FAQPage and Article schema, publish a sitemap and an llms.txt at the root, keep canonical URLs stable, and earn coverage from trusted sites in your space. Generative engines lean on specificity, verifiability, and structural cleanliness.",
-      },
-      {
-        question: "Does llms.txt actually matter?",
-        answer:
-          "It matters as a canonical inventory for language-model crawlers, the way sitemap.xml matters for search-engine crawlers. Absence rarely disqualifies a site, but presence makes it easier for models to reach the right URLs and reduces the noise around what your site is.",
-      },
-      {
-        question: "What schema should every article carry for AI search?",
-        answer:
-          "Article for the piece itself, FAQPage for any Q&A block, and BreadcrumbList for the hierarchy. Organization schema belongs on the site root. All should carry stable IDs and match what appears on the page.",
-      },
-      {
-        question: "How important are brand mentions for GEO?",
-        answer:
-          "Very. Language models leaned on trusted corpora during training and continue to weight them in retrieval, so a page from a site that gets mentioned by other trusted sources is disproportionately more likely to be cited. On-page structure gets you eligible; off-page mentions get you selected.",
-      },
-      {
-        question: "Do I need to write differently for AI answer engines?",
-        answer:
-          "Slightly. Lead every page with a self-contained answer, keep one question per URL, and cite specifics with sources. The rest of the writing rules do not change. What changes is that a machine is reading, and it is grading you on whether it could lift a clean sentence and stand behind the source.",
-      },
-    ],
-  },
-  // ---------------- Article: AI SEO in 2026 ----------------
-  {
-    slug: "ai-seo-what-changed-in-2026",
-    kind: "article",
-    title: "AI SEO in 2026: what changed, what still works, and what to stop doing",
-    excerpt:
-      "Generative search did not kill SEO; it changed the endpoint. Traffic that used to land as a click now sometimes lands as a mention in a generated answer. Here is what to keep doing, what to add, and what to stop.",
-    topic:
-      "AI SEO, AI SEO 2026, SEO for AI search, ChatGPT SEO, Perplexity SEO, AI Overviews SEO, generative search optimization, AI content strategy, LLM SEO, AI visibility, AEO, GEO, SEO changes 2026",
-    offering: "custom-ai-engineering",
-    publishedAt: "2026-08-31",
-    readingMinutes: 8,
-    diagram: "two-endpoints",
-    sections: [
-      {
-        heading: "The endpoint changed, not the game",
-        paragraphs: [
-          "For a long time SEO had one endpoint: a person clicked through to your page. Generative search added a second one. Some queries never leave the answer surface at all; the reader gets a composed response and moves on, and if your page was one of the sources, your brand was in front of them without a click ever landing. Traffic did not stop; it split into a channel you measure and a channel you do not.",
-          "That is the whole shift, and everything worth doing in AI SEO flows from it. The pages that work now are the ones that earn a click when the reader wants to go deep and earn a mention when the reader just wants a fast answer. They are different jobs on the same page, and most sites are still doing one and not the other.",
-        ],
-      },
-      {
-        heading: "What still works",
-        paragraphs: [
-          "The fundamentals did not move. High-intent queries still convert best. Deep, specific pages still beat broad, thin ones. Authoritative external coverage still compounds everything. Technically sound sites still rank; broken ones still do not. Anyone selling you a total reset for the AI era is charging for a rewrite you probably did not need.",
-        ],
-        list: [
-          "Answering the query the reader actually typed, not the topic the SEO tool suggested.",
-          "Original writing with a point of view. Rehashed listicles were losing ground already; AI accelerated it.",
-          "Internal links that concentrate authority on the pages you want to be found for.",
-          "Fast, accessible, mobile-first pages. Core Web Vitals still rank; they just no longer decide.",
-          "Coverage from trusted sites in the same space. Backlinks matter, brand mentions matter more.",
-        ],
-      },
-      {
-        heading: "What to add",
-        paragraphs: [
-          "The new work is not another SEO gimmick. It is engineering the page so a machine can quote it and citing sources cleanly enough that the machine trusts it. The specifics come out of the AEO and GEO playbooks: lead with a self-contained answer, publish an FAQ block with FAQPage schema, cite numbers and standards by name, keep canonical URLs stable.",
-        ],
-        list: [
-          "Lead every page with a single self-contained answer to the question the page is about.",
-          "FAQPage and Article JSON-LD schema on every post.",
-          "An llms.txt at the root, inventoried from the same data as the site so it never drifts.",
-          "Plain-language variants of anything technical, so a summary can quote them cleanly.",
-          "Measurement that captures citations and mentions in AI answers, not only clicks.",
-        ],
-      },
-      {
-        heading: "What to stop",
-        paragraphs: [
-          "Some habits that used to be neutral or mildly helpful are now actively damaging in a world where a language model is reading and composing.",
-        ],
-        list: [
-          "Publishing thin content on adjacent long-tail keywords. Language models collapse them into one answer and the padding stops helping.",
-          "Splitting the same content across parallel URL namespaces (`/blog/x` and `/insights/x`). Ranking signal splits; citations become inconsistent.",
-          "Moving cited URLs to freshen them. A moved URL is a broken citation somewhere else.",
-          "Aggressive keyword stuffing. Answer engines read for meaning, and they punish pages that read as spam even when older ranking models ignored it.",
-          "Blocking AI crawlers by default in robots.txt. That is a decision to opt out of the second endpoint; make it deliberately, not by copy-paste.",
-        ],
-      },
-      {
-        heading: "How to measure the new endpoint",
-        paragraphs: [
-          "The traffic that never becomes a click is real but harder to see. A workable stack: a light branded-search monitor to see if your name is trending in the wake of a topic, a periodic manual check across the major answer engines for the queries you sell against, and a review of referral traffic from AI surfaces where they do send clicks. None of it is a perfect metric. All of it is better than measuring only what analytics has always shown.",
-          "The point is not to obsess about attribution. The point is to notice, early, when you are being cited more or less often, and to have some idea why. That signal changes what you write next, which is the whole loop.",
-        ],
-      },
-    ],
-    keyTakeaways: [
-      "Generative search added a second endpoint: a mention inside a composed answer. Traffic split; it did not stop.",
-      "Fundamentals still hold: high-intent queries, deep pages, authoritative coverage, technically sound sites.",
-      "Add: self-contained answers up front, FAQPage and Article schema, an llms.txt at the root, measurement that captures citations.",
-      "Stop: thin adjacent-keyword pages, split URL namespaces, moving cited URLs, keyword stuffing, and blocking AI crawlers by copy-paste.",
-    ],
-    qa: [
-      {
-        question: "Did AI kill SEO?",
-        answer:
-          "No. It added a second endpoint. Traffic that used to always end at a click now sometimes ends at a citation in a generated answer. Pages built for both endpoints do fine; pages built only for the click miss the second half.",
-      },
-      {
-        question: "What still works in SEO in 2026?",
-        answer:
-          "The fundamentals: answering the query the reader actually typed, deep and specific pages, coverage from trusted sites, sound technical hygiene, and internal links that concentrate authority. None of that moved with the shift to AI search.",
-      },
-      {
-        question: "What should I stop doing for SEO in the AI era?",
-        answer:
-          "Stop publishing thin adjacent-keyword pages, splitting content across parallel URL namespaces, moving cited URLs to freshen them, keyword stuffing, and blocking AI crawlers by default. Each of those actively hurts a site whose second endpoint is a language model composing an answer.",
-      },
-      {
-        question: "How do you measure AI SEO visibility?",
-        answer:
-          "Combine a branded-search monitor, periodic manual queries across the major answer engines for the questions you sell against, and referral analytics from AI surfaces that do send clicks. None of these is perfect; together they show whether citations and mentions are growing over time.",
-      },
-      {
-        question: "Should I block AI crawlers in robots.txt?",
-        answer:
-          "Only as a deliberate choice, not by default. Blocking AI crawlers is a decision to opt out of the second endpoint (citation inside a generated answer), which for most B2B sites is a visibility loss they did not intend.",
-      },
-    ],
-  },
   // ---------------- Case study: passed first AI governance audit ----------------
   {
     slug: "passed-first-ai-governance-audit",
@@ -2320,6 +2033,13 @@ const rawBlogPosts: BlogPost[] = [
         ],
       },
       {
+        heading: "Fixed price per phase, and the exits it gives you",
+        paragraphs: [
+          "Fixed price is only honest when it is per phase, not one number for the whole build. A single upfront quote for an entire AI system is either padded to cover the unknowns or a figure that will not survive contact with reality. Breaking the work into phases keeps each one small enough to price accurately, and it hands you the decision at every boundary.",
+          "That gives you real exit points. After discovery you can stop. After the proof of concept you can stop. After each production phase you can stop. You are never locked into paying for work you have lost confidence in. And because we are not paid by the hour, we have no reason to build the feature that is not worth building; we will tell you when something is not worth the phase it would cost.",
+        ],
+      },
+      {
         heading: "How to estimate before you call anyone",
         paragraphs: [
           "Write one sentence describing the outcome, list the systems the AI must touch, and note whether the data already exists and whether a human will check the output or not. Those four answers place your build on the spectrum from a small automation to a full production system, which is most of the estimate.",
@@ -2349,6 +2069,11 @@ const rawBlogPosts: BlogPost[] = [
         answer:
           "Fixed price per phase is better for the buyer: it puts scope risk on the builder and makes the budget known up front. Hourly billing transfers that risk to you and rewards slowness. The one thing fixed price needs is a defined scope, which is what a paid discovery phase produces.",
       },
+      {
+        question: "What is a paid discovery sprint and why is it paid?",
+        answer:
+          "It is a short, fixed-price engagement that turns your idea into a real specification, an architecture, a build-vs-buy recommendation, and a fixed price for each phase that follows. It is paid because it is real engineering work, and because paying for it filters for serious buyers. Sometimes its honest output is a recommendation not to build at all.",
+      },
     ],
   },
 ];
@@ -2367,10 +2092,62 @@ function estimateReadingMinutes(post: BlogPost): number {
   return Math.max(1, Math.round(words / 220));
 }
 
-export const blogPosts: BlogPost[] = rawBlogPosts.map((p) => ({
-  ...p,
-  readingMinutes: estimateReadingMinutes(p),
-}));
+// Slugs folded into evergreen URLs via 301 (see next.config.ts, Phase 2).
+// Their content stays in rawBlogPosts (available for merges) but they are
+// excluded from every public surface: a redirecting URL must never appear in
+// the listing, the sitemap, or static params.
+const REDIRECTED = new Set<string>([
+  "what-is-an-ai-sdr",
+  "how-much-does-an-ai-sdr-cost",
+  "ai-gtm-engine-autonomous-outbound",
+  "what-custom-ai-development-costs-fixed-price-per-phase",
+]);
+
+// Category per slug (Phase 6). Case studies keep their `kind: "case-study"`
+// tag AND a category. "Commercial" is the cross-cutting bucket for cost /
+// build-vs-buy / vendor-choice content.
+const CATEGORY: Record<string, BlogCategory> = {
+  // AI Production Engineering
+  "why-ai-pilots-dont-reach-production": "AI Production Engineering",
+  "ai-production-readiness-checklist": "AI Production Engineering",
+  "adding-ai-to-your-product": "AI Production Engineering",
+  "ai-workflow-that-actually-shipped": "AI Production Engineering",
+  // AI Agents & Automation
+  "ai-sdr-vs-human-sdr-when-each-wins": "AI Agents & Automation",
+  "outbound-is-a-research-problem": "AI Agents & Automation",
+  "founder-outbound-without-hiring-an-sdr": "AI Agents & Automation",
+  "ai-outbound-for-regulated-industries": "AI Agents & Automation",
+  "saas-outbound-booked-meetings-case-study": "AI Agents & Automation",
+  "agency-pipeline-case-study": "AI Agents & Automation",
+  "small-team-follow-up-case-study": "AI Agents & Automation",
+  // AI Governance & Compliance
+  "ai-governance-before-the-audit": "AI Governance & Compliance",
+  "iso-42001-readiness-checklist-ai-management-system": "AI Governance & Compliance",
+  "eu-ai-act-compliance-obligations-by-risk-tier": "AI Governance & Compliance",
+  "passed-first-ai-governance-audit": "AI Governance & Compliance",
+  // Commercial (cross-cutting)
+  "how-much-does-custom-ai-development-cost": "Commercial",
+  "custom-ai-development-vs-in-house-team": "Commercial",
+  "best-ai-engineering-companies-for-startups": "Commercial",
+  "build-vs-buy-ai-custom-development-vs-off-the-shelf": "Commercial",
+};
+
+export const blogPosts: BlogPost[] = rawBlogPosts
+  .filter((p) => !REDIRECTED.has(p.slug))
+  .map((p) => ({
+    ...p,
+    readingMinutes: estimateReadingMinutes(p),
+    category: CATEGORY[p.slug] ?? "Commercial",
+  }));
+
+/** The taxonomy, in display order, for any category UI or filtering. */
+export const blogCategories: BlogCategory[] = [
+  "AI Production Engineering",
+  "AI Agents & Automation",
+  "AI Governance & Compliance",
+  "AI Infrastructure & RAG",
+  "Commercial",
+];
 
 export function getBlogPost(slug: string) {
   return blogPosts.find((p) => p.slug === slug);
