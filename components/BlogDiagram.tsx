@@ -446,10 +446,58 @@ function TwoEndpoints({ compact }: { compact?: boolean } = {}) {
   );
 }
 
+// System One (Jev) vs an autoregressive LLM: same input, two shapes of output.
+// The LLM row emits a left-to-right token stream of free text you must parse;
+// the System One row emits one typed record with a confidence score in a single
+// pass, constrained to a schema.
+function SystemOneVsLlm({ compact }: { compact?: boolean } = {}) {
+  const tok = (x: number, y: number, w: number) => (
+    <rect key={x} x={x} y={y} width={w} height="16" rx="3" fill={`color-mix(in oklab, ${FG} 14%, transparent)`} stroke={HAIR} />
+  );
+  return (
+    <Frame
+      compact={compact}
+      viewBox="0 0 640 300"
+      title="System One model vs autoregressive LLM"
+      desc="An LLM turns one input into a left-to-right stream of text tokens that must be parsed. A System One model turns the same input into a single typed record with a confidence score in one pass."
+    >
+      {/* shared input */}
+      <rect x="24" y="126" width="96" height="48" rx="10" fill={SURFACE} stroke={HAIR} />
+      {L(72, 147, "input", { fill: FG, size: 12, anchor: "middle", weight: 500 })}
+      {L(72, 165, "+ schema", { fill: FAINT, size: 10, anchor: "middle" })}
+      <path d="M120 150 H150" stroke={HAIR} strokeWidth="1.5" />
+
+      {/* LLM row */}
+      {L(150, 44, "AUTOREGRESSIVE LLM", { fill: FAINT, size: 10 })}
+      <rect x="150" y="56" width="120" height="46" rx="10" fill={SURFACE} stroke={HAIR} />
+      {L(210, 78, "token by token", { fill: MUTED, size: 11, anchor: "middle" })}
+      {L(210, 94, "free text", { fill: FAINT, size: 10, anchor: "middle" })}
+      {[290, 330, 362, 402, 434, 474].map((x, i) => tok(x, 70, i % 2 ? 26 : 34))}
+      {L(524, 66, "then you parse", { fill: FAINT, size: 10 })}
+      {L(524, 80, "and validate", { fill: FAINT, size: 10 })}
+
+      {/* System One row */}
+      {L(150, 214, "SYSTEM ONE MODEL", { fill: GOLDT, size: 10 })}
+      <rect x="150" y="226" width="120" height="46" rx="10" fill={`color-mix(in oklab, ${GOLD} 14%, transparent)`} stroke={GOLD} />
+      {L(210, 248, "single pass", { fill: GOLDT, size: 11, anchor: "middle", weight: 500 })}
+      {L(210, 264, "non-autoregressive", { fill: GOLDT, size: 9, anchor: "middle" })}
+      <path d="M270 249 H300" stroke={GOLD} strokeWidth="1.5" />
+      <rect x="300" y="216" width="220" height="66" rx="10" fill={SURFACE} stroke={GOLD} />
+      {L(316, 238, "{ intent: \"refund\",", { fill: FG, size: 11 })}
+      {L(316, 256, "  priority: \"high\",", { fill: FG, size: 11 })}
+      {L(316, 274, "  confidence: 0.94 }", { fill: GOLDT, size: 11, weight: 500 })}
+      {L(536, 245, "typed,", { fill: FAINT, size: 10 })}
+      {L(536, 259, "consumed", { fill: FAINT, size: 10 })}
+      {L(536, 273, "directly", { fill: FAINT, size: 10 })}
+    </Frame>
+  );
+}
+
 const diagrams: Record<
   string,
   (props?: { compact?: boolean }) => React.ReactElement
 > = {
+  "system-one-vs-llm": SystemOneVsLlm,
   "pilot-production": PilotProduction,
   "governance-layers": GovernanceLayers,
   "outbound-research": OutboundResearch,

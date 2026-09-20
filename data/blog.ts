@@ -2076,6 +2076,83 @@ const rawBlogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "what-is-jev-system-one-model",
+    kind: "article",
+    title: "What is Jev? TypeSafe AI's System One model, explained for engineers",
+    excerpt:
+      "Jev is a new class of AI model that returns typed, structured decisions with a confidence score instead of generating text. Here is what a System One model is, how it differs from an LLM, and where it fits in a production system.",
+    topic:
+      "what is Jev, Jev AI model, System One model, TypeSafe AI, non-autoregressive model, structured output model, typed AI decisions, System 1 AI",
+    offering: "custom-ai-engineering",
+    publishedAt: "2026-09-20",
+    readingMinutes: 7,
+    diagram: "system-one-vs-llm",
+    sections: [
+      {
+        heading: "What Jev is",
+        paragraphs: [
+          "Jev is the first public model in a class TypeSafe AI calls System One models, released in early access on 15 September 2026. It does not generate text. You give it unstructured input plus a schema you define in advance, and it returns typed values with a calibrated confidence score on each one. It is built for the decisions software makes internally: classification, routing, extraction, scoring. Not chat.",
+          "The name follows Daniel Kahneman's split between System 1, the fast automatic judgment, and System 2, the slow deliberate reasoning. A chat LLM is a System 2 tool asked to do System 1 work. Jev is built for the System 1 half directly, which is why it is small, fast, and constrained.",
+        ],
+      },
+      {
+        heading: "How it differs from an LLM",
+        paragraphs: [
+          "A large language model is autoregressive: it generates one token at a time, each conditioned on the last, as free text you then have to parse and validate. That is what makes it flexible and also what makes it slow, expensive per decision, and able to hallucinate a field that does not fit your schema.",
+          "Jev is non-autoregressive. It produces the whole structured answer in a single pass, and the output is restricted to values your schema allows, so a type error is not something it corrects, it is something it cannot emit by construction. TypeSafe trains this with an approach it calls Reinforcement Learning for Calibrated Decisions, aimed at confidence numbers that mean what they say rather than a model that is always sure.",
+          "The published figures: 70 to 500 ms end to end, which TypeSafe frames as 40 to 200 times faster than frontier LLMs on the same structured tasks, at $0.042 per million input tokens with output not metered. Those are the vendor's numbers, not ours, and worth confirming against your own workload before you plan around them.",
+        ],
+      },
+      {
+        heading: "Where it fits, and where it does not",
+        paragraphs: [
+          "A System One model is not a replacement for a generative LLM. It cannot write, summarize, or reason through an open problem. What it replaces is the pattern where teams bolt a heavyweight LLM onto a narrow decision, wrap it in a JSON-mode prompt, and then spend the rest of the project defending against malformed output, latency, and cost.",
+          "In a production system the two compose. A model like Jev sits on the hot path where a typed decision has to be fast, cheap, and safe to consume directly, and a generative model stays where language actually has to be produced. The engineering value is that the typed boundary is enforced by the model rather than reconstructed with validators and retries downstream.",
+        ],
+        list: [
+          "Good fit: routing, triage, intent detection, field extraction, eligibility and risk scoring, content classification.",
+          "Poor fit: drafting, summarization, multi-step reasoning, anything whose output is prose.",
+          "Watch: the confidence score is only useful if you actually branch on it. A low-confidence path still needs a fallback or a human.",
+        ],
+      },
+      {
+        heading: "What this signals for AI engineering",
+        paragraphs: [
+          "The broader shift Jev points at is away from one general model doing every job and toward a system of specialized models, each on the part of the workload it fits. That is the same argument production AI engineering has been making about reliability: the model is the easy 20 percent, and the system around it, the typed boundaries, the fallbacks, the observability, is the part that decides whether it ships.",
+          "Whether Jev specifically wins is not the point for a team building today. The point is that structured, calibrated, typed decisions are becoming a first-class primitive, and designing your system so a decision has a defined type and a confidence you can act on will age better than piping every decision through free-text generation.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Jev is a System One model: it returns typed, schema-constrained values with calibrated confidence, not generated text.",
+      "It is non-autoregressive and, by construction, cannot emit a value outside your schema, so type errors are impossible rather than corrected.",
+      "It complements an LLM rather than replacing it: typed decisions on the hot path, generation where language is actually needed.",
+      "Vendor claims (70 to 500 ms, 40 to 200 times faster, $0.042 per million input tokens) should be validated against your own workload.",
+    ],
+    qa: [
+      {
+        question: "What is a System One model?",
+        answer:
+          "A model built to make a single fast, structured decision that software consumes directly. It takes input plus a schema and returns typed values with a confidence score, rather than generating free text. The name references Kahneman's fast System 1 thinking. Jev, from TypeSafe AI, is the first public example.",
+      },
+      {
+        question: "How is Jev different from ChatGPT or a normal LLM?",
+        answer:
+          "An LLM generates text one token at a time and can produce output that does not fit your schema. Jev is non-autoregressive: it returns the whole structured answer in one pass, constrained to values your schema allows, so it cannot make a type error and cannot hallucinate a field. It is for decisions, not for writing.",
+      },
+      {
+        question: "When should you use a model like Jev instead of an LLM?",
+        answer:
+          "Use it for narrow, high-volume typed decisions: routing, triage, classification, extraction, scoring. Keep a generative LLM for anything whose output is language. In most real systems they compose rather than compete.",
+      },
+      {
+        question: "Can Jev really not hallucinate?",
+        answer:
+          "The claim is specifically about type safety: because the output is restricted to values your schema defines, it cannot emit an invalid or out-of-schema value. That is narrower than saying it is always correct. It can still be confidently wrong within the allowed set, which is why the calibrated confidence score and a fallback path matter.",
+      },
+    ],
+  },
 ];
 
 // Reading time is computed from the actual body, not hand-typed, so it stays
@@ -2111,6 +2188,7 @@ const CATEGORY: Record<string, BlogCategory> = {
   "why-ai-pilots-dont-reach-production": "AI Production Engineering",
   "ai-production-readiness-checklist": "AI Production Engineering",
   "adding-ai-to-your-product": "AI Production Engineering",
+  "what-is-jev-system-one-model": "AI Production Engineering",
   "ai-workflow-that-actually-shipped": "AI Production Engineering",
   // AI Agents & Automation
   "ai-sdr-vs-human-sdr-when-each-wins": "AI Agents & Automation",
