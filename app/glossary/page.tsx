@@ -6,21 +6,13 @@ import { breadcrumbSchema, definedTermSetSchema, pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "AI Glossary",
   description:
-    "Plain-English definitions of the terms behind production AI and go-to-market: AI SDR, AI governance, SOC 2, ISO 42001, EU AI Act, observability, AEO, and more.",
+    "Plain-English definitions of the terms behind production AI: RAG, grounding, guardrails, evaluation harness, observability, AI governance, SOC 2, ISO 42001, the EU AI Act, and more.",
   path: "/glossary",
 });
 
 // Plain, honest definitions. Answer-engine friendly: term + a self-contained,
 // quotable sentence. Kept in the site voice — the mechanism, not the vocabulary.
 const terms = [
-  {
-    term: "AI SDR",
-    def: "An AI system that does a sales-development rep's job end to end (researching the account, finding the angle, writing and sending outreach, and following up) rather than a tool a human rep operates.",
-  },
-  {
-    term: "AI GTM engine",
-    def: "An autonomous go-to-market system that runs outbound from first contact to booked meeting, so the motion no longer depends on a person working each account by hand.",
-  },
   {
     term: "AI governance",
     def: "The controls, records, and evidence that let an organization account for how an AI system decides and behaves, so that when a regulator, customer, or board asks, there is an answer.",
@@ -54,22 +46,6 @@ const terms = [
     def: "The European Union's regulation that classifies AI systems by risk and attaches obligations that scale with that risk, from transparency duties to strict requirements for high-risk uses.",
   },
   {
-    term: "AEO (Answer Engine Optimization)",
-    def: "Writing and structuring content so AI answer engines can quote it accurately, a superset of SEO, aimed at machines that summarize rather than just rank.",
-  },
-  {
-    term: "White-label partnership",
-    def: "An arrangement where a partner sells a provider's product under their own brand while the provider powers the technology invisibly; the product and the customer relationship stay the partner's.",
-  },
-  {
-    term: "SEO (Search Engine Optimization)",
-    def: "The practice of writing and structuring content so search engines rank it for the queries a target reader actually types. Answers the question: can we be found in a list of ten blue links.",
-  },
-  {
-    term: "GEO (Generative Engine Optimization)",
-    def: "The practice of writing content so generative search surfaces (Google AI Overviews, Perplexity, ChatGPT search) select and quote it in their generated answers, rather than the older goal of ranking in a link list.",
-  },
-  {
     term: "Grounding",
     def: "Anchoring a model's output in specific source material, retrieved documents, structured data, or verifiable facts, so the response can be audited against the source rather than trusted on its confidence alone.",
   },
@@ -92,30 +68,6 @@ const terms = [
   {
     term: "Model drift",
     def: "Slow degradation in a model's outputs over time as the world it sees shifts away from the world it was trained on. Detected by continuous evaluation, not by intuition.",
-  },
-  {
-    term: "Deliverability",
-    def: "The share of sent outbound email that lands in the recipient's primary inbox instead of promotions or spam. A function of sender reputation, authentication, and relevance to the recipient.",
-  },
-  {
-    term: "Domain warmup",
-    def: "The gradual ramp of sending volume on a fresh sending domain, so inbox providers build trust in it before real campaigns run. Skipping it burns the domain.",
-  },
-  {
-    term: "Reply rate",
-    def: "The percentage of sent outbound messages that receive any reply. A blunt measure of relevance; positive reply rate is the sharper one.",
-  },
-  {
-    term: "Positive reply rate",
-    def: "The percentage of sent outbound messages that receive an interested reply, not just any reply. The number that decides whether an outbound program actually books meetings.",
-  },
-  {
-    term: "Meeting-book rate",
-    def: "The percentage of sent outbound messages that convert to a booked meeting. The number a founder or a VP of Sales cares about, because it maps directly to pipeline.",
-  },
-  {
-    term: "Lead scoring",
-    def: "Ranking inbound or replied leads by how likely they are to convert, from real intent signals (role, fit, engagement) rather than politeness. Determines who gets the human's time first.",
   },
   {
     term: "Model card",

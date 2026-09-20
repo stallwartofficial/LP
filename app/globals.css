@@ -994,6 +994,151 @@ label[for] {
   }
 }
 
+/* "How we operate" tile motion. Two layers, both compositor-only (transform +
+   opacity), so they cost nothing on the main thread and the section stays a
+   server component with no JS:
+   1. Ambient: a slow gold sheen that drifts inside each tile, always on, very
+      low opacity, staggered per tile so the grid breathes rather than pulsing
+      in unison.
+   2. Hover: an accent bloom rising from the top edge, fading in on hover.
+   Both are decorative and sit behind the content (z-index: -1); reduced motion
+   stops the drift but keeps the static sheen. */
+.op-tile { position: relative; overflow: hidden; isolation: isolate; }
+.op-tile::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    38% 38% at 30% 28%,
+    color-mix(in oklab, var(--accent) 11%, transparent),
+    transparent 70%
+  );
+  opacity: 0.55;
+  animation: op-drift 15s ease-in-out infinite;
+  will-change: transform;
+}
+.op-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    62% 60% at 50% 0%,
+    color-mix(in oklab, var(--accent) 15%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out-expo);
+}
+.op-tile:hover::after { opacity: 1; }
+/* Stagger the ambient drift so tiles are out of phase. */
+.op-tile:nth-child(2)::before { animation-delay: -3s; }
+.op-tile:nth-child(3)::before { animation-delay: -6s; }
+.op-tile:nth-child(4)::before { animation-delay: -9s; }
+.op-tile:nth-child(5)::before { animation-delay: -4.5s; }
+.op-tile:nth-child(6)::before { animation-delay: -7.5s; }
+.op-tile:nth-child(7)::before { animation-delay: -10.5s; }
+@keyframes op-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(7%, 6%, 0) scale(1.08); }
+  66% { transform: translate3d(-6%, 9%, 0) scale(1.05); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .op-tile::before { animation: none; }
+  .op-tile::after { transition: none; }
+}
+
+/* Capability visuals (/offer "what we build"). The four bespoke gold-line
+   SVGs move: signals flow along the accent paths, nodes breathe, the chart
+   line draws, the stacked cards float. All are SVG presentation attributes
+   (stroke-dashoffset / opacity / transform), cheap and looping, and the global
+   reduced-motion block already neutralises them. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes viz-flow { to { stroke-dashoffset: -14; } }
+  @keyframes viz-breathe { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  @keyframes viz-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+  @keyframes viz-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+  @keyframes viz-draw { 0% { stroke-dashoffset: 90; } 55%, 100% { stroke-dashoffset: 0; } }
+
+  /* Signals travelling the accent paths (Agents branches, Infra spokes). */
+  .viz-agents path[stroke-opacity],
+  .viz-infra path[stroke-opacity] {
+    stroke-dasharray: 5 9;
+    animation: viz-flow 1.4s linear infinite;
+  }
+
+  /* Agents: source breathes, the four target boxes light up in sequence. */
+  .viz-agents > circle { animation: viz-breathe 2.6s ease-in-out infinite; }
+  .viz-agents rect { animation: viz-pulse 2.6s ease-in-out infinite; }
+  .viz-agents rect:nth-of-type(2) { animation-delay: 0.35s; }
+  .viz-agents rect:nth-of-type(3) { animation-delay: 0.7s; }
+  .viz-agents rect:nth-of-type(4) { animation-delay: 1.05s; }
+  /* Agent loop: the ring's signal flows and a pointer orbits the centre. */
+  .viz-agents .agent-ring { stroke-dasharray: 5 8; animation: viz-flow 1.8s linear infinite; }
+  .agent-orbit { transform-box: view-box; transform-origin: 130px 75px; animation: spin 5s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Infra: the four hub nodes pulse in turn, the RAG core breathes. */
+  .viz-infra circle { animation: viz-pulse 2.4s ease-in-out infinite; }
+  .viz-infra circle:nth-of-type(2) { animation-delay: 0.3s; }
+  .viz-infra circle:nth-of-type(3) { animation-delay: 0.6s; }
+  .viz-infra circle:nth-of-type(4) { animation-delay: 0.9s; }
+  .viz-infra rect { animation: viz-breathe 3s ease-in-out infinite; }
+
+  /* SaaS: the chart line draws itself, the list rows shimmer in sequence. */
+  .viz-saas g[stroke-opacity] path { stroke-dasharray: 90; animation: viz-draw 3.4s ease-in-out infinite; }
+  .viz-saas g[fill] rect { animation: viz-pulse 2.8s ease-in-out infinite; }
+  .viz-saas g[fill] rect:nth-of-type(2) { animation-delay: 0.25s; }
+  .viz-saas g[fill] rect:nth-of-type(3) { animation-delay: 0.5s; }
+  .viz-saas g[fill] rect:nth-of-type(4) { animation-delay: 0.75s; }
+
+  /* Custom: requirements flow into the core, the core breathes, the module
+     shapes pulse in turn, and the production check draws. */
+  .viz-custom .flow { stroke-dasharray: 5 9; animation: viz-flow 1.5s linear infinite; }
+  .viz-custom .sys-core { transform-box: fill-box; transform-origin: center; animation: viz-breathe 3s ease-in-out infinite; }
+  .viz-custom .sys-check { stroke-dasharray: 26; animation: viz-draw 3s ease-in-out infinite; }
+  .viz-custom .mod { animation: viz-pulse 2.6s ease-in-out infinite; }
+  .viz-custom .mod:nth-of-type(2) { animation-delay: 0.3s; }
+  .viz-custom .mod:nth-of-type(3) { animation-delay: 0.6s; }
+
+  /* Mini strip tiles: each one animates the part that tells its story. */
+  @keyframes bar-rise { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(1); } }
+  @keyframes api-travel { 0% { transform: translateX(0); } 50% { transform: translateX(30px); } 100% { transform: translateX(0); } }
+  @keyframes pulse-ring { 0%, 100% { opacity: 0.4; transform: scale(0.82); } 50% { opacity: 1; transform: scale(1); } }
+  @keyframes fall-in { 0% { opacity: 0; transform: translateY(-6px); } 30%, 100% { opacity: 1; transform: translateY(0); } }
+
+  /* Web: a marker travels the globe's equator. */
+  .m-web .web-dot { transform-box: fill-box; animation: api-travel 3s ease-in-out infinite; }
+  /* Mobile: the content lines type in, the field blinks. */
+  .m-mobile path:last-of-type { stroke-dasharray: 34; animation: viz-draw 2.6s ease-in-out infinite; }
+  .m-mobile rect:last-of-type { animation: viz-breathe 2.2s ease-in-out infinite; }
+  /* API: a packet travels between the brackets. */
+  .m-api .api-dot { transform-box: fill-box; animation: api-travel 2.2s ease-in-out infinite; }
+  /* Stores: the cylinder rings fall in one after another. */
+  .m-store ellipse { transform-box: fill-box; animation: fall-in 3s ease-in-out infinite; }
+  .m-store path { transform-box: fill-box; animation: fall-in 3s ease-in-out infinite; }
+  .m-store path:nth-of-type(1) { animation-delay: 0.3s; }
+  .m-store path:nth-of-type(2) { animation-delay: 0.6s; }
+  /* Vectors: the grid twinkles, the lit vector pulses. */
+  .m-vec circle { animation: viz-pulse 2.6s ease-in-out infinite; }
+  .m-vec circle:nth-of-type(3n) { animation-delay: 0.4s; }
+  .m-vec circle:nth-of-type(3n + 1) { animation-delay: 0.8s; }
+  .m-vec circle:nth-of-type(8) { animation: viz-breathe 1.6s ease-in-out infinite; }
+  /* Pipelines and Monitoring: the signal flows along the path. */
+  .m-pipe path { stroke-dasharray: 5 6; animation: viz-flow 1.2s linear infinite; }
+  .m-mon path:last-of-type { stroke-dasharray: 5 6; animation: viz-flow 1.1s linear infinite; }
+  /* Dashboards: bars rise in sequence, the trend line draws. */
+  .m-dash rect:not(:first-of-type) { transform-box: fill-box; transform-origin: bottom; animation: bar-rise 2.4s ease-in-out infinite; }
+  .m-dash rect:nth-of-type(3) { animation-delay: 0.2s; }
+  .m-dash rect:nth-of-type(4) { animation-delay: 0.4s; }
+  .m-dash path:last-of-type { stroke-dasharray: 40; animation: viz-draw 3s ease-in-out infinite; }
+  /* MVP: the launch ring pulses out. */
+  .m-mvp circle { transform-box: fill-box; transform-origin: center; animation: pulse-ring 2.4s ease-out infinite; }
+}
+
 /* Form craft: auto-growing textarea, and validation that waits until the user
    has actually finished rather than shouting on first keystroke. */
 textarea { field-sizing: content; }

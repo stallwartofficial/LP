@@ -97,7 +97,7 @@ export function Commitments() {
               <div
                 key={tile.area}
                 style={{ gridArea: tile.area }}
-                className={`card-lift flex min-w-0 flex-col rounded-2xl border p-4 transition-colors duration-300 lg:basis-auto lg:p-5 ${
+                className={`op-tile card-lift flex min-w-0 flex-col rounded-2xl border p-4 transition-colors duration-300 lg:basis-auto lg:p-5 ${
                   isFeature ? "lg:self-stretch" : ""
                 } ${
                   isFeature
