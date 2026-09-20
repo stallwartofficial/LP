@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import type { BlogPost } from "@/data/blog";
+import type { BlogPost, BlogCategory } from "@/data/blog";
+import { blogCategories } from "@/data/blog";
 import { getOffering } from "@/data/offerings";
 import { BlogDiagram } from "@/components/BlogDiagram";
 
@@ -119,20 +120,39 @@ const SORT_LABELS: Record<SortKey, string> = {
   articles: "Articles first",
 };
 
+// Filter facets: "All", each pillar category that actually has posts, and a
+// cross-cutting "Case studies" facet keyed on `kind` rather than category.
+type Facet = "All" | "Case studies" | BlogCategory;
+
 export function BlogCardGrid({ posts }: { posts: BlogPost[] }) {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortKey>("newest");
+  const [facet, setFacet] = useState<Facet>("All");
   const q = query.trim().toLowerCase();
 
+  // Only offer facets that have at least one post, so the bar never shows an
+  // empty category. Order follows the canonical taxonomy.
+  const facets = useMemo<Facet[]>(() => {
+    const present = new Set(posts.map((p) => p.category));
+    const cats = blogCategories.filter((c) => present.has(c));
+    const hasCase = posts.some((p) => p.kind === "case-study");
+    return ["All", ...(hasCase ? (["Case studies"] as Facet[]) : []), ...cats];
+  }, [posts]);
+
   const filtered = useMemo(() => {
+    const byFacet = posts.filter((p) => {
+      if (facet === "All") return true;
+      if (facet === "Case studies") return p.kind === "case-study";
+      return p.category === facet;
+    });
     const matched = q
-      ? posts.filter((p) =>
+      ? byFacet.filter((p) =>
           [p.title, p.excerpt, p.topic, p.industry ?? "", p.persona ?? ""]
             .join(" ")
             .toLowerCase()
             .includes(q)
         )
-      : posts.slice();
+      : byFacet.slice();
     const byDate = (a: BlogPost, b: BlogPost) =>
       b.publishedAt.localeCompare(a.publishedAt);
     switch (sort) {
@@ -152,10 +172,39 @@ export function BlogCardGrid({ posts }: { posts: BlogPost[] }) {
       default:
         return matched.sort(byDate);
     }
-  }, [posts, q, sort]);
+  }, [posts, q, sort, facet]);
 
   return (
     <div>
+      {/* Category facets. Clickable, keyboard-focusable, single-select. All
+          posts are already in the DOM (server-rendered); these only filter the
+          visible set, so the page stays crawl-safe with no URL fan-out. */}
+      <div
+        role="tablist"
+        aria-label="Filter by category"
+        className="mb-6 flex flex-wrap gap-2"
+      >
+        {facets.map((f) => {
+          const active = facet === f;
+          return (
+            <button
+              key={f}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => setFacet(f)}
+              className={`rounded-full border px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors ${
+                active
+                  ? "border-[var(--accent)] bg-[var(--accent)]/12 text-[var(--accent-text)]"
+                  : "border-[var(--hairline-strong)] text-[var(--fg)]/65 hover:border-[var(--accent)] hover:text-[var(--fg)]"
+              }`}
+            >
+              {f}
+            </button>
+          );
+        })}
+      </div>
+
       <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full max-w-xl">
           <input
