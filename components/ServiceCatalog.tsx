@@ -24,7 +24,7 @@ const stroke = "var(--accent)";
 const faint = "color-mix(in oklab, var(--fg) 22%, transparent)";
 
 const AgentsVisual = (
-  <svg viewBox="0 0 320 150" fill="none" className="h-full w-full" aria-hidden="true">
+  <svg viewBox="0 0 320 150" fill="none" className="viz-agents h-full w-full" aria-hidden="true">
     <g stroke={faint} strokeWidth="1">
       <path d="M60 75h60M200 45h60M200 105h60" />
       <path d="M120 75c30 0 40-30 80-30M120 75c30 0 40 30 80 30" stroke={stroke} strokeOpacity="0.6" />
@@ -38,7 +38,7 @@ const AgentsVisual = (
 );
 
 const SaasVisual = (
-  <svg viewBox="0 0 320 150" fill="none" className="h-full w-full" aria-hidden="true">
+  <svg viewBox="0 0 320 150" fill="none" className="viz-saas h-full w-full" aria-hidden="true">
     <rect x="30" y="20" width="260" height="115" rx="10" fill="color-mix(in oklab,var(--surface) 80%,transparent)" stroke={faint} />
     <path d="M30 45h260" stroke={faint} />
     <circle cx="45" cy="32" r="3" fill={stroke} /><circle cx="55" cy="32" r="3" fill={faint} /><circle cx="65" cy="32" r="3" fill={faint} />
@@ -49,7 +49,7 @@ const SaasVisual = (
 );
 
 const InfraVisual = (
-  <svg viewBox="0 0 320 150" fill="none" className="h-full w-full" aria-hidden="true">
+  <svg viewBox="0 0 320 150" fill="none" className="viz-infra h-full w-full" aria-hidden="true">
     <g stroke={faint}>
       <path d="M160 75h-70M160 75h70M160 75V35M160 75v40" />
       <path d="M90 75H55M230 75h35M160 35V15M160 115v20" stroke={stroke} strokeOpacity="0.6" />
@@ -63,7 +63,7 @@ const InfraVisual = (
 );
 
 const CustomVisual = (
-  <svg viewBox="0 0 320 150" fill="none" className="h-full w-full" aria-hidden="true">
+  <svg viewBox="0 0 320 150" fill="none" className="viz-custom h-full w-full" aria-hidden="true">
     <g>
       <rect x="70" y="70" width="80" height="55" rx="8" fill="color-mix(in oklab,var(--surface) 80%,transparent)" stroke={faint} />
       <rect x="120" y="45" width="80" height="55" rx="8" fill="color-mix(in oklab,var(--surface) 85%,transparent)" stroke={faint} />
