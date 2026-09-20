@@ -34,7 +34,10 @@
   --color-cream-soft: #efeade;
   --color-cream-dim: #d9d3c4;
 
-  /* ---- Fluid type scale (390px to 1600px viewport) ---- */
+  /* ---- Fluid type scale (390px to 1600px viewport). These are unchanged; the
+     large-screen scale-up is done by bumping the root font-size at large
+     breakpoints (see below), which scales type, spacing AND container widths
+     together and so preserves every proportion. ---- */
   --text-step--1: clamp(0.78rem, 0.76rem + 0.08vw, 0.82rem);
   --text-step-0: clamp(0.95rem, 0.93rem + 0.1vw, 1rem);
   --text-step-1: clamp(1.05rem, 1rem + 0.2vw, 1.15rem);
@@ -53,6 +56,19 @@
   /* Shared easing so every transition on the site feels like one hand. */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Large-monitor scaling. The whole design is rem-based (type scale, spacing,
+   container max-widths), so nudging the root font-size up at large breakpoints
+   scales type, spacing AND container widths together, in proportion. Below
+   1536px the root stays 16px, so laptop, tablet and mobile render EXACTLY as
+   before. Above it, the page grows to use the viewport instead of sitting as a
+   laptop-sized column in a huge canvas. Steps are gentle and capped so content
+   never stretches unnaturally. */
+@media (min-width: 1536px) { :root { font-size: 17px; } }
+@media (min-width: 1728px) { :root { font-size: 18px; } }
+@media (min-width: 1920px) { :root { font-size: 19px; } }
+@media (min-width: 2200px) { :root { font-size: 20.5px; } }
+@media (min-width: 2560px) { :root { font-size: 22px; } }
 
 :root {
   color-scheme: light;
