@@ -994,6 +994,63 @@ label[for] {
   }
 }
 
+/* "How we operate" tile motion. Two layers, both compositor-only (transform +
+   opacity), so they cost nothing on the main thread and the section stays a
+   server component with no JS:
+   1. Ambient: a slow gold sheen that drifts inside each tile, always on, very
+      low opacity, staggered per tile so the grid breathes rather than pulsing
+      in unison.
+   2. Hover: an accent bloom rising from the top edge, fading in on hover.
+   Both are decorative and sit behind the content (z-index: -1); reduced motion
+   stops the drift but keeps the static sheen. */
+.op-tile { position: relative; overflow: hidden; isolation: isolate; }
+.op-tile::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    38% 38% at 30% 28%,
+    color-mix(in oklab, var(--accent) 11%, transparent),
+    transparent 70%
+  );
+  opacity: 0.55;
+  animation: op-drift 15s ease-in-out infinite;
+  will-change: transform;
+}
+.op-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    62% 60% at 50% 0%,
+    color-mix(in oklab, var(--accent) 15%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out-expo);
+}
+.op-tile:hover::after { opacity: 1; }
+/* Stagger the ambient drift so tiles are out of phase. */
+.op-tile:nth-child(2)::before { animation-delay: -3s; }
+.op-tile:nth-child(3)::before { animation-delay: -6s; }
+.op-tile:nth-child(4)::before { animation-delay: -9s; }
+.op-tile:nth-child(5)::before { animation-delay: -4.5s; }
+.op-tile:nth-child(6)::before { animation-delay: -7.5s; }
+.op-tile:nth-child(7)::before { animation-delay: -10.5s; }
+@keyframes op-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(7%, 6%, 0) scale(1.08); }
+  66% { transform: translate3d(-6%, 9%, 0) scale(1.05); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .op-tile::before { animation: none; }
+  .op-tile::after { transition: none; }
+}
+
 /* Form craft: auto-growing textarea, and validation that waits until the user
    has actually finished rather than shouting on first keystroke. */
 textarea { field-sizing: content; }
