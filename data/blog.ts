@@ -2019,6 +2019,13 @@ const rawBlogPosts: BlogPost[] = [
         ],
       },
       {
+        heading: "Fixed price per phase, and the exits it gives you",
+        paragraphs: [
+          "Fixed price is only honest when it is per phase, not one number for the whole build. A single upfront quote for an entire AI system is either padded to cover the unknowns or a figure that will not survive contact with reality. Breaking the work into phases keeps each one small enough to price accurately, and it hands you the decision at every boundary.",
+          "That gives you real exit points. After discovery you can stop. After the proof of concept you can stop. After each production phase you can stop. You are never locked into paying for work you have lost confidence in. And because we are not paid by the hour, we have no reason to build the feature that is not worth building; we will tell you when something is not worth the phase it would cost.",
+        ],
+      },
+      {
         heading: "How to estimate before you call anyone",
         paragraphs: [
           "Write one sentence describing the outcome, list the systems the AI must touch, and note whether the data already exists and whether a human will check the output or not. Those four answers place your build on the spectrum from a small automation to a full production system, which is most of the estimate.",
@@ -2047,6 +2054,11 @@ const rawBlogPosts: BlogPost[] = [
         question: "Is fixed-price or hourly better for an AI project?",
         answer:
           "Fixed price per phase is better for the buyer: it puts scope risk on the builder and makes the budget known up front. Hourly billing transfers that risk to you and rewards slowness. The one thing fixed price needs is a defined scope, which is what a paid discovery phase produces.",
+      },
+      {
+        question: "What is a paid discovery sprint and why is it paid?",
+        answer:
+          "It is a short, fixed-price engagement that turns your idea into a real specification, an architecture, a build-vs-buy recommendation, and a fixed price for each phase that follows. It is paid because it is real engineering work, and because paying for it filters for serious buyers. Sometimes its honest output is a recommendation not to build at all.",
       },
     ],
   },
