@@ -125,6 +125,12 @@ const nextConfig: NextConfig = {
         destination: "/blog/how-much-does-custom-ai-development-cost",
         permanent: true,
       },
+      // Phase 3: marketer-focused SEO/AEO/GEO posts retired (deleted + 301).
+      // They targeted marketers, not AI-engineering buyers, and diluted
+      // positioning. Zero clicks / zero impressions, so no equity is lost.
+      { source: "/blog/aeo-vs-seo-vs-geo", destination: "/blog", permanent: true },
+      { source: "/blog/geo-checklist-get-cited-by-ai-answers", destination: "/blog", permanent: true },
+      { source: "/blog/ai-seo-what-changed-in-2026", destination: "/blog", permanent: true },
       {
         source: "/blog/saas-inbound-triage-case-study",
         destination: "/blog/saas-outbound-booked-meetings-case-study",
