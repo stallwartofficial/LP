@@ -25,17 +25,34 @@ type Pillar = {
 const stroke = "var(--accent)";
 const faint = "color-mix(in oklab, var(--fg) 22%, transparent)";
 
+// AI Agents & Automation: the agent loop across the full width. Perceive ->
+// Reason -> Act -> Tools, with an autonomous feedback loop returning Act to
+// Perceive. Signals flow along every accent path; the core breathes.
+const lbl = { fill: faint, fontSize: 8, textAnchor: "middle" as const, fontFamily: "var(--font-mono)", letterSpacing: "1" };
 const AgentsVisual = (
   <svg viewBox="0 0 320 150" fill="none" className="viz-agents h-full w-full" aria-hidden="true">
-    <g stroke={faint} strokeWidth="1">
-      <path d="M60 75h60M200 45h60M200 105h60" />
-      <path d="M120 75c30 0 40-30 80-30M120 75c30 0 40 30 80 30" stroke={stroke} strokeOpacity="0.6" />
-    </g>
-    <circle cx="45" cy="75" r="15" fill="color-mix(in oklab,var(--accent) 18%,transparent)" stroke={stroke} />
-    {[[200, 45], [200, 105], [275, 45], [275, 105]].map(([x, y], i) => (
-      <rect key={i} x={x - 14} y={y - 12} width="28" height="24" rx="5" fill="color-mix(in oklab,var(--surface) 80%,transparent)" stroke={faint} />
-    ))}
-    <circle cx="45" cy="75" r="4" fill={stroke} />
+    {/* forward flow with arrowheads */}
+    <path d="M58 56H120" stroke={stroke} strokeOpacity="0.6" />
+    <path d="M162 56H222" stroke={stroke} strokeOpacity="0.6" />
+    <path d="M120 56l-7-4M120 56l-7 4M222 56l-7-4M222 56l-7 4" stroke={stroke} />
+    {/* stage nodes */}
+    <circle cx="44" cy="56" r="12" fill="color-mix(in oklab,var(--surface) 80%,transparent)" stroke={stroke} />
+    <circle cx="141" cy="56" r="17" fill="color-mix(in oklab,var(--accent) 16%,transparent)" stroke={stroke} />
+    <circle cx="141" cy="56" r="4" fill={stroke} />
+    <circle cx="238" cy="56" r="12" fill="color-mix(in oklab,var(--surface) 80%,transparent)" stroke={stroke} />
+    {/* tools the agent calls */}
+    <path d="M250 56h16M266 56c9 0 9-18 22-18M266 56c9 0 9 18 22 18" stroke={stroke} strokeOpacity="0.6" />
+    <rect x="288" y="28" width="26" height="20" rx="4" fill="color-mix(in oklab,var(--surface) 80%,transparent)" stroke={faint} />
+    <rect x="288" y="64" width="26" height="20" rx="4" fill="color-mix(in oklab,var(--surface) 80%,transparent)" stroke={faint} />
+    {/* autonomous feedback loop: Act back to Perceive */}
+    <path d="M238 70C238 128 44 128 44 70" stroke={stroke} strokeOpacity="0.5" />
+    <path d="M44 72l-4 8M44 72l4 8" stroke={stroke} />
+    {/* labels */}
+    <text x="44" y="86" {...lbl}>PERCEIVE</text>
+    <text x="141" y="92" {...lbl}>REASON</text>
+    <text x="238" y="86" {...lbl}>ACT</text>
+    <text x="301" y="100" {...lbl}>TOOLS</text>
+    <text x="141" y="145" {...lbl} fillOpacity="0.7">AUTONOMOUS LOOP</text>
   </svg>
 );
 
@@ -64,33 +81,57 @@ const InfraVisual = (
   </svg>
 );
 
+// Custom AI Systems: varied requirements on the left assemble into one bespoke
+// system in the centre, which ships to production. Signals flow inward, the
+// core breathes, the production check draws.
 const CustomVisual = (
   <svg viewBox="0 0 320 150" fill="none" className="viz-custom h-full w-full" aria-hidden="true">
-    <g>
-      <rect x="70" y="70" width="80" height="55" rx="8" fill="color-mix(in oklab,var(--surface) 80%,transparent)" stroke={faint} />
-      <rect x="120" y="45" width="80" height="55" rx="8" fill="color-mix(in oklab,var(--surface) 85%,transparent)" stroke={faint} />
-      <rect x="170" y="20" width="80" height="55" rx="8" fill="color-mix(in oklab,var(--accent) 12%,transparent)" stroke={stroke} />
-    </g>
-    <path d="M185 47h50M185 60h34" stroke={stroke} strokeOpacity="0.7" />
+    {/* varied requirement modules (different shapes) */}
+    <rect className="mod" x="30" y="26" width="26" height="22" rx="4" stroke={faint} />
+    <circle className="mod" cx="43" cy="75" r="13" stroke={faint} />
+    <path className="mod" d="M30 126 56 126 43 104Z" stroke={faint} />
+    {/* connectors into the custom system's left edge */}
+    <path className="flow" d="M56 37C88 37 96 60 118 60M56 75H118M50 113C88 113 96 90 118 90" stroke={stroke} strokeOpacity="0.6" />
+    {/* the custom system: heterogeneous modules fitted together */}
+    <rect className="sys-core" x="120" y="48" width="82" height="54" rx="8" fill="color-mix(in oklab,var(--accent) 12%,transparent)" stroke={stroke} />
+    <rect x="127" y="55" width="30" height="18" rx="3" stroke={faint} />
+    <rect x="161" y="55" width="34" height="18" rx="3" stroke={faint} />
+    <rect x="127" y="77" width="44" height="18" rx="3" stroke={faint} />
+    <rect x="175" y="77" width="20" height="18" rx="3" stroke={stroke} strokeOpacity="0.6" />
+    {/* ship to production */}
+    <path className="flow" d="M202 75H260" stroke={stroke} strokeOpacity="0.6" />
+    <path d="M260 75l-7-4M260 75l-7 4" stroke={stroke} />
+    <circle cx="286" cy="75" r="15" fill="color-mix(in oklab,var(--surface) 80%,transparent)" stroke={stroke} />
+    <path className="sys-check" d="M278 75l6 6 10-12" stroke={stroke} />
+    {/* labels */}
+    <text x="43" y="146" {...lbl}>REQUIREMENTS</text>
+    <text x="161" y="118" {...lbl}>CUSTOM SYSTEM</text>
+    <text x="286" y="103" {...lbl}>PRODUCTION</text>
   </svg>
 );
 
-// Mini diagrams for the wide cards' bottom strip. Same gold-line idiom, tiny.
-const mini = (children: ReactNode) => (
-  <svg viewBox="0 0 100 60" fill="none" className="viz-mini h-full w-full" aria-hidden="true">
+// Mini diagrams for the wide cards' right column. Same gold-line idiom, tiny,
+// and each one idle-animates (see the .m-* rules in globals.css): the class on
+// the svg drives which parts move.
+const mini = (cls: string, children: ReactNode) => (
+  <svg viewBox="0 0 100 60" fill="none" className={`viz-mini ${cls} h-full w-full`} aria-hidden="true">
     {children}
   </svg>
 );
+// Web: a globe with a marker travelling the equator.
 const MiniBrowser = mini(
+  "m-web",
   <>
-    <rect x="8" y="10" width="84" height="42" rx="6" stroke={faint} />
-    <path d="M8 22h84" stroke={faint} />
-    <circle cx="16" cy="16" r="2" fill={stroke} />
-    <circle cx="23" cy="16" r="2" fill={faint} />
-    <path d="M18 45l11-11 8 6 13-15" stroke={stroke} strokeOpacity="0.7" />
+    <circle cx="50" cy="30" r="19" stroke={faint} />
+    <ellipse cx="50" cy="30" rx="8" ry="19" stroke={faint} />
+    <path d="M31 30h38" stroke={faint} />
+    <path d="M35 20h30M35 40h30" stroke={faint} />
+    <circle className="web-dot" cx="31" cy="30" r="2.5" fill={stroke} />
   </>,
 );
+// Mobile: content lines type in.
 const MiniMobile = mini(
+  "m-mobile",
   <>
     <rect x="36" y="8" width="28" height="46" rx="5" stroke={faint} />
     <path d="M45 12h10" stroke={faint} />
@@ -98,16 +139,26 @@ const MiniMobile = mini(
     <path d="M42 36h16M42 42h11" stroke={faint} />
   </>,
 );
+// API: a data packet travels between the brackets.
 const MiniApi = mini(
-  <path d="M40 20 28 30l12 10M60 20l12 10-12 10M53 18l-6 24" stroke={stroke} strokeOpacity="0.7" />,
-);
-const MiniDatabase = mini(
+  "m-api",
   <>
-    <ellipse cx="50" cy="16" rx="20" ry="6" stroke={stroke} strokeOpacity="0.7" />
-    <path d="M30 16v12c0 3.3 9 6 20 6s20-2.7 20-6V16M30 28v12c0 3.3 9 6 20 6s20-2.7 20-6V28" stroke={faint} />
+    <path d="M40 20 28 30l12 10M60 20l12 10-12 10" stroke={stroke} strokeOpacity="0.7" />
+    <circle className="api-dot" cx="42" cy="30" r="2.5" fill={stroke} />
   </>,
 );
+// Stores: the cylinder rings fall in one by one.
+const MiniDatabase = mini(
+  "m-store",
+  <>
+    <ellipse cx="50" cy="16" rx="20" ry="6" stroke={stroke} strokeOpacity="0.7" />
+    <path d="M30 16v12c0 3.3 9 6 20 6s20-2.7 20-6V16" stroke={faint} />
+    <path d="M30 28v12c0 3.3 9 6 20 6s20-2.7 20-6V28" stroke={faint} />
+  </>,
+);
+// Vectors: the grid twinkles, the lit vector pulses.
 const MiniVectors = mini(
+  "m-vec",
   <>
     {[0, 1, 2, 3].map((c) =>
       [0, 1, 2].map((r) => (
@@ -116,7 +167,9 @@ const MiniVectors = mini(
     )}
   </>,
 );
+// Pipelines: the signal flows along the line.
 const MiniPipeline = mini(
+  "m-pipe",
   <>
     <circle cx="20" cy="30" r="5" stroke={stroke} />
     <circle cx="50" cy="30" r="5" stroke={faint} />
@@ -124,7 +177,9 @@ const MiniPipeline = mini(
     <path d="M25 30h20M55 30h20" stroke={stroke} strokeOpacity="0.6" />
   </>,
 );
+// Dashboards: the bars rise and the trend line draws.
 const MiniDashboard = mini(
+  "m-dash",
   <>
     <rect x="10" y="12" width="80" height="38" rx="5" stroke={faint} />
     <path d="M10 24h80" stroke={faint} />
@@ -134,13 +189,17 @@ const MiniDashboard = mini(
     <path d="M58 40l8-8 6 5 10-12" stroke={stroke} strokeOpacity="0.7" />
   </>,
 );
+// MVP: the launch ring pulses out.
 const MiniMvp = mini(
+  "m-mvp",
   <>
     <circle cx="50" cy="30" r="16" stroke={stroke} strokeOpacity="0.7" />
     <path d="M45 22l15 8-15 8z" fill={stroke} fillOpacity="0.6" />
   </>,
 );
+// Monitoring: the trace scrolls across.
 const MiniMonitor = mini(
+  "m-mon",
   <>
     <rect x="10" y="14" width="80" height="34" rx="5" stroke={faint} />
     <path d="M14 33h13l6-11 8 20 6-13 5 4h29" stroke={stroke} strokeOpacity="0.7" />
