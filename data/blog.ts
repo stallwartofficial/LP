@@ -13,6 +13,17 @@
 
 export type PostKind = "case-study" | "article";
 
+// Blog taxonomy. Four pillar categories map to the four engineering pillars; a
+// cross-cutting "Commercial" category holds buyer/decision content that is not
+// pillar-specific. Case studies are tagged via `kind`, not a category, so a case
+// study carries BOTH a category and the Case Study tag.
+export type BlogCategory =
+  | "AI Production Engineering"
+  | "AI Agents & Automation"
+  | "AI Governance & Compliance"
+  | "AI Infrastructure & RAG"
+  | "Commercial";
+
 export type QaBlock = {
   question: string;
   answer: string;
@@ -53,6 +64,9 @@ export type BlogPost = {
   metrics?: { label: string; value: string }[];
   /** Declarative Q&A. Rendered on page and emitted as FAQPage schema. */
   qa: QaBlock[];
+  /** Taxonomy category. Assigned via CATEGORY below (kept out of the raw
+   *  objects so the mapping lives in one place), so every live post has one. */
+  category?: BlogCategory;
 };
 
 const rawBlogPosts: BlogPost[] = [
@@ -2089,12 +2103,51 @@ const REDIRECTED = new Set<string>([
   "what-custom-ai-development-costs-fixed-price-per-phase",
 ]);
 
+// Category per slug (Phase 6). Case studies keep their `kind: "case-study"`
+// tag AND a category. "Commercial" is the cross-cutting bucket for cost /
+// build-vs-buy / vendor-choice content.
+const CATEGORY: Record<string, BlogCategory> = {
+  // AI Production Engineering
+  "why-ai-pilots-dont-reach-production": "AI Production Engineering",
+  "ai-production-readiness-checklist": "AI Production Engineering",
+  "adding-ai-to-your-product": "AI Production Engineering",
+  "ai-workflow-that-actually-shipped": "AI Production Engineering",
+  // AI Agents & Automation
+  "ai-sdr-vs-human-sdr-when-each-wins": "AI Agents & Automation",
+  "outbound-is-a-research-problem": "AI Agents & Automation",
+  "founder-outbound-without-hiring-an-sdr": "AI Agents & Automation",
+  "ai-outbound-for-regulated-industries": "AI Agents & Automation",
+  "saas-outbound-booked-meetings-case-study": "AI Agents & Automation",
+  "agency-pipeline-case-study": "AI Agents & Automation",
+  "small-team-follow-up-case-study": "AI Agents & Automation",
+  // AI Governance & Compliance
+  "ai-governance-before-the-audit": "AI Governance & Compliance",
+  "iso-42001-readiness-checklist-ai-management-system": "AI Governance & Compliance",
+  "eu-ai-act-compliance-obligations-by-risk-tier": "AI Governance & Compliance",
+  "passed-first-ai-governance-audit": "AI Governance & Compliance",
+  // Commercial (cross-cutting)
+  "how-much-does-custom-ai-development-cost": "Commercial",
+  "custom-ai-development-vs-in-house-team": "Commercial",
+  "best-ai-engineering-companies-for-startups": "Commercial",
+  "build-vs-buy-ai-custom-development-vs-off-the-shelf": "Commercial",
+};
+
 export const blogPosts: BlogPost[] = rawBlogPosts
   .filter((p) => !REDIRECTED.has(p.slug))
   .map((p) => ({
     ...p,
     readingMinutes: estimateReadingMinutes(p),
+    category: CATEGORY[p.slug] ?? "Commercial",
   }));
+
+/** The taxonomy, in display order, for any category UI or filtering. */
+export const blogCategories: BlogCategory[] = [
+  "AI Production Engineering",
+  "AI Agents & Automation",
+  "AI Governance & Compliance",
+  "AI Infrastructure & RAG",
+  "Commercial",
+];
 
 export function getBlogPost(slug: string) {
   return blogPosts.find((p) => p.slug === slug);
