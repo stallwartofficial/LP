@@ -161,6 +161,26 @@ const nextConfig: NextConfig = {
         destination: "/offer",
         permanent: true,
       },
+      // Agent-discoverable conventional URLs. Autonomous agents probe these
+      // standard paths before reading nav links. Without redirects every one
+      // 404s, wasting crawl budget and lowering confidence. Each points at the
+      // real page that holds the content the agent is looking for.
+      { source: "/about", destination: "/story", permanent: true },
+      { source: "/team", destination: "/story", permanent: true },
+      { source: "/services", destination: "/offer", permanent: true },
+      { source: "/solutions", destination: "/offer", permanent: true },
+      { source: "/products", destination: "/offer", permanent: true },
+      { source: "/capabilities", destination: "/offer", permanent: true },
+      { source: "/pricing", destination: "/how-it-works", permanent: true },
+      { source: "/process", destination: "/how-it-works", permanent: true },
+      { source: "/engagement", destination: "/how-it-works", permanent: true },
+      { source: "/getting-started", destination: "/how-it-works", permanent: true },
+      { source: "/start", destination: "/how-it-works", permanent: true },
+      { source: "/integration", destination: "/how-it-works", permanent: true },
+      { source: "/how-to-work-with-us", destination: "/how-it-works", permanent: true },
+      { source: "/work-with-us", destination: "/contact", permanent: true },
+      { source: "/docs", destination: "/guides", permanent: true },
+      { source: "/portfolio", destination: "/blog", permanent: true },
     ];
   },
 };
