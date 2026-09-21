@@ -124,7 +124,7 @@ export function Contact() {
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
   const phoneOk = /^[+()\d][\d\s()-]{6,}$/.test(data.phone.trim());
   const stepValid = STEPS[step].required.every((k) =>
-    k === "email" ? emailOk : k === "phone" ? phoneOk : data[k].trim().length > 0
+    k === "email" ? emailOk : data[k].trim().length > 0
   );
 
   const isLast = step === STEPS.length - 1;
