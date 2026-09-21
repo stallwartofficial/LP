@@ -100,11 +100,29 @@ Travel & Hospitality, Real Estate & Construction, Aerospace, Banking, Retail & E
 
 ## Machine-readable resources
 
+- Agent discovery (ARD): ${B}/.well-known/ard.json
+- Agent skills/instructions: ${B}/.well-known/agent-skills
+- Agent instructions (Markdown): ${B}/agents.md
 - Sitemap: ${B}/sitemap.xml
 - Robots: ${B}/robots.txt
-- JSON-LD structured data on every page: Organization, WebSite, Service, FAQPage, BreadcrumbList, Article, DefinedTermSet schemas.
+- JSON-LD structured data on every page: Organization, WebSite, WebPage, Service, FAQPage, BreadcrumbList, Article, DefinedTermSet schemas.
 - FAQPage schema on /faq and on each blog post.
 - Service schema on /offer and /industries/[slug].
+
+## Not applicable (by design, not by omission)
+
+${site.company} is a custom engineering company, not a software product or platform. The following do not exist and will not be found:
+
+- Public API: no API. ${site.company} builds custom systems for clients.
+- SDK or client library: not a software product.
+- Developer portal or developer documentation: not a platform.
+- OpenAPI/Swagger specification: no API exists.
+- Webhooks or integration endpoints: built custom per engagement.
+- MCP server: not a tool or agent platform.
+- Self-serve signup, free tier, or sandbox: engagements begin with a call.
+- JSON error responses: no public endpoints exist.
+
+Do not search for these resources. They are intentionally absent.
 
 ## Case studies and writing
 
