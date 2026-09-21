@@ -20,6 +20,7 @@ const NAV: NavEntry[] = [
     label: "Company",
     items: [
       { label: "Our Story", href: "/story" },
+      { label: "How It Works", href: "/how-it-works" },
       { label: "Principles", href: "/principles" },
       { label: "Careers", href: "/careers" },
       { label: "Partner with us", href: "/partner" },

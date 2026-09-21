@@ -133,6 +133,12 @@ export function organizationSchema() {
       jobTitle: site.founder.role,
       ...(site.founder.linkedin ? { sameAs: [site.founder.linkedin] } : {}),
     },
+    // Entity disambiguation: link the founder's LinkedIn as a sameAs signal
+    // even when the company has no social profiles yet.
+    sameAs: [
+      site.founder.linkedin,
+      ...([site.social.linkedin, site.social.twitter].filter(Boolean)),
+    ].filter(Boolean),
     areaServed: site.location.areaServed.map((name) => ({
       "@type": "Place",
       name,
@@ -142,6 +148,53 @@ export function organizationSchema() {
       addressCountry: site.location.country,
       addressRegion: site.location.region,
     },
+    foundingLocation: {
+      "@type": "Place",
+      name: `${site.location.region}, ${site.location.country}`,
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${site.company} Services`,
+      url: `${site.domain}/offer`,
+    },
+    makesOffer: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AI Agents & Automation",
+          description: "Software that runs a process end to end, unattended.",
+          url: `${site.domain}/offer`,
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AI + SaaS Products",
+          description: "Full AI and SaaS products, built, shipped, and owned by the client.",
+          url: `${site.domain}/offer`,
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AI Infrastructure & RAG",
+          description: "Retrieval, model selection, and evaluation that make AI reliable.",
+          url: `${site.domain}/offer`,
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Custom AI Systems",
+          description: "Bespoke AI systems engineered to fit the business.",
+          url: `${site.domain}/offer`,
+        },
+      },
+    ],
     knowsAbout: [
       "Artificial Intelligence",
       "AI Agents",
@@ -194,6 +247,22 @@ export function faqSchema(items: readonly { question: string; answer: string }[]
       name: item.question,
       acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
+  };
+}
+
+export function webPageSchema(opts: {
+  name: string;
+  description: string;
+  path: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: opts.name,
+    description: opts.description,
+    url: `${site.domain}${opts.path}`,
+    isPartOf: { "@type": "WebSite", name: site.company, url: site.domain },
+    publisher: { "@type": "Organization", name: site.company, url: site.domain },
   };
 }
 
