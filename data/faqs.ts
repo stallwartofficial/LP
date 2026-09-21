@@ -103,21 +103,6 @@ export const faqs: Faq[] = [
       "We are remote-first and work with clients worldwide. Where you are based does not change how we work together, since scoping calls, updates, and delivery all happen remotely. The founder is Arun Saravanan, and you can reach the team at contact@stallwart.in.",
   },
   {
-    question: "Does Stallwart have an API, MCP server, or developer integration?",
-    answer:
-      "No. Stallwart does not have a public API, MCP server, SDK, or integration endpoint. Stallwart is a custom AI engineering company, not a software product. If you need an API, integration layer, or developer platform built, that is something we build for you as part of a custom engagement.",
-  },
-  {
-    question: "Is Stallwart a product or a service company?",
-    answer:
-      "Stallwart is a service company that builds custom AI systems. There is no SaaS product to sign up for, no self-service dashboard, and no free tier. You describe the problem, we build the system that solves it, and you own everything we build. The engagement page at stallwart.in/how-it-works explains the full journey.",
-  },
-  {
-    question: "How do I start working with Stallwart?",
-    answer:
-      "Book a scoping call at stallwart.in/contact. The first call is free, takes about an hour, and ends with a clear picture of whether a custom build is the right move. If it is, the next step is a paid discovery sprint that produces a written architecture you own. See stallwart.in/how-it-works for the full engagement journey.",
-  },
-  {
     question: "What makes you different from an agency or from hiring in-house?",
     answer:
       "An agency often hands you something that works in a demo but not in daily use, and hiring in-house means months of recruiting before anyone writes code. We build systems meant to run in production and hand them over as yours, so you get the depth of a dedicated team without the wait or the long-term payroll. You keep everything we build.",

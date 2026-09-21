@@ -24,7 +24,7 @@ const INTERESTS = [
 // Three short steps convert better than one long form: each screen asks for one
 // coherent group, so the reader is never staring at a wall of fields.
 const STEPS = [
-  { id: "you", title: "You", required: ["name", "email"] as const },
+  { id: "you", title: "You", required: ["name", "email", "phone"] as const },
   { id: "company", title: "Company", required: ["company"] as const },
   { id: "problem", title: "The problem", required: [] as const },
 ] as const;
@@ -219,7 +219,7 @@ export function Contact() {
             <p className="eyebrow">What to expect</p>
             <ul className="mt-5 space-y-4">
               {[
-                "A response within one hour during business hours, from a person.",
+                "One reply from a real person, not a drip sequence.",
                 "A conversation about the actual problem, not a canned pitch.",
                 "A scoped, honest recommendation, including if off-the-shelf already solves it.",
                 "Someone who can answer technical questions on the spot, not route them.",
@@ -238,24 +238,8 @@ export function Contact() {
             </ul>
           </div>
 
-          <div className="rule-t mt-8 pt-8">
-            <p className="eyebrow">On the first call</p>
-            <p className="mt-4 text-sm leading-relaxed text-[var(--fg)]/70">
-              The first call takes about an hour. You describe the problem, we
-              ask questions, and you leave with a clear picture of whether a
-              custom build is the right move. No deck, no proposal, no
-              obligation.
-            </p>
-            <Link
-              href="/how-it-works"
-              className="link-draw mt-3 inline-block text-sm font-medium text-[var(--accent-text)]"
-            >
-              See the full engagement journey
-            </Link>
-          </div>
-
           {site.contact.email && (
-            <div className="rule-t mt-8 hidden pt-8 lg:block">
+            <div className="rule-t mt-10 hidden pt-8 lg:block">
               <p className="eyebrow">Direct</p>
               <a
                 href={`mailto:${site.contact.email}`}
@@ -330,7 +314,7 @@ export function Contact() {
                       )}
                     </div>
                     <div>
-                      <label htmlFor="phone" className={labelClass}>Phone <span className="font-normal text-[var(--fg)]/50">(optional)</span></label>
+                      <label htmlFor="phone" className={labelClass}>Phone</label>
                       <div className="mt-2">
                         <PhoneField
                           value={data.phone}

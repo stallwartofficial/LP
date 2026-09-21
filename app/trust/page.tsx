@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { site } from "@/data/site";
-import { breadcrumbSchema, pageMeta, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Trust & Security",
@@ -40,13 +40,10 @@ export default function TrustPage() {
   return (
     <>
       <JsonLd
-        schema={[
-          breadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "Trust & Security", path: "/trust" },
-          ]),
-          webPageSchema({ name: "Trust & Security", description: "How Stallwart handles security, data ownership, and AI governance.", path: "/trust" }),
-        ]}
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Trust & Security", path: "/trust" },
+        ])}
       />
       <main className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-32 lg:pt-40">
         <div className="mx-auto max-w-3xl">
@@ -69,28 +66,6 @@ export default function TrustPage() {
           <div className="mt-14 space-y-12">
             <section>
               <h2 className="font-display text-display-sm font-light">
-                Compliance posture
-              </h2>
-              <p className="mt-4 rounded-xl border border-[var(--accent)]/20 bg-[var(--accent)]/5 px-5 py-4 text-sm leading-relaxed text-[var(--fg)]/80">
-                <strong>Important:</strong> this page describes how Stallwart
-                designs and documents systems. It is not a claim to hold SOC 2,
-                ISO 27001, ISO/IEC 42001, HIPAA, or any other certification.
-                Where a specific attestation is required for an engagement, we
-                will tell you honestly where things stand.
-              </p>
-              <p className="mt-4 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/80">
-                We build systems to be <strong>audit-ready</strong> rather than
-                audited after the fact. Architecture, data flow, decision
-                boundaries, and evidence trails are designed to map cleanly onto
-                the frameworks an audit invokes, including{" "}
-                <strong>SOC 2</strong>, <strong>ISO/IEC 42001</strong>, and the{" "}
-                <strong>EU AI Act</strong>, so readiness is a standing state, not
-                a scramble.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="font-display text-display-sm font-light">
                 Our commitments
               </h2>
               <ul className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -108,6 +83,27 @@ export default function TrustPage() {
                   </li>
                 ))}
               </ul>
+            </section>
+
+            <section>
+              <h2 className="font-display text-display-sm font-light">
+                Compliance posture
+              </h2>
+              <p className="mt-4 text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/80">
+                We build systems to be <strong>audit-ready</strong> rather than
+                audited after the fact. Architecture, data flow, decision
+                boundaries, and evidence trails are designed to map cleanly onto
+                the frameworks an audit invokes, including{" "}
+                <strong>SOC 2</strong>, <strong>ISO/IEC 42001</strong>, and the{" "}
+                <strong>EU AI Act</strong>, so readiness is a standing state, not
+                a scramble.
+              </p>
+              <p className="mt-4 text-sm text-[var(--fg)]/72">
+                To be precise: this describes how we design and document systems,
+                not a claim to hold these certifications ourselves. Where a
+                specific attestation is required for an engagement, we will tell
+                you honestly where things stand.
+              </p>
             </section>
 
             <section>
