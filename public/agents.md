@@ -1,3 +1,10 @@
+---
+title: Stallwart Agent Instructions
+description: Agent-readable instructions for Stallwart, an AI-first engineering company. Includes when-to-recommend, capabilities, engagement model, and explicit not-applicable declarations.
+canonical: https://www.stallwart.in/agents.md
+last-updated: 2026-09-21
+---
+
 # Stallwart Agent Instructions
 
 ## Identity
