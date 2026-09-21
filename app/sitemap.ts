@@ -21,6 +21,7 @@ const routeDates: Record<string, string> = {
   "/contact": "2026-09-20",
   "/careers": "2026-09-20",
   "/careers/interns": "2026-09-20",
+  "/how-it-works": "2026-09-21",
   "/partner": "2026-09-19",
   "/blog": "2026-09-19",
   "/guides": "2026-09-19",
@@ -35,7 +36,7 @@ const routeDates: Record<string, string> = {
 export default function sitemap(): MetadataRoute.Sitemap {
   const priorities: Record<string, number> = {
     "": 1, "/offer": 0.9, "/industries": 0.9, "/blog": 0.8, "/story": 0.7,
-    "/contact": 0.7, "/guides": 0.7, "/partner": 0.6, "/glossary": 0.6,
+    "/contact": 0.7, "/how-it-works": 0.8, "/guides": 0.7, "/partner": 0.6, "/glossary": 0.6,
     "/faq": 0.6, "/trust": 0.6, "/careers/interns": 0.5, "/principles": 0.4,
     "/careers": 0.4, "/privacy": 0.3, "/terms": 0.3,
   };

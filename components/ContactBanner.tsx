@@ -36,7 +36,7 @@ export function ContactBanner() {
           Bring the idea. One conversation, and we start building.
         </p>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/contact"
             className="group relative overflow-hidden rounded-full bg-[var(--color-gold-bright)] px-8 py-4 text-sm font-medium text-[var(--color-ink)]"
@@ -46,6 +46,12 @@ export function ContactBanner() {
               className="absolute inset-0 -translate-x-full bg-[var(--color-cream)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
             />
             <span className="relative">{site.cta.primary}</span>
+          </Link>
+          <Link
+            href="/how-it-works"
+            className="rounded-full border border-[var(--color-cream)]/25 px-6 py-3.5 text-sm font-medium text-[var(--color-cream)]/80 transition-colors hover:border-[var(--color-cream)]/50 hover:text-[var(--color-cream)]"
+          >
+            See how it works
           </Link>
         </div>
       </div>

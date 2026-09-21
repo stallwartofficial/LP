@@ -8,7 +8,7 @@ import { Engagement } from "@/components/Engagement";
 import { Faq } from "@/components/Faq";
 import { ContactBanner } from "@/components/ContactBanner";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbSchema, serviceSchema, industriesSchema, pageMeta } from "@/lib/seo";
+import { breadcrumbSchema, serviceSchema, industriesSchema, pageMeta, webPageSchema } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "AI Agents, SaaS & Custom AI Systems",
@@ -31,6 +31,7 @@ export default function OfferPage() {
             { name: "Home", path: "/" },
             { name: "What We Build", path: "/offer" },
           ]),
+          webPageSchema({ name: "What We Build", description: "Stallwart builds AI agents, SaaS products, RAG infrastructure, and custom AI systems, engineered to production.", path: "/offer" }),
         ]}
       />
       <ServiceCatalog />
