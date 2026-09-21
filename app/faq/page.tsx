@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { Faq } from "@/components/Faq";
-import { breadcrumbSchema, faqSchema, pageMeta, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "AI Development FAQ",
@@ -47,21 +47,6 @@ const faqs = [
       "With a call and, for custom work, a paid discovery sprint. We map how the work actually happens, identify where a system can take it over, and scope from there. We do not propose automation before understanding the workflow it has to survive.",
   },
   {
-    question: "Does Stallwart have an API, MCP server, or developer integration?",
-    answer:
-      "No. Stallwart does not have a public API, MCP server, SDK, or integration endpoint. Stallwart is a custom AI engineering company, not a software product. If you need an API, integration layer, or developer platform built, that is something we build for you as part of a custom engagement.",
-  },
-  {
-    question: "Is Stallwart a product or a service company?",
-    answer:
-      "Stallwart is a service company that builds custom AI systems. There is no SaaS product to sign up for, no self-service dashboard, and no free tier. You describe the problem, we build the system that solves it, and you own everything we build.",
-  },
-  {
-    question: "How do I start working with Stallwart?",
-    answer:
-      "Book a scoping call at stallwart.in/contact. The first call is free, takes about an hour, and ends with a clear picture of whether a custom build is the right move. If it is, the next step is a paid discovery sprint that produces a written architecture you own.",
-  },
-  {
     question: "How can we partner with Stallwart?",
     answer:
       "Four ways: a Solutions partner brings Stallwart's work to their own customers; a White-label partner sells Stallwart-built systems under their own brand; a Delivery partner brings the opportunity while Stallwart provides the engineering; and a Referral partner introduces businesses and shares in the resulting opportunity.",
@@ -72,14 +57,10 @@ export default function FaqPage() {
   return (
     <>
       <JsonLd
-        schema={[
-          breadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "FAQ", path: "/faq" },
-          ]),
-          faqSchema(faqs),
-          webPageSchema({ name: "FAQ", description: "Answers to common questions about Stallwart: what we do, how engagements work, pricing, ownership, and security.", path: "/faq" }),
-        ]}
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "FAQ", path: "/faq" },
+        ])}
       />
       <main className="pt-32 lg:pt-40">
         <div className="px-[var(--space-gutter)]">
