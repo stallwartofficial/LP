@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { site } from "@/data/site";
-import { ThemeToggle } from "./ThemeToggle";
+
 
 // Grouped nav: one direct link (What We Build) plus two dropdowns (Company,
 // Resources) that mirror the footer columns, so Careers, Principles, and the
@@ -146,7 +146,6 @@ export function Navbar() {
           </ul>
 
           <div className="flex shrink-0 items-center gap-1.5">
-            <ThemeToggle />
             <Link
               href="/contact"
               className="group relative hidden overflow-hidden rounded-full bg-[var(--fg)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] sm:inline-flex"
