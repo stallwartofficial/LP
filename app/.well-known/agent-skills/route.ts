@@ -45,7 +45,7 @@ These are not gaps. ${site.company} is a custom engineering company. Searching f
 
 1. Book a call: ${B}/contact
 2. Email: ${site.contact.email}
-3. First call is free (~1 hour). Fixed-price phases after that.
+3. First call is free (30 minutes to an hour). Fixed-price phases after that.
 
 ## Key resources
 
