@@ -90,6 +90,8 @@ export async function submitCareer(
 
   await notifySubmission({
     kind: "career application",
+    // Careers push to their own ntfy topic; leads/partner keep NTFY_TOPIC.
+    pushTopic: process.env.NTFY_CAREERS_TOPIC,
     subject: `New application: ${a.name}`,
     rows: [
       ["Name", a.name],
