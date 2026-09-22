@@ -10,6 +10,9 @@
 //   LEAD_NOTIFY_EMAILS    comma-separated team recipients
 //   CALLMEBOT_RECIPIENTS  comma-separated "phone:apikey" pairs (one per person)
 //   NTFY_TOPIC            ntfy.sh topic to push to (no spaces), e.g. "Stallwart-leads"
+//   NTFY_CAREERS_TOPIC    separate ntfy topic for careers applications; the
+//                         careers form passes it as `pushTopic`. Falls back to
+//                         NTFY_TOPIC when unset.
 
 type Row = [label: string, value: string];
 
@@ -24,12 +27,15 @@ export async function notifySubmission(opts: {
   // custom template, or just `body` for the default wrapper.
   ack?: { to: string; name: string; body?: string; subject?: string; html?: string };
   attachments?: Attachment[]; // e.g. a resume, attached to the team email
+  // Override the ntfy topic for this submission (e.g. careers to its own
+  // topic). Falls back to NTFY_TOPIC when empty/unset.
+  pushTopic?: string;
 }) {
   await Promise.allSettled([
     sendTeamEmail(opts.subject, opts.rows, opts.attachments),
     opts.ack ? sendAck(opts.ack) : Promise.resolve(),
     sendWhatsApp(opts.whatsapp),
-    sendPush(opts.subject, opts.whatsapp),
+    sendPush(opts.subject, opts.whatsapp, opts.pushTopic),
   ]);
 }
 
@@ -117,8 +123,8 @@ async function sendWhatsApp(text: string) {
 
 // ntfy.sh push: a plain POST to the topic URL. Best-effort; skips if unset.
 // Title/tag headers must be ASCII, so the body carries the detail.
-async function sendPush(title: string, body: string) {
-  const topic = (process.env.NTFY_TOPIC || "").trim();
+async function sendPush(title: string, body: string, topicOverride?: string) {
+  const topic = (topicOverride || process.env.NTFY_TOPIC || "").trim();
   if (!topic) return;
   try {
     const res = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
