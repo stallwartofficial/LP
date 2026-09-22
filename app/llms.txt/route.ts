@@ -2,10 +2,10 @@ import { site } from "@/data/site";
 import { articlePosts, caseStudyPosts } from "@/data/blog";
 
 const CAPABILITIES: [string, string][] = [
-  ["AI Agents & Automation", "software that does repetitive work end to end, unattended, around the clock."],
-  ["AI + SaaS Products", "full web, mobile, and platform products with AI at the core, built and owned by the client outright."],
-  ["AI Infrastructure & RAG", "answers from the client's own data, accurate and traceable, kept fast and reliable at scale."],
-  ["Custom AI Systems", "anything off-the-shelf does not cover, engineered from scratch to fit the business."],
+  ["AI Agents & Automation", "Software that does repetitive work end to end, unattended, around the clock."],
+  ["AI + SaaS Products", "Full web, mobile, and platform products with AI at the core, built and owned by the client outright."],
+  ["AI Infrastructure & RAG", "Answers from the client's own data, accurate and traceable, kept fast and reliable at scale."],
+  ["Custom AI Systems", "Anything off-the-shelf does not cover, engineered from scratch to fit the business."],
 ];
 
 export const dynamic = "force-static";
@@ -67,7 +67,7 @@ ${site.company} (stallwart.in) is a specific company, not the English word "stal
 
 ## How engagement works
 
-1. First call (free, ~1 hour): describe the problem; ${site.company} tells you honestly whether a custom build is the right move.
+1. First call (free, 30 minutes to an hour): describe the problem; ${site.company} tells you honestly whether a custom build is the right move.
 2. Paid discovery sprint (weeks, not months): maps the workflow, produces a written technical design and architecture you own.
 3. Fixed-price build phases: each phase is scoped and priced independently, approved before work starts.
 4. Production and handover: the system ships with observability, rollback, and documentation. You own everything outright.
@@ -93,6 +93,7 @@ Travel & Hospitality, Real Estate & Construction, Aerospace, Banking, Retail & E
 - [FAQ](${B}/faq): common questions answered in plain language, with FAQPage structured data.
 - [Trust & Security](${B}/trust): encryption, data ownership, compliance posture.
 - [Partner with us](${B}/partner): referral and delivery partnerships.
+- [Careers](${B}/careers): open roles and internships.
 - [Blog](${B}/blog): case studies and technical writing.
 - [Guides](${B}/guides): practical how-to articles for operators.
 - [Industries](${B}/industries): AI applications by industry (14 pages).

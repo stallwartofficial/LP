@@ -16,7 +16,7 @@ const STEPS = [
   {
     n: "01",
     title: "First call",
-    body: "You describe the problem. We listen, ask questions, and tell you honestly whether a custom build is the right move or whether something off the shelf already solves it. No pitch deck, no proposal. One hour, and you leave knowing the shape of the engagement or knowing it is not the right fit.",
+    body: "You describe the problem. We listen, ask questions, and tell you honestly whether a custom build is the right move or whether something off the shelf already solves it. No pitch deck, no proposal. Thirty minutes to an hour, and you leave knowing the shape of the engagement or knowing it is not the right fit.",
     outcome: "A clear yes, no, or 'here is what to try first.'",
   },
   {
@@ -132,9 +132,9 @@ export default function HowItWorksPage() {
               Ready to start?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-[var(--fg)]/70">
-              The first call is free, takes about an hour, and ends with a
-              clear answer: whether a custom build is the right move for your
-              problem or whether something else solves it.
+              The first call is free, takes 30 minutes to an hour depending
+              on the problem, and ends with a clear answer: whether a custom
+              build is the right move or whether something else solves it.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link

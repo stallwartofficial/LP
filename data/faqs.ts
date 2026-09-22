@@ -46,6 +46,16 @@ export const faqCategories: FaqCategory[] = [
         answer:
           "No. Stallwart does not have a public API, MCP server, SDK, or integration endpoint. Stallwart is a custom AI engineering company, not a software product. If you need an API, integration layer, or developer platform built, that is something we build for you as part of a custom engagement.",
       },
+      {
+        question: "How many businesses has Stallwart worked with?",
+        answer:
+          "Over 30 businesses so far, across banking, fintech, healthcare, retail, logistics, education, and more. More than 10 of those have come back to build again, which we take as the most honest measure of whether the work holds up.",
+      },
+      {
+        question: "How big is the Stallwart team?",
+        answer:
+          "We are a small, focused engineering team. Every project is handled by senior engineers who build the system themselves rather than delegating to junior staff. You work directly with the people writing the code, not a project manager relaying messages.",
+      },
     ],
   },
   {
@@ -102,6 +112,21 @@ export const faqCategories: FaqCategory[] = [
         answer:
           "RAG, short for retrieval-augmented generation, is a way of letting an AI answer from your own documents and data instead of only what it was trained on. Before it responds, the system looks up the relevant material from your files and uses that to write the answer. It is what lets an AI reliably answer questions about your business, your policies, or your product.",
       },
+      {
+        question: "What tech stack do you use?",
+        answer:
+          "We pick the stack that fits the problem, not a house favourite. Common choices include Python and TypeScript on the backend, React or Next.js on the frontend, PostgreSQL or vector databases for storage, and whichever cloud provider you already run on. For AI we work across model providers and pick the one that meets your accuracy, latency, and cost requirements.",
+      },
+      {
+        question: "Can you show me examples of what you have built?",
+        answer:
+          "Yes. We publish case studies on our blog that walk through the problem, the approach, and the result. If you want to see something closer to your own situation, ask on the scoping call and we will share relevant examples directly.",
+      },
+      {
+        question: "Do you build mobile apps?",
+        answer:
+          "Yes, when the problem calls for one. We build cross-platform mobile apps alongside the AI systems that power them, so the whole thing ships as one product rather than two disconnected pieces.",
+      },
     ],
   },
   {
@@ -128,6 +153,21 @@ export const faqCategories: FaqCategory[] = [
         answer:
           "Within one hour during business hours. You will hear from a person, not a queue.",
       },
+      {
+        question: "Do you offer support after delivery?",
+        answer:
+          "Yes. After handover we offer a support window to make sure the system runs cleanly in production. Beyond that, many clients come back for new phases or new systems. We do not lock you into a retainer, but we are here when you need us.",
+      },
+      {
+        question: "What does the discovery sprint deliver?",
+        answer:
+          "A written technical design and architecture document that your engineers can interrogate. It maps the workflow the system has to survive, the edge cases, the data sources, and the build plan. You own this document whether or not you continue with us.",
+      },
+      {
+        question: "Do you work on an hourly or project basis?",
+        answer:
+          "Project basis, always. Every phase has a fixed price agreed before work starts. We do not bill by the hour, so you never have to wonder whether a question on a call is costing you money.",
+      },
     ],
   },
   {
@@ -144,6 +184,16 @@ export const faqCategories: FaqCategory[] = [
         answer:
           "Your data is encrypted in transit and at rest, and keys stay on your side. We do not sell your data and we do not use it to train models that are shared with anyone else. We describe the security practices we follow rather than pointing to a certification badge, and we are glad to walk through them before you commit.",
       },
+      {
+        question: "What happens to my data after the project ends?",
+        answer:
+          "Your data stays yours. We do not retain copies after handover. Any credentials, API keys, or access we used during the build are revoked at the end of the engagement. If you want us to delete anything from our side, we will confirm it in writing.",
+      },
+      {
+        question: "Can you sign an NDA before we talk?",
+        answer:
+          "Yes. If you need a mutual NDA in place before the first conversation, send it to contact@stallwart.in and we will review and sign it. We are used to working under confidentiality and it does not slow anything down.",
+      },
     ],
   },
   {
@@ -158,12 +208,22 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How do I start working with Stallwart?",
         answer:
-          "Reach out at contact@stallwart.in or book a scoping call at stallwart.in/contact. The first call is free, takes about an hour, and ends with a clear picture of whether a custom build is the right move. If it is, the next step is a paid discovery sprint that produces a written architecture you own.",
+          "Reach out at contact@stallwart.in or book a scoping call at stallwart.in/contact. The first call is free, takes 30 minutes to an hour depending on the problem, and ends with a clear picture of whether a custom build is the right move. If it is, the next step is a paid discovery sprint that produces a written architecture you own.",
       },
       {
         question: "Do I need to be technical to work with you?",
         answer:
           "No. You need to understand your own business and the problem you want solved. We handle the technical side and explain what we are building in plain language, so you can make decisions without needing to know how any of it works underneath.",
+      },
+      {
+        question: "What should I prepare before the first call?",
+        answer:
+          "Nothing formal. Just be ready to describe the problem you want solved and how the work happens today. If you have documents, screenshots, or examples of the process, bring those along. We will ask the right questions to fill in the rest.",
+      },
+      {
+        question: "How long is the first call?",
+        answer:
+          "Between 30 minutes and an hour, depending on the complexity of what you are trying to solve. By the end you will know whether a custom build is the right move for your problem, or whether something else solves it. There is no obligation and no sales follow-up.",
       },
     ],
   },
