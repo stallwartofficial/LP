@@ -43,8 +43,8 @@ export function CareersForm() {
     if (!form.name.trim()) next.name = "Your name, so we know who we're talking to.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       next.email = "An email we can actually reach you at.";
-    if (form.built.trim().length < 20)
-      next.built = "A couple of sentences is plenty. Tell us the real thing.";
+    if (!form.built.trim())
+      next.built = "Tell us something you've built or worked on, even a line is fine.";
     if (form.linkedin.trim() && !form.linkedin.toLowerCase().includes("linkedin.com"))
       next.linkedin = "That's not a linkedin.com link.";
     if (form.github.trim() && !form.github.toLowerCase().includes("github.com"))

@@ -3,9 +3,6 @@ import { ServiceCatalog } from "@/components/ServiceCatalog";
 import { IndustryExplorer } from "@/components/IndustryExplorer";
 import { Process } from "@/components/Process";
 import { TechStack } from "@/components/TechStack";
-import { Architecture } from "@/components/Architecture";
-import { Engagement } from "@/components/Engagement";
-import { Faq } from "@/components/Faq";
 import { ContactBanner } from "@/components/ContactBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, serviceSchema, industriesSchema, pageMeta, webPageSchema } from "@/lib/seo";
@@ -38,9 +35,6 @@ export default function OfferPage() {
       <IndustryExplorer />
       <Process />
       <TechStack />
-      <Architecture />
-      <Engagement />
-      <Faq heading="Questions, answered" />
       <ContactBanner />
     </div>
   );

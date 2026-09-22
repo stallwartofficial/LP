@@ -3,7 +3,7 @@ import { ProblemSolution } from "@/components/ProblemSolution";
 import { WhatWeBuild } from "@/components/WhatWeBuild";
 import { StoryTeaser } from "@/components/StoryTeaser";
 import { SocialProof } from "@/components/SocialProof";
-import { Commitments } from "@/components/TrustLayer";
+
 import { ContactBanner } from "@/components/ContactBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { webSiteSchema, serviceSchema } from "@/lib/seo";
@@ -27,7 +27,6 @@ export default function Home() {
       <Hero />
       <ProblemSolution />
       <WhatWeBuild />
-      <Commitments />
       <SocialProof />
       <StoryTeaser />
       <ContactBanner />

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
-import { Faq } from "@/components/Faq";
 import { ContactBanner } from "@/components/ContactBanner";
 import { site } from "@/data/site";
-import { breadcrumbSchema, faqSchema, pageMeta, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, pageMeta, webPageSchema } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "How It Works",
@@ -40,32 +39,6 @@ const STEPS = [
   },
 ];
 
-const COMMERCIAL_MODEL = [
-  {
-    q: "What does it cost?",
-    a: "Fixed price per phase, approved before work starts. Scope drives the figure, which is why the first conversation is about the problem, not a rate card. We do not bill hourly and we do not publish a public price list, because honest pricing requires understanding what the system has to do.",
-  },
-  {
-    q: "How long does it take?",
-    a: "Discovery and technical design run in weeks, not months. Build duration depends on scope and is committed at the end of design, not guessed before it. You get a timeline for each phase before it starts.",
-  },
-  {
-    q: "What do I own at the end?",
-    a: "Everything. Source code, infrastructure definitions, runbooks, documentation. There is no lock-in and nothing that only works on our side. You can take it to another team, run it yourself, or extend it without us.",
-  },
-  {
-    q: "Can I walk away after any phase?",
-    a: "Yes. Each phase is scoped and priced independently. After discovery you have a written architecture you can take elsewhere. After any build phase you have working software. There is no contract that binds you to the next phase.",
-  },
-  {
-    q: "What if an off-the-shelf tool already solves my problem?",
-    a: "We will tell you on the first call. We would rather point you to an existing product than build something you do not need. We take on the work where a custom system genuinely outperforms what you can buy.",
-  },
-  {
-    q: "How quickly will you respond?",
-    a: "Within one hour during business hours. You will hear from a person, not a queue.",
-  },
-];
 
 export default function HowItWorksPage() {
   return (
@@ -76,10 +49,6 @@ export default function HowItWorksPage() {
             { name: "Home", path: "/" },
             { name: "How It Works", path: "/how-it-works" },
           ]),
-          faqSchema(COMMERCIAL_MODEL.map((item) => ({
-            question: item.q,
-            answer: item.a,
-          }))),
           webPageSchema({ name: "How It Works", description: "How to work with Stallwart: the engagement journey from first call to production handover.", path: "/how-it-works" }),
         ]}
       />
@@ -105,7 +74,7 @@ export default function HowItWorksPage() {
                 key={step.n}
                 className={`grid gap-6 py-10 sm:grid-cols-[4rem_1fr] ${i > 0 ? "rule-t" : ""}`}
               >
-                <span className="font-mono text-xs tracking-[0.2em] text-[var(--accent-text)]">
+                <span className="font-display text-[3rem] font-light leading-none tracking-[-0.02em] text-[var(--fg)]/15">
                   {step.n}
                 </span>
                 <div>
@@ -155,30 +124,6 @@ export default function HowItWorksPage() {
                 </ul>
               </div>
             </div>
-          </section>
-
-          {/* Commercial model FAQ */}
-          <section className="rule-t mt-14 pt-14">
-            <h2 className="font-display text-display-sm font-light">
-              The questions{" "}
-              <span className="text-gold-sheen italic">every buyer asks.</span>
-            </h2>
-            <p className="mt-4 text-[var(--fg)]/70">
-              Cost, timeline, ownership, and what happens if you change your
-              mind. Answered here so you do not have to book a call to find out.
-            </p>
-            <dl className="mt-10 divide-y divide-[var(--hairline)]">
-              {COMMERCIAL_MODEL.map((item) => (
-                <div key={item.q} className="py-6">
-                  <dt className="font-display text-[length:var(--text-step-1)] font-light leading-tight">
-                    {item.q}
-                  </dt>
-                  <dd className="mt-3 leading-relaxed text-[var(--fg)]/75">
-                    {item.a}
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </section>
 
           {/* Next action */}

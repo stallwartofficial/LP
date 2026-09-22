@@ -320,13 +320,19 @@ export function Contact() {
                   <>
                     <div>
                       <label htmlFor="name" className={labelClass}>Name</label>
-                      <input id="name" type="text" autoComplete="name" placeholder="Jordan Mehta" value={data.name} onChange={(e) => set("name", e.target.value)} className={`field ${fieldClass}`} />
+                      <input id="name" type="text" autoComplete="name" placeholder="Alex Turner" value={data.name} onChange={(e) => set("name", e.target.value)} className={`field ${fieldClass}`} />
+                      {touched && !data.name.trim() && (
+                        <p className="mt-2 text-xs text-red-400/90">We need your name so we know who we&apos;re talking to.</p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="email" className={labelClass}>Work email</label>
-                      <input id="email" type="email" autoComplete="email" placeholder="jordan@company.com" value={data.email} onChange={(e) => set("email", e.target.value)} className={`field ${fieldClass}`} />
+                      <input id="email" type="email" autoComplete="email" placeholder="alex@company.com" value={data.email} onChange={(e) => set("email", e.target.value)} className={`field ${fieldClass}`} />
+                      {touched && !data.email.trim() && (
+                        <p className="mt-2 text-xs text-red-400/90">We need an email to get back to you.</p>
+                      )}
                       {touched && data.email.length > 0 && !emailOk && (
-                        <p className="mt-2 text-xs text-red-500">Enter a valid email address.</p>
+                        <p className="mt-2 text-xs text-red-400/90">That doesn&apos;t look like a valid email. Check for typos.</p>
                       )}
                     </div>
                     <div>
@@ -339,7 +345,7 @@ export function Contact() {
                         />
                       </div>
                       {touched && data.phone.length > 0 && !phoneOk && (
-                        <p className="mt-2 text-xs text-red-500">Enter a valid phone number.</p>
+                        <p className="mt-2 text-xs text-red-400/90">That doesn&apos;t look like a valid phone number.</p>
                       )}
                     </div>
                   </>
@@ -375,8 +381,8 @@ export function Contact() {
 
                 {step === 2 && (
                   <div>
-                    <label htmlFor="message" className={labelClass}>What keeps falling through? <span className="font-normal text-[var(--fg)]/60">(optional)</span></label>
-                    <textarea id="message" rows={6} placeholder="The process that only works because someone remembers it…" value={data.message} onChange={(e) => set("message", e.target.value)} className={`field ${fieldClass}`} />
+                    <label htmlFor="message" className={labelClass}>Describe the problem <span className="font-normal text-[var(--fg)]/60">(optional)</span></label>
+                    <textarea id="message" rows={6} placeholder="What are you trying to solve?" value={data.message} onChange={(e) => set("message", e.target.value)} className={`field ${fieldClass}`} />
                     <p className="mt-3 text-sm text-[var(--fg)]/60">
                       Reviewing for {data.name || "you"}{data.company ? ` at ${data.company}` : ""}. One reply from a person, no drip sequence.
                     </p>

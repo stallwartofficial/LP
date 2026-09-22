@@ -6,7 +6,7 @@ import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "AI Engineering Careers",
   description:
-    "We hire people who build: from first principles, with momentum, obsessed with the customer, in craft with the team. Interns open in Engineering and Business.",
+    "We hire people who build: from first principles, with momentum, obsessed with the customer, in craft with the team. Social Media & Creative Intern open now.",
   path: "/careers",
 });
 
@@ -30,24 +30,14 @@ const principles = [
   },
 ];
 
-// Open roles live here. Add an entry (or flip `open`) and the section + the
-// "N seats open" line update themselves.
-const roles = [
+const internships = [
   {
     slug: "interns",
-    title: "Interns",
-    meta: "Engineering and Business · Internship",
+    title: "Social Media & Creative Intern",
+    meta: "Content & Social · Internship",
     open: true,
   },
 ];
-
-const openRoles = roles.filter((r) => r.open);
-
-function seatsLine(n: number): string {
-  if (n === 0) return "No roles open right now, but we always read a strong application.";
-  if (n === 1) return "One opportunity, open right now. If this is you, we want the application.";
-  return `${n} openings, open right now. If one is you, we want the application.`;
-}
 
 const process = [
   { n: "1", t: "A first conversation", meta: "30 min", d: "We get to know each other and check for real fit. No trick questions." },
@@ -75,7 +65,7 @@ export default function CareersPage() {
               <span className="text-gold-sheen italic">actually work.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-[length:var(--text-step-2)] leading-relaxed text-[var(--fg)]/85">
-              We hire people who can actually build, and build well. Skill comes
+              We hire people who make things happen. Skill comes
               first here. Everything else is secondary.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -88,14 +78,14 @@ export default function CareersPage() {
             </div>
           </section>
 
-          {/* ----------------------------- Open roles ------------------------- */}
-          <section id="roles" className="mt-16 scroll-mt-28">
-            <h2 className="font-display text-display-sm font-light">Open roles</h2>
+          {/* ----------------------------- Internship -------------------------- */}
+          <section id="internship" className="mt-16 scroll-mt-28">
+            <h2 className="font-display text-display-sm font-light">Internship</h2>
             <p className="mt-4 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/70">
-              {seatsLine(openRoles.length)}
+              One opportunity, open right now. If this is you, we want the application.
             </p>
             <div className="mt-8 space-y-4">
-              {openRoles.map((r) => (
+              {internships.filter((r) => r.open).map((r) => (
                 <Link
                   key={r.slug}
                   href={`/careers/${r.slug}`}
@@ -114,6 +104,22 @@ export default function CareersPage() {
                   </div>
                 </Link>
               ))}
+            </div>
+          </section>
+
+          {/* ------------------------- Full-Time Opportunities ---------------- */}
+          <section id="full-time" className="mt-16 scroll-mt-28">
+            <h2 className="font-display text-display-sm font-light">Full-time opportunities</h2>
+            <div className="mt-8 rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6 sm:p-7">
+              <p className="text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/80">
+                We don&apos;t have a full-time opening right now. When we do, you&apos;ll find it here.
+              </p>
+              <p className="mt-3 text-sm text-[var(--fg)]/60">
+                Still want to be on our radar? Send your resume to{" "}
+                <a href="mailto:contact@stallwart.in" className="link-draw text-[var(--accent-text)]">
+                  contact@stallwart.in
+                </a>
+              </p>
             </div>
           </section>
 
