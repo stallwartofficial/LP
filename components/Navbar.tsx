@@ -184,11 +184,7 @@ export function Navbar() {
         hidden={!menuOpen}
         className="pointer-events-auto fixed inset-0 z-40 flex flex-col overflow-y-auto bg-[var(--bg)]/98 px-[var(--space-gutter)] pb-10 pt-6 backdrop-blur-2xl lg:hidden"
       >
-        <div className="flex items-center justify-between">
-          <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5" aria-label={`${site.company}, home`}>
-            <Image src="/images/stallwart-lion-mark.png" alt="Stallwart lion mark" width={218} height={256} sizes="36px" className="logo-bounce h-9 w-auto" />
-            <span className="text-lg font-medium uppercase tracking-[0.16em] font-[family-name:var(--font-wordmark)]">{site.company}</span>
-          </Link>
+        <div className="flex items-center justify-end">
           <button
             type="button"
             onClick={() => setMenuOpen(false)}
