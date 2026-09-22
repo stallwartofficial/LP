@@ -3676,6 +3676,238 @@ const rawBlogPosts: BlogPost[] = [
     }
   ]
 },
+
+  // ── New articles: AI product shipping + pilot with guardrails ──────────
+
+  {
+    slug: "ship-product-with-ai-features-built-in",
+    kind: "article",
+    title: "How to ship a product with AI features built in from day one",
+    excerpt:
+      "Building AI into a new product is not the same as bolting it onto an existing one. This is the build sequence, architecture, and evaluation strategy for founders shipping an AI-native product for the first time.",
+    topic:
+      "ship product with AI features, AI product development, build AI product from scratch, AI-native product architecture, how to build AI into a product, AI product launch, AI features in new product",
+    offering: "ai-saas",
+    publishedAt: "2026-09-22",
+    readingMinutes: 10,
+    sections: [
+      {
+        heading: "Why 'add AI later' is a false economy",
+        paragraphs: [
+          "Teams that defer AI to a future sprint end up rebuilding their data layer, their feedback loops, and often their UX. AI is not a feature toggle. It changes how the product thinks, how errors surface, and what users expect. If AI is central to the value proposition, it belongs in the architecture from sprint one.",
+          "This does not mean you need a model on day one. It means you need the plumbing for one: structured logging, a prompt management layer, an evaluation harness, and a fallback path that lets the product work when the model is wrong or slow."
+        ]
+      },
+      {
+        heading: "The four-layer architecture for AI-native products",
+        paragraphs: [
+          "Every AI-native product we have shipped shares the same four layers. They are not optional abstractions. They are the minimum structure that lets you iterate on the model without rewriting the product.",
+        ],
+        list: [
+          "Data layer: structured inputs, validated and capped before they reach the model. This includes user input, context documents, and any retrieval results. Every input is logged with a correlation ID.",
+          "Orchestration layer: prompt assembly, model routing, timeout handling, and retry logic. This is where you swap models, A/B test prompts, and enforce cost caps. It never touches UI code.",
+          "Evaluation layer: a scored test suite that runs on every prompt or model change. Not unit tests. A set of real inputs with expected outputs, scored by accuracy, latency, and cost. This is what keeps you honest.",
+          "Presentation layer: the UI that consumes model output as data, not as trusted instructions. It handles loading states, confidence indicators, and the 'model is wrong' path. Users should always know when they are looking at AI output."
+        ]
+      },
+      {
+        heading: "Start with the evaluation harness, not the model",
+        paragraphs: [
+          "The first thing to build is not the AI feature. It is the evaluation harness. Collect 50 to 100 real examples of the task the AI will perform. Write the expected output for each. Score them by hand. This becomes your ground truth.",
+          "Now when you plug in a model, you know immediately whether it is good enough. When you change a prompt, you know whether it got better or worse. Without this, every model change is a guess, and you will ship regressions you do not notice until users complain.",
+          "The harness does not need to be sophisticated. A spreadsheet of inputs, expected outputs, and a script that runs them through the model and scores the result is enough to start. Automate it into CI before you ship."
+        ]
+      },
+      {
+        heading: "Choosing your first model",
+        paragraphs: [
+          "Do not start with the most powerful model. Start with the cheapest model that passes your evaluation suite at an acceptable score. You can always upgrade. You cannot easily downgrade once users expect the quality of a frontier model.",
+          "Run your eval suite against three to four models at different price points. Pick the one that clears your accuracy threshold at the lowest cost and latency. Document this decision. You will revisit it every quarter as models improve and prices drop."
+        ]
+      },
+      {
+        heading: "The fallback path is not optional",
+        paragraphs: [
+          "Every AI feature needs a defined behavior for when the model fails: times out, returns garbage, exceeds your cost cap, or is simply wrong. This is not error handling. It is product design.",
+          "The fallback might be a cached previous result, a simpler heuristic, a manual workflow, or a message that says 'we could not generate this, here is what you can do instead.' The worst fallback is silence or a generic error. Design the degraded experience as carefully as the happy path."
+        ]
+      },
+      {
+        heading: "Observability from day one",
+        paragraphs: [
+          "Log every model call with: the input, the output, the model used, latency, token count, cost, and the correlation ID. This is not optional instrumentation you add later. It is the data you need to debug production issues, catch quality drift, and justify the cost of the AI feature to your own team.",
+          "Set alerts on latency spikes, error rate increases, and cost anomalies. If your model provider has an outage, you should know before your users do."
+        ]
+      },
+      {
+        heading: "The build sequence that works",
+        paragraphs: [
+          "Here is the order we use when building AI-native products. It is not the only order, but it avoids the most common rework."
+        ],
+        list: [
+          "Week 1: Collect evaluation examples. Define expected outputs. Build the scoring script.",
+          "Week 2: Build the orchestration layer. Wire up one model. Run evals. Pick the model that passes.",
+          "Week 3: Build the fallback path. Test it by deliberately failing the model. Ship the degraded experience.",
+          "Week 4: Build the presentation layer. Surface confidence. Handle loading states. Connect observability.",
+          "Week 5: Ship to a closed group. Watch the logs. Score real outputs against your eval suite. Iterate.",
+          "Week 6 onward: Widen access. Add prompt variants. A/B test. Continuously evaluate."
+        ]
+      },
+      {
+        heading: "What most teams get wrong",
+        paragraphs: [
+          "The three most common mistakes we see in AI product launches are: starting with the model instead of the evaluation, skipping the fallback path, and treating model output as trusted data in the UI. All three are architecture decisions, not AI decisions. They are fixable, but they are cheaper to get right the first time."
+        ]
+      }
+    ],
+    keyTakeaways: [
+      "Build the evaluation harness before you build the AI feature.",
+      "Use a four-layer architecture: data, orchestration, evaluation, presentation.",
+      "Start with the cheapest model that passes your eval suite.",
+      "Design the fallback experience as carefully as the happy path.",
+      "Log every model call from day one. Observability is not optional.",
+      "Ship to a closed group first. Score real outputs before you widen access."
+    ],
+    qa: [
+      {
+        question: "How do I build AI into a new product from scratch?",
+        answer: "Start with your evaluation harness: collect 50 to 100 real examples of the task the AI will do, define expected outputs, and build a scoring script. Then build your orchestration layer, wire up the cheapest model that passes your evals, design the fallback path for when the model fails, and add observability on every call. Ship to a small group, watch the logs, and iterate before widening access."
+      },
+      {
+        question: "What architecture should an AI-native product use?",
+        answer: "A four-layer architecture works for most AI-native products: a data layer that validates and logs inputs, an orchestration layer that handles prompts and model routing, an evaluation layer with a scored test suite, and a presentation layer that treats model output as data and handles the 'model is wrong' path. This structure lets you swap models and change prompts without rewriting the product."
+      },
+      {
+        question: "Should I use the best AI model for my product?",
+        answer: "No. Start with the cheapest model that passes your evaluation suite at an acceptable accuracy. Run your evals against three to four models at different price points and pick the one that clears your threshold at the lowest cost and latency. You can always upgrade later, but downgrading after users expect frontier-model quality is much harder."
+      },
+      {
+        question: "What happens when the AI feature fails in production?",
+        answer: "Every AI feature needs a defined fallback: a cached result, a simpler heuristic, a manual workflow, or a clear message explaining what happened. The worst fallback is silence or a generic error. Design the degraded experience as part of the product, not as an afterthought."
+      },
+      {
+        question: "How do I evaluate AI quality in a product?",
+        answer: "Build a scored test suite of real inputs with expected outputs. Run it on every prompt or model change. Score by accuracy, latency, and cost. Automate it into your CI pipeline. This is what prevents you from shipping regressions you do not notice until users complain."
+      },
+      {
+        question: "What is the biggest mistake teams make when shipping AI products?",
+        answer: "Starting with the model instead of the evaluation harness. Without a scored eval suite, every prompt change is a guess, and you ship quality regressions without knowing. The second most common mistake is skipping the fallback path, so the product breaks visibly when the model is wrong or slow."
+      }
+    ]
+  },
+
+  {
+    slug: "pilot-with-guardrails-explained",
+    kind: "article",
+    title: "What 'pilot with guardrails' actually means (and why most teams get it wrong)",
+    excerpt:
+      "Every enterprise AI rollout starts with a pilot. Most stall there. 'Pilot with guardrails' is not a vague safety gesture. It is a specific engineering pattern: scoped deployment, hard boundaries, and a decision framework for when to widen or kill.",
+    topic:
+      "pilot with guardrails, AI pilot program, AI guardrails meaning, AI pilot to production, enterprise AI pilot, AI rollout strategy, AI pilot best practices, what are AI guardrails",
+    offering: "ai-systems",
+    publishedAt: "2026-09-22",
+    readingMinutes: 9,
+    sections: [
+      {
+        heading: "The phrase everyone uses and nobody defines",
+        paragraphs: [
+          "'Pilot with guardrails' appears in every enterprise AI strategy deck. It sounds responsible. It sounds measured. And in most organizations, it means nothing specific. The pilot runs for three months, someone presents a slide deck, and leadership asks whether to 'scale it.' Nobody has defined what success looks like, what the guardrails actually prevent, or what triggers the decision to go wider.",
+          "This is why most AI pilots stall. The pilot itself was never the problem. The missing piece is the engineering that turns a time-boxed experiment into a production system with defined boundaries."
+        ]
+      },
+      {
+        heading: "What guardrails actually are",
+        paragraphs: [
+          "Guardrails are not aspirational safety principles. They are hard constraints enforced in code. Each one has a trigger condition, an automated response, and a notification. If you cannot point to the line of code that enforces a guardrail, it is not a guardrail. It is a hope."
+        ],
+        list: [
+          "Input guardrails: validation, sanitization, and rejection of inputs that fall outside the scope the pilot was designed to handle. If the pilot handles English-language support tickets, an input guardrail rejects or flags tickets in other languages rather than letting the model guess.",
+          "Output guardrails: checks on model output before it reaches the user or downstream system. This includes toxicity filters, format validation, confidence thresholds, and business rule checks. If the model suggests a price below your floor, the output guardrail catches it.",
+          "Cost guardrails: hard caps on token spend, API calls per minute, and total cost per day. These are not budgets you review monthly. They are circuit breakers that stop the system before it runs up a bill.",
+          "Scope guardrails: the boundary that defines what the pilot is allowed to do. A pilot that drafts email replies should not also book meetings, even if the model can. Scope guardrails enforce the 'this and only this' contract.",
+          "Human-in-the-loop guardrails: defined points where a human must review, approve, or override before the system acts. Not 'a human can intervene if they notice.' A hard gate: the system waits for approval before proceeding."
+        ]
+      },
+      {
+        heading: "Scoped deployment is not a soft launch",
+        paragraphs: [
+          "A soft launch is 'we turned it on for 10% of users and hope nothing breaks.' A scoped deployment is 'we turned it on for this specific workflow, with these specific users, processing these specific input types, with these hard boundaries, and we are measuring these specific metrics to decide whether to widen.'",
+          "The scope should be narrow enough that you can read every output the system produces for the first week. If you cannot, the scope is too wide. Narrow scope is not timidity. It is the fastest way to build the evidence you need to go wider with confidence."
+        ]
+      },
+      {
+        heading: "The three metrics that matter",
+        paragraphs: [
+          "Most pilot dashboards track too many things and measure none of them well. You need exactly three metrics to make the widen-or-kill decision."
+        ],
+        list: [
+          "Accuracy: what percentage of outputs are correct, measured against human review of a random sample. Not 'user satisfaction.' Not 'engagement.' Did the system produce the right answer? Score this weekly.",
+          "Intervention rate: how often does a human override, correct, or reject the system's output? This is the leading indicator of whether the system is ready to run with less supervision. If the rate is not declining week over week, something is wrong.",
+          "Cost per unit of work: what does it cost to process one ticket, draft one email, or classify one document? This is what you compare against the human cost of the same work. If the AI costs more than the person, the pilot is not working, regardless of accuracy."
+        ]
+      },
+      {
+        heading: "The decision framework: widen, hold, or kill",
+        paragraphs: [
+          "Before the pilot starts, write down the criteria for three outcomes. Not after. Before. This is the contract between the team running the pilot and the leadership funding it."
+        ],
+        list: [
+          "Widen: accuracy above your threshold for three consecutive weeks, intervention rate declining, cost per unit below the human baseline. You expand to the next scope increment (more users, more input types, or less human review).",
+          "Hold: accuracy meets threshold but intervention rate is flat or cost is above baseline. You keep the current scope, investigate the bottleneck, and set a two-week deadline for improvement.",
+          "Kill: accuracy below threshold for two consecutive weeks, or a guardrail fires on a critical failure (the system does something it was never supposed to do). You stop the pilot, diagnose the root cause, and decide whether to restart with a different approach."
+        ]
+      },
+      {
+        heading: "From pilot to production: what changes",
+        paragraphs: [
+          "A pilot that passes the widen criteria is not production-ready. It is evidence that production is worth building. The gap between pilot and production is the engineering work that most teams underestimate.",
+          "Production adds: redundancy and failover, automated evaluation running continuously (not just weekly human review), alerting on quality drift, rollback to the previous version in under five minutes, audit logging for compliance, and load testing at the target scale. None of this existed in the pilot. All of it is required before you remove the human-in-the-loop guardrail."
+        ]
+      },
+      {
+        heading: "Why most teams get it wrong",
+        paragraphs: [
+          "The most common failure mode is not a bad model. It is a pilot with no exit criteria. The team runs the experiment, produces a positive-sounding report, and then the organization debates for months about whether to 'move forward.' Meanwhile, the pilot environment drifts, the champion moves to another project, and the whole thing quietly dies.",
+          "The second most common failure is removing guardrails too early. The pilot hits its accuracy target for one good week, someone declares victory, and the human-in-the-loop gate is removed. Two weeks later, the model encounters an input type it has never seen, produces confidently wrong output, and the damage is done.",
+          "Define the guardrails in code. Define the exit criteria in writing. Make the widen-or-kill decision on a schedule. That is what 'pilot with guardrails' actually means."
+        ]
+      }
+    ],
+    keyTakeaways: [
+      "Guardrails are hard constraints in code, not safety principles in a slide deck.",
+      "Five types of guardrails: input, output, cost, scope, and human-in-the-loop.",
+      "Scoped deployment means a specific workflow, specific users, specific inputs, and specific metrics.",
+      "Track three metrics: accuracy, intervention rate, and cost per unit of work.",
+      "Write the widen, hold, or kill criteria before the pilot starts.",
+      "The gap from pilot to production is engineering work: redundancy, continuous evaluation, alerting, rollback, and audit logging."
+    ],
+    qa: [
+      {
+        question: "What does 'pilot with guardrails' mean in AI?",
+        answer: "It means deploying an AI system to a narrowly scoped group of users and workflows with hard constraints enforced in code: input validation, output checks, cost caps, scope limits, and human approval gates. Each guardrail has a trigger, an automated response, and a notification. The pilot runs against predefined success criteria, and the team decides on a schedule whether to widen, hold, or kill."
+      },
+      {
+        question: "What are AI guardrails?",
+        answer: "AI guardrails are hard constraints enforced in code that prevent an AI system from operating outside its intended boundaries. They include input validation (reject out-of-scope inputs), output checks (filter harmful or incorrect output), cost caps (circuit breakers on spend), scope limits (restrict what the system is allowed to do), and human-in-the-loop gates (require approval before acting). If you cannot point to the code that enforces it, it is not a guardrail."
+      },
+      {
+        question: "How do I run an AI pilot program?",
+        answer: "Define a narrow scope: one workflow, a small user group, and specific input types. Set up guardrails in code for input, output, cost, scope, and human review. Measure three metrics weekly: accuracy against human review, intervention rate, and cost per unit of work. Write your widen, hold, and kill criteria before starting. Make the decision on a fixed schedule, not when someone feels ready."
+      },
+      {
+        question: "How do I know when an AI pilot is ready for production?",
+        answer: "When accuracy is above your threshold for three consecutive weeks, the intervention rate is declining, and cost per unit is below the human baseline. But passing those criteria means the pilot is worth building into production, not that it is production-ready. Production requires additional engineering: redundancy, continuous automated evaluation, quality drift alerts, fast rollback, audit logging, and load testing."
+      },
+      {
+        question: "Why do AI pilots fail to reach production?",
+        answer: "The most common reason is a pilot with no predefined exit criteria. The team runs the experiment, writes a positive report, and the organization debates for months. The second reason is removing guardrails too early after one good week, then encountering inputs the model has never seen. Define exit criteria in writing before you start, and remove guardrails only when the metrics justify it over consecutive weeks."
+      },
+      {
+        question: "What metrics should I track during an AI pilot?",
+        answer: "Three metrics: accuracy (percentage of correct outputs, scored by human review of a random sample), intervention rate (how often humans override or correct the system), and cost per unit of work (compared against the human cost of the same task). If accuracy is high, intervention rate is declining, and cost is below the human baseline, the pilot is working."
+      }
+    ]
+  },
 ];
 
 // Reading time is computed from the actual body, not hand-typed, so it stays
@@ -3723,6 +3955,8 @@ const CATEGORY: Record<string, BlogCategory> = {
   "vector-databases-explained": "AI Infrastructure & RAG",
   "what-is-an-ai-agent-vs-llm": "AI Agents & Automation",
   "prototype-to-production-ai": "AI Production Engineering",
+  "ship-product-with-ai-features-built-in": "AI Production Engineering",
+  "pilot-with-guardrails-explained": "AI Production Engineering",
   // AI Production Engineering
   "why-ai-pilots-dont-reach-production": "AI Production Engineering",
   "ai-production-readiness-checklist": "AI Production Engineering",

@@ -105,9 +105,28 @@ export async function submitCareer(
     ack: {
       to: a.email,
       name: a.name,
-      body: "Thanks for applying to Stallwart. We read every application ourselves and will be in touch if there is a fit.",
+      subject: "We got your application | Stallwart",
+      html: careerAckHtml(a.name, "Social Media & Creative Intern"),
     },
   });
 
   return { ok: true };
+}
+
+function esc(s: string) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function careerAckHtml(name: string, role: string) {
+  const n = esc(name);
+  const r = esc(role);
+  return `<div style="font-family:system-ui,sans-serif;max-width:520px;color:#111;line-height:1.6">
+<p>Hey ${n},</p>
+<p>Thanks for taking the time to apply to Stallwart for the ${r} role.</p>
+<p>We've received your application and the things you shared with us. Someone from our team will take a proper look at your application and get a sense of what you've built, what you've worked on, and what you could bring to the team.</p>
+<p>If we think there's a good fit, we'll reach out to you with the next steps. And yes, a real person will be reading it.</p>
+<p>There's nothing you need to do right now. Go build something, learn something, or chase whatever you're working on next.</p>
+<p>Until then, keep building. Keep learning. Keep growing.</p>
+<p style="margin-top:24px">Team Stallwart<br/><span style="color:#666">Build things that actually work.</span></p>
+</div>`;
 }

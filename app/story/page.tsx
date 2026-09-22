@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Story } from "@/components/Story";
-import { Commitments } from "@/components/TrustLayer";
-import { Architecture } from "@/components/Architecture";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 
@@ -70,8 +68,6 @@ export default function StoryPage() {
         </div>
       </section>
 
-      <Commitments />
-      <Architecture />
     </div>
   );
 }
