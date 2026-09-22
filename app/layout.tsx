@@ -139,11 +139,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         className="min-h-full text-[var(--fg)]"
         suppressHydrationWarning
       >
-        {/* Applies the theme before hydration so there is no flash. Dark is the
-            default unless the visitor explicitly chose light. Uses next/script
-            beforeInteractive (raw <script> in a component is not executed). */}
+        {/* Dark mode only. The class is applied unconditionally before
+            hydration so there is no flash. */}
         <Script id="theme-init" strategy="beforeInteractive">
-          {`(function(){try{var t=localStorage.getItem('theme');if(t!=='light'){document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();`}
+          {`document.documentElement.classList.add('dark');`}
         </Script>
         {/* Nav and footer live here, not per-page: a new route cannot ship
             without them, and there is one import instead of sixteen.
