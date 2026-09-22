@@ -182,22 +182,11 @@ export function Navbar() {
       <div
         id="mobile-nav"
         hidden={!menuOpen}
-        className="pointer-events-auto fixed inset-0 z-40 flex flex-col overflow-y-auto bg-[var(--bg)]/98 px-[var(--space-gutter)] pb-10 pt-6 backdrop-blur-2xl lg:hidden"
+        className="pointer-events-auto fixed inset-0 z-40 flex flex-col overflow-y-auto bg-[var(--bg)]/98 px-[var(--space-gutter)] pb-10 pt-24 backdrop-blur-2xl lg:hidden"
       >
-        <div className="flex items-center justify-end">
-          <button
-            type="button"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--hairline-strong)] text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
-          >
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" className="h-4 w-4">
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          </button>
-        </div>
-
-        <div className="mt-10 flex flex-1 flex-col gap-8">
+        {/* No close button here: the navbar's own toggle (higher z-index)
+            morphs to an X and closes the sheet, so a second one would overlap. */}
+        <div className="mt-4 flex flex-1 flex-col gap-8">
           {NAV.map((entry) =>
             entry.items ? (
               <div key={entry.label}>
