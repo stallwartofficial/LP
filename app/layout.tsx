@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Spectral, IBM_Plex_Sans, IBM_Plex_Mono, Cinzel } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
@@ -119,7 +118,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`h-full antialiased ${spectral.variable} ${plexSans.variable} ${plexMono.variable} ${cinzel.variable}`}
+      className={`dark h-full antialiased ${spectral.variable} ${plexSans.variable} ${plexMono.variable} ${cinzel.variable}`}
+      style={{ backgroundColor: '#0b0b0a' }}
       // Tells Next the smooth scrolling in globals.css is intentional, so it
       // suppresses it during route transitions instead of warning about it.
       data-scroll-behavior="smooth"
@@ -139,11 +139,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         className="min-h-full text-[var(--fg)]"
         suppressHydrationWarning
       >
-        {/* Dark mode only. The class is applied unconditionally before
-            hydration so there is no flash. */}
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`document.documentElement.classList.add('dark');`}
-        </Script>
         {/* Nav and footer live here, not per-page: a new route cannot ship
             without them, and there is one import instead of sixteen.
             The .page-stack wrapper carries a solid bg + higher z-index so it
