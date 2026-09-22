@@ -3,6 +3,17 @@
 import { useState } from "react";
 import type { FaqCategory } from "@/data/faqs";
 
+function linkEmails(text: string) {
+  const parts = text.split(/(\S+@\S+\.\S+)/g);
+  return parts.map((p, i) =>
+    /\S+@\S+\.\S+/.test(p) ? (
+      <a key={i} href={`mailto:${p}`} className="link-draw text-[var(--accent-text)]">{p}</a>
+    ) : (
+      p
+    )
+  );
+}
+
 export function FaqSearch({ categories }: { categories: FaqCategory[] }) {
   const [query, setQuery] = useState("");
   const q = query.toLowerCase().trim();
@@ -125,7 +136,7 @@ export function FaqSearch({ categories }: { categories: FaqCategory[] }) {
                       {f.question}
                     </dt>
                     <dd className="text-sm leading-relaxed text-[var(--fg)]/70">
-                      {f.answer}
+                      {linkEmails(f.answer)}
                     </dd>
                   </div>
                 ))}

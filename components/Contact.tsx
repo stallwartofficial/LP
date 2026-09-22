@@ -241,10 +241,10 @@ export function Contact() {
           <div className="rule-t mt-8 pt-8">
             <p className="eyebrow">On the first call</p>
             <p className="mt-4 text-sm leading-relaxed text-[var(--fg)]/70">
-              The first call takes about an hour. You describe the problem, we
-              ask questions, and you leave with a clear picture of whether a
-              custom build is the right move. No deck, no proposal, no
-              obligation.
+              The first call takes 30 minutes to an hour, depending on the
+              problem. You describe what you need, we ask questions, and you
+              leave with a clear picture of whether a custom build is the
+              right move. No deck, no proposal, no obligation.
             </p>
             <Link
               href="/how-it-works"

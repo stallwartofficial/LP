@@ -11,24 +11,24 @@ import { site } from "@/data/site";
 // <lastmod> when it is consistently accurate, so update the date below whenever
 // a page's content meaningfully changes. Anything without an entry falls back to
 // SITE_UPDATED. Blog posts use their own publishedAt.
-const SITE_UPDATED = "2026-09-20";
+const SITE_UPDATED = "2026-09-22";
 
 // path (after the domain, "" = home) -> ISO date of last meaningful content change.
 const routeDates: Record<string, string> = {
-  "": "2026-09-20",
-  "/offer": "2026-09-20",
+  "": "2026-09-22",
+  "/offer": "2026-09-22",
   "/story": "2026-09-20",
-  "/contact": "2026-09-20",
-  "/careers": "2026-09-20",
-  "/careers/interns": "2026-09-20",
-  "/how-it-works": "2026-09-21",
+  "/contact": "2026-09-22",
+  "/careers": "2026-09-22",
+  "/careers/interns": "2026-09-22",
+  "/how-it-works": "2026-09-22",
   "/partner": "2026-09-19",
-  "/blog": "2026-09-19",
+  "/blog": "2026-09-22",
   "/guides": "2026-09-19",
   "/glossary": "2026-09-19",
-  "/faq": "2026-09-19",
+  "/faq": "2026-09-22",
   "/trust": "2026-09-19",
-  "/principles": "2026-09-19",
+  "/principles": "2026-09-22",
   "/privacy": "2026-09-12",
   "/terms": "2026-09-12",
 };

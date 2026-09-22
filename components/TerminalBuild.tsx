@@ -10,10 +10,10 @@ import { useEffect, useRef, useState } from "react";
 const COMMAND = "stallwart build --anything";
 
 const OUTPUT = [
-  { name: "AI Agents & Automation", line: "software that does your repetitive work on its own, around the clock." },
-  { name: "AI + SaaS Products", line: "a complete app or platform, built and fully owned by you." },
+  { name: "AI Agents & Automation", line: "Software that does your repetitive work on its own, around the clock." },
+  { name: "AI + SaaS Products", line: "A complete app or platform, built and fully owned by you." },
   { name: "AI Infrastructure & RAG", line: "AI that answers from your own data, accurately and reliably." },
-  { name: "Custom AI Systems", line: "anything the others do not cover, built to fit your problem." },
+  { name: "Custom AI Systems", line: "Anything the others do not cover, built to fit your problem." },
 ];
 
 export function TerminalBuild() {
