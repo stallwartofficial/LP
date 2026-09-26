@@ -21,7 +21,7 @@ const STEPS = [
   },
   {
     n: "02",
-    title: "Paid discovery sprint",
+    title: "Discovery sprint",
     body: "We map the workflow the system has to survive: how the work actually happens, where it breaks, what failure costs, and what the edge cases look like. This produces a written technical design and architecture that your engineers can interrogate. You can take this document to another team and build it yourself.",
     outcome: "A written architecture you own, whether or not you continue.",
   },
@@ -63,14 +63,13 @@ export default function HowItWorksPage() {
           {/* Header */}
           <p className="eyebrow">How it works</p>
           <h1 className="font-display mt-4 max-w-3xl text-display-lg font-light">
-            From first call to{" "}
-            <span className="text-gold-sheen italic">you own it.</span>
+            How does working with Stallwart work?
           </h1>
           <p className="mt-6 max-w-2xl text-[length:var(--text-step-1)] leading-relaxed text-[var(--fg)]/75">
-            Stallwart is not a SaaS product you sign up for. It is an
-            engineering company that builds custom AI systems around your
-            business. Every engagement follows the same four steps, and you
-            can walk away with what you have after any one of them.
+            Every engagement follows four steps: a free first call, a
+            discovery sprint, fixed-price build phases, and production
+            handover. You own everything at the end, and you can walk away
+            after any step with what has been produced.
           </p>
 
           {/* Engagement steps */}
@@ -101,9 +100,13 @@ export default function HowItWorksPage() {
           {/* What Stallwart is and is not */}
           <section className="rule-t mt-4 pt-14">
             <h2 className="font-display text-display-sm font-light">
-              What this is,{" "}
-              <span className="text-gold-sheen italic">and what it is not.</span>
+              What is Stallwart?
             </h2>
+            <p className="mt-4 max-w-2xl text-[var(--fg)]/70">
+              Stallwart is an AI-first engineering company that builds custom
+              AI systems around your business. Fixed price, full ownership,
+              no lock-in.
+            </p>
             <div className="mt-8 grid gap-6 sm:grid-cols-2">
               <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6">
                 <h3 className="text-sm font-medium uppercase tracking-[0.1em] text-[var(--accent-text)]">
@@ -135,12 +138,12 @@ export default function HowItWorksPage() {
           {/* Next action */}
           <section className="rule-t mt-14 pt-14 text-center">
             <h2 className="font-display text-display-sm font-light">
-              Ready to start?
+              How do I start working with Stallwart?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-[var(--fg)]/70">
-              The first call is free, takes 30 minutes to an hour depending
-              on the problem, and ends with a clear answer: whether a custom
-              build is the right move or whether something else solves it.
+              Book a free first call. It takes 30 minutes to an hour, and
+              you leave with a clear answer: whether a custom build is the
+              right move, or whether something else solves it.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link

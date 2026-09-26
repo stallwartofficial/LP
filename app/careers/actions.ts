@@ -14,6 +14,7 @@ const RESUME_TYPES = [
 const careerSchema = z.object({
   name: z.string().trim().min(1).max(200),
   email: z.string().trim().email().max(320),
+  phone: z.string().trim().max(20).optional().default(""),
   linkedin: z
     .string()
     .trim()
@@ -76,6 +77,7 @@ export async function submitCareer(
     const { error } = await supabaseAdmin().from("career_applications").insert({
       name: a.name,
       email: a.email,
+      phone: a.phone || null,
       linkedin_url: a.linkedin || null,
       github_url: a.github || null,
       portfolio_url: a.portfolio || null,
@@ -97,6 +99,7 @@ export async function submitCareer(
     rows: [
       ["Name", a.name],
       ["Email", a.email],
+      ["Phone", a.phone || "-"],
       ["LinkedIn", a.linkedin || "-"],
       ["GitHub", a.github || "-"],
       ["Portfolio", a.portfolio || "-"],

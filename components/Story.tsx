@@ -26,14 +26,13 @@ export function Story() {
           </div>
 
           <h1 className="font-display mt-5 text-display-lg font-light">
-            He couldn&apos;t buy the standard.
-            <br />
-            <span className="text-gold-sheen italic">So he built it.</span>
+            Who is behind Stallwart?
           </h1>
 
           <p className="mt-5 text-[length:var(--text-step-1)] text-[var(--fg)]/75">
-            The industry sells the demo. Someone has to answer for the rest.
-            This is that answer.
+            Stallwart was founded by {site.founder.fullName}, an engineer with
+            five-plus years building AI systems. He couldn&apos;t buy the
+            standard he wanted, so he built it.
           </p>
         </div>
 
