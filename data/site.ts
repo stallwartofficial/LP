@@ -1,6 +1,6 @@
-// Founder tenure, derived so the copy never goes stale. Recomputed at build
+// Founder experience, derived so the copy never goes stale. Recomputed at build
 // time; the site redeploys well within a year, so "N years" stays current
-// without anyone editing the string. Start year 2021 (about five years in 2026).
+// without anyone editing the string. Arun started working in 2021 (5+ years).
 const FOUNDER_SINCE = 2021;
 const YEAR_WORDS = [
   "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
@@ -203,7 +203,7 @@ export const site = {
    */
   location: {
     country: "India",
-    region: "Tamil Nadu",
+    region: "India",
     areaServed: ["United States", "United Kingdom", "India", "Worldwide"],
   },
   cta: {

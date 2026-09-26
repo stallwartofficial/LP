@@ -110,7 +110,7 @@ export function organizationSchema() {
     image: `${site.domain}/images/stallwart-lion-mark.png`,
     description: site.description,
     slogan: site.tagline,
-    foundingDate: "2021",
+    foundingDate: "2026",
     ...(site.contact.email ? { email: site.contact.email } : {}),
     ...(site.contact.email
       ? {
@@ -146,7 +146,7 @@ export function organizationSchema() {
     },
     foundingLocation: {
       "@type": "Place",
-      name: `${site.location.region}, ${site.location.country}`,
+      name: site.location.country,
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",

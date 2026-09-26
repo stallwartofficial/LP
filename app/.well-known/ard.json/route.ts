@@ -103,12 +103,12 @@ export function GET() {
 
         location: {
           country: "India",
-          state: "Tamil Nadu",
+          country: "India",
           remote: true,
           serves: "worldwide",
         },
 
-        founded: 2021,
+        founded: 2026,
       },
     ],
   };
