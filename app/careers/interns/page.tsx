@@ -169,7 +169,7 @@ export default function InternsPage() {
               and why. Not a cover letter. Just the thing that shows how you think.
             </p>
             <div className="mt-10">
-              <CareersForm />
+              <CareersForm role="Social Media & Creative Intern" />
             </div>
           </section>
         </div>

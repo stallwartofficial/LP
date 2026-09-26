@@ -123,10 +123,6 @@ export function organizationSchema() {
           },
         }
       : {}),
-    ...(() => {
-      const profiles = [site.social.linkedin, site.social.twitter].filter(Boolean);
-      return profiles.length ? { sameAs: profiles } : {};
-    })(),
     founder: {
       "@type": "Person",
       name: site.founder.fullName,
@@ -254,6 +250,8 @@ export function webPageSchema(opts: {
   name: string;
   description: string;
   path: string;
+  datePublished?: string;
+  dateModified?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -261,6 +259,8 @@ export function webPageSchema(opts: {
     name: opts.name,
     description: opts.description,
     url: `${site.domain}${opts.path}`,
+    ...(opts.datePublished ? { datePublished: opts.datePublished } : {}),
+    ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
     isPartOf: { "@type": "WebSite", name: site.company, url: site.domain },
     publisher: { "@type": "Organization", name: site.company, url: site.domain },
   };
@@ -300,6 +300,7 @@ export function articleSchema(opts: {
     dateModified: opts.dateModified ?? opts.datePublished,
     about: opts.about,
     url: `${site.domain}${opts.path}`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${site.domain}${opts.path}` },
     // Author is the founder (E-E-A-T), with the company as publisher.
     author: {
       "@type": "Person",
@@ -425,6 +426,27 @@ export function definedTermSetSchema(
  * to other pages (the guides index), where the content is a set of links, not a
  * stepwise procedure. Deliberately not HowTo: these are entry points, not steps.
  */
+export function howToSchema(opts: {
+  name: string;
+  description: string;
+  path: string;
+  steps: { name: string; text: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: opts.name,
+    description: opts.description,
+    url: `${site.domain}${opts.path}`,
+    step: opts.steps.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  };
+}
+
 export function itemListSchema(name: string, items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",

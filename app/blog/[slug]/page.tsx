@@ -51,6 +51,7 @@ export default async function BlogPostPage({ params }: Props) {
             headline: post.title,
             description: post.excerpt,
             datePublished: post.publishedAt,
+            dateModified: post.updatedAt,
             path: `/blog/${post.slug}`,
             about: post.topic,
           }),
@@ -108,7 +109,7 @@ export default async function BlogPostPage({ params }: Props) {
               })}
             </time>
             <span>{post.readingMinutes} min read</span>
-            <span>{site.company}</span>
+            <span>By {site.founder.fullName}</span>
           </p>
 
 

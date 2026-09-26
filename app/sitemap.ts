@@ -11,7 +11,7 @@ import { site } from "@/data/site";
 // <lastmod> when it is consistently accurate, so update the date below whenever
 // a page's content meaningfully changes. Anything without an entry falls back to
 // SITE_UPDATED. Blog posts use their own publishedAt.
-const SITE_UPDATED = "2026-09-22";
+export const SITE_UPDATED = "2026-09-26";
 
 // path (after the domain, "" = home) -> ISO date of last meaningful content change.
 const routeDates: Record<string, string> = {
@@ -31,6 +31,8 @@ const routeDates: Record<string, string> = {
   "/principles": "2026-09-22",
   "/privacy": "2026-09-12",
   "/terms": "2026-09-12",
+  "/llms.txt": "2026-09-26",
+  "/llms-full.txt": "2026-09-26",
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -39,6 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact": 0.7, "/how-it-works": 0.8, "/guides": 0.7, "/partner": 0.6, "/glossary": 0.6,
     "/faq": 0.6, "/trust": 0.6, "/careers/interns": 0.5, "/principles": 0.4,
     "/careers": 0.4, "/privacy": 0.3, "/terms": 0.3,
+    "/llms.txt": 0.3, "/llms-full.txt": 0.3,
   };
 
   const staticRoutes: MetadataRoute.Sitemap = Object.keys(priorities).map((path) => ({

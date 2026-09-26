@@ -80,7 +80,7 @@ const cinzel = Cinzel({
 // pairs the trust promise, then the brand.
 const homeTitle = "Stallwart | AI-First Engineering Company";
 const homeDescription =
-  "Stallwart is an AI-first engineering company. Bring the problem, we build the system that solves it: agents, AI + SaaS products, RAG and infrastructure, and custom AI systems, engineered to production and yours to own.";
+  "Stallwart is an AI-first engineering company. We build AI agents, SaaS products, RAG systems, and custom AI, engineered to production and yours to own.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
@@ -126,6 +126,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <head>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <JsonLd schema={organizationSchema()} />
       </head>
       {/* suppressHydrationWarning on <body>: browser extensions (Grammarly,
