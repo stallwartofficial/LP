@@ -9,18 +9,17 @@ export function GET() {
     specVersion: "1.0",
     entries: [
       {
-        identifier: "stallwart",
+        identifier: "urn:air:stallwart:services:stallwart",
         displayName: "Stallwart",
         name: site.company,
         description: site.description,
         url: B,
-        type: "organization",
+        type: "application/ai-catalog+json",
         representativeQueries: [
           "Who builds custom AI systems",
           "AI engineering company India",
           "custom AI agents for business",
           "production AI systems company",
-          "AI + SaaS product development",
           "RAG infrastructure company",
         ],
         category: "AI Engineering Services",
@@ -84,16 +83,6 @@ export function GET() {
           "Communication",
           "Physical AI",
         ],
-
-        not_applicable: {
-          public_api: "Stallwart does not offer a public API. It builds custom systems for clients.",
-          sdk: "No SDK. Stallwart is not a software product.",
-          developer_portal: "No developer portal. Stallwart is a services company.",
-          webhooks: "No public webhooks. Custom integrations are built per engagement.",
-          mcp_server: "No MCP server. Stallwart is not a tool or platform.",
-          self_serve: "No self-serve signup. Engagements begin with a call.",
-          openapi_spec: "No OpenAPI spec. No API exists.",
-        },
 
         founder: {
           name: "Arun Saravanan",

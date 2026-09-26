@@ -268,9 +268,13 @@ export function ServiceCatalog() {
       <div className="mx-auto max-w-[112rem]">
         <Reveal className="mx-auto max-w-4xl text-center">
           <h2 className="font-display font-light leading-[1.05]" style={{ fontSize: "var(--text-step-6)" }}>
-            Anything in software, powered by AI.<br />
-            <span className="text-gold-sheen italic">If you can describe it, we build it.</span>
+            What does Stallwart build?
           </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-[length:var(--text-step-1)] text-[var(--fg)]/72">
+            AI agents, SaaS products, RAG infrastructure, and custom AI
+            systems. If you can describe the problem, we build the system
+            that solves it.
+          </p>
         </Reveal>
 
         <Reveal className="mt-8 flex justify-center">

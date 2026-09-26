@@ -93,7 +93,7 @@ ${offeringLines}
 ## How engagement works
 
 1. First call (free, 30 minutes to an hour): describe the problem; ${site.company} tells you honestly whether a custom build is the right move.
-2. Paid discovery sprint (weeks, not months): maps the workflow, produces a written technical design and architecture you own.
+2. Discovery sprint (weeks, not months): maps the workflow, produces a written technical design and architecture you own.
 3. Fixed-price build phases: each phase is scoped and priced independently, approved before work starts.
 4. Production and handover: the system ships with observability, rollback, and documentation. You own everything outright.
 

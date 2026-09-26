@@ -10,7 +10,7 @@ import { useState } from "react";
 // Supabase client (anon key). RLS allows anon INSERT only, so the key is safe to
 // ship; created_at and status ('new') are set by the table defaults.
 
-type Field = "name" | "email" | "built" | "linkedin" | "github" | "portfolio" | "resume";
+type Field = "name" | "email" | "phone" | "built" | "linkedin" | "github" | "portfolio" | "resume";
 
 const RESUME_MAX_BYTES = 5 * 1024 * 1024; // 5 MB
 const RESUME_TYPES = [
@@ -23,6 +23,7 @@ export function CareersForm({ role = "Open Role" }: { role?: string }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    phone: "",
     linkedin: "",
     github: "",
     portfolio: "",
@@ -43,6 +44,8 @@ export function CareersForm({ role = "Open Role" }: { role?: string }) {
     if (!form.name.trim()) next.name = "Your name, so we know who we're talking to.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       next.email = "An email we can actually reach you at.";
+    if (form.phone.trim() && !/^\+?\d[\d\s\-()]{6,}$/.test(form.phone.trim()))
+      next.phone = "Enter a valid phone number with country code.";
     if (!form.built.trim())
       next.built = "Tell us something you've built or worked on, even a line is fine.";
     if (form.linkedin.trim() && !form.linkedin.toLowerCase().includes("linkedin.com"))
@@ -93,6 +96,7 @@ export function CareersForm({ role = "Open Role" }: { role?: string }) {
       const res = await submitCareer({
         name: form.name.trim(),
         email: form.email.trim(),
+        phone: form.phone.trim(),
         linkedin: form.linkedin.trim(),
         github: form.github.trim(),
         portfolio: form.portfolio.trim(),
@@ -143,7 +147,7 @@ export function CareersForm({ role = "Open Role" }: { role?: string }) {
         <button
           type="button"
           onClick={() => {
-            setForm({ name: "", email: "", linkedin: "", github: "", portfolio: "", built: "" });
+            setForm({ name: "", email: "", phone: "", linkedin: "", github: "", portfolio: "", built: "" });
             setResume(null);
             setErrors({});
             setSubmitError(null);
@@ -194,6 +198,16 @@ export function CareersForm({ role = "Open Role" }: { role?: string }) {
           onChange={set("email")}
           error={errors.email}
           autoComplete="email"
+        />
+        <Text
+          label="Phone"
+          type="tel"
+          optional
+          value={form.phone}
+          onChange={set("phone")}
+          error={errors.phone}
+          placeholder="+91 98765 43210"
+          autoComplete="tel"
         />
 
         <div className="grid gap-5 sm:grid-cols-3">
