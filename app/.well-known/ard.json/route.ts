@@ -103,7 +103,6 @@ export function GET() {
 
         location: {
           country: "India",
-          country: "India",
           remote: true,
           serves: "worldwide",
         },
