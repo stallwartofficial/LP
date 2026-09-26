@@ -36,6 +36,7 @@ const careerSchema = z.object({
     .default("")
     .refine((v) => v === "" || /^https?:\/\/|\./.test(v), "Enter a valid link"),
   built: z.string().trim().min(20).max(5000),
+  role: z.string().trim().max(200).optional().default("Open Role"),
   resume: z
     .object({
       filename: z.string().max(200),
@@ -108,7 +109,7 @@ export async function submitCareer(
       to: a.email,
       name: a.name,
       subject: "We got your application | Stallwart",
-      html: careerAckHtml(a.name, "Social Media & Creative Intern"),
+      html: careerAckHtml(a.name, a.role),
     },
   });
 

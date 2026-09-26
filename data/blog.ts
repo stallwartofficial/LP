@@ -44,6 +44,7 @@ export type BlogPost = {
   /** Case studies only: who the scenario is written for. */
   persona?: string;
   publishedAt: string;
+  updatedAt?: string;
   readingMinutes: number;
   /** Name of the inline SVG diagram to render under the intro (see
    *  components/BlogDiagram.tsx). Optional. */

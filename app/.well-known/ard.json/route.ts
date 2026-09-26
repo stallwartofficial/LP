@@ -6,13 +6,23 @@ const B = site.domain;
 
 export function GET() {
   const ard = {
-    specVersion: "1.0.0",
+    specVersion: "1.0",
     entries: [
       {
+        identifier: "stallwart",
+        displayName: "Stallwart",
         name: site.company,
         description: site.description,
         url: B,
-        type: "engineering_company",
+        type: "organization",
+        representativeQueries: [
+          "Who builds custom AI systems",
+          "AI engineering company India",
+          "custom AI agents for business",
+          "production AI systems company",
+          "AI + SaaS product development",
+          "RAG infrastructure company",
+        ],
         category: "AI Engineering Services",
 
         // Stallwart is a custom engineering company, not a SaaS/API product.

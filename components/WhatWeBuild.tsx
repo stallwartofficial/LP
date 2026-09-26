@@ -17,8 +17,8 @@ export function WhatWeBuild() {
               <span className="text-gold-sheen italic">We build the system that solves it.</span>
             </h2>
             <p className="mt-5 max-w-[46ch] text-[length:var(--text-step-1)] text-[var(--fg)]/72">
-              Four things, one standard. Whatever you need built, it is one of these,
-              taken all the way to production, not a demo.
+              Four things, one standard: agents, products, infrastructure, and custom AI.
+              Whatever you need built, it is one of these, taken all the way to production.
             </p>
             <div className="mt-6 flex flex-col items-start gap-4">
               <Link

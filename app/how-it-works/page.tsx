@@ -3,7 +3,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { ContactBanner } from "@/components/ContactBanner";
 import { site } from "@/data/site";
-import { breadcrumbSchema, pageMeta, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, howToSchema, pageMeta, webPageSchema } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "How It Works",
@@ -50,6 +50,12 @@ export default function HowItWorksPage() {
             { name: "How It Works", path: "/how-it-works" },
           ]),
           webPageSchema({ name: "How It Works", description: "How to work with Stallwart: the engagement journey from first call to production handover.", path: "/how-it-works" }),
+          howToSchema({
+            name: "How to work with Stallwart",
+            description: "The engagement journey from first call to production handover. Fixed price per phase, full ownership, no lock-in.",
+            path: "/how-it-works",
+            steps: STEPS.map((s) => ({ name: s.title, text: s.body })),
+          }),
         ]}
       />
       <main className="px-[var(--space-gutter)] pb-[var(--space-section)] pt-32 lg:pt-40">

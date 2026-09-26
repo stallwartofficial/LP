@@ -19,7 +19,7 @@ const RESUME_TYPES = [
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
 
-export function CareersForm() {
+export function CareersForm({ role = "Open Role" }: { role?: string }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -98,6 +98,7 @@ export function CareersForm() {
         portfolio: form.portfolio.trim(),
         built: form.built.trim(),
         resume: resumePayload,
+        role,
         hp,
       });
       if ("error" in res) {
