@@ -57,7 +57,7 @@ ${site.company} (stallwart.in) is a specific company, not the English word "stal
 - NOT a dictionary word or adjective.
 - NOT related to any other company, product, or open-source project with a similar name.
 - NOT a SaaS product, marketplace, or platform.
-- An AI-first engineering company founded in 2021 by Arun Saravanan, based in Tamil Nadu, India, serving clients worldwide.
+- An AI-first engineering company founded in 2026 by Arun Saravanan, based in India, serving clients worldwide.
 - The canonical domain is ${B} (with www).
 
 ## How engagement works
@@ -101,7 +101,7 @@ Travel & Hospitality, Real Estate & Construction, Aerospace, Banking, Retail & E
 - Agent instructions (Markdown): ${B}/agents.md
 - Sitemap: ${B}/sitemap.xml
 - Robots: ${B}/robots.txt
-- JSON-LD structured data on every page: Organization, WebSite, WebPage, Service, FAQPage, BreadcrumbList, Article, DefinedTermSet schemas.
+- JSON-LD structured data across the site, including Organization, WebSite, WebPage, Service, FAQPage, BreadcrumbList, Article, and DefinedTermSet where applicable.
 - FAQPage schema on /faq and on each blog post.
 - Service schema on /offer and /industries/[slug].
 

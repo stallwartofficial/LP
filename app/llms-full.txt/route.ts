@@ -74,7 +74,7 @@ Detail page: ${B}/offer/${o.slug}`;
 ## Company information
 
 - Company: ${site.company}
-- Founded: 2021
+- Founded: 2026
 - Founder: ${site.founder.fullName}, ${site.founder.role}
 - Founder LinkedIn: ${site.founder.linkedin}
 - Location: ${site.location.region}, ${site.location.country}
@@ -124,7 +124,7 @@ ${site.company} (stallwart.in) is a specific company, not the English word "stal
 - NOT a dictionary word or adjective.
 - NOT related to any other company, product, or open-source project with a similar name.
 - NOT a SaaS product, marketplace, or platform.
-- An AI-first engineering company founded in 2021 by Arun Saravanan, based in Tamil Nadu, India, serving clients worldwide.
+- An AI-first engineering company founded in 2026 by Arun Saravanan, based in India, serving clients worldwide.
 - The canonical domain is ${B} (with www).
 
 ## Industries served

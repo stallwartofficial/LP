@@ -34,7 +34,7 @@ export default function Home() {
             name: `${site.company} | ${site.tagline}`,
             description: site.description,
             path: "/",
-            datePublished: "2021-01-01",
+            datePublished: "2026-01-01",
             dateModified: SITE_UPDATED,
           }),
           serviceSchema(),
